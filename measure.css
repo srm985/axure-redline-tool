@@ -37,8 +37,8 @@
     left: 300px;
     width: 75px;
     height: 400px;
-    background-color: green;
     border: dashed 5px #555555;
+    background-color: green;
 }
 
 #item-6 {
@@ -49,6 +49,10 @@
     color: #555555;
 }
 
+body {
+    font-family: 'Lato', sans-serif;
+}
+
 .redline-layer {
     font-family: 'Lato', sans-serif;
 }
@@ -57,18 +61,17 @@
     position: fixed;
     z-index: 99999;
     top: 0;
-    /*left: 100%;*/
-    right: 0;
+    left: 100%;
     width: 250px;
     height: 100%;
     padding: 20px;
+    transition: all 0.1s ease-in-out;
     color: #FFFFFF;
     background-color: rgba(51, 51, 51, 0.9);
 }
 
 .redline-panel-exposed {
-    right: 0 !important;
-    left: auto !important;
+    left: calc(100% - 290px) !important;
 }
 
 .hover-layer,

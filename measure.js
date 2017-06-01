@@ -9,7 +9,7 @@ var borderThickness = 1,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0;
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-width': '', 'border-style': '', 'border-color': '', 'border-radius': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'color': '', 'test': '' } };
+var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-width': '', 'border-style': '', 'border-color': '', 'border-radius': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'color': '', '_text': '' } };
 
 $(document).ready(function() {
     $('.redline-layer').hide(); //*****Start by hiding all redline elements.*****
@@ -42,6 +42,12 @@ $(document).ready(function() {
             updateRedlinePanel(selectedElement);
         }
     });
+
+    $('body').on('click', function(e) {
+    	if (e.target === this) {
+    		closeRedline();
+    	}
+    });
 });
 
 //*************************************************************************************************
@@ -62,8 +68,8 @@ function isRedlineElement(element) {
 //*                  Highlight our hovered element and add extension lines.                       *
 //*************************************************************************************************
 function highlightHoverElement() {
-    elemMeas.width = hoveredElement.width();
-    elemMeas.height = hoveredElement.height();
+    elemMeas.width = hoveredElement.outerWidth();
+    elemMeas.height = hoveredElement.outerHeight();
     elemMeas.offsetTop = hoveredElement.offset().top;
     elemMeas.offsetLeft = hoveredElement.offset().left;
     console.log(elemMeas);
@@ -94,8 +100,8 @@ function highlightHoverElement() {
 //*                  Highlight our selected element and add extension lines.                      *
 //*************************************************************************************************
 function highlightSelectElement() {
-    elemSelectMeas.width = selectedElement.width();
-    elemSelectMeas.height = selectedElement.height();
+    elemSelectMeas.width = selectedElement.outerWidth();
+    elemSelectMeas.height = selectedElement.outerHeight();
     elemSelectMeas.offsetTop = selectedElement.offset().top;
     elemSelectMeas.offsetLeft = selectedElement.offset().left;
     console.log(elemSelectMeas);
@@ -229,7 +235,11 @@ function updateRedlinePanel(element) {
     $('#redline-panel').addClass('redline-panel-exposed');
     $.each(cssProperties, function(i, value) {
         $.each(cssProperties[i], function(_i, _value) {
-            cssProperties[i][_i] = element.css(_i);
+            if (_i == '_text') {
+                cssProperties[i][_i] = element.html();
+            } else {
+                cssProperties[i][_i] = element.css(_i);
+            }
         });
     });
     appendRedlinePanel();
@@ -241,10 +251,15 @@ function updateRedlinePanel(element) {
 function appendRedlinePanel() {
     $.each(cssProperties, function(i, value) {
         $('#redline-panel').append('<div class="redline-layer redline-panel-section"></div>');
-        $('.redline-panel-section:last').append('<b><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
+        $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
         $.each(cssProperties[i], function(_i, _value) {
-            $('.redline-panel-section:last').append('<p class="redline-layer">' + _i + ': ' + _value + '</p>');
+            if (_value != '' && _value != 'none' && _value != '0px') {
+                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ': ' + _value + '</p>');
+            }
         });
+        if ($('.redline-panel-section:last p').length <= 1) {
+            $('.redline-panel-section:last').remove();
+        }
     });
 }
 
@@ -256,4 +271,13 @@ function clearRedline() {
     $('.hover-o-layer').hide();
     $('.dimension-layer').hide();
     $('.measure-layer').hide();
+}
+
+//*************************************************************************************************
+//*                              Handle 'click-aways' on page.                                    *
+//*************************************************************************************************
+function closeRedline() {
+	clearRedline();
+	$('.select-layer').hide();
+	$('#redline-panel').removeClass('redline-panel-exposed');
 }
