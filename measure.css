@@ -22,9 +22,18 @@
     background-color: blue;
 }
 
+#div-4 {
+    position: absolute;
+    top: 200px;
+    left: 500px;
+    width: 130px;
+    height: 300px;
+    background-color: #555555;
+}
+
 .hover-layer,
 .hover-o-layer,
-.click-layer,
+.select-layer,
 .dimension-layer,
 .measure-layer {
     position: absolute;
@@ -37,18 +46,21 @@
     border: solid 1px #4860FF;
     border-right: none;
     border-bottom: none;
+    z-index: 9997;
 }
 
 .hover-o-layer {
     border: dashed 1px #4860FF;
     border-right: none;
     border-bottom: none;
+    z-index: 9996;
 }
 
-.click-layer {
+.select-layer {
     border: solid 1px #E89A28;
     border-right: none;
     border-bottom: none;
+    z-index: 9998;
 }
 
 .dimension-layer {
