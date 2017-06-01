@@ -28,6 +28,7 @@
     left: 500px;
     width: 130px;
     height: 300px;
+    border-radius: 5px;
     background-color: #555555;
 }
 
@@ -62,8 +63,9 @@ body {
     z-index: 99999;
     top: 0;
     left: 100%;
+    overflow-y: auto;
     width: 250px;
-    height: 100%;
+    height: calc(100% - 40px);
     padding: 20px;
     transition: all 0.1s ease-in-out;
     color: #FFFFFF;
@@ -72,6 +74,27 @@ body {
 
 .redline-panel-exposed {
     left: calc(100% - 290px) !important;
+}
+
+#redline-panel,
+#redline-panel input {
+    font-size: 12px;
+}
+
+.redline-panel-section {
+    margin-top: 20px;
+}
+
+#redline-panel p {
+    margin-bottom: 0;
+}
+
+#redline-panel input {
+    margin-top: 0;
+    padding: 5px 2px;
+    cursor: text;
+    opacity: 0.5;
+    border-radius: 5px;
 }
 
 .hover-layer,
