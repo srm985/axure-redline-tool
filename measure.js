@@ -9,7 +9,7 @@ var borderThickness = 1,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0;
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_text': '' } };
+var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
 $(document).ready(function() {
     $('.redline-layer').hide(); //*****Start by hiding all redline elements.*****
@@ -50,6 +50,10 @@ $(document).ready(function() {
     });
 
     $('body').on('mouseup', '#redline-panel input', function() {
+        $(this).select();
+    });
+
+    $('body').on('mouseup', '#redline-panel textarea', function() {
         $(this).select();
     })
 });
@@ -239,7 +243,7 @@ function updateRedlinePanel(element) {
     $('#redline-panel').addClass('redline-panel-exposed');
     $.each(cssProperties, function(i, value) {
         $.each(cssProperties[i], function(_i, _value) {
-            if (_i == '_text') {
+            if (_i == '_content') {
                 cssProperties[i][_i] = element.html();
             } else {
                 cssProperties[i][_i] = element.css(_i);
@@ -260,13 +264,23 @@ function appendRedlinePanel() {
         $.each(cssProperties[i], function(_i, _value) {
             if (_value != '' && _value != 'none' && _value != '0px') {
                 $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '').replace('-top-', '-').replace('-left-', '-') + ':</p>');
-                $('.redline-panel-section:last').append('<input class="redline-layer" value="' + _value + '" readonly="readonly"></input>');
+                if (_i != '_content') {
+                    $('.redline-panel-section:last').append('<input class="redline-layer" value="' + _value + '" readonly="readonly"></input>');
+                } else {
+                    $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
+                    $('.redline-panel-section textarea').html(_value);
+                }
             }
         });
+        //*****Remove any sections without CSS properties.*****
         if ($('.redline-panel-section:last p').length <= 1) {
             $('.redline-panel-section:last').remove();
         }
+
     });
+    if (cssProperties.text._content == '') {
+        $('p:contains("TEXT")').parent().parent().remove();
+    }
 }
 
 //*************************************************************************************************

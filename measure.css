@@ -73,7 +73,7 @@ body {
 }
 
 .redline-panel-exposed {
-    left: calc(100% - 290px) !important;
+    left: calc(100% - 300px) !important;
 }
 
 #redline-panel,
@@ -89,12 +89,20 @@ body {
     margin-bottom: 0;
 }
 
-#redline-panel input {
+#redline-panel input,
+#redline-panel textarea {
+    width: calc(100% - 12px);
     margin-top: 0;
-    padding: 5px 2px;
+    padding: 4px 5px;
     cursor: text;
     opacity: 0.5;
-    border-radius: 5px;
+    border: solid 1px #FFFFFF;
+    border-radius: 3px;
+}
+
+#redline-panel textarea {
+    height: 50px;
+    resize: none;
 }
 
 .hover-layer,
