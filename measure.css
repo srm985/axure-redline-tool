@@ -20,6 +20,7 @@
     width: 100px;
     height: 95px;
     background-color: blue;
+    box-shadow: 0 3px 5px rgba(51, 51, 51, 0.5);
 }
 
 #div-4 {
@@ -62,8 +63,8 @@ body {
     position: fixed;
     z-index: 99999;
     top: 0;
-    left: 100%;
-    overflow-y: auto;
+    left: calc(100% - 5px);
+    overflow-x: visible;
     width: 250px;
     height: calc(100% - 40px);
     padding: 20px;
@@ -73,11 +74,39 @@ body {
 }
 
 .redline-panel-exposed {
-    left: calc(100% - 300px) !important;
+    /*left: calc(100% - 300px) !important;*/
+    transform: translateX(-285px);
+}
+
+#redline-panel-menu {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 20px;
+    height: 40px;
+    transform: translateX(-20px);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#redline-panel-menu > div {
+}
+
+#redline-panel-menu > div > div {
+    width: 12px;
+    height: 2px;
+    margin: 3px 0 3px 5px;
+    background-color: #FFFFFF;
 }
 
 #redline-panel,
-#redline-panel input {
+#redline-panel input,
+#redline-panel textarea {
     font-size: 12px;
 }
 

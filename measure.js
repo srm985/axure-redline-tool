@@ -9,11 +9,12 @@ var borderThickness = 1,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0;
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
+var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
 $(document).ready(function() {
     $('.redline-layer').hide(); //*****Start by hiding all redline elements.*****
     $('#redline-panel').show();
+    $('#redline-panel *').show();
 
     $('body').on('mouseenter', '*', function() {
         hoveredElement = $(this);
@@ -41,6 +42,11 @@ $(document).ready(function() {
             highlightSelectElement();
             updateRedlinePanel(selectedElement);
         }
+    });
+
+    $('#redline-panel').on('click', '#redline-panel-menu', function() {
+        $('#redline-panel').toggleClass('redline-panel-exposed');
+        console.log($(this).attr('id'));
     });
 
     $('body').on('click', function(e) {
@@ -239,8 +245,6 @@ function drawIntraElementMarkers() {
 //*                                Update our redline spec panel.                                 *
 //*************************************************************************************************
 function updateRedlinePanel(element) {
-    $('#redline-panel *').remove('*');
-    $('#redline-panel').addClass('redline-panel-exposed');
     $.each(cssProperties, function(i, value) {
         $.each(cssProperties[i], function(_i, _value) {
             if (_i == '_content') {
@@ -251,7 +255,9 @@ function updateRedlinePanel(element) {
         });
     });
     console.log(cssProperties);
+    clearRedlinePanel();
     appendRedlinePanel();
+    $('#redline-panel').addClass('redline-panel-exposed');
 }
 
 //*************************************************************************************************
@@ -278,8 +284,13 @@ function appendRedlinePanel() {
         }
 
     });
-    if (cssProperties.text._content == '') {
+    //*****Remove a few items based on special queries.*****
+    if (cssProperties['text']['_content'] == '') {
         $('p:contains("TEXT")').parent().parent().remove();
+    }
+    if (cssProperties['styles']['border-top-width'] == '0px') {
+    	$('p:contains("border-color")').next().remove();
+    	$('p:contains("border-color")').remove();
     }
 }
 
@@ -300,4 +311,9 @@ function closeRedline() {
     clearRedline();
     $('.select-layer').hide();
     $('#redline-panel').removeClass('redline-panel-exposed');
+    clearRedlinePanel();
+}
+
+function clearRedlinePanel() {
+    $('#redline-panel > *').not('div:first').remove();
 }
