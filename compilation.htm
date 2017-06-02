@@ -1,4 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 <div class="redline-layer hover-layer" id="t-hover"></div>
 <div class="redline-layer hover-layer" id="r-hover"></div>
 <div class="redline-layer hover-layer" id="b-hover"></div>
@@ -7,10 +8,10 @@
 <div class="redline-layer hover-o-layer" id="ro-hover"></div>
 <div class="redline-layer hover-o-layer" id="bo-hover"></div>
 <div class="redline-layer hover-o-layer" id="lo-hover"></div>
-<div class="redline-layer click-layer" id="t-click"></div>
-<div class="redline-layer click-layer" id="r-click"></div>
-<div class="redline-layer click-layer" id="b-click"></div>
-<div class="redline-layer click-layer" id="l-click"></div>
+<div class="redline-layer select-layer" id="t-select"></div>
+<div class="redline-layer select-layer" id="r-select"></div>
+<div class="redline-layer select-layer" id="b-select"></div>
+<div class="redline-layer select-layer" id="l-select"></div>
 <div class="redline-layer dimension-layer" id="t-dimension"><span class="redline-layer"></span></div>
 <div class="redline-layer dimension-layer" id="r-dimension"><span class="redline-layer"></span></div>
 <div class="redline-layer dimension-layer" id="b-dimension"><span class="redline-layer"></span></div>
@@ -19,31 +20,121 @@
 <div class="redline-layer measure-layer" id="r-measure"></div>
 <div class="redline-layer measure-layer" id="b-measure"></div>
 <div class="redline-layer measure-layer" id="l-measure"></div>
+<div class="redline-layer" id="redline-panel">
+    <div class="redline-layer" id="redline-panel-menu">
+        <div class="redline-layer">
+            <div class="redline-layer"></div>
+            <div class="redline-layer"></div>
+            <div class="redline-layer"></div>
+        </div>
+    </div>
+</div>
 <style type="text/css">
+.redline-layer {
+    font-family: 'Lato', sans-serif;
+}
+
+#redline-panel {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: calc(100% - 5px);
+    overflow-x: visible;
+    width: 250px;
+    height: calc(100% - 40px);
+    padding: 20px;
+    transition: all 0.1s ease-in-out;
+    color: #FFFFFF;
+    background-color: rgba(51, 51, 51, 0.9);
+}
+
+.redline-panel-exposed {
+    /*left: calc(100% - 300px) !important;*/
+    transform: translateX(-285px);
+}
+
+#redline-panel-menu {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 20px;
+    height: 40px;
+    transform: translateX(-20px);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#redline-panel-menu > div {}
+
+#redline-panel-menu > div > div {
+    width: 12px;
+    height: 2px;
+    margin: 3px 0 3px 5px;
+    background-color: #FFFFFF;
+}
+
+#redline-panel,
+#redline-panel input,
+#redline-panel textarea {
+    font-size: 12px;
+}
+
+.redline-panel-section {
+    margin-top: 20px;
+}
+
+#redline-panel p {
+    margin-bottom: 0;
+}
+
+#redline-panel input,
+#redline-panel textarea {
+    width: calc(100% - 12px);
+    margin-top: 0;
+    padding: 4px 5px;
+    cursor: text;
+    opacity: 0.5;
+    border: solid 1px #FFFFFF;
+    border-radius: 3px;
+}
+
+#redline-panel textarea {
+    height: 50px;
+    resize: none;
+}
+
 .hover-layer,
 .hover-o-layer,
-.click-layer,
+.select-layer,
 .dimension-layer,
 .measure-layer {
     position: absolute;
+    display: none;
     width: 0;
     height: 0;
-    display: none;
 }
 
 .hover-layer {
+    z-index: 9997;
     border: solid 1px #4860FF;
     border-right: none;
     border-bottom: none;
 }
 
 .hover-o-layer {
+    z-index: 9996;
     border: dashed 1px #4860FF;
     border-right: none;
     border-bottom: none;
 }
 
-.click-layer {
+.select-layer {
+    z-index: 9998;
     border: solid 1px #E89A28;
     border-right: none;
     border-bottom: none;
@@ -52,139 +143,55 @@
 .dimension-layer {
     font-size: 10px;
     font-weight: bold;
+    z-index: 9999;
     display: flex;
-    padding: 0px;
     min-width: 30px;
     min-height: 20px;
+    padding: 0;
+    letter-spacing: 1px;
     color: #FFFFFF;
     border-radius: 5px;
     background-color: #E89A28;
     justify-content: center;
     align-items: center;
-    letter-spacing: 1px;
-    font-family: arial;
-    z-index: 9999;
 }
 
 .measure-layer {
+    z-index: 9995;
     border: solid 1px #E89A28;
     border-right: none;
     border-bottom: none;
 }
 </style>
 <script type="text/javascript">
+var borderThickness = 1,
+    labelSpacing = 5,
+    hoveredElement = '',
+    selectedElement = '',
+    elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
+    elemSelectMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
+    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0 },
+    redlineClass,
+    dimensionMarkerWidth = 0,
+    dimensionMarkerHeight = 0;
+
+var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
+
 $(document).ready(function() {
     $('.redline-layer').hide(); //*****Start by hiding all redline elements.*****
-
-    var borderThickness = 1,
-        hoveredElement = '',
-        clickedElement = '',
-        elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-        elemClickMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-        intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0 },
-        redlineClass,
-        dimensionMarkerWidth = 0,
-        dimensionMarkerHeight = 0;
+    $('#redline-panel').show();
+    $('#redline-panel *').show();
 
     $('#base').on('mouseenter', '*', function() {
         hoveredElement = $(this);
-        redlineClass = hoveredElement.attr('class') === undefined ? '' : hoveredElement.attr('class');
-        if (redlineClass.indexOf('redline-layer') == '-1') {
-            elemMeas.width = hoveredElement.width();
-            elemMeas.height = hoveredElement.height();
-            elemMeas.offsetTop = hoveredElement.offset().top;
-            elemMeas.offsetLeft = hoveredElement.offset().left;
-            console.log(elemMeas);
-            $('.hover-layer').show();
-            $('.hover-o-layer').show();
-            $('#t-hover').width(elemMeas.width + borderThickness);
-            $('#b-hover').width(elemMeas.width);
-            $('#r-hover').height(elemMeas.height);
-            $('#l-hover').height(elemMeas.height);
-
-            $('#t-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: elemMeas.offsetLeft - borderThickness });
-            $('#b-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: elemMeas.offsetLeft - borderThickness });
-            $('#r-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft + elemMeas.width });
-            $('#l-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft - borderThickness });
-
-            $('#to-hover').width($(window).innerWidth() - 1);
-            $('#bo-hover').width($(window).innerWidth() - 1);
-            $('#ro-hover').height($(window).innerHeight() - 1);
-            $('#lo-hover').height($(window).innerHeight() - 1);
-
-            $('#to-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: 0 });
-            $('#bo-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: 0 });
-            $('#ro-hover').offset({ top: 0, left: elemMeas.offsetLeft + elemMeas.width });
-            $('#lo-hover').offset({ top: 0, left: elemMeas.offsetLeft - borderThickness });
-            if (hoveredElement[0] == clickedElement[0]) {
-                $('#t-dimension').show();
-                $('#r-dimension').show();
-                $('#t-dimension > span').show();
-                $('#r-dimension > span').show();
-            } else if (clickedElement != '') {
-
-                $.each(intraElemMeas, function(i, value) {
-                    intraElemMeas[i] = 0;
-                });
-
-                if (elemMeas.offsetTop > elemClickMeas.offsetTop + elemClickMeas.height) {
-                    intraElemMeas.bottom = Math.abs(elemClickMeas.offsetTop + elemClickMeas.height - elemMeas.offsetTop);
-                } else if (elemClickMeas.offsetTop > elemMeas.offsetTop + elemMeas.height) {
-                    intraElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemClickMeas.offsetTop);
-                } else {
-                    intraElemMeas.top = Math.abs(elemMeas.offsetTop - elemClickMeas.offsetTop);
-                    intraElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemClickMeas.offsetTop + elemClickMeas.height));
-                }
-
-                if (elemClickMeas.offsetLeft > elemMeas.offsetLeft + elemMeas.width) {
-                    intraElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemClickMeas.offsetLeft);
-                } else if (elemMeas.offsetLeft > elemClickMeas.offsetLeft + elemClickMeas.width) {
-                    intraElemMeas.right = Math.abs(elemClickMeas.offsetLeft + elemClickMeas.width - elemMeas.offsetLeft);
-                } else {
-                    intraElemMeas.left = Math.abs(elemMeas.offsetLeft - elemClickMeas.offsetLeft);
-                    intraElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemClickMeas.offsetLeft + elemClickMeas.width));
-                }
-
-                dimensionMarkerWidth = $('.dimension-layer').width();
-                dimensionMarkerHeight = $('.dimension-layer').height();
-
-                if (intraElemMeas.top > 0) {
-                    $('#t-measure').show();
-                    $('#t-measure').height(intraElemMeas.top - (borderThickness * 2));
-                    $('#t-measure').offset({ top: elemClickMeas.offsetTop - intraElemMeas.top, left: elemClickMeas.offsetLeft + (elemClickMeas.width / 2) });
-                    $('#t-dimension').show();
-                    $('#t-dimension > span').show();
-                    $('#t-dimension > span').html(intraElemMeas.top);
-                    $('#t-dimension').offset({ top: elemClickMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemClickMeas.offsetLeft + (elemClickMeas.width / 2) + 5 });
-                }
-                if (intraElemMeas.right > 0) {
-                    $('#r-measure').show();
-                    $('#r-measure').width(intraElemMeas.right - (borderThickness * 2));
-                    $('#r-measure').offset({ top: elemClickMeas.offsetTop + (elemClickMeas.height / 2), left: elemClickMeas.offsetLeft + elemClickMeas.width });
-                    $('#r-dimension').show();
-                    $('#r-dimension > span').show();
-                    $('#r-dimension > span').html(intraElemMeas.right);
-                    $('#r-dimension').offset({ top: elemClickMeas.offsetTop + (elemClickMeas.height / 2) - dimensionMarkerHeight - 5, left: elemClickMeas.offsetLeft + elemClickMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
-                }
-                if (intraElemMeas.bottom > 0) {
-                    $('#b-measure').show();
-                    $('#b-measure').height(intraElemMeas.bottom - (borderThickness * 2));
-                    $('#b-measure').offset({ top: elemClickMeas.offsetTop + elemClickMeas.height, left: elemClickMeas.offsetLeft + (elemClickMeas.width / 2) });
-                    $('#b-dimension').show();
-                    $('#b-dimension > span').show();
-                    $('#b-dimension > span').html(intraElemMeas.bottom);
-                    $('#b-dimension').offset({ top: elemClickMeas.offsetTop + elemClickMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemClickMeas.offsetLeft + (elemClickMeas.width / 2) + 5 });
-                }
-                if (intraElemMeas.left > 0) {
-                    $('#l-measure').show();
-                    $('#l-measure').width(intraElemMeas.left - (borderThickness * 2));
-                    $('#l-measure').offset({ top: elemClickMeas.offsetTop + (elemClickMeas.height / 2), left: elemClickMeas.offsetLeft - intraElemMeas.left });
-                    $('#l-dimension').show();
-                    $('#l-dimension > span').show();
-                    $('#l-dimension > span').html(intraElemMeas.left);
-                    $('#l-dimension').offset({ top: elemClickMeas.offsetTop + (elemClickMeas.height / 2) - dimensionMarkerHeight - 5, left: elemClickMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
-                }
-
+        if (!isRedlineElement(hoveredElement)) {
+            highlightHoverElement();
+            //*****Check if we're hovering over our previously-selected element.*****
+            if (hoveredElement[0] == selectedElement[0]) {
+                highlightSelectElement();
+            } else if (selectedElement != '') {
+                measureIntraElementDistance();
+                drawIntraElementMarkers();
                 console.log(intraElemMeas);
             }
         }
@@ -195,44 +202,302 @@ $(document).ready(function() {
     });
 
     $('#base').on('click', '*', function() {
-        clearRedline();
-        clickedElement = $(this);
-        redlineClass = clickedElement.attr('class') === undefined ? '' : clickedElement.attr('class');
-        if (redlineClass.indexOf('redline-layer') == '-1') {
-            elemClickMeas.width = clickedElement.width();
-            elemClickMeas.height = clickedElement.height();
-            elemClickMeas.offsetTop = clickedElement.offset().top;
-            elemClickMeas.offsetLeft = clickedElement.offset().left;
-            console.log(elemClickMeas);
-            $('.click-layer').show();
-            $('#t-click').width(elemClickMeas.width + borderThickness);
-            $('#b-click').width(elemClickMeas.width);
-            $('#r-click').height(elemClickMeas.height);
-            $('#l-click').height(elemClickMeas.height);
-
-            $('#t-click').offset({ top: elemClickMeas.offsetTop - borderThickness, left: elemClickMeas.offsetLeft - borderThickness });
-            $('#b-click').offset({ top: elemClickMeas.offsetTop + elemClickMeas.height, left: elemClickMeas.offsetLeft - borderThickness });
-            $('#r-click').offset({ top: elemClickMeas.offsetTop, left: elemClickMeas.offsetLeft + elemClickMeas.width });
-            $('#l-click').offset({ top: elemClickMeas.offsetTop, left: elemClickMeas.offsetLeft - borderThickness });
-
-            $('#t-dimension').show();
-            $('#r-dimension').show();
-            $('#t-dimension > span').show();
-            $('#r-dimension > span').show();
-            dimensionMarkerWidth = $('.dimension-layer').width();
-            dimensionMarkerHeight = $('.dimension-layer').height();
-            $('#t-dimension > span').html(elemClickMeas.width);
-            $('#r-dimension > span').html(elemClickMeas.height);
-            $('#t-dimension').offset({ top: elemClickMeas.offsetTop - dimensionMarkerHeight - 10, left: elemClickMeas.offsetLeft + (elemClickMeas.width / 2) - (dimensionMarkerWidth / 2) });
-            $('#r-dimension').offset({ top: elemClickMeas.offsetTop + (elemClickMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemClickMeas.offsetLeft + elemClickMeas.width + 10 });
+        selectedElement = $(this);
+        if (!isRedlineElement(selectedElement)) {
+            console.log(selectedElement.attr('id'));
+            selectedElement = findDeepestChild(selectedElement);
+            clearRedline();
+            highlightSelectElement();
+            updateRedlinePanel(selectedElement);
         }
     });
+
+    $('#redline-panel').on('click', '#redline-panel-menu', function() {
+        $('#redline-panel').toggleClass('redline-panel-exposed');
+    });
+
+    $('body').on('click', function(e) {
+        if (e.target === this) {
+            closeRedline();
+        }
+    });
+
+    $('#base').on('mouseup', '#redline-panel input', function() {
+        $(this).select();
+    });
+
+    $('#base').on('mouseup', '#redline-panel textarea', function() {
+        $(this).select();
+    })
 });
 
+//*************************************************************************************************
+//*              Ensure we aren't interacting with a redline-specific element.                    *
+//*************************************************************************************************
+function isRedlineElement(element) {
+    var redlineStatus;
+
+    redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
+    if (redlineStatus.indexOf('redline-layer') == '-1') {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//*************************************************************************************************
+//*                  Highlight our hovered element and add extension lines.                       *
+//*************************************************************************************************
+function highlightHoverElement() {
+    elemMeas.width = hoveredElement.outerWidth();
+    elemMeas.height = hoveredElement.outerHeight();
+    elemMeas.offsetTop = hoveredElement.offset().top;
+    elemMeas.offsetLeft = hoveredElement.offset().left;
+    console.log(elemMeas);
+    $('.hover-layer').show();
+    $('.hover-o-layer').show();
+    $('#t-hover').width(elemMeas.width + borderThickness);
+    $('#b-hover').width(elemMeas.width);
+    $('#r-hover').height(elemMeas.height);
+    $('#l-hover').height(elemMeas.height);
+
+    $('#t-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: elemMeas.offsetLeft - borderThickness });
+    $('#b-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: elemMeas.offsetLeft - borderThickness });
+    $('#r-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft + elemMeas.width });
+    $('#l-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft - borderThickness });
+
+    $('#to-hover').width($(window).innerWidth() - (borderThickness * 2));
+    $('#bo-hover').width($(window).innerWidth() - (borderThickness * 2));
+    $('#ro-hover').height($(window).innerHeight() - (borderThickness * 2));
+    $('#lo-hover').height($(window).innerHeight() - (borderThickness * 2));
+
+    $('#to-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: 0 });
+    $('#bo-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: 0 });
+    $('#ro-hover').offset({ top: 0, left: elemMeas.offsetLeft + elemMeas.width });
+    $('#lo-hover').offset({ top: 0, left: elemMeas.offsetLeft - borderThickness });
+}
+
+//*************************************************************************************************
+//*                  Highlight our selected element and add extension lines.                      *
+//*************************************************************************************************
+function highlightSelectElement() {
+    elemSelectMeas.width = selectedElement.outerWidth();
+    elemSelectMeas.height = selectedElement.outerHeight();
+    elemSelectMeas.offsetTop = selectedElement.offset().top;
+    elemSelectMeas.offsetLeft = selectedElement.offset().left;
+    console.log(elemSelectMeas);
+    $('.select-layer').show();
+    $('#t-select').width(elemSelectMeas.width + borderThickness);
+    $('#b-select').width(elemSelectMeas.width);
+    $('#r-select').height(elemSelectMeas.height);
+    $('#l-select').height(elemSelectMeas.height);
+
+    $('#t-select').offset({ top: elemSelectMeas.offsetTop - borderThickness, left: elemSelectMeas.offsetLeft - borderThickness });
+    $('#b-select').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height, left: elemSelectMeas.offsetLeft - borderThickness });
+    $('#r-select').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft + elemSelectMeas.width });
+    $('#l-select').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft - borderThickness });
+
+    $('#t-dimension').show();
+    $('#r-dimension').show();
+    $('#t-dimension > span').show();
+    $('#r-dimension > span').show();
+    dimensionMarkerWidth = $('.dimension-layer').width();
+    dimensionMarkerHeight = $('.dimension-layer').height();
+    $('#t-dimension > span').text(Math.round(elemSelectMeas.width));
+    $('#r-dimension > span').text(Math.round(elemSelectMeas.height));
+    $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2) });
+    $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing });
+}
+
+//*************************************************************************************************
+//*             Measure distance between selected element to newly hovered element.               *
+//*************************************************************************************************
+function measureIntraElementDistance() {
+    $.each(intraElemMeas, function(i, value) {
+        intraElemMeas[i] = 0;
+    });
+
+    if (elemMeas.offsetTop > elemSelectMeas.offsetTop + elemSelectMeas.height) {
+        intraElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
+    } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop + elemMeas.height) {
+        intraElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
+    } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height > elemMeas.offsetTop + elemMeas.height) {
+        intraElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
+    } else if (elemSelectMeas.offsetTop < elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height < elemMeas.offsetTop + elemMeas.height) {
+        intraElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
+    } else {
+        intraElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
+        intraElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
+    }
+
+    if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft + elemMeas.width) {
+        intraElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
+    } else if (elemMeas.offsetLeft > elemSelectMeas.offsetLeft + elemSelectMeas.width) {
+        intraElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
+    } else if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width > elemMeas.offsetLeft + elemMeas.width) {
+        intraElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
+    } else if (elemSelectMeas.offsetLeft < elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width < elemMeas.offsetLeft + elemMeas.width) {
+        intraElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
+    } else {
+        intraElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
+        intraElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
+    }
+}
+
+//*************************************************************************************************
+//*                   Append our intra-element dimension lines and labels.                        *
+//*************************************************************************************************
+function drawIntraElementMarkers() {
+    dimensionMarkerWidth = $('.dimension-layer').width();
+    dimensionMarkerHeight = $('.dimension-layer').height();
+
+    if (intraElemMeas.top != 0) {
+        $('#t-measure').show();
+        $('#t-measure').height(Math.abs(intraElemMeas.top) - borderThickness);
+        if (intraElemMeas.top > 0) {
+            $('#t-measure').offset({ top: elemSelectMeas.offsetTop - intraElemMeas.top, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+        } else {
+            $('#t-measure').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+        }
+        $('#t-dimension').show();
+        $('#t-dimension > span').show();
+        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.top)));
+        $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+    }
+    if (intraElemMeas.right != 0) {
+        $('#r-measure').show();
+        $('#r-measure').width(Math.abs(intraElemMeas.right) - borderThickness);
+        if (intraElemMeas.right > 0) {
+            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width });
+        } else {
+            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + intraElemMeas.right });
+        }
+
+        $('#r-dimension').show();
+        $('#r-dimension > span').show();
+        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.right)));
+        $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
+    }
+    if (intraElemMeas.bottom != 0) {
+        $('#b-measure').show();
+        $('#b-measure').height(Math.abs(intraElemMeas.bottom) - borderThickness);
+        if (intraElemMeas.bottom > 0) {
+            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+        } else {
+            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + intraElemMeas.bottom, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+        }
+
+        $('#b-dimension').show();
+        $('#b-dimension > span').show();
+        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.bottom)));
+        $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+    }
+    if (intraElemMeas.left != 0) {
+        $('#l-measure').show();
+        $('#l-measure').width(Math.abs(intraElemMeas.left) - borderThickness);
+        if (intraElemMeas.left > 0) {
+            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft - intraElemMeas.left });
+        } else {
+            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft });
+        }
+
+        $('#l-dimension').show();
+        $('#l-dimension > span').show();
+        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.left)));
+        $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
+    }
+}
+
+//*************************************************************************************************
+//*                                Update our redline spec panel.                                 *
+//*************************************************************************************************
+function updateRedlinePanel(element) {
+    $.each(cssProperties, function(i, value) {
+        $.each(cssProperties[i], function(_i, _value) {
+            if (_i == '_content') {
+                cssProperties[i][_i] = element.text().trim();
+            } else {
+                cssProperties[i][_i] = element.css(_i);
+            }
+        });
+    });
+    console.log(cssProperties);
+    clearRedlinePanel();
+    appendRedlinePanel();
+    $('#redline-panel').addClass('redline-panel-exposed');
+}
+
+//*************************************************************************************************
+//*                                Append each property section.                                  *
+//*************************************************************************************************
+function appendRedlinePanel() {
+    $.each(cssProperties, function(i, value) {
+        $('#redline-panel').append('<div class="redline-layer redline-panel-section"></div>');
+        $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
+        $.each(cssProperties[i], function(_i, _value) {
+            if (_value != '' && _value != 'none' && _value != '0px') {
+                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '').replace('-top-', '-').replace('-left-', '-') + ':</p>');
+                if (_i != '_content') {
+                    $('.redline-panel-section:last').append('<input class="redline-layer" value="' + _value + '" readonly="readonly"></input>');
+                } else {
+                    $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
+                    $('.redline-panel-section textarea').text(_value);
+                }
+            }
+        });
+        //*****Remove any sections without CSS properties.*****
+        if ($('.redline-panel-section:last p').length <= 1) {
+            $('.redline-panel-section:last').remove();
+        }
+
+    });
+    //*****Remove a few items based on special queries.*****
+    if (cssProperties['text']['_content'] == '') {
+        $('p:contains("TEXT")').parent().parent().remove();
+    }
+    if (cssProperties['styles']['border-top-width'] == '0px') {
+        $('p:contains("border-color")').next().remove();
+        $('p:contains("border-color")').remove();
+    }
+}
+
+//*************************************************************************************************
+//*                       Strip all redline-specific elements from page.                          *
+//*************************************************************************************************
 function clearRedline() {
     $('.hover-layer').hide();
     $('.hover-o-layer').hide();
     $('.dimension-layer').hide();
     $('.measure-layer').hide();
+}
+
+//*************************************************************************************************
+//*                              Handle 'click-aways' on page.                                    *
+//*************************************************************************************************
+function closeRedline() {
+    clearRedline();
+    $('.select-layer').hide();
+    $('#redline-panel').removeClass('redline-panel-exposed');
+    clearRedlinePanel();
+}
+
+//*************************************************************************************************
+//*                           Clear all content in redline panel.                                 *
+//*************************************************************************************************
+function clearRedlinePanel() {
+    $('#redline-panel > *').not('div:first').remove();
+}
+
+//*************************************************************************************************
+//*                             Find the deepest child element.                                   *
+//*************************************************************************************************
+function findDeepestChild(element) {
+    var current = element;
+
+    while (current.children().length) {
+        current = current.children();
+    }
+
+    return current;
 }
 </script>

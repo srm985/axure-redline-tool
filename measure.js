@@ -38,6 +38,7 @@ $(document).ready(function() {
     $('body').on('click', '*', function() {
         selectedElement = $(this);
         if (!isRedlineElement(selectedElement)) {
+            selectedElement = findDeepestChild(selectedElement);
             clearRedline();
             highlightSelectElement();
             updateRedlinePanel(selectedElement);
@@ -136,8 +137,8 @@ function highlightSelectElement() {
     $('#r-dimension > span').show();
     dimensionMarkerWidth = $('.dimension-layer').width();
     dimensionMarkerHeight = $('.dimension-layer').height();
-    $('#t-dimension > span').html(Math.round(elemSelectMeas.width));
-    $('#r-dimension > span').html(Math.round(elemSelectMeas.height));
+    $('#t-dimension > span').text(Math.round(elemSelectMeas.width));
+    $('#r-dimension > span').text(Math.round(elemSelectMeas.height));
     $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2) });
     $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing });
 }
@@ -194,7 +195,7 @@ function drawIntraElementMarkers() {
         }
         $('#t-dimension').show();
         $('#t-dimension > span').show();
-        $('#t-dimension > span').html(Math.round(Math.abs(intraElemMeas.top)));
+        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.top)));
         $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
     if (intraElemMeas.right != 0) {
@@ -208,7 +209,7 @@ function drawIntraElementMarkers() {
 
         $('#r-dimension').show();
         $('#r-dimension > span').show();
-        $('#r-dimension > span').html(Math.round(Math.abs(intraElemMeas.right)));
+        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.right)));
         $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
     }
     if (intraElemMeas.bottom != 0) {
@@ -222,7 +223,7 @@ function drawIntraElementMarkers() {
 
         $('#b-dimension').show();
         $('#b-dimension > span').show();
-        $('#b-dimension > span').html(Math.round(Math.abs(intraElemMeas.bottom)));
+        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.bottom)));
         $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
     if (intraElemMeas.left != 0) {
@@ -236,7 +237,7 @@ function drawIntraElementMarkers() {
 
         $('#l-dimension').show();
         $('#l-dimension > span').show();
-        $('#l-dimension > span').html(Math.round(Math.abs(intraElemMeas.left)));
+        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.left)));
         $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
     }
 }
@@ -248,7 +249,7 @@ function updateRedlinePanel(element) {
     $.each(cssProperties, function(i, value) {
         $.each(cssProperties[i], function(_i, _value) {
             if (_i == '_content') {
-                cssProperties[i][_i] = element.html();
+                cssProperties[i][_i] = element.text().trim();
             } else {
                 cssProperties[i][_i] = element.css(_i);
             }
@@ -274,7 +275,7 @@ function appendRedlinePanel() {
                     $('.redline-panel-section:last').append('<input class="redline-layer" value="' + _value + '" readonly="readonly"></input>');
                 } else {
                     $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
-                    $('.redline-panel-section textarea').html(_value);
+                    $('.redline-panel-section textarea').text(_value);
                 }
             }
         });
@@ -289,8 +290,8 @@ function appendRedlinePanel() {
         $('p:contains("TEXT")').parent().parent().remove();
     }
     if (cssProperties['styles']['border-top-width'] == '0px') {
-    	$('p:contains("border-color")').next().remove();
-    	$('p:contains("border-color")').remove();
+        $('p:contains("border-color")').next().remove();
+        $('p:contains("border-color")').remove();
     }
 }
 
@@ -314,6 +315,22 @@ function closeRedline() {
     clearRedlinePanel();
 }
 
+//*************************************************************************************************
+//*                           Clear all content in redline panel.                                 *
+//*************************************************************************************************
 function clearRedlinePanel() {
     $('#redline-panel > *').not('div:first').remove();
+}
+
+//*************************************************************************************************
+//*                             Find the deepest child element.                                   *
+//*************************************************************************************************
+function findDeepestChild(element) {
+    var current = element;
+
+    while (current.children().length) {
+        current = current.children();
+    }
+
+    return current;
 }
