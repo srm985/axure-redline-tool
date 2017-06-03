@@ -26,7 +26,6 @@ $(document).ready(function() {
             } else if (selectedElement != '') {
                 measureIntraElementDistance();
                 drawIntraElementMarkers();
-                console.log(intraElemMeas);
             }
         }
     });
@@ -38,6 +37,8 @@ $(document).ready(function() {
     $('body').on('click', '*', function() {
         selectedElement = $(this);
         if (!isRedlineElement(selectedElement)) {
+            console.clear();
+            console.log(selectedElement.attr('id'));
             selectedElement = findDeepestChild(selectedElement);
             clearRedline();
             highlightSelectElement();
@@ -47,7 +48,6 @@ $(document).ready(function() {
 
     $('#redline-panel').on('click', '#redline-panel-menu', function() {
         $('#redline-panel').toggleClass('redline-panel-exposed');
-        console.log($(this).attr('id'));
     });
 
     $('body').on('click', function(e) {
@@ -87,7 +87,6 @@ function highlightHoverElement() {
     elemMeas.height = hoveredElement.outerHeight();
     elemMeas.offsetTop = hoveredElement.offset().top;
     elemMeas.offsetLeft = hoveredElement.offset().left;
-    console.log(elemMeas);
     $('.hover-layer').show();
     $('.hover-o-layer').show();
     $('#t-hover').width(elemMeas.width + borderThickness);
@@ -119,7 +118,6 @@ function highlightSelectElement() {
     elemSelectMeas.height = selectedElement.outerHeight();
     elemSelectMeas.offsetTop = selectedElement.offset().top;
     elemSelectMeas.offsetLeft = selectedElement.offset().left;
-    console.log(elemSelectMeas);
     $('.select-layer').show();
     $('#t-select').width(elemSelectMeas.width + borderThickness);
     $('#b-select').width(elemSelectMeas.width);
@@ -328,7 +326,7 @@ function clearRedlinePanel() {
 function findDeepestChild(element) {
     var current = element;
 
-    while (current.children().length) {
+    while (current.children().length > 1) {
         current = current.children();
     }
 

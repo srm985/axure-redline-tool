@@ -69,7 +69,8 @@
     cursor: pointer;
 }
 
-#redline-panel-menu > div {}
+#redline-panel-menu > div {
+}
 
 #redline-panel-menu > div > div {
     width: 12px;
@@ -89,7 +90,7 @@
 }
 
 #redline-panel p {
-    margin-bottom: 0;
+    margin: 10px 0 0 0;
 }
 
 #redline-panel input,
@@ -168,14 +169,52 @@ var borderThickness = 1,
     labelSpacing = 5,
     hoveredElement = '',
     selectedElement = '',
-    elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    elemSelectMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0 },
+    elemMeas = {
+        width: 0,
+        height: 0,
+        offsetTop: 0,
+        offsetLeft: 0
+    },
+    elemSelectMeas = {
+        width: 0,
+        height: 0,
+        offsetTop: 0,
+        offsetLeft: 0
+    },
+    intraElemMeas = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+    },
     redlineClass,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0;
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
+var cssProperties = {
+    'properties': {
+        'width': '',
+        'height': ''
+    },
+    'styles': {
+        'background-color': '',
+        'opacity': '',
+        'border-top-width': '',
+        'border-top-style': '',
+        'border-top-color': '',
+        'border-top-left-radius': '',
+        'box-shadow': ''
+    },
+    'text': {
+        'font-family': '',
+        'font-size': '',
+        'font-weight': '',
+        'line-height': '',
+        'text-align': '',
+        'color': '',
+        '_content': ''
+    }
+};
 
 $(document).ready(function() {
     $('.redline-layer').hide(); //*****Start by hiding all redline elements.*****
@@ -192,7 +231,6 @@ $(document).ready(function() {
             } else if (selectedElement != '') {
                 measureIntraElementDistance();
                 drawIntraElementMarkers();
-                console.log(intraElemMeas);
             }
         }
     });
@@ -204,7 +242,7 @@ $(document).ready(function() {
     $('#base').on('click', '*', function() {
         selectedElement = $(this);
         if (!isRedlineElement(selectedElement)) {
-            console.log(selectedElement.attr('id'));
+            console.clear();
             selectedElement = findDeepestChild(selectedElement);
             clearRedline();
             highlightSelectElement();
@@ -253,7 +291,6 @@ function highlightHoverElement() {
     elemMeas.height = hoveredElement.outerHeight();
     elemMeas.offsetTop = hoveredElement.offset().top;
     elemMeas.offsetLeft = hoveredElement.offset().left;
-    console.log(elemMeas);
     $('.hover-layer').show();
     $('.hover-o-layer').show();
     $('#t-hover').width(elemMeas.width + borderThickness);
@@ -261,20 +298,44 @@ function highlightHoverElement() {
     $('#r-hover').height(elemMeas.height);
     $('#l-hover').height(elemMeas.height);
 
-    $('#t-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: elemMeas.offsetLeft - borderThickness });
-    $('#b-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: elemMeas.offsetLeft - borderThickness });
-    $('#r-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft + elemMeas.width });
-    $('#l-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft - borderThickness });
+    $('#t-hover').offset({
+        top: elemMeas.offsetTop - borderThickness,
+        left: elemMeas.offsetLeft - borderThickness
+    });
+    $('#b-hover').offset({
+        top: elemMeas.offsetTop + elemMeas.height,
+        left: elemMeas.offsetLeft - borderThickness
+    });
+    $('#r-hover').offset({
+        top: elemMeas.offsetTop,
+        left: elemMeas.offsetLeft + elemMeas.width
+    });
+    $('#l-hover').offset({
+        top: elemMeas.offsetTop,
+        left: elemMeas.offsetLeft - borderThickness
+    });
 
     $('#to-hover').width($(window).innerWidth() - (borderThickness * 2));
     $('#bo-hover').width($(window).innerWidth() - (borderThickness * 2));
     $('#ro-hover').height($(window).innerHeight() - (borderThickness * 2));
     $('#lo-hover').height($(window).innerHeight() - (borderThickness * 2));
 
-    $('#to-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: 0 });
-    $('#bo-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: 0 });
-    $('#ro-hover').offset({ top: 0, left: elemMeas.offsetLeft + elemMeas.width });
-    $('#lo-hover').offset({ top: 0, left: elemMeas.offsetLeft - borderThickness });
+    $('#to-hover').offset({
+        top: elemMeas.offsetTop - borderThickness,
+        left: 0
+    });
+    $('#bo-hover').offset({
+        top: elemMeas.offsetTop + elemMeas.height,
+        left: 0
+    });
+    $('#ro-hover').offset({
+        top: 0,
+        left: elemMeas.offsetLeft + elemMeas.width
+    });
+    $('#lo-hover').offset({
+        top: 0,
+        left: elemMeas.offsetLeft - borderThickness
+    });
 }
 
 //*************************************************************************************************
@@ -285,17 +346,28 @@ function highlightSelectElement() {
     elemSelectMeas.height = selectedElement.outerHeight();
     elemSelectMeas.offsetTop = selectedElement.offset().top;
     elemSelectMeas.offsetLeft = selectedElement.offset().left;
-    console.log(elemSelectMeas);
     $('.select-layer').show();
     $('#t-select').width(elemSelectMeas.width + borderThickness);
     $('#b-select').width(elemSelectMeas.width);
     $('#r-select').height(elemSelectMeas.height);
     $('#l-select').height(elemSelectMeas.height);
 
-    $('#t-select').offset({ top: elemSelectMeas.offsetTop - borderThickness, left: elemSelectMeas.offsetLeft - borderThickness });
-    $('#b-select').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height, left: elemSelectMeas.offsetLeft - borderThickness });
-    $('#r-select').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft + elemSelectMeas.width });
-    $('#l-select').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft - borderThickness });
+    $('#t-select').offset({
+        top: elemSelectMeas.offsetTop - borderThickness,
+        left: elemSelectMeas.offsetLeft - borderThickness
+    });
+    $('#b-select').offset({
+        top: elemSelectMeas.offsetTop + elemSelectMeas.height,
+        left: elemSelectMeas.offsetLeft - borderThickness
+    });
+    $('#r-select').offset({
+        top: elemSelectMeas.offsetTop,
+        left: elemSelectMeas.offsetLeft + elemSelectMeas.width
+    });
+    $('#l-select').offset({
+        top: elemSelectMeas.offsetTop,
+        left: elemSelectMeas.offsetLeft - borderThickness
+    });
 
     $('#t-dimension').show();
     $('#r-dimension').show();
@@ -305,8 +377,14 @@ function highlightSelectElement() {
     dimensionMarkerHeight = $('.dimension-layer').height();
     $('#t-dimension > span').text(Math.round(elemSelectMeas.width));
     $('#r-dimension > span').text(Math.round(elemSelectMeas.height));
-    $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2) });
-    $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing });
+    $('#t-dimension').offset({
+        top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing,
+        left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2)
+    });
+    $('#r-dimension').offset({
+        top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2),
+        left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing
+    });
 }
 
 //*************************************************************************************************
@@ -355,56 +433,92 @@ function drawIntraElementMarkers() {
         $('#t-measure').show();
         $('#t-measure').height(Math.abs(intraElemMeas.top) - borderThickness);
         if (intraElemMeas.top > 0) {
-            $('#t-measure').offset({ top: elemSelectMeas.offsetTop - intraElemMeas.top, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+            $('#t-measure').offset({
+                top: elemSelectMeas.offsetTop - intraElemMeas.top,
+                left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2)
+            });
         } else {
-            $('#t-measure').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+            $('#t-measure').offset({
+                top: elemSelectMeas.offsetTop,
+                left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2)
+            });
         }
         $('#t-dimension').show();
         $('#t-dimension > span').show();
         $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.top)));
-        $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+        $('#t-dimension').offset({
+            top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2),
+            left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing
+        });
     }
     if (intraElemMeas.right != 0) {
         $('#r-measure').show();
         $('#r-measure').width(Math.abs(intraElemMeas.right) - borderThickness);
         if (intraElemMeas.right > 0) {
-            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width });
+            $('#r-measure').offset({
+                top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2),
+                left: elemSelectMeas.offsetLeft + elemSelectMeas.width
+            });
         } else {
-            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + intraElemMeas.right });
+            $('#r-measure').offset({
+                top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2),
+                left: elemSelectMeas.offsetLeft + elemSelectMeas.width + intraElemMeas.right
+            });
         }
 
         $('#r-dimension').show();
         $('#r-dimension > span').show();
         $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.right)));
-        $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
+        $('#r-dimension').offset({
+            top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing,
+            left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2)
+        });
     }
     if (intraElemMeas.bottom != 0) {
         $('#b-measure').show();
         $('#b-measure').height(Math.abs(intraElemMeas.bottom) - borderThickness);
         if (intraElemMeas.bottom > 0) {
-            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+            $('#b-measure').offset({
+                top: elemSelectMeas.offsetTop + elemSelectMeas.height,
+                left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2)
+            });
         } else {
-            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + intraElemMeas.bottom, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+            $('#b-measure').offset({
+                top: elemSelectMeas.offsetTop + elemSelectMeas.height + intraElemMeas.bottom,
+                left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2)
+            });
         }
 
         $('#b-dimension').show();
         $('#b-dimension > span').show();
         $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.bottom)));
-        $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+        $('#b-dimension').offset({
+            top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2),
+            left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing
+        });
     }
     if (intraElemMeas.left != 0) {
         $('#l-measure').show();
         $('#l-measure').width(Math.abs(intraElemMeas.left) - borderThickness);
         if (intraElemMeas.left > 0) {
-            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft - intraElemMeas.left });
+            $('#l-measure').offset({
+                top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2),
+                left: elemSelectMeas.offsetLeft - intraElemMeas.left
+            });
         } else {
-            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft });
+            $('#l-measure').offset({
+                top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2),
+                left: elemSelectMeas.offsetLeft
+            });
         }
 
         $('#l-dimension').show();
         $('#l-dimension > span').show();
         $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.left)));
-        $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
+        $('#l-dimension').offset({
+            top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing,
+            left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2)
+        });
     }
 }
 
@@ -493,9 +607,11 @@ function clearRedlinePanel() {
 //*************************************************************************************************
 function findDeepestChild(element) {
     var current = element;
-
-    while (current.children().length) {
+    //console.log(current.attr('id'));
+    while (current.children().length > 1) {
+        console.log(current.children().length);
         current = current.children();
+        //console.log(current.attr('id'));
     }
 
     return current;

@@ -115,7 +115,7 @@ body {
 }
 
 #redline-panel p {
-    margin-bottom: 0;
+    margin: 10px 0 0 0;
 }
 
 #redline-panel input,
