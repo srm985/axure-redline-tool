@@ -82,19 +82,16 @@ body {
     position: absolute;
     top: 20px;
     left: 0;
+    display: flex;
     width: 20px;
     height: 40px;
+    cursor: pointer;
     transform: translateX(-20px);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     background-color: inherit;
-    display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-}
-
-#redline-panel-menu > div {
 }
 
 #redline-panel-menu > div > div {
@@ -102,6 +99,67 @@ body {
     height: 2px;
     margin: 3px 0 3px 5px;
     background-color: #FFFFFF;
+}
+
+.tool-enabler {
+    position: relative;
+}
+
+.tool-enabler span {
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    margin-right: 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    transition: 0.4s;
+    border-radius: 34px;
+    background-color: #CCCCCC;
+}
+
+.slider:before {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    width: 26px;
+    height: 26px;
+    content: '';
+    transition: 0.4s;
+    border-radius: 50%;
+    background-color: white;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }
 
 #redline-panel,

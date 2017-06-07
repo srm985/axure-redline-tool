@@ -310,6 +310,7 @@ function closeRedline() {
     clearRedline();
     $('.select-layer').hide();
     $('#redline-panel').removeClass('redline-panel-exposed');
+    selectedElement = '';
     clearRedlinePanel();
 }
 
