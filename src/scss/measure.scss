@@ -55,11 +55,14 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+$primary-color: #4EDEC2;
+$switch-transition: all 0.15s ease-in-out;
 .redline-layer {
     font-family: 'Lato', sans-serif;
 }
 
 #redline-panel {
+    font-size: 12px;
     position: fixed;
     z-index: 99999;
     top: 0;
@@ -71,10 +74,27 @@ body {
     transition: all 0.1s ease-in-out;
     color: #FFFFFF;
     background-color: rgba(51, 51, 51, 0.9);
+    p {
+        margin: 10px 0 0 0;
+    }
+    input,
+    textarea {
+        font-size: 12px;
+        width: calc(100% - 12px);
+        margin-top: 0;
+        padding: 4px 5px;
+        cursor: text;
+        opacity: 0.5;
+        border: solid 1px #FFFFFF;
+        border-radius: 3px;
+    }
+    textarea {
+        height: 50px;
+        resize: none;
+    }
 }
 
 .redline-panel-exposed {
-    /*left: calc(100% - 300px) !important;*/
     transform: translateX(-285px);
 }
 
@@ -92,97 +112,74 @@ body {
     background-color: inherit;
     justify-content: center;
     align-items: center;
+    > div > div {
+        width: 12px;
+        height: 2px;
+        margin: 3px 0 3px 5px;
+        background-color: #FFFFFF;
+    }
 }
 
-#redline-panel-menu > div > div {
-    width: 12px;
-    height: 2px;
-    margin: 3px 0 3px 5px;
-    background-color: #FFFFFF;
+.redline-tool-enabler {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .switch {
-    .cmn-toggle {
+    .toggle-switch {
         position: absolute;
         visibility: hidden;
         margin-left: -9999px;
+        + label {
+            position: relative;
+            display: block;
+            width: 60px;
+            height: 28px;
+            padding: 2px;
+            cursor: pointer;
+            user-select: none;
+            transition: $switch-transition;
+            border-radius: 28px;
+            outline: none;
+            background-color: #DDDDDD;
+        }
+        + label:before,
+        + label:after {
+            position: absolute;
+            display: block;
+            content: '';
+            transition: $switch-transition;
+        }
+        + label:before {
+            top: 2px;
+            right: 2px;
+            bottom: 2px;
+            left: 2px;
+            border-radius: 28px;
+            background-color: #FFFFFF;
+        }
+        + label:after {
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: 24px;
+            border-radius: 50%;
+            background-color: #DDDDDD;
+        }
+        &:checked + label {
+            background-color: $primary-color;
+        }
+        &:checked + label:after {
+            margin-left: 32px;
+            background-color: $primary-color;
+        }
     }
-    .cmn-toggle + label {
-        position: relative;
-        display: block;
-        cursor: pointer;
-        user-select: none;
-        outline: none;
-    }
-    input.cmn-toggle-round-flat + label {
-        width: 70px;
-        height: 30px;
-        padding: 2px;
-        transition: background 0.4s;
-        border-radius: 30px;
-        background-color: #DDDDDD;
-    }
-    input.cmn-toggle-round-flat + label:before,
-    input.cmn-toggle-round-flat + label:after {
-        position: absolute;
-        display: block;
-        content: '';
-    }
-    input.cmn-toggle-round-flat + label:before {
-        top: 2px;
-        right: 2px;
-        bottom: 2px;
-        left: 2px;
-        transition: background 0.4s;
-        border-radius: 30px;
-        background-color: #FFFFFF;
-    }
-    input.cmn-toggle-round-flat + label:after {
-        top: 4px;
-        bottom: 4px;
-        left: 4px;
-        width: 28px;
-        transition: margin 0.4s, background 0.4s;
-        border-radius: 52px;
-        background-color: #DDDDDD;
-    }
-    input.cmn-toggle-round-flat:checked + label {
-        background-color: #8CE196;
-    }
-    input.cmn-toggle-round-flat:checked + label:after {
-        margin-left: 30px;
-        background-color: #8CE196;
-    }
-}
-
-#redline-panel,
-#redline-panel input,
-#redline-panel textarea {
-    font-size: 12px;
 }
 
 .redline-panel-section {
     margin-top: 20px;
-}
-
-#redline-panel p {
-    margin: 10px 0 0 0;
-}
-
-#redline-panel input,
-#redline-panel textarea {
-    width: calc(100% - 12px);
-    margin-top: 0;
-    padding: 4px 5px;
-    cursor: text;
-    opacity: 0.5;
-    border: solid 1px #FFFFFF;
-    border-radius: 3px;
-}
-
-#redline-panel textarea {
-    height: 50px;
-    resize: none;
 }
 
 .hover-layer,

@@ -1,4 +1,5 @@
-var borderThickness = 1,
+var enableTool = true,
+    borderThickness = 1,
     labelSpacing = 5,
     hoveredElement = '',
     selectedElement = '',
@@ -12,12 +13,82 @@ var borderThickness = 1,
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
 $(document).ready(function() {
-    $('.redline-layer').hide(); //*****Start by hiding all redline elements.*****
+
+    initTool();
+
+    //*****Enable/Disable Redline Tool*****
+    $('#redline-panel').on('change', '.switch', function() {
+        enableRedline();
+    });
+
+    //*****Element Hover*****
+    $('body').on('mouseenter', '*', function() {
+        elementHover($(this));
+    });
+
+    //*****Element Leave*****
+    $('body').on('mouseleave', '*', function() {
+        clearRedline();
+    });
+
+    //*****Element Click*****
+    $('body').on('click', '*', function() {
+        elementClick($(this));
+    });
+
+    //*****Open/Close Redline Panel*****
+    $('#redline-panel').on('click', '#redline-panel-menu', function() {
+        $('#redline-panel').toggleClass('redline-panel-exposed');
+    });
+
+    //*****Handle Element Clickaway*****
+    $('body').on('click', function(e) {
+        if (e.target === this) {
+            closeRedline();
+        }
+    });
+
+    //*****Autoselect Redline Panel Content****
+    $('#redline-panel').on('mouseup', 'input', function() {
+        $(this).select();
+    });
+
+    //*****Autoselect Redline Panel Content****
+    $('#redline-panel').on('mouseup', 'textarea', function() {
+        $(this).select();
+    })
+});
+
+//*************************************************************************************************
+//*                                 Initialize our tool.                                          *
+//*************************************************************************************************
+function initTool() {
+    $('.redline-tool-wrapper *').addClass('redline-layer');   //Label all redline tool elelemnts.
+    $('.redline-layer').hide();
+    $('.redline-tool-wrapper').show();
     $('#redline-panel').show();
     $('#redline-panel *').show();
+    $('.toggle-switch').prop('checked', true);
+    enableRedline();
+}
 
-    $('body').on('mouseenter', '*', function() {
-        hoveredElement = $(this);
+//*************************************************************************************************
+//*                             Enable or disable our tool.                                       *
+//*************************************************************************************************
+function enableRedline() {
+    enableTool = $('.toggle-switch').prop('checked');
+
+    if (!enableTool) {
+        closeRedline();
+    }
+}
+
+//*************************************************************************************************
+//*                             Handle element hover actions.                                     *
+//*************************************************************************************************
+function elementHover(element) {
+    if (enableTool) {
+        hoveredElement = element;
         if (!isRedlineElement(hoveredElement)) {
             highlightHoverElement();
             //*****Check if we're hovering over our previously-selected element.*****
@@ -28,42 +99,23 @@ $(document).ready(function() {
                 drawIntraElementMarkers();
             }
         }
-    });
+    }
+}
 
-    $('body').on('mouseleave', '*', function() {
-        clearRedline();
-    });
-
-    $('body').on('click', '*', function() {
-        selectedElement = $(this);
+//*************************************************************************************************
+//*                             Handle element click actions.                                     *
+//*************************************************************************************************
+function elementClick(element) {
+    if (enableTool) {
+        selectedElement = element;
         if (!isRedlineElement(selectedElement)) {
-            console.clear();
-            console.log(selectedElement.attr('id'));
             selectedElement = findDeepestChild(selectedElement);
             clearRedline();
             highlightSelectElement();
             updateRedlinePanel(selectedElement);
         }
-    });
-
-    $('#redline-panel').on('click', '#redline-panel-menu', function() {
-        $('#redline-panel').toggleClass('redline-panel-exposed');
-    });
-
-    $('body').on('click', function(e) {
-        if (e.target === this) {
-            closeRedline();
-        }
-    });
-
-    $('body').on('mouseup', '#redline-panel input', function() {
-        $(this).select();
-    });
-
-    $('body').on('mouseup', '#redline-panel textarea', function() {
-        $(this).select();
-    })
-});
+    }
+}
 
 //*************************************************************************************************
 //*              Ensure we aren't interacting with a redline-specific element.                    *
@@ -318,7 +370,7 @@ function closeRedline() {
 //*                           Clear all content in redline panel.                                 *
 //*************************************************************************************************
 function clearRedlinePanel() {
-    $('#redline-panel > *').not('div:first').remove();
+    $('#redline-panel > *').not('div:first').not('.redline-tool-enabler').remove();
 }
 
 //*************************************************************************************************
