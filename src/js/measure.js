@@ -63,7 +63,7 @@ $(document).ready(function() {
 //*                                 Initialize our tool.                                          *
 //*************************************************************************************************
 function initTool() {
-    $('.redline-tool-wrapper *').addClass('redline-layer');   //Label all redline tool elelemnts.
+    $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
     $('.redline-layer').hide();
     $('.redline-tool-wrapper').show();
     $('#redline-panel').show();
@@ -79,7 +79,9 @@ function enableRedline() {
     enableTool = $('.toggle-switch').prop('checked');
 
     if (!enableTool) {
-        closeRedline();
+        setTimeout(function() {
+            closeRedline();
+        }, 250);
     }
 }
 
@@ -107,9 +109,8 @@ function elementHover(element) {
 //*************************************************************************************************
 function elementClick(element) {
     if (enableTool) {
-        selectedElement = element;
-        if (!isRedlineElement(selectedElement)) {
-            selectedElement = findDeepestChild(selectedElement);
+        if (!isRedlineElement(element)) {
+            selectedElement = findDeepestChild(element);
             clearRedline();
             highlightSelectElement();
             updateRedlinePanel(selectedElement);
