@@ -22,7 +22,8 @@ $(document).ready(function() {
     });
 
     //*****Element Hover*****
-    $('body').on('mouseenter', '*', function() {
+    $('body').on('mouseenter', '*', function(e) {
+        e.stopImmediatePropagation();
         elementHover($(this));
     });
 
@@ -32,7 +33,8 @@ $(document).ready(function() {
     });
 
     //*****Element Click*****
-    $('body').on('click', '*', function() {
+    $('body').on('click', '*', function(e) {
+        e.stopImmediatePropagation();
         elementClick($(this));
     });
 
@@ -110,7 +112,8 @@ function elementHover(element) {
 function elementClick(element) {
     if (enableTool) {
         if (!isRedlineElement(element)) {
-            selectedElement = findDeepestChild(element);
+            //selectedElement = findDeepestChild(element);
+            selectedElement = element;
             clearRedline();
             highlightSelectElement();
             updateRedlinePanel(selectedElement);
