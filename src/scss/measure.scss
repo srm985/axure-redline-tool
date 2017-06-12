@@ -3,6 +3,7 @@
     height: 275px;
     margin-top: 125px;
     background-color: red;
+    border: solid 2px #555555;
 }
 
 #div-2 {
@@ -39,7 +40,8 @@
     left: 300px;
     width: 75px;
     height: 400px;
-    border: dashed 5px #555555;
+    border-top: dashed 5px #555555;
+    border-bottom: solid 3px red;
     background-color: green;
 }
 

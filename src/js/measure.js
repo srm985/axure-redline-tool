@@ -10,7 +10,7 @@ var enableTool = true,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0;
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top-width': '', 'border-top-style': '', 'border-top-color': '', 'border-top-left-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
+var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
 $(document).ready(function() {
 
@@ -300,15 +300,41 @@ function drawIntraElementMarkers() {
 //*                                Update our redline spec panel.                                 *
 //*************************************************************************************************
 function updateRedlinePanel(element) {
+    var propMatch;
+
     $.each(cssProperties, function(i, value) {
         $.each(cssProperties[i], function(_i, _value) {
             if (_i == '_content') {
                 cssProperties[i][_i] = element.text().trim();
             } else {
                 cssProperties[i][_i] = element.css(_i);
+                console.log(_i + ': ' + element.css(_i));
             }
         });
     });
+
+    propMatch = cssProperties['styles']['border-top'];
+    if (propMatch != '' && propMatch == cssProperties['styles']['border-right'] && propMatch == cssProperties['styles']['border-bottom'] && propMatch == cssProperties['styles']['border-left']) {
+        cssProperties['styles']['border-top'] = '';
+        cssProperties['styles']['border-right'] = '';
+        cssProperties['styles']['border-bottom'] = '';
+        cssProperties['styles']['border-left'] = '';
+
+        cssProperties['styles']['border-style'] = cssProperties['styles']['border-top-style'];
+        cssProperties['styles']['border-width'] = cssProperties['styles']['border-top-width'];
+        cssProperties['styles']['border-color'] = cssProperties['styles']['border-top-color'];
+    }
+
+    propMatch = cssProperties['styles']['border-top-left-radius'];
+    if (propMatch != '' && propMatch == cssProperties['styles']['border-top-right-radius'] && propMatch == cssProperties['styles']['border-bottom-right-radius'] && propMatch == cssProperties['styles']['border-bottom-left-radius']) {
+        cssProperties['styles']['border-top-left-radius'] = '';
+        cssProperties['styles']['border-top-right-radius'] = '';
+        cssProperties['styles']['border-bottom-right-radius'] = '';
+        cssProperties['styles']['border-bottom-left-radius'] = '';
+
+        cssProperties['styles']['border-radius'] = '111';
+    }
+
     console.log(cssProperties);
     clearRedlinePanel();
     appendRedlinePanel();
@@ -323,8 +349,8 @@ function appendRedlinePanel() {
         $('#redline-panel').append('<div class="redline-layer redline-panel-section"></div>');
         $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
         $.each(cssProperties[i], function(_i, _value) {
-            if (_value != '' && _value != 'none' && _value != '0px') {
-                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '').replace('-top-', '-').replace('-left-', '-') + ':</p>');
+            if (_value !== undefined && _value != '' && _value.indexOf('none') < 0 && _value != '0px') {
+                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':</p>');
                 if (_i != '_content') {
                     $('.redline-panel-section:last').append('<input class="redline-layer" value="' + _value + '" readonly="readonly"></input>');
                 } else {
