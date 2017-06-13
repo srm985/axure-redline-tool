@@ -10,7 +10,7 @@ var enableTool = true,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0;
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
+var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
 $(document).ready(function() {
 
@@ -308,11 +308,35 @@ function updateRedlinePanel(element) {
                 cssProperties[i][_i] = element.text().trim();
             } else {
                 cssProperties[i][_i] = element.css(_i);
-                console.log(_i + ': ' + element.css(_i));
+                console.log(_i + ': ' + cssProperties[i][_i]);
             }
         });
     });
 
+    //*****Concat granular values to shorthand and clear.*****    
+    cssProperties['styles']['border-top'] = cssProperties['styles']['border-top-style'] + ' ' + cssProperties['styles']['border-top-width'] + ' ' + cssProperties['styles']['border-top-color'];
+    cssProperties['styles']['border-right'] = cssProperties['styles']['border-right-style'] + ' ' + cssProperties['styles']['border-right-width'] + ' ' + cssProperties['styles']['border-right-color'];
+    cssProperties['styles']['border-bottom'] = cssProperties['styles']['border-bottom-style'] + ' ' + cssProperties['styles']['border-bottom-width'] + ' ' + cssProperties['styles']['border-bottom-color'];
+    cssProperties['styles']['border-left'] = cssProperties['styles']['border-left-style'] + ' ' + cssProperties['styles']['border-left-width'] + ' ' + cssProperties['styles']['border-left-color'];
+    /*cssProperties['styles']['border-top-style'] = '';
+    cssProperties['styles']['border-right-style'] = '';
+    cssProperties['styles']['border-bottom-style'] = '';
+    cssProperties['styles']['border-left-style'] = '';
+    cssProperties['styles']['border-top-width'] = '';
+    cssProperties['styles']['border-right-width'] = '';
+    cssProperties['styles']['border-bottom-width'] = '';
+    cssProperties['styles']['border-left-width'] = '';
+    cssProperties['styles']['border-top-color'] = '';
+    cssProperties['styles']['border-right-color'] = '';
+    cssProperties['styles']['border-bottom-color'] = '';
+    cssProperties['styles']['border-left-color'] = '';*/
+
+    //*****Clear our border attribute tags because we'll populate them later.*****
+    cssProperties['styles']['border-style'] = '';
+    cssProperties['styles']['border-width'] = '';
+    cssProperties['styles']['border-color'] = '';
+
+    //*****Check if we have matching border attributes and consolidate.*****
     propMatch = cssProperties['styles']['border-top'];
     if (propMatch != '' && propMatch == cssProperties['styles']['border-right'] && propMatch == cssProperties['styles']['border-bottom'] && propMatch == cssProperties['styles']['border-left']) {
         cssProperties['styles']['border-top'] = '';
@@ -320,19 +344,27 @@ function updateRedlinePanel(element) {
         cssProperties['styles']['border-bottom'] = '';
         cssProperties['styles']['border-left'] = '';
 
-        cssProperties['styles']['border-style'] = cssProperties['styles']['border-top-style'];
-        cssProperties['styles']['border-width'] = cssProperties['styles']['border-top-width'];
-        cssProperties['styles']['border-color'] = cssProperties['styles']['border-top-color'];
+        cssProperties['styles']['border-style'] = selectedElement.css('border-top-style');
+        if (cssProperties['styles']['border-style'] != 'none') {
+            cssProperties['styles']['border-width'] = selectedElement.css('border-top-width');
+            cssProperties['styles']['border-color'] = selectedElement.css('border-top-color');
+            cssProperties['styles']['border'] = cssProperties['styles']['border-style'] + ' ' + cssProperties['styles']['border-width'] + ' ' + cssProperties['styles']['border-color'];
+        }
+    } else {
+        cssProperties['styles']['border-style'] = '';
+        cssProperties['styles']['border-width'] = '';
+        cssProperties['styles']['border-color'] = '';
     }
 
+    //*****Check if we have matching border-radius attributes and consolidate.*****
     propMatch = cssProperties['styles']['border-top-left-radius'];
     if (propMatch != '' && propMatch == cssProperties['styles']['border-top-right-radius'] && propMatch == cssProperties['styles']['border-bottom-right-radius'] && propMatch == cssProperties['styles']['border-bottom-left-radius']) {
+        cssProperties['styles']['border-radius'] = cssProperties['styles']['border-top-right-radius'];
+
         cssProperties['styles']['border-top-left-radius'] = '';
         cssProperties['styles']['border-top-right-radius'] = '';
         cssProperties['styles']['border-bottom-right-radius'] = '';
         cssProperties['styles']['border-bottom-left-radius'] = '';
-
-        cssProperties['styles']['border-radius'] = '111';
     }
 
     console.log(cssProperties);
@@ -400,7 +432,7 @@ function closeRedline() {
 //*                           Clear all content in redline panel.                                 *
 //*************************************************************************************************
 function clearRedlinePanel() {
-    $('#redline-panel > *').not('div:first').not('.redline-tool-enabler').remove();
+    $('#redline-panel .column-right > *').not('div:first').not('.redline-tool-enabler').remove();
 }
 
 //*************************************************************************************************

@@ -2,8 +2,8 @@
     width: 150px;
     height: 275px;
     margin-top: 125px;
-    background-color: red;
     border: solid 2px #555555;
+    background-color: red;
 }
 
 #div-2 {
@@ -11,6 +11,7 @@
     height: 175px;
     margin-top: 125px;
     margin-left: 600px;
+    border-top-right-radius: 7px;
     background-color: yellow;
 }
 
@@ -68,14 +69,35 @@ $switch-transition: all 0.15s ease-in-out;
     position: fixed;
     z-index: 99999;
     top: 0;
-    left: calc(100% - 5px);
+    left: calc(100% - 25px);
     overflow-x: visible;
+    overflow-y: auto;
     width: 250px;
     height: calc(100% - 40px);
     padding: 20px;
     transition: all 0.1s ease-in-out;
     color: #FFFFFF;
     background-color: rgba(51, 51, 51, 0.9);
+    #redline-panel-menu {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        display: flex;
+        width: 20px;
+        height: 40px;
+        cursor: pointer;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: inherit;
+        justify-content: center;
+        align-items: center;
+        > div > div {
+            width: 12px;
+            height: 2px;
+            margin: 3px 0 3px 5px;
+            background-color: #FFFFFF;
+        }
+    }
     p {
         margin: 10px 0 0 0;
     }
