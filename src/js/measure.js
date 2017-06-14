@@ -367,6 +367,9 @@ function updateRedlinePanel(element) {
         cssProperties['styles']['border-bottom-left-radius'] = '';
     }
 
+    //*****Clean up our font family attributes.*****
+    cssProperties['text']['font-family'] = cssProperties['text']['font-family'].replace('"','').split(',')[0];
+
     console.log(cssProperties);
     clearRedlinePanel();
     appendRedlinePanel();
@@ -381,7 +384,7 @@ function appendRedlinePanel() {
         $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
         $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
         $.each(cssProperties[i], function(_i, _value) {
-            if (_value !== undefined && _value != '' && _value.indexOf('none') < 0 && _value != '0px') {
+            if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
                 $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':</p>');
                 if (_i != '_content') {
                     $('.redline-panel-section:last').append('<input class="redline-layer" value="' + _value + '" readonly="readonly"></input>');
@@ -398,7 +401,7 @@ function appendRedlinePanel() {
 
     });
     //*****Remove a few items based on special queries.*****
-    if (cssProperties['text']['_content'] == '') {
+    if (cssProperties['text']['_content'].length < 1) {
         $('p:contains("TEXT")').parent().parent().remove();
     }
     if (cssProperties['styles']['border-top-width'] == '0px') {
