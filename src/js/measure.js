@@ -39,7 +39,7 @@ $(document).ready(function() {
     });
 
     //*****Open/Close Redline Panel*****
-    $('#redline-panel').on('click', '#redline-panel-menu', function() {
+    $('#redline-panel').on('click', '#menu-tab-column > div', function() {
         $('#redline-panel').toggleClass('redline-panel-exposed');
     });
 
@@ -308,7 +308,7 @@ function updateRedlinePanel(element) {
                 cssProperties[i][_i] = element.text().trim();
             } else {
                 cssProperties[i][_i] = element.css(_i);
-                console.log(_i + ': ' + cssProperties[i][_i]);
+                //console.log(_i + ': ' + cssProperties[i][_i]);
             }
         });
     });
@@ -318,7 +318,7 @@ function updateRedlinePanel(element) {
     cssProperties['styles']['border-right'] = cssProperties['styles']['border-right-style'] + ' ' + cssProperties['styles']['border-right-width'] + ' ' + cssProperties['styles']['border-right-color'];
     cssProperties['styles']['border-bottom'] = cssProperties['styles']['border-bottom-style'] + ' ' + cssProperties['styles']['border-bottom-width'] + ' ' + cssProperties['styles']['border-bottom-color'];
     cssProperties['styles']['border-left'] = cssProperties['styles']['border-left-style'] + ' ' + cssProperties['styles']['border-left-width'] + ' ' + cssProperties['styles']['border-left-color'];
-    /*cssProperties['styles']['border-top-style'] = '';
+    cssProperties['styles']['border-top-style'] = '';
     cssProperties['styles']['border-right-style'] = '';
     cssProperties['styles']['border-bottom-style'] = '';
     cssProperties['styles']['border-left-style'] = '';
@@ -329,7 +329,7 @@ function updateRedlinePanel(element) {
     cssProperties['styles']['border-top-color'] = '';
     cssProperties['styles']['border-right-color'] = '';
     cssProperties['styles']['border-bottom-color'] = '';
-    cssProperties['styles']['border-left-color'] = '';*/
+    cssProperties['styles']['border-left-color'] = '';
 
     //*****Clear our border attribute tags because we'll populate them later.*****
     cssProperties['styles']['border-style'] = '';
@@ -378,7 +378,7 @@ function updateRedlinePanel(element) {
 //*************************************************************************************************
 function appendRedlinePanel() {
     $.each(cssProperties, function(i, value) {
-        $('#redline-panel').append('<div class="redline-layer redline-panel-section"></div>');
+        $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
         $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
         $.each(cssProperties[i], function(_i, _value) {
             if (_value !== undefined && _value != '' && _value.indexOf('none') < 0 && _value != '0px') {
@@ -432,7 +432,7 @@ function closeRedline() {
 //*                           Clear all content in redline panel.                                 *
 //*************************************************************************************************
 function clearRedlinePanel() {
-    $('#redline-panel .column-right > *').not('div:first').not('.redline-tool-enabler').remove();
+    $('#redline-panel-menu-column > *').not('div:first').remove();
 }
 
 //*************************************************************************************************
