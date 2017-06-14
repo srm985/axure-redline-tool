@@ -8,14 +8,37 @@ var enableTool = true,
     intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0 },
     redlineClass,
     dimensionMarkerWidth = 0,
-    dimensionMarkerHeight = 0;
+    dimensionMarkerHeight = 0,
+    documentClone;
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
 $(document).ready(function() {
-
     initTool();
+    /*bindListeners();
+    tempClone = $('body').clone(true);
+    console.log(tempClone);
+    $('body').remove();
+    $('html').append(tempClone);*/
+});
 
+//*************************************************************************************************
+//*                                 Initialize our tool.                                          *
+//*************************************************************************************************
+function initTool() {
+    $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
+    $('.redline-layer').hide();
+    $('.redline-tool-wrapper').show();
+    $('#redline-panel').show();
+    $('#redline-panel *').show();
+    $('.toggle-switch').prop('checked', true);
+    enableRedline();
+}
+
+//*************************************************************************************************
+//*                               Bind our event listeners.                                       *
+//*************************************************************************************************
+function bindListeners() {
     //*****Enable/Disable Redline Tool*****
     $('#redline-panel').on('change', '.switch', function() {
         enableRedline();
@@ -36,10 +59,12 @@ $(document).ready(function() {
     $('body').on('click', '*', function(e) {
         e.stopImmediatePropagation();
         elementClick($(this));
+
     });
 
     //*****Open/Close Redline Panel*****
-    $('#redline-panel').on('click', '#menu-tab-column > div', function() {
+    $('#redline-panel').on('click', '#menu-tab-column > div', function(e) {
+        e.stopImmediatePropagation();
         $('#redline-panel').toggleClass('redline-panel-exposed');
     });
 
@@ -58,20 +83,7 @@ $(document).ready(function() {
     //*****Autoselect Redline Panel Content****
     $('#redline-panel').on('mouseup', 'textarea', function() {
         $(this).select();
-    })
-});
-
-//*************************************************************************************************
-//*                                 Initialize our tool.                                          *
-//*************************************************************************************************
-function initTool() {
-    $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
-    $('.redline-layer').hide();
-    $('.redline-tool-wrapper').show();
-    $('#redline-panel').show();
-    $('#redline-panel *').show();
-    $('.toggle-switch').prop('checked', true);
-    enableRedline();
+    });
 }
 
 //*************************************************************************************************
@@ -80,10 +92,21 @@ function initTool() {
 function enableRedline() {
     enableTool = $('.toggle-switch').prop('checked');
 
-    if (!enableTool) {
+    if (enableTool) {
+        documentClone = $('body').clone('true');
+        $('*').off();
+        bindListeners();
+    } else {
         setTimeout(function() {
             closeRedline();
         }, 250);
+        setTimeout(function() {
+            $('body').remove();
+            $('html').append(documentClone);
+            $('.toggle-switch').prop('checked', false);
+            bindListeners();
+            closeRedline();
+        }, 255);
     }
 }
 
@@ -368,7 +391,7 @@ function updateRedlinePanel(element) {
     }
 
     //*****Clean up our font family attributes.*****
-    cssProperties['text']['font-family'] = cssProperties['text']['font-family'].replace('"','').split(',')[0];
+    cssProperties['text']['font-family'] = cssProperties['text']['font-family'].replace('"', '').split(',')[0];
 
     console.log(cssProperties);
     clearRedlinePanel();
