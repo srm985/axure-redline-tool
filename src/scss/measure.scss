@@ -1,13 +1,55 @@
 $primary-color: #4EDEC2;
+$toolBackgroundColor: rgba(51, 51, 51, 0.9);
+$font-stack: 'Lato', sans-serif;
 $switch-transition: all 0.15s ease-in-out;
 .redline-layer {
-    font-family: 'Lato', sans-serif;
+    font-family: $font-stack;
+}
+
+#top-control-panel {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: $toolBackgroundColor;
+    display: flex;
+    align-items: center;
+    float: left;
+    .zoom-controls {
+        display: flex;
+        width: 130px;
+        justify-content: space-between;
+        margin-left: 15px;
+        div {
+            display: flex;
+            box-sizing: border-box;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            color: #FFFFFF;
+            border-radius: 50%;
+            background-color: $primary-color;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        input {
+            width: 50px;
+            height: 25px;
+            border: none;
+            border-radius: 12px;
+            outline: none;
+            text-align: center;
+        }
+    }
 }
 
 #redline-panel {
     position: fixed;
     z-index: 9999;
-    top: 0;
+    top: 50px;
     left: calc(100% - 25px);
     display: flex;
     width: 290px;
@@ -23,7 +65,7 @@ $switch-transition: all 0.15s ease-in-out;
             margin-top: 20px;
             cursor: pointer;
             border-radius: 20px 0 0 20px;
-            background-color: rgba(51, 51, 51, 0.9);
+            background-color: $toolBackgroundColor;
             align-items: center;
             justify-content: space-between;
             > div > div {
@@ -42,7 +84,7 @@ $switch-transition: all 0.15s ease-in-out;
         height: 100%;
         padding: 20px 20px 0 20px;
         color: #FFFFFF;
-        background-color: rgba(51, 51, 51, 0.9);
+        background-color: $toolBackgroundColor;
         .redline-tool-enabler {
             font-size: 16px;
             display: flex;
@@ -102,7 +144,7 @@ $switch-transition: all 0.15s ease-in-out;
         .redline-panel-section {
             margin-top: 20px;
         }
-        .redline-panel-section:last-of-type  p:last-of-type + * {
+        .redline-panel-section:last-of-type p:last-of-type + * {
             margin-bottom: 20px;
         }
         p {

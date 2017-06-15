@@ -42,6 +42,8 @@ function initTool() {
     $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
     $('.redline-layer').hide();
     $('.redline-tool-wrapper').show();
+    $('#top-control-panel').show();
+    $('#top-control-panel *').show();
     $('#redline-panel').show();
     $('#redline-panel *').show();
     //$('.toggle-switch').prop('checked', true);
