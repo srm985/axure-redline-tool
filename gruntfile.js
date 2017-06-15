@@ -85,7 +85,7 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: ['src/supporting/cdn-links.htm', 'web/temp/markup.htm', 'web/temp/measure.css', 'web/temp/measure.js'],
-                dest: 'web/plugin.htm',
+                dest: 'web/plugin.txt',
             },
         },
         minifyHtml: {
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'web/plugin.min.htm': 'web/plugin.htm'
+                    'web/plugin.txt': 'web/plugin.txt'
                 }
             }
         }

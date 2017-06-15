@@ -14,13 +14,26 @@ var enableTool = true,
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
 $(document).ready(function() {
+    checkState();
     initTool();
-    /*bindListeners();
-    tempClone = $('body').clone(true);
-    console.log(tempClone);
-    $('body').remove();
-    $('html').append(tempClone);*/
+    documentClone = $('body').clone('true');
+    enableRedline();
 });
+
+//*************************************************************************************************
+//*                                 Initialize our tool.                                          *
+//*************************************************************************************************
+function checkState() {
+    var trackingCookie = getCookie('axure-tool-enabled');
+
+    if (trackingCookie != '' && trackingCookie == 1) {
+        enableTool = true;
+    } else if (trackingCookie != '' && trackingCookie == 0) {
+        enableTool = false;
+    } else {
+        setCookie('axure-tool-enabled', '1', 1);
+    }
+}
 
 //*************************************************************************************************
 //*                                 Initialize our tool.                                          *
@@ -31,8 +44,7 @@ function initTool() {
     $('.redline-tool-wrapper').show();
     $('#redline-panel').show();
     $('#redline-panel *').show();
-    $('.toggle-switch').prop('checked', true);
-    enableRedline();
+    //$('.toggle-switch').prop('checked', true);
 }
 
 //*************************************************************************************************
@@ -41,6 +53,7 @@ function initTool() {
 function bindListeners() {
     //*****Enable/Disable Redline Tool*****
     $('#redline-panel').on('change', '.switch', function() {
+        enableTool = $('.toggle-switch').prop('checked');
         enableRedline();
     });
 
@@ -90,12 +103,12 @@ function bindListeners() {
 //*                             Enable or disable our tool.                                       *
 //*************************************************************************************************
 function enableRedline() {
-    enableTool = $('.toggle-switch').prop('checked');
-
     if (enableTool) {
         documentClone = $('body').clone('true');
         $('*').off();
         bindListeners();
+        $('.toggle-switch').prop('checked', true);
+        setCookie('axure-tool-enabled', '1', 1);
     } else {
         setTimeout(function() {
             closeRedline();
@@ -106,7 +119,8 @@ function enableRedline() {
             $('.toggle-switch').prop('checked', false);
             bindListeners();
             closeRedline();
-        }, 255);
+        }, 260);
+        setCookie('axure-tool-enabled', '0', 1);
     }
 }
 
@@ -472,4 +486,32 @@ function findDeepestChild(element) {
     }
 
     return current;
+}
+
+//*************************************************************************************************
+//*                      Set a tracking cookie for tool enabled/disabled.                         *
+//*************************************************************************************************
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+//*************************************************************************************************
+//*                                     Read cookies.                                             *
+//*************************************************************************************************
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return '';
 }
