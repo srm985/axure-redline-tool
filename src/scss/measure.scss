@@ -1,6 +1,9 @@
-$primary-color: #4EDEC2;
-$toolBackgroundColor: rgba(51, 51, 51, 0.9);
-$font-stack: 'Lato', sans-serif;
+$primary-color-teal: #4EDEC2;
+$primary-color-orange: #E89A28;
+$primary-color-background: rgba(51, 51, 51, 0.9);
+$primary-color-blue: #4860FF;
+$font-stack: 'Lato',
+sans-serif;
 $switch-transition: all 0.15s ease-in-out;
 .redline-layer {
     font-family: $font-stack;
@@ -11,18 +14,20 @@ $switch-transition: all 0.15s ease-in-out;
     z-index: 99999;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: $toolBackgroundColor;
     display: flex;
-    align-items: center;
     float: left;
+    width: 100%;
+    height: 60px;
+    background-color: $primary-color-background;
+    padding: 0 20px;
+    align-items: center;
     .zoom-controls {
         display: flex;
-        width: 130px;
-        justify-content: space-between;
+        width: 150px;
         margin-left: 15px;
+        justify-content: space-between;
         div {
+            font-weight: bold;
             display: flex;
             box-sizing: border-box;
             width: 25px;
@@ -30,18 +35,19 @@ $switch-transition: all 0.15s ease-in-out;
             cursor: pointer;
             color: #FFFFFF;
             border-radius: 50%;
-            background-color: $primary-color;
+            background-color: $primary-color-teal;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
+            font-size: 22px;
         }
         input {
-            width: 50px;
+            width: 60px;
             height: 25px;
-            border: none;
-            border-radius: 12px;
-            outline: none;
             text-align: center;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            opacity: 0.5;
         }
     }
 }
@@ -49,7 +55,7 @@ $switch-transition: all 0.15s ease-in-out;
 #redline-panel {
     position: fixed;
     z-index: 9999;
-    top: 50px;
+    top: 60px;
     left: calc(100% - 25px);
     display: flex;
     width: 290px;
@@ -65,7 +71,7 @@ $switch-transition: all 0.15s ease-in-out;
             margin-top: 20px;
             cursor: pointer;
             border-radius: 20px 0 0 20px;
-            background-color: $toolBackgroundColor;
+            background-color: $primary-color-background;
             align-items: center;
             justify-content: space-between;
             > div > div {
@@ -84,7 +90,7 @@ $switch-transition: all 0.15s ease-in-out;
         height: 100%;
         padding: 20px 20px 0 20px;
         color: #FFFFFF;
-        background-color: $toolBackgroundColor;
+        background-color: $primary-color-background;
         .redline-tool-enabler {
             font-size: 16px;
             display: flex;
@@ -133,11 +139,11 @@ $switch-transition: all 0.15s ease-in-out;
                     background-color: #DDDDDD;
                 }
                 &:checked + label {
-                    background-color: $primary-color;
+                    background-color: $primary-color-teal;
                 }
                 &:checked + label:after {
                     margin-left: 32px;
-                    background-color: $primary-color;
+                    background-color: $primary-color-teal;
                 }
             }
         }
@@ -185,21 +191,21 @@ $switch-transition: all 0.15s ease-in-out;
 
 .hover-layer {
     z-index: 9997;
-    border: solid 1px #4860FF;
+    border: solid 1px $primary-color-blue;
     border-right: none;
     border-bottom: none;
 }
 
 .hover-o-layer {
     z-index: 9996;
-    border: dashed 1px #4860FF;
+    border: dashed 1px $primary-color-blue;
     border-right: none;
     border-bottom: none;
 }
 
 .select-layer {
     z-index: 9998;
-    border: solid 1px #E89A28;
+    border: solid 1px $primary-color-orange;
     border-right: none;
     border-bottom: none;
 }
@@ -215,14 +221,14 @@ $switch-transition: all 0.15s ease-in-out;
     letter-spacing: 1px;
     color: #FFFFFF;
     border-radius: 5px;
-    background-color: #E89A28;
+    background-color: $primary-color-orange;
     justify-content: center;
     align-items: center;
 }
 
 .measure-layer {
     z-index: 9995;
-    border: solid 1px #E89A28;
+    border: solid 1px $primary-color-orange;
     border-right: none;
     border-bottom: none;
 }

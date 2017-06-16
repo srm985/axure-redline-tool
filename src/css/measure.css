@@ -6,18 +6,20 @@
   z-index: 99999;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 50px;
-  background-color: rgba(51, 51, 51, 0.9);
   display: flex;
-  align-items: center;
-  float: left; }
+  float: left;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(51, 51, 51, 0.9);
+  padding: 0 20px;
+  align-items: center; }
   #top-control-panel .zoom-controls {
     display: flex;
-    width: 130px;
-    justify-content: space-between;
-    margin-left: 15px; }
+    width: 150px;
+    margin-left: 15px;
+    justify-content: space-between; }
     #top-control-panel .zoom-controls div {
+      font-weight: bold;
       display: flex;
       box-sizing: border-box;
       width: 25px;
@@ -28,19 +30,20 @@
       background-color: #4EDEC2;
       justify-content: center;
       align-items: center;
-      font-weight: bold; }
+      font-size: 22px; }
     #top-control-panel .zoom-controls input {
-      width: 50px;
+      width: 60px;
       height: 25px;
+      text-align: center;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       outline: none;
-      text-align: center; }
+      opacity: 0.5; }
 
 #redline-panel {
   position: fixed;
   z-index: 9999;
-  top: 50px;
+  top: 60px;
   left: calc(100% - 25px);
   display: flex;
   width: 290px;

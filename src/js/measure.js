@@ -1,4 +1,5 @@
 var enableTool = true,
+    documentZoom = 100,
     borderThickness = 1,
     labelSpacing = 5,
     hoveredElement = '',
@@ -47,6 +48,11 @@ function initTool() {
     $('#redline-panel').show();
     $('#redline-panel *').show();
     //$('.toggle-switch').prop('checked', true);
+
+    $('#zoom-value').val(documentZoom + '%');
+    $('#base').wrap('<div class="zoom-wrapper"></div>');
+    $('#base').addClass('redline-layer');
+    $('.zoom-wrapper').addClass('redline-layer');
 }
 
 //*************************************************************************************************
@@ -99,6 +105,20 @@ function bindListeners() {
     $('#redline-panel').on('mouseup', 'textarea', function() {
         $(this).select();
     });
+
+    //*****Handle Zoom Controls*****
+    $('#top-control-panel').on('click', '.zoom-control-button', function() {
+        console.log('ppp');
+        if ($(this).text() == '+') {
+            documentZoom += 10;
+            $('#zoom-value').val(documentZoom + '%');
+            $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
+        } else {
+            documentZoom -= 10;
+            $('#zoom-value').val(documentZoom + '%');
+            $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
+        }
+    })
 }
 
 //*************************************************************************************************
