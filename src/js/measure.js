@@ -6,7 +6,7 @@ var enableTool = true,
     selectedElement = '',
     elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
     elemSelectMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0 },
+    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0, trueTop: 0, trueRight: 0, trueBottom: 0, trueLeft: 0 },
     redlineClass,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0,
@@ -19,6 +19,7 @@ $(document).ready(function() {
     initTool();
     documentClone = $('body').clone('true');
     enableRedline();
+
 });
 
 //*************************************************************************************************
@@ -47,12 +48,14 @@ function initTool() {
     $('#top-control-panel *').show();
     $('#redline-panel').show();
     $('#redline-panel *').show();
-    //$('.toggle-switch').prop('checked', true);
 
     $('#zoom-value').val(documentZoom + '%');
     $('#base').wrap('<div class="zoom-wrapper"></div>');
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
+    $('#base *').each(function(i) {
+        $(this).data('thedimensions', { width: $(this).outerWidth(), height: $(this).outerHeight(), offsetTop: $(this).offset().top, offsetLeft: $(this).offset().left });
+    });
 }
 
 //*************************************************************************************************
@@ -92,7 +95,7 @@ function bindListeners() {
     //*****Handle Element Clickaway*****
     $('body').on('click', function(e) {
         if (e.target === this) {
-            closeRedline();
+            closeRedline(1);
         }
     });
 
@@ -112,11 +115,14 @@ function bindListeners() {
         if ($(this).children().text() == '+') {
             documentZoom += 10;
             $('#zoom-value').val(documentZoom + '%');
-            $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
+            $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
         } else {
             documentZoom -= 10;
             $('#zoom-value').val(documentZoom + '%');
-            $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
+            $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
+        }
+        if (selectedElement) {
+            highlightSelectElement();
         }
     });
 }
@@ -126,12 +132,13 @@ function bindListeners() {
 //*************************************************************************************************
 function enableRedline() {
     if (enableTool) {
+        setCookie('axure-tool-enabled', '1', 1);
         documentClone = $('body').clone('true');
+        $('.toggle-switch').prop('checked', true);
         $('*').off();
         bindListeners();
-        $('.toggle-switch').prop('checked', true);
-        setCookie('axure-tool-enabled', '1', 1);
     } else {
+        setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function() {
             closeRedline();
         }, 250);
@@ -141,9 +148,10 @@ function enableRedline() {
             $('.toggle-switch').prop('checked', false);
             bindListeners();
             closeRedline();
-        }, 260);
-        setCookie('axure-tool-enabled', '0', 1);
+        }, 300);
     }
+    $('.zoom-wrapper').show();
+    $('#base').show();
 }
 
 //*************************************************************************************************
@@ -229,11 +237,8 @@ function highlightHoverElement() {
 //*                  Highlight our selected element and add extension lines.                      *
 //*************************************************************************************************
 function highlightSelectElement() {
-    console.log(selectedElement);
     elemSelectMeas.width = (selectedElement.outerWidth() * (documentZoom / 100));
     elemSelectMeas.height = (selectedElement.outerHeight() * (documentZoom / 100));
-
-    console.log(elemSelectMeas.width);
     elemSelectMeas.offsetTop = selectedElement.offset().top;
     elemSelectMeas.offsetLeft = selectedElement.offset().left;
     $('.select-layer').show();
@@ -253,8 +258,8 @@ function highlightSelectElement() {
     $('#r-dimension > span').show();
     dimensionMarkerWidth = $('.dimension-layer').width();
     dimensionMarkerHeight = $('.dimension-layer').height();
-    $('#t-dimension > span').text(Math.round(elemSelectMeas.width));
-    $('#r-dimension > span').text(Math.round(elemSelectMeas.height));
+    $('#t-dimension > span').text(Math.round(selectedElement.data('thedimensions').width));
+    $('#r-dimension > span').text(Math.round(selectedElement.data('thedimensions').height));
 
     $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2) });
     $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing });
@@ -270,28 +275,40 @@ function measureIntraElementDistance() {
 
     if (elemMeas.offsetTop > elemSelectMeas.offsetTop + elemSelectMeas.height) {
         intraElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
+        intraElemMeas.trueBottom = Math.abs(selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height - hoveredElement.data('thedimensions').offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
+        intraElemMeas.trueTop = Math.abs(hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height - selectedElement.data('thedimensions').offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height > elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
+        intraElemMeas.trueTop = Math.abs(hoveredElement.data('thedimensions').offsetTop - selectedElement.data('thedimensions').offsetTop);
     } else if (elemSelectMeas.offsetTop < elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height < elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
+        intraElemMeas.trueBottom = Math.abs((hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height) - (selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height));
     } else {
         intraElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
         intraElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
+        intraElemMeas.trueTop = selectedElement.data('thedimensions').offsetTop - hoveredElement.data('thedimensions').offsetTop;
+        intraElemMeas.trueBottom = (hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height) - (selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height);
     }
 
     if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
+        intraElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredElement.data('thedimensions').width - selectedElement.data('thedimensions').offsetLeft);
     } else if (elemMeas.offsetLeft > elemSelectMeas.offsetLeft + elemSelectMeas.width) {
         intraElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
+        intraElemMeas.trueRight = Math.abs(selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width - hoveredElement.data('thedimensions').offsetLeft);
     } else if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width > elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
+        intraElemMeas.trueLeft = Math.abs(hoveredElement.data('thedimensions').offsetLeft - selectedElement.data('thedimensions').offsetLeft);
     } else if (elemSelectMeas.offsetLeft < elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width < elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
+        intraElemMeas.trueRight = Math.abs((hoveredElement.data('thedimensions').offsetLeft + hoveredElement.data('thedimensions').width) - (selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width));
     } else {
         intraElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
         intraElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
+        intraElemMeas.trueLeft = selectedElement.data('thedimensions').offsetLeft - hoveredElement.data('thedimensions').offsetLeft;
+        intraElemMeas.trueRight = (hoveredElement.data('thedimensions').offsetLeft + hoveredElement.data('thedimensions').width) - (selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width);
     }
 }
 
@@ -312,7 +329,7 @@ function drawIntraElementMarkers() {
         }
         $('#t-dimension').show();
         $('#t-dimension > span').show();
-        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.top)));
+        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueTop)));
         $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
     if (intraElemMeas.right != 0) {
@@ -326,7 +343,7 @@ function drawIntraElementMarkers() {
 
         $('#r-dimension').show();
         $('#r-dimension > span').show();
-        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.right)));
+        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueRight)));
         $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
     }
     if (intraElemMeas.bottom != 0) {
@@ -340,7 +357,7 @@ function drawIntraElementMarkers() {
 
         $('#b-dimension').show();
         $('#b-dimension > span').show();
-        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.bottom)));
+        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueBottom)));
         $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
     if (intraElemMeas.left != 0) {
@@ -354,7 +371,7 @@ function drawIntraElementMarkers() {
 
         $('#l-dimension').show();
         $('#l-dimension > span').show();
-        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.left)));
+        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueLeft)));
         $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
     }
 }
@@ -370,7 +387,7 @@ function updateRedlinePanel(element) {
             if (_i == '_content') {
                 cssProperties[i][_i] = element.text().trim();
             } else {
-                cssProperties[i][_i] = element.css(_i);
+                cssProperties[i][_i] = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
                 //console.log(_i + ': ' + cssProperties[i][_i]);
             }
         });

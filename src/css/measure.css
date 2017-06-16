@@ -1,7 +1,6 @@
-.redline-layer {
+.redline-tool-wrapper .redline-layer {
   font-family: "Lato", sans-serif; }
-
-#top-control-panel {
+.redline-tool-wrapper #top-control-panel {
   position: fixed;
   z-index: 99999;
   top: 0;
@@ -13,12 +12,12 @@
   padding: 0 20px;
   background-color: rgba(51, 51, 51, 0.9);
   align-items: center; }
-  #top-control-panel .zoom-controls {
+  .redline-tool-wrapper #top-control-panel .zoom-controls {
     display: flex;
     width: 150px;
     margin-left: 15px;
     justify-content: space-between; }
-    #top-control-panel .zoom-controls div {
+    .redline-tool-wrapper #top-control-panel .zoom-controls div {
       font-size: 22px;
       font-weight: bold;
       display: flex;
@@ -32,7 +31,7 @@
       background-color: #4EDEC2;
       justify-content: center;
       align-items: center; }
-    #top-control-panel .zoom-controls input {
+    .redline-tool-wrapper #top-control-panel .zoom-controls input {
       width: 60px;
       height: 25px;
       text-align: center;
@@ -40,8 +39,7 @@
       border: none;
       border-radius: 10px;
       outline: none; }
-
-#redline-panel {
+.redline-tool-wrapper #redline-panel {
   position: fixed;
   z-index: 9999;
   top: 60px;
@@ -50,10 +48,10 @@
   width: 290px;
   height: 100%;
   transition: all 0.1s ease-in-out; }
-  #redline-panel #menu-tab-column {
+  .redline-tool-wrapper #redline-panel #menu-tab-column {
     width: 20px;
     height: 100%; }
-    #redline-panel #menu-tab-column > div {
+    .redline-tool-wrapper #redline-panel #menu-tab-column > div {
       display: flex;
       width: 100%;
       height: 40px;
@@ -63,12 +61,12 @@
       background-color: rgba(51, 51, 51, 0.9);
       align-items: center;
       justify-content: space-between; }
-      #redline-panel #menu-tab-column > div > div > div {
+      .redline-tool-wrapper #redline-panel #menu-tab-column > div > div > div {
         width: 12px;
         height: 2px;
         margin: 3px 0 3px 7px;
         background-color: #FFFFFF; }
-  #redline-panel #redline-panel-menu-column {
+  .redline-tool-wrapper #redline-panel #redline-panel-menu-column {
     font-size: 12px;
     overflow-y: auto;
     box-sizing: border-box;
@@ -77,16 +75,16 @@
     padding: 20px 20px 0 20px;
     color: #FFFFFF;
     background-color: rgba(51, 51, 51, 0.9); }
-    #redline-panel #redline-panel-menu-column .redline-tool-enabler {
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-tool-enabler {
       font-size: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center; }
-    #redline-panel #redline-panel-menu-column .switch .toggle-switch {
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch {
       position: absolute;
       visibility: hidden;
       margin-left: -9999px; }
-      #redline-panel #redline-panel-menu-column .switch .toggle-switch + label {
+      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label {
         position: relative;
         display: block;
         width: 60px;
@@ -98,39 +96,39 @@
         border-radius: 28px;
         outline: none;
         background-color: #DDDDDD; }
-      #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before,
-      #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
+      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before,
+      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
         position: absolute;
         display: block;
         content: '';
         transition: all 0.15s ease-in-out; }
-      #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before {
+      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before {
         top: 2px;
         right: 2px;
         bottom: 2px;
         left: 2px;
         border-radius: 28px;
         background-color: #FFFFFF; }
-      #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
+      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
         top: 4px;
         bottom: 4px;
         left: 4px;
         width: 24px;
         border-radius: 50%;
         background-color: #DDDDDD; }
-      #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label {
+      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label {
         background-color: #4EDEC2; }
-      #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label:after {
+      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label:after {
         margin-left: 32px;
         background-color: #4EDEC2; }
-    #redline-panel #redline-panel-menu-column .redline-panel-section {
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-panel-section {
       margin-top: 20px; }
-    #redline-panel #redline-panel-menu-column .redline-panel-section:last-of-type p:last-of-type + * {
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-panel-section:last-of-type p:last-of-type + * {
       margin-bottom: 20px; }
-    #redline-panel #redline-panel-menu-column p {
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column p {
       margin: 10px 0 0 0; }
-    #redline-panel #redline-panel-menu-column input,
-    #redline-panel #redline-panel-menu-column textarea {
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column input,
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column textarea {
       font-size: 12px;
       width: calc(100% - 12px);
       margin-top: 0;
@@ -139,42 +137,36 @@
       opacity: 0.5;
       border: solid 1px #FFFFFF;
       border-radius: 3px; }
-    #redline-panel #redline-panel-menu-column textarea {
+    .redline-tool-wrapper #redline-panel #redline-panel-menu-column textarea {
       height: 50px;
       resize: none; }
-
-.redline-panel-exposed {
+.redline-tool-wrapper .redline-panel-exposed {
   transform: translateX(-265px); }
-
-.hover-layer,
-.hover-o-layer,
-.select-layer,
-.dimension-layer,
-.measure-layer {
+.redline-tool-wrapper .hover-layer,
+.redline-tool-wrapper .hover-o-layer,
+.redline-tool-wrapper .select-layer,
+.redline-tool-wrapper .dimension-layer,
+.redline-tool-wrapper .measure-layer {
   position: absolute;
   display: none;
   width: 0;
   height: 0; }
-
-.hover-layer {
+.redline-tool-wrapper .hover-layer {
   z-index: 9997;
   border: solid 1px #4860FF;
   border-right: none;
   border-bottom: none; }
-
-.hover-o-layer {
+.redline-tool-wrapper .hover-o-layer {
   z-index: 9996;
   border: dashed 1px #4860FF;
   border-right: none;
   border-bottom: none; }
-
-.select-layer {
+.redline-tool-wrapper .select-layer {
   z-index: 9998;
   border: solid 1px #E89A28;
   border-right: none;
   border-bottom: none; }
-
-.dimension-layer {
+.redline-tool-wrapper .dimension-layer {
   font-size: 10px;
   font-weight: bold;
   z-index: 9999;
@@ -188,8 +180,7 @@
   background-color: #E89A28;
   justify-content: center;
   align-items: center; }
-
-.measure-layer {
+.redline-tool-wrapper .measure-layer {
   z-index: 9995;
   border: solid 1px #E89A28;
   border-right: none;

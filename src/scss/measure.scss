@@ -5,231 +5,226 @@ $primary-color-blue: #4860FF;
 $font-stack: 'Lato',
 sans-serif;
 $switch-transition: all 0.15s ease-in-out;
-.redline-layer {
-    font-family: $font-stack;
-}
 
-#top-control-panel {
-    position: fixed;
-    z-index: 99999;
-    top: 0;
-    left: 0;
-    display: flex;
-    float: left;
-    width: 100%;
-    height: 60px;
-    padding: 0 20px;
-    background-color: $primary-color-background;
-    align-items: center;
-    .zoom-controls {
-        display: flex;
-        width: 150px;
-        margin-left: 15px;
-        justify-content: space-between;
-        div {
-            font-size: 22px;
-            font-weight: bold;
-            display: flex;
-            box-sizing: border-box;
-            width: 25px;
-            height: 25px;
-            cursor: pointer;
-            user-select: none;
-            color: #FFFFFF;
-            border-radius: 50%;
-            background-color: $primary-color-teal;
-            justify-content: center;
-            align-items: center;
-        }
-        input {
-            width: 60px;
-            height: 25px;
-            text-align: center;
-            opacity: 0.5;
-            border: none;
-            border-radius: 10px;
-            outline: none;
-        }
+
+.redline-tool-wrapper {
+    .redline-layer {
+        font-family: $font-stack;
     }
-}
-
-#redline-panel {
-    position: fixed;
-    z-index: 9999;
-    top: 60px;
-    left: calc(100% - 25px);
-    display: flex;
-    width: 290px;
-    height: 100%;
-    transition: all 0.1s ease-in-out;
-    #menu-tab-column {
-        width: 20px;
-        height: 100%;
-        > div {
+    #top-control-panel {
+        position: fixed;
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        display: flex;
+        float: left;
+        width: 100%;
+        height: 60px;
+        padding: 0 20px;
+        background-color: $primary-color-background;
+        align-items: center;
+        .zoom-controls {
             display: flex;
-            width: 100%;
-            height: 40px;
-            margin-top: 20px;
-            cursor: pointer;
-            border-radius: 20px 0 0 20px;
-            background-color: $primary-color-background;
-            align-items: center;
+            width: 150px;
+            margin-left: 15px;
             justify-content: space-between;
-            > div > div {
-                width: 12px;
-                height: 2px;
-                margin: 3px 0 3px 7px;
-                background-color: #FFFFFF;
+            div {
+                font-size: 22px;
+                font-weight: bold;
+                display: flex;
+                box-sizing: border-box;
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
+                user-select: none;
+                color: #FFFFFF;
+                border-radius: 50%;
+                background-color: $primary-color-teal;
+                justify-content: center;
+                align-items: center;
+            }
+            input {
+                width: 60px;
+                height: 25px;
+                text-align: center;
+                opacity: 0.5;
+                border: none;
+                border-radius: 10px;
+                outline: none;
             }
         }
     }
-    #redline-panel-menu-column {
-        font-size: 12px;
-        overflow-y: auto;
-        box-sizing: border-box;
-        width: 270px;
+    #redline-panel {
+        position: fixed;
+        z-index: 9999;
+        top: 60px;
+        left: calc(100% - 25px);
+        display: flex;
+        width: 290px;
         height: 100%;
-        padding: 20px 20px 0 20px;
-        color: #FFFFFF;
-        background-color: $primary-color-background;
-        .redline-tool-enabler {
-            font-size: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .switch {
-            .toggle-switch {
-                position: absolute;
-                visibility: hidden;
-                margin-left: -9999px;
-                + label {
-                    position: relative;
-                    display: block;
-                    width: 60px;
-                    height: 28px;
-                    padding: 2px;
-                    cursor: pointer;
-                    user-select: none;
-                    transition: $switch-transition;
-                    border-radius: 28px;
-                    outline: none;
-                    background-color: #DDDDDD;
-                }
-                + label:before,
-                + label:after {
-                    position: absolute;
-                    display: block;
-                    content: '';
-                    transition: $switch-transition;
-                }
-                + label:before {
-                    top: 2px;
-                    right: 2px;
-                    bottom: 2px;
-                    left: 2px;
-                    border-radius: 28px;
+        transition: all 0.1s ease-in-out;
+        #menu-tab-column {
+            width: 20px;
+            height: 100%;
+            > div {
+                display: flex;
+                width: 100%;
+                height: 40px;
+                margin-top: 20px;
+                cursor: pointer;
+                border-radius: 20px 0 0 20px;
+                background-color: $primary-color-background;
+                align-items: center;
+                justify-content: space-between;
+                > div > div {
+                    width: 12px;
+                    height: 2px;
+                    margin: 3px 0 3px 7px;
                     background-color: #FFFFFF;
                 }
-                + label:after {
-                    top: 4px;
-                    bottom: 4px;
-                    left: 4px;
-                    width: 24px;
-                    border-radius: 50%;
-                    background-color: #DDDDDD;
-                }
-                &:checked + label {
-                    background-color: $primary-color-teal;
-                }
-                &:checked + label:after {
-                    margin-left: 32px;
-                    background-color: $primary-color-teal;
-                }
             }
         }
-        .redline-panel-section {
-            margin-top: 20px;
-        }
-        .redline-panel-section:last-of-type p:last-of-type + * {
-            margin-bottom: 20px;
-        }
-        p {
-            margin: 10px 0 0 0;
-        }
-        input,
-        textarea {
+        #redline-panel-menu-column {
             font-size: 12px;
-            width: calc(100% - 12px);
-            margin-top: 0;
-            padding: 4px 5px;
-            cursor: text;
-            opacity: 0.5;
-            border: solid 1px #FFFFFF;
-            border-radius: 3px;
-        }
-        textarea {
-            height: 50px;
-            resize: none;
+            overflow-y: auto;
+            box-sizing: border-box;
+            width: 270px;
+            height: 100%;
+            padding: 20px 20px 0 20px;
+            color: #FFFFFF;
+            background-color: $primary-color-background;
+            .redline-tool-enabler {
+                font-size: 16px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .switch {
+                .toggle-switch {
+                    position: absolute;
+                    visibility: hidden;
+                    margin-left: -9999px;
+                    + label {
+                        position: relative;
+                        display: block;
+                        width: 60px;
+                        height: 28px;
+                        padding: 2px;
+                        cursor: pointer;
+                        user-select: none;
+                        transition: $switch-transition;
+                        border-radius: 28px;
+                        outline: none;
+                        background-color: #DDDDDD;
+                    }
+                    + label:before,
+                    + label:after {
+                        position: absolute;
+                        display: block;
+                        content: '';
+                        transition: $switch-transition;
+                    }
+                    + label:before {
+                        top: 2px;
+                        right: 2px;
+                        bottom: 2px;
+                        left: 2px;
+                        border-radius: 28px;
+                        background-color: #FFFFFF;
+                    }
+                    + label:after {
+                        top: 4px;
+                        bottom: 4px;
+                        left: 4px;
+                        width: 24px;
+                        border-radius: 50%;
+                        background-color: #DDDDDD;
+                    }
+                    &:checked + label {
+                        background-color: $primary-color-teal;
+                    }
+                    &:checked + label:after {
+                        margin-left: 32px;
+                        background-color: $primary-color-teal;
+                    }
+                }
+            }
+            .redline-panel-section {
+                margin-top: 20px;
+            }
+            .redline-panel-section:last-of-type p:last-of-type + * {
+                margin-bottom: 20px;
+            }
+            p {
+                margin: 10px 0 0 0;
+            }
+            input,
+            textarea {
+                font-size: 12px;
+                width: calc(100% - 12px);
+                margin-top: 0;
+                padding: 4px 5px;
+                cursor: text;
+                opacity: 0.5;
+                border: solid 1px #FFFFFF;
+                border-radius: 3px;
+            }
+            textarea {
+                height: 50px;
+                resize: none;
+            }
         }
     }
-}
-
-.redline-panel-exposed {
-    transform: translateX(-265px);
-}
-
-.hover-layer,
-.hover-o-layer,
-.select-layer,
-.dimension-layer,
-.measure-layer {
-    position: absolute;
-    display: none;
-    width: 0;
-    height: 0;
-}
-
-.hover-layer {
-    z-index: 9997;
-    border: solid 1px $primary-color-blue;
-    border-right: none;
-    border-bottom: none;
-}
-
-.hover-o-layer {
-    z-index: 9996;
-    border: dashed 1px $primary-color-blue;
-    border-right: none;
-    border-bottom: none;
-}
-
-.select-layer {
-    z-index: 9998;
-    border: solid 1px $primary-color-orange;
-    border-right: none;
-    border-bottom: none;
-}
-
-.dimension-layer {
-    font-size: 10px;
-    font-weight: bold;
-    z-index: 9999;
-    display: flex;
-    min-width: 30px;
-    min-height: 20px;
-    padding: 0;
-    letter-spacing: 1px;
-    color: #FFFFFF;
-    border-radius: 5px;
-    background-color: $primary-color-orange;
-    justify-content: center;
-    align-items: center;
-}
-
-.measure-layer {
-    z-index: 9995;
-    border: solid 1px $primary-color-orange;
-    border-right: none;
-    border-bottom: none;
+    .redline-panel-exposed {
+        transform: translateX(-265px);
+    }
+    .hover-layer,
+    .hover-o-layer,
+    .select-layer,
+    .dimension-layer,
+    .measure-layer {
+        position: absolute;
+        display: none;
+        width: 0;
+        height: 0;
+    }
+    .hover-layer {
+        z-index: 9997;
+        border: solid 1px $primary-color-blue;
+        border-right: none;
+        border-bottom: none;
+    }
+    .hover-o-layer {
+        z-index: 9996;
+        border: dashed 1px $primary-color-blue;
+        border-right: none;
+        border-bottom: none;
+    }
+    .select-layer {
+        z-index: 9998;
+        border: solid 1px $primary-color-orange;
+        border-right: none;
+        border-bottom: none;
+    }
+    .dimension-layer {
+        font-size: 10px;
+        font-weight: bold;
+        z-index: 9999;
+        display: flex;
+        min-width: 30px;
+        min-height: 20px;
+        padding: 0;
+        letter-spacing: 1px;
+        color: #FFFFFF;
+        border-radius: 5px;
+        background-color: $primary-color-orange;
+        justify-content: center;
+        align-items: center;
+    }
+    .measure-layer {
+        z-index: 9995;
+        border: solid 1px $primary-color-orange;
+        border-right: none;
+        border-bottom: none;
+    }
 }
