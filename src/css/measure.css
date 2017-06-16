@@ -10,8 +10,8 @@
   float: left;
   width: 100%;
   height: 60px;
-  background-color: rgba(51, 51, 51, 0.9);
   padding: 0 20px;
+  background-color: rgba(51, 51, 51, 0.9);
   align-items: center; }
   #top-control-panel .zoom-controls {
     display: flex;
@@ -19,26 +19,27 @@
     margin-left: 15px;
     justify-content: space-between; }
     #top-control-panel .zoom-controls div {
+      font-size: 22px;
       font-weight: bold;
       display: flex;
       box-sizing: border-box;
       width: 25px;
       height: 25px;
       cursor: pointer;
+      user-select: none;
       color: #FFFFFF;
       border-radius: 50%;
       background-color: #4EDEC2;
       justify-content: center;
-      align-items: center;
-      font-size: 22px; }
+      align-items: center; }
     #top-control-panel .zoom-controls input {
       width: 60px;
       height: 25px;
       text-align: center;
+      opacity: 0.5;
       border: none;
       border-radius: 10px;
-      outline: none;
-      opacity: 0.5; }
+      outline: none; }
 
 #redline-panel {
   position: fixed;

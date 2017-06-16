@@ -18,8 +18,8 @@ $switch-transition: all 0.15s ease-in-out;
     float: left;
     width: 100%;
     height: 60px;
-    background-color: $primary-color-background;
     padding: 0 20px;
+    background-color: $primary-color-background;
     align-items: center;
     .zoom-controls {
         display: flex;
@@ -27,27 +27,28 @@ $switch-transition: all 0.15s ease-in-out;
         margin-left: 15px;
         justify-content: space-between;
         div {
+            font-size: 22px;
             font-weight: bold;
             display: flex;
             box-sizing: border-box;
             width: 25px;
             height: 25px;
             cursor: pointer;
+            user-select: none;
             color: #FFFFFF;
             border-radius: 50%;
             background-color: $primary-color-teal;
             justify-content: center;
             align-items: center;
-            font-size: 22px;
         }
         input {
             width: 60px;
             height: 25px;
             text-align: center;
+            opacity: 0.5;
             border: none;
             border-radius: 10px;
             outline: none;
-            opacity: 0.5;
         }
     }
 }

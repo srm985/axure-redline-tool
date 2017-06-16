@@ -108,8 +108,8 @@ function bindListeners() {
 
     //*****Handle Zoom Controls*****
     $('#top-control-panel').on('click', '.zoom-control-button', function() {
-        console.log('ppp');
-        if ($(this).text() == '+') {
+        clearRedline();
+        if ($(this).children().text() == '+') {
             documentZoom += 10;
             $('#zoom-value').val(documentZoom + '%');
             $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
@@ -118,7 +118,7 @@ function bindListeners() {
             $('#zoom-value').val(documentZoom + '%');
             $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
         }
-    })
+    });
 }
 
 //*************************************************************************************************
@@ -198,8 +198,8 @@ function isRedlineElement(element) {
 //*                  Highlight our hovered element and add extension lines.                       *
 //*************************************************************************************************
 function highlightHoverElement() {
-    elemMeas.width = hoveredElement.outerWidth();
-    elemMeas.height = hoveredElement.outerHeight();
+    elemMeas.width = (hoveredElement.outerWidth() * (documentZoom / 100));
+    elemMeas.height = (hoveredElement.outerHeight() * (documentZoom / 100));
     elemMeas.offsetTop = hoveredElement.offset().top;
     elemMeas.offsetLeft = hoveredElement.offset().left;
     $('.hover-layer').show();
@@ -229,8 +229,11 @@ function highlightHoverElement() {
 //*                  Highlight our selected element and add extension lines.                      *
 //*************************************************************************************************
 function highlightSelectElement() {
-    elemSelectMeas.width = selectedElement.outerWidth();
-    elemSelectMeas.height = selectedElement.outerHeight();
+    console.log(selectedElement);
+    elemSelectMeas.width = (selectedElement.outerWidth() * (documentZoom / 100));
+    elemSelectMeas.height = (selectedElement.outerHeight() * (documentZoom / 100));
+
+    console.log(elemSelectMeas.width);
     elemSelectMeas.offsetTop = selectedElement.offset().top;
     elemSelectMeas.offsetLeft = selectedElement.offset().left;
     $('.select-layer').show();
@@ -252,6 +255,7 @@ function highlightSelectElement() {
     dimensionMarkerHeight = $('.dimension-layer').height();
     $('#t-dimension > span').text(Math.round(elemSelectMeas.width));
     $('#r-dimension > span').text(Math.round(elemSelectMeas.height));
+
     $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2) });
     $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing });
 }
