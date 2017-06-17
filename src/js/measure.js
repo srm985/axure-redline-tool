@@ -14,13 +14,20 @@ var enableTool = true,
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
-$(document).ready(function() {
+$(window).on('load', function() {
+    //*****I'm not insane for doubley defining this function. This needs to be done otherwise the demo won't work.*****
+    onLoadFunction();
+});
+
+//*************************************************************************************************
+//*                   Wrap onLoad events in function to call during demo.                         *
+//*************************************************************************************************
+function onLoadFunction() {
     checkState();
     initTool();
-    documentClone = $('body').clone('true');
+    documentClone = $('body').clone(true);
     enableRedline();
-
-});
+}
 
 //*************************************************************************************************
 //*                                 Initialize our tool.                                          *
@@ -48,8 +55,7 @@ function initTool() {
     $('#top-control-panel *').show();
     $('#redline-panel').show();
     $('#redline-panel *').show();
-
-    $('#zoom-value').val(documentZoom + '%');
+    
     $('#base').wrap('<div class="zoom-wrapper"></div>');
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
@@ -83,7 +89,6 @@ function bindListeners() {
     $('body').on('click', '*', function(e) {
         e.stopImmediatePropagation();
         elementClick($(this));
-
     });
 
     //*****Open/Close Redline Panel*****
@@ -112,15 +117,15 @@ function bindListeners() {
     //*****Handle Zoom Controls*****
     $('#top-control-panel').on('click', '.zoom-control-button', function() {
         clearRedline();
+        getZoom();
         if ($(this).children().text() == '+') {
             documentZoom += 10;
-            $('#zoom-value').val(documentZoom + '%');
-            $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
         } else {
             documentZoom -= 10;
-            $('#zoom-value').val(documentZoom + '%');
-            $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
         }
+
+        setZoom();
+
         if (selectedElement) {
             highlightSelectElement();
         }
@@ -133,25 +138,28 @@ function bindListeners() {
 function enableRedline() {
     if (enableTool) {
         setCookie('axure-tool-enabled', '1', 1);
-        documentClone = $('body').clone('true');
         $('.toggle-switch').prop('checked', true);
         $('*').off();
         bindListeners();
+        $('.zoom-wrapper').show();
+        $('.zoom-wrapper *').show();
+        setZoom();
     } else {
         setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function() {
-            closeRedline();
+            //closeRedline();
         }, 250);
         setTimeout(function() {
-            $('body').remove();
-            $('html').append(documentClone);
+            $('html body').remove();
+            $('html').append(documentClone.clone(true));
             $('.toggle-switch').prop('checked', false);
             bindListeners();
-            closeRedline();
-        }, 300);
+            //closeRedline();
+            $('.zoom-wrapper').show();
+            $('.zoom-wrapper *').show();
+            setZoom();
+        }, 250);
     }
-    $('.zoom-wrapper').show();
-    $('#base').show();
 }
 
 //*************************************************************************************************
@@ -557,4 +565,19 @@ function getCookie(cname) {
         }
     }
     return '';
+}
+
+//*************************************************************************************************
+//*                                    Set zoom level.                                            *
+//*************************************************************************************************
+function setZoom() {
+    $('#zoom-value').val(documentZoom + '%');
+    $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
+}
+
+//*************************************************************************************************
+//*                                    Read zoom level.                                           *
+//*************************************************************************************************
+function getZoom() {
+    documentZoom = parseInt($('#zoom-value').val());
 }
