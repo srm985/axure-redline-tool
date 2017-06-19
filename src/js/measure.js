@@ -112,14 +112,10 @@ function bindListeners() {
     });
 
     //*****Element Hover*****
-    $('body').on('mouseenter', '*', function(e) {
+    $('body').on('mouseover', '*', function(e) {
         e.stopImmediatePropagation();
-        elementHover($(this));
-    });
-
-    //*****Element Leave*****
-    $('body').on('mouseleave', '*', function() {
         clearRedline();
+        elementHover($(this));
     });
 
     //*****Element Click/Clickaway*****
@@ -211,7 +207,6 @@ function enableRedline() {
 function elementHover(element) {
     if (enableTool) {
         hoveredElement = element;
-        console.log(hoveredElement.attr('id'));
         if (!isRedlineElement(hoveredElement) || hoveredElement.attr('id') == 'base') {
             highlightHoverElement();
             //*****Check if we're hovering over our previously-selected element.*****
