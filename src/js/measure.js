@@ -79,14 +79,13 @@ function initTool() {
     });
     //*****Manually size our containers sue to absolutely-positioned children.*****
     $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
-    console.log(padding);
     $('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;' + 'top:' + padding + 'px !important; left:' + padding + 'px !important;');
     //*****If content has no background color, define as #FFFFFF.*****
     if ($('#base').css('background-color').match(/rgba\(\d+,\s\d+,\s\d+,\s0\)/).length > 0) {
         $('#base').css('background-color', '#FFFFFF');
     }
-    $(document).scrollTop(896);
-    //console.log($('#base').scrollTop());
+    $(document).scrollTop(padding - (($(window).innerHeight() - maxHeight) / 2));
+    $(document).scrollLeft(padding - (($(window).innerWidth() - maxWidth) / 2));
 }
 
 //*************************************************************************************************
@@ -142,10 +141,6 @@ function bindListeners() {
         }
 
         setZoom();
-
-        if (selectedElement) {
-            highlightSelectElement();
-        }
     });
 
     //*****Allow Zoom Input Value*****
@@ -164,9 +159,6 @@ function bindListeners() {
             setZoom();
         }
 
-    });
-    $(document).scroll(function() {
-        console.log($(this).scrollTop());
     });
 }
 
@@ -612,6 +604,10 @@ function setZoom() {
     documentZoom = documentZoom <= 0 ? 1 : documentZoom;
     $('#zoom-value').val(documentZoom + '%');
     $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
+
+    if (selectedElement) {
+        highlightSelectElement();
+    }
 }
 
 //*************************************************************************************************
