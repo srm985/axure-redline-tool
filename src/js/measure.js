@@ -48,6 +48,14 @@ function checkState() {
 //*                                 Initialize our tool.                                          *
 //*************************************************************************************************
 function initTool() {
+    var width = 0,
+        height = 0,
+        top = 0,
+        left = 0,
+        maxWidth = 0,
+        maxHeight = 0,
+        padding = 1000;
+
     $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
     $('.redline-layer').hide();
     $('.redline-tool-wrapper').show();
@@ -60,8 +68,25 @@ function initTool() {
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
     $('#base *').each(function(i) {
-        $(this).data('thedimensions', { width: $(this).outerWidth(), height: $(this).outerHeight(), offsetTop: $(this).offset().top, offsetLeft: $(this).offset().left });
+        width = $(this).outerWidth();
+        height = $(this).outerHeight();
+        top = $(this).offset().top;
+        left = $(this).offset().left;
+
+        $(this).data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
+        maxWidth = maxWidth < left + width ? left + width : maxWidth;
+        maxHeight = maxHeight < top + height ? top + height : maxHeight;
     });
+    //*****Manually size our containers sue to absolutely-positioned children.*****
+    $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
+    console.log(padding);
+    $('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;' + 'top:' + padding + 'px !important; left:' + padding + 'px !important;');
+    //*****If content has no background color, define as #FFFFFF.*****
+    if ($('#base').css('background-color').match(/rgba\(\d+,\s\d+,\s\d+,\s0\)/).length > 0) {
+        $('#base').css('background-color', '#FFFFFF');
+    }
+    $(document).scrollTop(896);
+    //console.log($('#base').scrollTop());
 }
 
 //*************************************************************************************************
@@ -85,10 +110,14 @@ function bindListeners() {
         clearRedline();
     });
 
-    //*****Element Click*****
+    //*****Element Click/Clickaway*****
     $('body').on('click', '*', function(e) {
         e.stopImmediatePropagation();
-        elementClick($(this));
+        if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
+            closeRedline();
+        } else {
+            elementClick($(this));
+        }
     });
 
     //*****Open/Close Redline Panel*****
@@ -97,20 +126,8 @@ function bindListeners() {
         $('#redline-panel').toggleClass('redline-panel-exposed');
     });
 
-    //*****Handle Element Clickaway*****
-    $('body').on('click', function(e) {
-        if (e.target === this) {
-            closeRedline(1);
-        }
-    });
-
     //*****Autoselect Redline Panel Content****
-    $('#redline-panel').on('mouseup', 'input', function() {
-        $(this).select();
-    });
-
-    //*****Autoselect Redline Panel Content****
-    $('#redline-panel').on('mouseup', 'textarea', function() {
+    $('#redline-panel').on('mouseup', 'input, textarea', function() {
         $(this).select();
     });
 
@@ -147,6 +164,9 @@ function bindListeners() {
             setZoom();
         }
 
+    });
+    $(document).scroll(function() {
+        console.log($(this).scrollTop());
     });
 }
 

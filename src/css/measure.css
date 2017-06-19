@@ -1,3 +1,14 @@
+body {
+  overflow: scroll;
+  width: 100%;
+  height: 100%; }
+
+.zoom-wrapper {
+  position: relative;
+  background-color: #333333; }
+  .zoom-wrapper #base {
+    position: absolute; }
+
 .redline-tool-wrapper .redline-layer {
   font-family: "Lato", sans-serif; }
 .redline-tool-wrapper #top-control-panel {
@@ -10,7 +21,7 @@
   width: 100%;
   height: 60px;
   padding: 0 20px;
-  background-color: rgba(51, 51, 51, 0.9);
+  background-color: rgba(17, 17, 17, 0.9);
   align-items: center; }
   .redline-tool-wrapper #top-control-panel .zoom-controls {
     display: flex;
@@ -58,7 +69,7 @@
       margin-top: 20px;
       cursor: pointer;
       border-radius: 20px 0 0 20px;
-      background-color: rgba(51, 51, 51, 0.9);
+      background-color: rgba(17, 17, 17, 0.9);
       align-items: center;
       justify-content: space-between; }
       .redline-tool-wrapper #redline-panel #menu-tab-column > div > div > div {
@@ -74,7 +85,7 @@
     height: 100%;
     padding: 20px 20px 0 20px;
     color: #FFFFFF;
-    background-color: rgba(51, 51, 51, 0.9); }
+    background-color: rgba(17, 17, 17, 0.9); }
     .redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-tool-enabler {
       font-size: 16px;
       display: flex;

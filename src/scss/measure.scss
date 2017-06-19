@@ -1,11 +1,25 @@
+//***********************************************************************
 $primary-color-teal: #4EDEC2;
 $primary-color-orange: #E89A28;
-$primary-color-background: rgba(51, 51, 51, 0.9);
+$primary-color-background: rgba(17, 17, 17, 0.9);
 $primary-color-blue: #4860FF;
 $font-stack: 'Lato',
 sans-serif;
 $switch-transition: all 0.15s ease-in-out;
+//***********************************************************************
+body {
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+}
 
+.zoom-wrapper {
+    position: relative;
+    background-color: #333333;
+    #base {
+        position: absolute;
+    }
+}
 
 .redline-tool-wrapper {
     .redline-layer {
