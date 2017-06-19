@@ -20,7 +20,7 @@ module.exports = function(grunt) {
             options: {
                 map: false,
                 processors: [
-                    require('autoprefixer')({ browsers: ['last 15 versions'] })
+                    require('autoprefixer')({ browsers: ['last 100 versions'] })
                 ]
             },
             dist: {

@@ -67,25 +67,38 @@ function initTool() {
     $('#base').wrap('<div class="zoom-wrapper"></div>');
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
+    //*****First find max dimensions to wrap content.*****
     $('#base *').each(function(i) {
         width = $(this).outerWidth();
         height = $(this).outerHeight();
         top = $(this).offset().top;
         left = $(this).offset().left;
-
-        $(this).data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
         maxWidth = maxWidth < left + width ? left + width : maxWidth;
         maxHeight = maxHeight < top + height ? top + height : maxHeight;
     });
-    //*****Manually size our containers sue to absolutely-positioned children.*****
+    //*****Manually size our containers due to absolutely-positioned children.*****
     $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
     $('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;' + 'top:' + padding + 'px !important; left:' + padding + 'px !important;');
     //*****If content has no background color, define as #FFFFFF.*****
-    if ($('#base').css('background-color').match(/rgba\(\d+,\s\d+,\s\d+,\s0\)/).length > 0) {
+    if ($('#base').css('background-color') == 'transparent' || $('#base').css('background-color').search(/rgba\(\d+,\s\d+,\s\d+,\s0\)/) >= 0) {
         $('#base').css('background-color', '#FFFFFF');
     }
     $(document).scrollTop(padding - (($(window).innerHeight() - maxHeight) / 2));
     $(document).scrollLeft(padding - (($(window).innerWidth() - maxWidth) / 2));
+    //*****By exception, add dimensions to base.*****
+    width = $('#base').innerWidth();
+    height = $('#base').innerHeight();
+    top = $('#base').offset().top;
+    left = $('#base').offset().left;
+    $('#base').data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
+    //*****Add dimensions to every element in document.*****
+    $('#base *').each(function(i) {
+        width = $(this).outerWidth();
+        height = $(this).outerHeight();
+        top = $(this).offset().top;
+        left = $(this).offset().left;
+        $(this).data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
+    });
 }
 
 //*************************************************************************************************
@@ -198,7 +211,8 @@ function enableRedline() {
 function elementHover(element) {
     if (enableTool) {
         hoveredElement = element;
-        if (!isRedlineElement(hoveredElement)) {
+        console.log(hoveredElement.attr('id'));
+        if (!isRedlineElement(hoveredElement) || hoveredElement.attr('id') == 'base') {
             highlightHoverElement();
             //*****Check if we're hovering over our previously-selected element.*****
             if (hoveredElement[0] == selectedElement[0]) {
@@ -260,15 +274,15 @@ function highlightHoverElement() {
     $('#r-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft + elemMeas.width });
     $('#l-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft - borderThickness });
 
-    $('#to-hover').width($(window).innerWidth() - (borderThickness * 2));
-    $('#bo-hover').width($(window).innerWidth() - (borderThickness * 2));
-    $('#ro-hover').height($(window).innerHeight() - (borderThickness * 2));
-    $('#lo-hover').height($(window).innerHeight() - (borderThickness * 2));
+    $('#to-hover').width(($('#base').innerWidth() - (borderThickness * 2)) * (documentZoom / 100));
+    $('#bo-hover').width(($('#base').innerWidth() - (borderThickness * 2)) * (documentZoom / 100));
+    $('#ro-hover').height(($('#base').innerHeight() - (borderThickness * 2)) * (documentZoom / 100));
+    $('#lo-hover').height(($('#base').innerHeight() - (borderThickness * 2)) * (documentZoom / 100));
 
-    $('#to-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: 0 });
-    $('#bo-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: 0 });
-    $('#ro-hover').offset({ top: 0, left: elemMeas.offsetLeft + elemMeas.width });
-    $('#lo-hover').offset({ top: 0, left: elemMeas.offsetLeft - borderThickness });
+    $('#to-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: $('#base').offset().left });
+    $('#bo-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: $('#base').offset().left });
+    $('#ro-hover').offset({ top: $('#base').offset().top, left: elemMeas.offsetLeft + elemMeas.width });
+    $('#lo-hover').offset({ top: $('#base').offset().top, left: elemMeas.offsetLeft - borderThickness });
 }
 
 //*************************************************************************************************
