@@ -6,7 +6,7 @@ var enableTool = true,
     selectedElement = '',
     elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
     elemSelectMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0 },
+    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0, trueTop: 0, trueRight: 0, trueBottom: 0, trueLeft: 0 },
     redlineClass,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0,
@@ -14,12 +14,20 @@ var enableTool = true,
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
-$(document).ready(function() {
+$(window).on('load', function() {
+    //*****I'm not insane for doubley defining this function. This needs to be done otherwise the demo won't work.*****
+    onLoadFunction();
+});
+
+//*************************************************************************************************
+//*                   Wrap onLoad events in function to call during demo.                         *
+//*************************************************************************************************
+function onLoadFunction() {
     checkState();
     initTool();
-    documentClone = $('body').clone('true');
+    documentClone = $('body').clone(true);
     enableRedline();
-});
+}
 
 //*************************************************************************************************
 //*                                 Initialize our tool.                                          *
@@ -40,6 +48,14 @@ function checkState() {
 //*                                 Initialize our tool.                                          *
 //*************************************************************************************************
 function initTool() {
+    var width = 0,
+        height = 0,
+        top = 0,
+        left = 0,
+        maxWidth = 0,
+        maxHeight = 0,
+        padding = 1000;
+
     $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
     $('.redline-layer').hide();
     $('.redline-tool-wrapper').show();
@@ -47,12 +63,42 @@ function initTool() {
     $('#top-control-panel *').show();
     $('#redline-panel').show();
     $('#redline-panel *').show();
-    //$('.toggle-switch').prop('checked', true);
 
-    $('#zoom-value').val(documentZoom + '%');
     $('#base').wrap('<div class="zoom-wrapper"></div>');
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
+    //*****First find max dimensions to wrap content.*****
+    $('#base *').each(function(i) {
+        width = $(this).outerWidth();
+        height = $(this).outerHeight();
+        top = $(this).offset().top;
+        left = $(this).offset().left;
+        maxWidth = maxWidth < left + width ? left + width : maxWidth;
+        maxHeight = maxHeight < top + height ? top + height : maxHeight;
+    });
+    //*****Manually size our containers due to absolutely-positioned children.*****
+    $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
+    $('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;' + 'top:' + padding + 'px !important; left:' + padding + 'px !important;');
+    //*****If content has no background color, define as #FFFFFF.*****
+    if ($('#base').css('background-color') == 'transparent' || $('#base').css('background-color').search(/rgba\(\d+,\s\d+,\s\d+,\s0\)/) >= 0) {
+        $('#base').css('background-color', '#FFFFFF');
+    }
+    $(document).scrollTop(padding - (($(window).innerHeight() - maxHeight) / 2));
+    $(document).scrollLeft(padding - (($(window).innerWidth() - maxWidth) / 2));
+    //*****By exception, add dimensions to base.*****
+    width = $('#base').innerWidth();
+    height = $('#base').innerHeight();
+    top = $('#base').offset().top;
+    left = $('#base').offset().left;
+    $('#base').data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
+    //*****Add dimensions to every element in document.*****
+    $('#base *').each(function(i) {
+        width = $(this).outerWidth();
+        height = $(this).outerHeight();
+        top = $(this).offset().top;
+        left = $(this).offset().left;
+        $(this).data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
+    });
 }
 
 //*************************************************************************************************
@@ -66,21 +112,20 @@ function bindListeners() {
     });
 
     //*****Element Hover*****
-    $('body').on('mouseenter', '*', function(e) {
+    $('body').on('mouseover', '*', function(e) {
         e.stopImmediatePropagation();
+        clearRedline();
         elementHover($(this));
     });
 
-    //*****Element Leave*****
-    $('body').on('mouseleave', '*', function() {
-        clearRedline();
-    });
-
-    //*****Element Click*****
+    //*****Element Click/Clickaway*****
     $('body').on('click', '*', function(e) {
         e.stopImmediatePropagation();
-        elementClick($(this));
-
+        if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
+            closeRedline();
+        } else {
+            elementClick($(this));
+        }
     });
 
     //*****Open/Close Redline Panel*****
@@ -89,36 +134,41 @@ function bindListeners() {
         $('#redline-panel').toggleClass('redline-panel-exposed');
     });
 
-    //*****Handle Element Clickaway*****
-    $('body').on('click', function(e) {
-        if (e.target === this) {
-            closeRedline();
-        }
-    });
-
     //*****Autoselect Redline Panel Content****
-    $('#redline-panel').on('mouseup', 'input', function() {
-        $(this).select();
-    });
-
-    //*****Autoselect Redline Panel Content****
-    $('#redline-panel').on('mouseup', 'textarea', function() {
+    $('#redline-panel').on('mouseup', 'input, textarea', function() {
         $(this).select();
     });
 
     //*****Handle Zoom Controls*****
     $('#top-control-panel').on('click', '.zoom-control-button', function() {
-        console.log('ppp');
-        if ($(this).text() == '+') {
+        clearRedline();
+        getZoom();
+        if ($(this).children().text() == '+') {
             documentZoom += 10;
-            $('#zoom-value').val(documentZoom + '%');
-            $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
         } else {
             documentZoom -= 10;
-            $('#zoom-value').val(documentZoom + '%');
-            $('.zoom-wrapper').css('transform', 'scale(' + documentZoom / 100 + ')');
         }
-    })
+
+        setZoom();
+    });
+
+    //*****Allow Zoom Input Value*****
+    $('#top-control-panel').on('focus', '#zoom-value', function(e) {
+        $(this).select();
+    });
+
+    //*****Pass Zoom Value Input*****
+    $('#top-control-panel').on('blur keypress', '#zoom-value', function(e) {
+        if (e.keyCode == 13) {
+            $(this).blur();
+            getZoom();
+            setZoom();
+        } else if (e.keyCode === undefined) {
+            getZoom();
+            setZoom();
+        }
+
+    });
 }
 
 //*************************************************************************************************
@@ -126,23 +176,28 @@ function bindListeners() {
 //*************************************************************************************************
 function enableRedline() {
     if (enableTool) {
-        documentClone = $('body').clone('true');
+        setCookie('axure-tool-enabled', '1', 1);
+        $('.toggle-switch').prop('checked', true);
         $('*').off();
         bindListeners();
-        $('.toggle-switch').prop('checked', true);
-        setCookie('axure-tool-enabled', '1', 1);
+        $('.zoom-wrapper').show();
+        $('.zoom-wrapper *').show();
+        setZoom();
     } else {
+        setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function() {
-            closeRedline();
+            //closeRedline();
         }, 250);
         setTimeout(function() {
-            $('body').remove();
-            $('html').append(documentClone);
+            $('html body').remove();
+            $('html').append(documentClone.clone(true));
             $('.toggle-switch').prop('checked', false);
             bindListeners();
-            closeRedline();
-        }, 260);
-        setCookie('axure-tool-enabled', '0', 1);
+            //closeRedline();
+            $('.zoom-wrapper').show();
+            $('.zoom-wrapper *').show();
+            setZoom();
+        }, 250);
     }
 }
 
@@ -152,7 +207,7 @@ function enableRedline() {
 function elementHover(element) {
     if (enableTool) {
         hoveredElement = element;
-        if (!isRedlineElement(hoveredElement)) {
+        if (!isRedlineElement(hoveredElement) || hoveredElement.attr('id') == 'base') {
             highlightHoverElement();
             //*****Check if we're hovering over our previously-selected element.*****
             if (hoveredElement[0] == selectedElement[0]) {
@@ -198,8 +253,8 @@ function isRedlineElement(element) {
 //*                  Highlight our hovered element and add extension lines.                       *
 //*************************************************************************************************
 function highlightHoverElement() {
-    elemMeas.width = hoveredElement.outerWidth();
-    elemMeas.height = hoveredElement.outerHeight();
+    elemMeas.width = (hoveredElement.outerWidth() * (documentZoom / 100));
+    elemMeas.height = (hoveredElement.outerHeight() * (documentZoom / 100));
     elemMeas.offsetTop = hoveredElement.offset().top;
     elemMeas.offsetLeft = hoveredElement.offset().left;
     $('.hover-layer').show();
@@ -214,23 +269,23 @@ function highlightHoverElement() {
     $('#r-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft + elemMeas.width });
     $('#l-hover').offset({ top: elemMeas.offsetTop, left: elemMeas.offsetLeft - borderThickness });
 
-    $('#to-hover').width($(window).innerWidth() - (borderThickness * 2));
-    $('#bo-hover').width($(window).innerWidth() - (borderThickness * 2));
-    $('#ro-hover').height($(window).innerHeight() - (borderThickness * 2));
-    $('#lo-hover').height($(window).innerHeight() - (borderThickness * 2));
+    $('#to-hover').width(($('#base').innerWidth() - (borderThickness * 2)) * (documentZoom / 100));
+    $('#bo-hover').width(($('#base').innerWidth() - (borderThickness * 2)) * (documentZoom / 100));
+    $('#ro-hover').height(($('#base').innerHeight() - (borderThickness * 2)) * (documentZoom / 100));
+    $('#lo-hover').height(($('#base').innerHeight() - (borderThickness * 2)) * (documentZoom / 100));
 
-    $('#to-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: 0 });
-    $('#bo-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: 0 });
-    $('#ro-hover').offset({ top: 0, left: elemMeas.offsetLeft + elemMeas.width });
-    $('#lo-hover').offset({ top: 0, left: elemMeas.offsetLeft - borderThickness });
+    $('#to-hover').offset({ top: elemMeas.offsetTop - borderThickness, left: $('#base').offset().left });
+    $('#bo-hover').offset({ top: elemMeas.offsetTop + elemMeas.height, left: $('#base').offset().left });
+    $('#ro-hover').offset({ top: $('#base').offset().top, left: elemMeas.offsetLeft + elemMeas.width });
+    $('#lo-hover').offset({ top: $('#base').offset().top, left: elemMeas.offsetLeft - borderThickness });
 }
 
 //*************************************************************************************************
 //*                  Highlight our selected element and add extension lines.                      *
 //*************************************************************************************************
 function highlightSelectElement() {
-    elemSelectMeas.width = selectedElement.outerWidth();
-    elemSelectMeas.height = selectedElement.outerHeight();
+    elemSelectMeas.width = (selectedElement.outerWidth() * (documentZoom / 100));
+    elemSelectMeas.height = (selectedElement.outerHeight() * (documentZoom / 100));
     elemSelectMeas.offsetTop = selectedElement.offset().top;
     elemSelectMeas.offsetLeft = selectedElement.offset().left;
     $('.select-layer').show();
@@ -250,8 +305,9 @@ function highlightSelectElement() {
     $('#r-dimension > span').show();
     dimensionMarkerWidth = $('.dimension-layer').width();
     dimensionMarkerHeight = $('.dimension-layer').height();
-    $('#t-dimension > span').text(Math.round(elemSelectMeas.width));
-    $('#r-dimension > span').text(Math.round(elemSelectMeas.height));
+    $('#t-dimension > span').text(Math.round(selectedElement.data('thedimensions').width));
+    $('#r-dimension > span').text(Math.round(selectedElement.data('thedimensions').height));
+
     $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2) });
     $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing });
 }
@@ -266,28 +322,40 @@ function measureIntraElementDistance() {
 
     if (elemMeas.offsetTop > elemSelectMeas.offsetTop + elemSelectMeas.height) {
         intraElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
+        intraElemMeas.trueBottom = Math.abs(selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height - hoveredElement.data('thedimensions').offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
+        intraElemMeas.trueTop = Math.abs(hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height - selectedElement.data('thedimensions').offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height > elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
+        intraElemMeas.trueTop = Math.abs(hoveredElement.data('thedimensions').offsetTop - selectedElement.data('thedimensions').offsetTop);
     } else if (elemSelectMeas.offsetTop < elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height < elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
+        intraElemMeas.trueBottom = Math.abs((hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height) - (selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height));
     } else {
         intraElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
         intraElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
+        intraElemMeas.trueTop = selectedElement.data('thedimensions').offsetTop - hoveredElement.data('thedimensions').offsetTop;
+        intraElemMeas.trueBottom = (hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height) - (selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height);
     }
 
     if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
+        intraElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredElement.data('thedimensions').width - selectedElement.data('thedimensions').offsetLeft);
     } else if (elemMeas.offsetLeft > elemSelectMeas.offsetLeft + elemSelectMeas.width) {
         intraElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
+        intraElemMeas.trueRight = Math.abs(selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width - hoveredElement.data('thedimensions').offsetLeft);
     } else if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width > elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
+        intraElemMeas.trueLeft = Math.abs(hoveredElement.data('thedimensions').offsetLeft - selectedElement.data('thedimensions').offsetLeft);
     } else if (elemSelectMeas.offsetLeft < elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width < elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
+        intraElemMeas.trueRight = Math.abs((hoveredElement.data('thedimensions').offsetLeft + hoveredElement.data('thedimensions').width) - (selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width));
     } else {
         intraElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
         intraElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
+        intraElemMeas.trueLeft = selectedElement.data('thedimensions').offsetLeft - hoveredElement.data('thedimensions').offsetLeft;
+        intraElemMeas.trueRight = (hoveredElement.data('thedimensions').offsetLeft + hoveredElement.data('thedimensions').width) - (selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width);
     }
 }
 
@@ -308,7 +376,7 @@ function drawIntraElementMarkers() {
         }
         $('#t-dimension').show();
         $('#t-dimension > span').show();
-        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.top)));
+        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueTop)));
         $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
     if (intraElemMeas.right != 0) {
@@ -322,7 +390,7 @@ function drawIntraElementMarkers() {
 
         $('#r-dimension').show();
         $('#r-dimension > span').show();
-        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.right)));
+        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueRight)));
         $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
     }
     if (intraElemMeas.bottom != 0) {
@@ -336,7 +404,7 @@ function drawIntraElementMarkers() {
 
         $('#b-dimension').show();
         $('#b-dimension > span').show();
-        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.bottom)));
+        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueBottom)));
         $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
     if (intraElemMeas.left != 0) {
@@ -350,7 +418,7 @@ function drawIntraElementMarkers() {
 
         $('#l-dimension').show();
         $('#l-dimension > span').show();
-        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.left)));
+        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueLeft)));
         $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
     }
 }
@@ -366,7 +434,7 @@ function updateRedlinePanel(element) {
             if (_i == '_content') {
                 cssProperties[i][_i] = element.text().trim();
             } else {
-                cssProperties[i][_i] = element.css(_i);
+                cssProperties[i][_i] = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
                 //console.log(_i + ': ' + cssProperties[i][_i]);
             }
         });
@@ -536,4 +604,24 @@ function getCookie(cname) {
         }
     }
     return '';
+}
+
+//*************************************************************************************************
+//*                                    Set zoom level.                                            *
+//*************************************************************************************************
+function setZoom() {
+    documentZoom = documentZoom <= 0 ? 1 : documentZoom;
+    $('#zoom-value').val(documentZoom + '%');
+    $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
+
+    if (selectedElement) {
+        highlightSelectElement();
+    }
+}
+
+//*************************************************************************************************
+//*                                    Read zoom level.                                           *
+//*************************************************************************************************
+function getZoom() {
+    documentZoom = parseInt($('#zoom-value').val());
 }

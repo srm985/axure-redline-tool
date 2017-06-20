@@ -13,8 +13,11 @@
 
 <body>
     <script type="text/javascript">
-    $(document).ready(function() {
+    $(window).on('load', function() {
         $('.redline-content').load('measure.htm');
+        setTimeout(function() {
+            onLoadFunction();
+        }, 500);
     });
     </script>
     <div class="redline-content"></div>
