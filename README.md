@@ -23,7 +23,7 @@ Update npm to the latest version.
 $ npm install npm@latest -g
 ```
 
-Install [http-server](https://www.npmjs.com/package/http-server) or your own prefered server.
+Install [http-server](https://www.npmjs.com/package/http-server) or your own preferred server.
 
 ```sh
 $ npm install http-server -g
@@ -49,11 +49,12 @@ $ grunt
 
 ## Bugs / Drawbacks
 
-As this code is embeded within Axure projects, it does not have direct control of how assets are exported from within Axure. The code makes every attempt to handle the various nested elements exported from Axure, but if you do encounter an issue, please let me know and I'll promptly resolve it.
+As this code is embedded within Axure projects, it does not have direct control of how assets are exported from within Axure. The code makes every attempt to handle the various nested elements exported from Axure, but if you do encounter an issue, please let me know and I'll promptly resolve it.
 
 ## Coming Features
 
-* Project Zoom Controls (High Priority)
+* Provide Sliced Images
+* Document Color Palette
 * CDN Link (Low Priority)
 
 ## Versioning
