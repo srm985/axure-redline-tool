@@ -11,6 +11,8 @@ To apply this code to one of your AxShare hosted projects, navigate to [www.shar
 
 [Axure Plugin Tutorial](https://www.axure.com/c/forum/AxShare-general-discussion/9953-create-edit-plugin-AxShare-tutorial.html)
 
+![plugin demo](http://www.seanmcquay.com/axure-redline-tool/axure-redline-tool.gif)
+
 ## Installation / Running
 
 Install [Node.js](https://nodejs.org/en/download/)
