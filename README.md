@@ -1,5 +1,5 @@
 # Axure Interactive Redline Tool
-This plugin intends to mimic some of the functionality of the plugin Measure for Sketch or InVision Inspect. Within my organization, we overly rely on the use of Axure - which doesn't offer many easy options to provide redlines for developers. As Axure does not support plugins within the application itself, this code resides within and is applied to your AxShare projects. 
+This plugin intends to mimic some of the functionality of the plugin [Measure](http://utom.design/measure/) for Sketch or InVision Inspect. Within my organization, we overly rely on the use of Axure - which doesn't offer many easy options to provide redlines for developers. As Axure does not support plugins within the application itself, this code resides within and is applied to your AxShare projects. 
 
 [Super Basic Demo](http://71gjur.AxShare.com/#g=1&p=test)
 
