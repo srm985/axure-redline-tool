@@ -10,7 +10,8 @@ var enableTool = true,
     redlineClass,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0,
-    documentClone;
+    documentClone,
+    cursorPosition = { top: '', left: '' };
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
@@ -168,6 +169,18 @@ function bindListeners() {
             setZoom();
         }
 
+    });
+
+    $(document).on('dialogopen', '*', function(e) {
+        var dialogElement;
+        e.stopImmediatePropagation();
+        dialogElement = $(this);
+        dialogElement.parent().find('.ui-button').html('<span class="ui-icon ui-icon-closethick">close</span>');
+        dialogElement.parent().offset({ top: cursorPosition.top, left: cursorPosition.left });
+    });
+
+    $('body').on('mousemove', function(e) {
+        cursorPosition = { top: e.pageY, left: e.pageX };
     });
 }
 
