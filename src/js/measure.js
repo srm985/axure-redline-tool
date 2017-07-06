@@ -122,6 +122,7 @@ function bindListeners() {
     //*****Element Click/Clickaway*****
     $('body').on('click', '*', function(e) {
         e.stopImmediatePropagation();
+
         if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
             closeRedline();
         } else {
@@ -171,6 +172,7 @@ function bindListeners() {
 
     });
 
+    //*****Intercept Dialog Openings*****
     $(document).on('dialogopen', '*', function(e) {
         var dialogElement;
         e.stopImmediatePropagation();
@@ -179,6 +181,7 @@ function bindListeners() {
         dialogElement.parent().offset({ top: cursorPosition.top, left: cursorPosition.left });
     });
 
+    //*****Track Cursor Position*****
     $('body').on('mousemove', function(e) {
         cursorPosition = { top: e.pageY, left: e.pageX };
     });
@@ -196,6 +199,7 @@ function enableRedline() {
         $('.zoom-wrapper').show();
         $('.zoom-wrapper *').show();
         setZoom();
+        //$('.ui-dialog').dialog('close');
     } else {
         setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function() {
@@ -252,10 +256,11 @@ function elementClick(element) {
 //*              Ensure we aren't interacting with a redline-specific element.                    *
 //*************************************************************************************************
 function isRedlineElement(element) {
-    var redlineStatus;
+    var redlineStatus, annotationStatus;
 
     redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
-    if (redlineStatus.indexOf('redline-layer') == '-1') {
+    annotationStatus = element.attr('class') === undefined ? '' : element.attr('class');
+    if (redlineStatus.search('redline-layer') == '-1' && annotationStatus.search(/ann(n)?ot/) == '-1' && annotationStatus.search('ui-dialog') == '-1') {
         return false;
     } else {
         return true;
