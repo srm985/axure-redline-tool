@@ -11,7 +11,7 @@ var enableTool = true,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0,
     documentClone,
-    cursorPosition = { top: '', left: '' };
+    elementPosition;
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
@@ -178,12 +178,7 @@ function bindListeners() {
         e.stopImmediatePropagation();
         dialogElement = $(this);
         dialogElement.parent().find('.ui-button').html('<span class="ui-icon ui-icon-closethick">close</span>');
-        dialogElement.parent().offset({ top: cursorPosition.top, left: cursorPosition.left });
-    });
-
-    //*****Track Cursor Position*****
-    $('body').on('mousemove', function(e) {
-        cursorPosition = { top: e.pageY, left: e.pageX };
+        dialogElement.parent().offset({ top: elementPosition.top, left: elementPosition.left });
     });
 }
 
@@ -192,14 +187,18 @@ function bindListeners() {
 //*************************************************************************************************
 function enableRedline() {
     if (enableTool) {
-        setCookie('axure-tool-enabled', '1', 1);
+        //$('.ui-dialog').dialog('close');
+        /*setCookie('axure-tool-enabled', '1', 1);
         $('.toggle-switch').prop('checked', true);
         $('*').off();
         bindListeners();
         $('.zoom-wrapper').show();
         $('.zoom-wrapper *').show();
-        setZoom();
-        //$('.ui-dialog').dialog('close');
+        setZoom();*/
+        $('*').off();
+        bindListeners();
+        $('.toggle-switch').prop('checked', true);
+        setCookie('axure-tool-enabled', '1', 1);
     } else {
         setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function() {
@@ -216,7 +215,7 @@ function enableRedline() {
             setZoom();
         }, 250);
     }
-}
+}   
 
 //*************************************************************************************************
 //*                             Handle element hover actions.                                     *
@@ -235,6 +234,8 @@ function elementHover(element) {
             }
         }
     }
+    elementPosition = element.offset();
+    elementPosition.top += element.height();
 }
 
 //*************************************************************************************************
