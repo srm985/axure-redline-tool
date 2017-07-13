@@ -187,14 +187,14 @@ function bindListeners() {
 //*************************************************************************************************
 function enableRedline() {
     if (enableTool) {
-        //$('.ui-dialog').dialog('close');
+        $('.ui-dialog-content').dialog('close');
         /*setCookie('axure-tool-enabled', '1', 1);
         $('.toggle-switch').prop('checked', true);
         $('*').off();
         bindListeners();
         $('.zoom-wrapper').show();
-        $('.zoom-wrapper *').show();
-        setZoom();*/
+        $('.zoom-wrapper *').show();*/
+        setZoom();
         $('*').off();
         bindListeners();
         $('.toggle-switch').prop('checked', true);
