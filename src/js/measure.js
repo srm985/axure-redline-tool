@@ -174,11 +174,42 @@ function bindListeners() {
 
     //*****Intercept Dialog Openings*****
     $(document).on('dialogopen', '*', function(e) {
-        var dialogElement;
+        var dialogElement, tempZoom;
         e.stopImmediatePropagation();
         dialogElement = $(this);
         dialogElement.parent().find('.ui-button').html('<span class="ui-icon ui-icon-closethick">close</span>');
-        dialogElement.parent().offset({ top: elementPosition.top, left: elementPosition.left });
+        tempZoom = documentZoom;
+        documentZoom = 100;
+        setZoom();
+        dialogElement.parent().offset({ top: (elementPosition.top + 5), left: elementPosition.left });
+        documentZoom = tempZoom;
+        setZoom();
+    });
+
+    //*****Intercept Axure Dialog Nonsense*****
+    /* This function intercepts the error    */
+    /* thrown when we open a dialog after    */
+    /* enabling and then disabling the       */
+    /* redline tool while a dialog was open. */
+    $('body .annotation').on('mousedown', '*', function(e) {
+        var element, tempZoom;
+        e.stopPropagation();
+        tempZoom = documentZoom;
+        documentZoom = 100;
+        setZoom();
+        element = $(this).parent().parent().find('.annnoteimage');
+        elementPosition = element.offset();
+        elementPosition.top += element.height();
+        documentZoom = tempZoom;
+        setZoom();
+        if (!$('.ui-dialog').is(':visible')) {
+            try {
+                $(this).trigger('click');
+            } catch (err) {
+                $(this).trigger('click');
+            }
+            $(this).trigger('click');
+        }
     });
 }
 
@@ -187,35 +218,28 @@ function bindListeners() {
 //*************************************************************************************************
 function enableRedline() {
     if (enableTool) {
-        $('.ui-dialog-content').dialog('close');
-        /*setCookie('axure-tool-enabled', '1', 1);
-        $('.toggle-switch').prop('checked', true);
-        $('*').off();
-        bindListeners();
         $('.zoom-wrapper').show();
-        $('.zoom-wrapper *').show();*/
+        $('.zoom-wrapper *').show();
         setZoom();
+        $('.ui-dialog').remove();
         $('*').off();
         bindListeners();
+        $('.zoom-wrapper *').css('cursor', 'pointer');
         $('.toggle-switch').prop('checked', true);
         setCookie('axure-tool-enabled', '1', 1);
     } else {
         setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function() {
-            //closeRedline();
-        }, 250);
-        setTimeout(function() {
             $('html body').remove();
             $('html').append(documentClone.clone(true));
             $('.toggle-switch').prop('checked', false);
             bindListeners();
-            //closeRedline();
             $('.zoom-wrapper').show();
             $('.zoom-wrapper *').show();
             setZoom();
         }, 250);
     }
-}   
+}
 
 //*************************************************************************************************
 //*                             Handle element hover actions.                                     *
@@ -234,8 +258,6 @@ function elementHover(element) {
             }
         }
     }
-    elementPosition = element.offset();
-    elementPosition.top += element.height();
 }
 
 //*************************************************************************************************
@@ -454,7 +476,6 @@ function updateRedlinePanel(element) {
                 cssProperties[i][_i] = element.text().trim();
             } else {
                 cssProperties[i][_i] = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
-                //console.log(_i + ': ' + cssProperties[i][_i]);
             }
         });
     });

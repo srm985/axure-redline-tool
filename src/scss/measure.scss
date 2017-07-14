@@ -3,6 +3,7 @@ $primary-color-teal: #4EDEC2;
 $primary-color-orange: #E89A28;
 $primary-color-background: rgba(17, 17, 17, 0.9);
 $primary-color-blue: #4860FF;
+$primary-color-gray: #555555;
 $font-stack: 'Lato',
 sans-serif;
 $switch-transition: all 0.15s ease-in-out;
@@ -11,15 +12,28 @@ body {
     overflow: scroll;
     width: 100%;
     height: 100%;
+    .ui-dialog {
+        padding: 0 !important;
+        border: solid 1px $primary-color-gray !important;
+        border-radius: 3px !important;
+        * { 
+            color: $primary-color-gray;
+        }
+    }
+    .ui-dialog-titlebar {
+        background-color: $primary-color-gray !important;
+        border: none !important;
+        button {
+            border-radius: 3px !important;
+            outline: none !important;
+        }
+    }
     .ui-button-icon-only .ui-icon {
         top: 0 !important;
         left: 0 !important;
     }
-    .ui-dialog {
-        padding: 0 !important;
-    }
     .ui-corner-all {
-        border-radius: 0 !important;
+        border-radius: 0;
     }
     .ui-dialog-content {
         padding: 10px !important;
@@ -56,11 +70,13 @@ body {
         height: 60px;
         padding: 0 20px;
         background-color: $primary-color-background;
+
         align-items: center;
         .zoom-controls {
             display: flex;
             width: 150px;
             margin-left: 15px;
+
             justify-content: space-between;
             div {
                 font-size: 22px;
@@ -74,6 +90,7 @@ body {
                 color: #FFFFFF;
                 border-radius: 50%;
                 background-color: $primary-color-teal;
+
                 justify-content: center;
                 align-items: center;
             }
@@ -100,7 +117,7 @@ body {
         #menu-tab-column {
             width: 20px;
             height: 100%;
-            > div {
+            >div {
                 display: flex;
                 width: 100%;
                 height: 40px;
@@ -108,9 +125,10 @@ body {
                 cursor: pointer;
                 border-radius: 20px 0 0 20px;
                 background-color: $primary-color-background;
+
                 align-items: center;
                 justify-content: space-between;
-                > div > div {
+                >div>div {
                     width: 12px;
                     height: 2px;
                     margin: 3px 0 3px 7px;
@@ -130,6 +148,7 @@ body {
             .redline-tool-enabler {
                 font-size: 16px;
                 display: flex;
+
                 justify-content: space-between;
                 align-items: center;
             }
@@ -138,7 +157,7 @@ body {
                     position: absolute;
                     visibility: hidden;
                     margin-left: -9999px;
-                    + label {
+                    +label {
                         position: relative;
                         display: block;
                         width: 60px;
@@ -151,14 +170,14 @@ body {
                         outline: none;
                         background-color: #DDDDDD;
                     }
-                    + label:before,
-                    + label:after {
+                    +label:before,
+                    +label:after {
                         position: absolute;
                         display: block;
                         content: '';
                         transition: $switch-transition;
                     }
-                    + label:before {
+                    +label:before {
                         top: 2px;
                         right: 2px;
                         bottom: 2px;
@@ -166,7 +185,7 @@ body {
                         border-radius: 28px;
                         background-color: #FFFFFF;
                     }
-                    + label:after {
+                    +label:after {
                         top: 4px;
                         bottom: 4px;
                         left: 4px;
@@ -174,10 +193,10 @@ body {
                         border-radius: 50%;
                         background-color: #DDDDDD;
                     }
-                    &:checked + label {
+                    &:checked+label {
                         background-color: $primary-color-teal;
                     }
-                    &:checked + label:after {
+                    &:checked+label:after {
                         margin-left: 32px;
                         background-color: $primary-color-teal;
                     }
@@ -186,7 +205,7 @@ body {
             .redline-panel-section {
                 margin-top: 20px;
             }
-            .redline-panel-section:last-of-type p:last-of-type + * {
+            .redline-panel-section:last-of-type p:last-of-type+* {
                 margin-bottom: 20px;
             }
             p {
@@ -252,6 +271,7 @@ body {
         color: #FFFFFF;
         border-radius: 5px;
         background-color: $primary-color-orange;
+
         justify-content: center;
         align-items: center;
     }
