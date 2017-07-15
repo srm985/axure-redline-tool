@@ -122,7 +122,6 @@ function bindListeners() {
     //*****Element Click/Clickaway*****
     $('body').on('click', '*', function(e) {
         e.stopImmediatePropagation();
-
         if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
             closeRedline();
         } else {
@@ -135,6 +134,30 @@ function bindListeners() {
         e.stopImmediatePropagation();
         $('#redline-panel').toggleClass('redline-panel-exposed');
     });
+
+    //*****Global Key Shortcuts*****
+    $(document).on('keydown', function(e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case 27:
+                closeRedline();
+                break;
+            case 187:
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                    documentZoom += 10;
+                    setZoom();
+                }
+                break;
+            case 189:
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                    documentZoom -= 10;
+                    setZoom();
+                }
+                break;
+        }
+    })
 
     //*****Autoselect Redline Panel Content****
     $('#redline-panel').on('mouseup', 'input, textarea', function() {
@@ -150,7 +173,6 @@ function bindListeners() {
         } else {
             documentZoom -= 10;
         }
-
         setZoom();
     });
 
@@ -191,6 +213,8 @@ function bindListeners() {
     /* thrown when we open a dialog after    */
     /* enabling and then disabling the       */
     /* redline tool while a dialog was open. */
+    /* Yes, I know it looks strange...       */
+    /*****************************************/
     $('body .annotation').on('mousedown', '*', function(e) {
         var element, tempZoom;
         e.stopPropagation();
@@ -202,14 +226,12 @@ function bindListeners() {
         elementPosition.top += element.height();
         documentZoom = tempZoom;
         setZoom();
-        if (!$('.ui-dialog').is(':visible')) {
-            try {
-                $(this).trigger('click');
-            } catch (err) {
-                $(this).trigger('click');
-            }
+        try {
+            $(this).trigger('click');
+        } catch (err) {
             $(this).trigger('click');
         }
+        $(this).trigger('click');
     });
 }
 
@@ -266,7 +288,6 @@ function elementHover(element) {
 function elementClick(element) {
     if (enableTool) {
         if (!isRedlineElement(element)) {
-            //selectedElement = findDeepestChild(element);
             selectedElement = element;
             clearRedline();
             highlightSelectElement();
