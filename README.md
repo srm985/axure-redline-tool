@@ -81,4 +81,4 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 * Resolved the issue of overflow scrolling content affecting artboard sizing. In Axure terms, hidden dynamic panel content no longer causes the generated artboard to be bigger than visible elements.
 * Resolved how the tool handle Axure annotations. Annotations can be read while the tool is disabled and while the tool is enabled, their icons are not considered interactive elements.
 * Added key command functionality to support zoom controls through [Ctrl +] / [Ctrl -] and Esc key to close the redline tool panel / deselect the element.
-* Added zoom tracking support to ensure current zoom level is maintained while progressing through screen flows.
+* Added zoom tracking support to ensure current zoom level is maintained while progressing through flows.
