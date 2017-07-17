@@ -2,3 +2,6 @@
 /node_modules/
 /web/temp/
 package-lock.json
+/src/.sass-cache/
+/src/css/measure.css.map
+/src/.sass-cache/

@@ -10,7 +10,8 @@ var enableTool = true,
     redlineClass,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0,
-    documentClone;
+    documentClone,
+    elementPosition;
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
@@ -27,13 +28,15 @@ function onLoadFunction() {
     initTool();
     documentClone = $('body').clone(true);
     enableRedline();
+    setZoom();
 }
 
 //*************************************************************************************************
-//*                                 Initialize our tool.                                          *
+//*                                   Check our cookies.                                          *
 //*************************************************************************************************
 function checkState() {
-    var trackingCookie = getCookie('axure-tool-enabled');
+    var trackingCookie = getCookie('axure-tool-enabled'),
+        zoomCookie = getCookie('axure-tool-zoom');
 
     if (trackingCookie != '' && trackingCookie == 1) {
         enableTool = true;
@@ -41,6 +44,10 @@ function checkState() {
         enableTool = false;
     } else {
         setCookie('axure-tool-enabled', '1', 1);
+    }
+
+    if (zoomCookie != '') {
+        documentZoom = parseFloat(zoomCookie);
     }
 }
 
@@ -54,7 +61,14 @@ function initTool() {
         left = 0,
         maxWidth = 0,
         maxHeight = 0,
-        padding = 1000;
+        scrollWidthHidden = 0,
+        scrollHeightHidden = 0,
+        hiddenWidth = false,
+        hiddenHeight = false,
+        padding = 1000,
+        currentElement,
+        parentElementHorizontal,
+        parentElementVertical;
 
     $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
     $('.redline-layer').hide();
@@ -68,13 +82,50 @@ function initTool() {
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
     //*****First find max dimensions to wrap content.*****
-    $('#base *').each(function(i) {
-        width = $(this).outerWidth();
-        height = $(this).outerHeight();
-        top = $(this).offset().top;
-        left = $(this).offset().left;
-        maxWidth = maxWidth < left + width ? left + width : maxWidth;
-        maxHeight = maxHeight < top + height ? top + height : maxHeight;
+    $('#base *').each(function() {
+        currentElement = $(this);
+        if (parentElementHorizontal === undefined && parentElementVertical === undefined) {
+            parentElementHorizontal = currentElement;
+            parentElementVertical = currentElement;
+        }
+        width = currentElement.outerWidth();
+        height = currentElement.outerHeight();
+        scrollWidthHidden = currentElement[0].scrollWidth;
+        scrollHeightHidden = currentElement[0].scrollHeight;
+        top = currentElement.offset().top;
+        left = currentElement.offset().left;
+        //*****Check if we're still within the parent containing horizontal-scrolling overflow.*****
+        if (!$.contains(parentElementHorizontal[0], currentElement[0])) {
+            hiddenWidth = false;
+        }
+        //*****Check if we're still within the parent containing vertical-scrolling overflow.*****
+        if (!$.contains(parentElementVertical[0], currentElement[0])) {
+            hiddenHeight = false;
+        }
+        //*****Check if we've found an element with horizontal-scrolling content.*****
+        if (scrollWidthHidden <= width && !hiddenWidth) {
+            maxWidth = maxWidth < left + width ? left + width : maxWidth;
+        } else {
+            if (!hiddenWidth && width > 0) {
+                hiddenWidth = true;
+                parentElementHorizontal = currentElement;
+            }
+            if (currentElement.width() > maxWidth) {
+                currentElement.addClass('redline-layer');
+            }
+        }
+        //*****Check if we've found an element with vertical-scrolling content.*****
+        if (scrollHeightHidden <= height && !hiddenHeight) {
+            maxHeight = maxHeight < top + height ? top + height : maxHeight;
+        } else {
+            if (!hiddenHeight && height > 0) {
+                hiddenHeight = true;
+                parentElementVertical = currentElement;
+            }
+            if (currentElement.height() > maxHeight) {
+                currentElement.addClass('redline-layer');
+            }
+        }
     });
     //*****Manually size our containers due to absolutely-positioned children.*****
     $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
@@ -134,6 +185,29 @@ function bindListeners() {
         $('#redline-panel').toggleClass('redline-panel-exposed');
     });
 
+    //*****Global Key Shortcuts*****
+    $(document).on('keydown', function(e) {
+        switch (e.keyCode) {
+            case 27:
+                closeRedline();
+                break;
+            case 187:
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                    documentZoom += 10;
+                    setZoom();
+                }
+                break;
+            case 189:
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                    documentZoom -= 10;
+                    setZoom();
+                }
+                break;
+        }
+    });
+
     //*****Autoselect Redline Panel Content****
     $('#redline-panel').on('mouseup', 'input, textarea', function() {
         $(this).select();
@@ -148,7 +222,6 @@ function bindListeners() {
         } else {
             documentZoom -= 10;
         }
-
         setZoom();
     });
 
@@ -169,6 +242,46 @@ function bindListeners() {
         }
 
     });
+
+    //*****Intercept Dialog Openings*****
+    $(document).on('dialogopen', '*', function(e) {
+        var dialogElement, tempZoom;
+        e.stopImmediatePropagation();
+        dialogElement = $(this);
+        dialogElement.parent().find('.ui-button').html('<span class="ui-icon ui-icon-closethick">close</span>');
+        tempZoom = documentZoom;
+        documentZoom = 100;
+        setZoom();
+        dialogElement.parent().offset({ top: (elementPosition.top + 5), left: elementPosition.left });
+        documentZoom = tempZoom;
+        setZoom();
+    });
+
+    //*****Intercept Axure Dialog Nonsense*****
+    /* This function intercepts the error    */
+    /* thrown when we open a dialog after    */
+    /* enabling and then disabling the       */
+    /* redline tool while a dialog was open. */
+    /* Yes, I know it looks strange...       */
+    /*****************************************/
+    $('body .annotation').on('mousedown', '*', function(e) {
+        var element, tempZoom;
+        e.stopPropagation();
+        tempZoom = documentZoom;
+        documentZoom = 100;
+        setZoom();
+        element = $(this).parent().parent().find('.annnoteimage');
+        elementPosition = element.offset();
+        elementPosition.top += element.height();
+        documentZoom = tempZoom;
+        setZoom();
+        try {
+            $(this).trigger('click');
+        } catch (err) {
+            $(this).trigger('click');
+        }
+        $(this).trigger('click');
+    });
 }
 
 //*************************************************************************************************
@@ -176,24 +289,22 @@ function bindListeners() {
 //*************************************************************************************************
 function enableRedline() {
     if (enableTool) {
-        setCookie('axure-tool-enabled', '1', 1);
-        $('.toggle-switch').prop('checked', true);
-        $('*').off();
-        bindListeners();
         $('.zoom-wrapper').show();
         $('.zoom-wrapper *').show();
         setZoom();
+        $('.ui-dialog').remove();
+        $('*').off();
+        bindListeners();
+        $('.zoom-wrapper *').css('cursor', 'pointer');
+        $('.toggle-switch').prop('checked', true);
+        setCookie('axure-tool-enabled', '1', 1);
     } else {
         setCookie('axure-tool-enabled', '0', 1);
-        setTimeout(function() {
-            //closeRedline();
-        }, 250);
         setTimeout(function() {
             $('html body').remove();
             $('html').append(documentClone.clone(true));
             $('.toggle-switch').prop('checked', false);
             bindListeners();
-            //closeRedline();
             $('.zoom-wrapper').show();
             $('.zoom-wrapper *').show();
             setZoom();
@@ -226,7 +337,6 @@ function elementHover(element) {
 function elementClick(element) {
     if (enableTool) {
         if (!isRedlineElement(element)) {
-            //selectedElement = findDeepestChild(element);
             selectedElement = element;
             clearRedline();
             highlightSelectElement();
@@ -239,10 +349,11 @@ function elementClick(element) {
 //*              Ensure we aren't interacting with a redline-specific element.                    *
 //*************************************************************************************************
 function isRedlineElement(element) {
-    var redlineStatus;
+    var redlineStatus, annotationStatus;
 
     redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
-    if (redlineStatus.indexOf('redline-layer') == '-1') {
+    annotationStatus = element.attr('class') === undefined ? '' : element.attr('class');
+    if (redlineStatus.search('redline-layer') == '-1' && annotationStatus.search(/ann(n)?ot/) == '-1' && annotationStatus.search('ui-dialog') == '-1') {
         return false;
     } else {
         return true;
@@ -435,7 +546,6 @@ function updateRedlinePanel(element) {
                 cssProperties[i][_i] = element.text().trim();
             } else {
                 cssProperties[i][_i] = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
-                //console.log(_i + ': ' + cssProperties[i][_i]);
             }
         });
     });
@@ -617,6 +727,8 @@ function setZoom() {
     if (selectedElement) {
         highlightSelectElement();
     }
+
+    setCookie('axure-tool-zoom', documentZoom, 1);
 }
 
 //*************************************************************************************************
