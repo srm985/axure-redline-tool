@@ -28,13 +28,15 @@ function onLoadFunction() {
     initTool();
     documentClone = $('body').clone(true);
     enableRedline();
+    setZoom();
 }
 
 //*************************************************************************************************
-//*                                 Initialize our tool.                                          *
+//*                                   Check our cookies.                                          *
 //*************************************************************************************************
 function checkState() {
-    var trackingCookie = getCookie('axure-tool-enabled');
+    var trackingCookie = getCookie('axure-tool-enabled'),
+        zoomCookie = getCookie('axure-tool-zoom');
 
     if (trackingCookie != '' && trackingCookie == 1) {
         enableTool = true;
@@ -42,6 +44,10 @@ function checkState() {
         enableTool = false;
     } else {
         setCookie('axure-tool-enabled', '1', 1);
+    }
+
+    if (zoomCookie != '') {
+        documentZoom = parseFloat(zoomCookie);
     }
 }
 
@@ -181,7 +187,6 @@ function bindListeners() {
 
     //*****Global Key Shortcuts*****
     $(document).on('keydown', function(e) {
-        console.log(e.keyCode);
         switch (e.keyCode) {
             case 27:
                 closeRedline();
@@ -201,7 +206,7 @@ function bindListeners() {
                 }
                 break;
         }
-    })
+    });
 
     //*****Autoselect Redline Panel Content****
     $('#redline-panel').on('mouseup', 'input, textarea', function() {
@@ -722,6 +727,8 @@ function setZoom() {
     if (selectedElement) {
         highlightSelectElement();
     }
+
+    setCookie('axure-tool-zoom', documentZoom, 1);
 }
 
 //*************************************************************************************************
