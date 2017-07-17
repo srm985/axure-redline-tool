@@ -55,7 +55,14 @@ function initTool() {
         left = 0,
         maxWidth = 0,
         maxHeight = 0,
-        padding = 1000;
+        scrollWidthHidden = 0,
+        scrollHeightHidden = 0,
+        hiddenWidth = false,
+        hiddenHeight = false,
+        padding = 1000,
+        currentElement,
+        parentElementHorizontal,
+        parentElementVertical;
 
     $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
     $('.redline-layer').hide();
@@ -69,13 +76,50 @@ function initTool() {
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
     //*****First find max dimensions to wrap content.*****
-    $('#base *').each(function(i) {
-        width = $(this).outerWidth();
-        height = $(this).outerHeight();
-        top = $(this).offset().top;
-        left = $(this).offset().left;
-        maxWidth = maxWidth < left + width ? left + width : maxWidth;
-        maxHeight = maxHeight < top + height ? top + height : maxHeight;
+    $('#base *').each(function() {
+        currentElement = $(this);
+        if (parentElementHorizontal === undefined && parentElementVertical === undefined) {
+            parentElementHorizontal = currentElement;
+            parentElementVertical = currentElement;
+        }
+        width = currentElement.outerWidth();
+        height = currentElement.outerHeight();
+        scrollWidthHidden = currentElement[0].scrollWidth;
+        scrollHeightHidden = currentElement[0].scrollHeight;
+        top = currentElement.offset().top;
+        left = currentElement.offset().left;
+        //*****Check if we're still within the parent containing horizontal-scrolling overflow.*****
+        if (!$.contains(parentElementHorizontal[0], currentElement[0])) {
+            hiddenWidth = false;
+        }
+        //*****Check if we're still within the parent containing vertical-scrolling overflow.*****
+        if (!$.contains(parentElementVertical[0], currentElement[0])) {
+            hiddenHeight = false;
+        }
+        //*****Check if we've found an element with horizontal-scrolling content.*****
+        if (scrollWidthHidden <= width && !hiddenWidth) {
+            maxWidth = maxWidth < left + width ? left + width : maxWidth;
+        } else {
+            if (!hiddenWidth && width > 0) {
+                hiddenWidth = true;
+                parentElementHorizontal = currentElement;
+            }
+            if (currentElement.width() > maxWidth) {
+                currentElement.addClass('redline-layer');
+            }
+        }
+        //*****Check if we've found an element with vertical-scrolling content.*****
+        if (scrollHeightHidden <= height && !hiddenHeight) {
+            maxHeight = maxHeight < top + height ? top + height : maxHeight;
+        } else {
+            if (!hiddenHeight && height > 0) {
+                hiddenHeight = true;
+                parentElementVertical = currentElement;
+            }
+            if (currentElement.height() > maxHeight) {
+                currentElement.addClass('redline-layer');
+            }
+        }
     });
     //*****Manually size our containers due to absolutely-positioned children.*****
     $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
