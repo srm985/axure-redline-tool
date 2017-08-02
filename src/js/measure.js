@@ -103,28 +103,24 @@ function initTool() {
             hiddenHeight = false;
         }
         //*****Check if we've found an element with horizontal-scrolling content.*****
-        if (scrollWidthHidden <= width && !hiddenWidth) {
+        if (!hiddenWidth) {
             maxWidth = maxWidth < left + width ? left + width : maxWidth;
-        } else {
-            if (!hiddenWidth && width > 0) {
-                hiddenWidth = true;
-                parentElementHorizontal = currentElement;
-            }
-            if (currentElement.width() > maxWidth) {
-                currentElement.addClass('redline-layer');
-            }
+        } else if (currentElement.width() > maxWidth) {
+            currentElement.addClass('redline-layer');
+        }
+        if (scrollWidthHidden > width && !hiddenWidth && width > 0) {
+            hiddenWidth = true;
+            parentElementHorizontal = currentElement;
         }
         //*****Check if we've found an element with vertical-scrolling content.*****
-        if (scrollHeightHidden <= height && !hiddenHeight) {
+        if (!hiddenHeight) {
             maxHeight = maxHeight < top + height ? top + height : maxHeight;
-        } else {
-            if (!hiddenHeight && height > 0) {
-                hiddenHeight = true;
-                parentElementVertical = currentElement;
-            }
-            if (currentElement.height() > maxHeight) {
-                currentElement.addClass('redline-layer');
-            }
+        } else if (currentElement.height() > maxHeight) {
+            currentElement.addClass('redline-layer');
+        }
+        if (scrollHeightHidden > height && !hiddenHeight && height > 0) {
+            hiddenHeight = true;
+            parentElementVertical = currentElement;
         }
     });
     //*****Manually size our containers due to absolutely-positioned children.*****
@@ -177,6 +173,11 @@ function bindListeners() {
         } else {
             elementClick($(this));
         }
+    });
+
+    //*****Element Scrolling*****
+    $('#base *').on('scroll', function() {
+        closeRedline();
     });
 
     //*****Open/Close Redline Panel*****

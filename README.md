@@ -54,6 +54,8 @@ As this code is embedded within Axure projects, it does not have direct control 
 
 You may find the generated artboard sizing odd during initial use. This tool scans all page elements and sizes the artboard based on the most-extreme elements. If you would like a specific size artboard, I would suggest using a background rectangle within Axure to define this. Alternatively, you may use a combination of vertical and horizontal lines to define your artboard border.
 
+Axure chooses to export some common elements such as circles and lines as images instead of using CSS. As such, you may find it difficult to find accurate dimensions on some items. A workaround for circles is to place a square in Axure and set the border radius greater than or equal to 50% of the square's dimensions.
+
 ## Coming Features
 
 * Provide Sliced Images
@@ -82,3 +84,8 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 * Resolved how the tool handle Axure annotations. Annotations can be read while the tool is disabled and while the tool is enabled, their icons are not considered interactive elements.
 * Added key command functionality to support zoom controls through [Ctrl +] / [Ctrl -] and Esc key to close the redline tool panel / deselect the element.
 * Added zoom tracking support to ensure current zoom level is maintained while progressing through flows.
+
+#### Version 1.1.1
+
+* Revised code to handle artboard rendering issues. Axure uses images instead of CSS for many common elements such as lines and circles. These exported images often have incorrect dimensions which cause the redline tool to incorrectly size the artboard. The code has been revised accordingly to handle these scenarios. 
+* The tool now removes element focus when the page is scrolled. This issue caused the orange selection box to remain fixed while the element below was scrolled. Code currently closes the redline tool when scrolling occurs. Later enhancement will be to bind orange selection box to the element selected so that even with scrolling the box remains.
