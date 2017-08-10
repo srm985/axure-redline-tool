@@ -1,26 +1,34 @@
 body {
   overflow: scroll;
   width: 100%;
-  height: 100%; }
-  body .ui-dialog {
-    padding: 0 !important;
-    border: solid 1px #555555 !important;
-    border-radius: 3px !important; }
-    body .ui-dialog * {
-      color: #555555; }
-  body .ui-dialog-titlebar {
-    background-color: #555555 !important;
-    border: none !important; }
-    body .ui-dialog-titlebar button {
-      border-radius: 3px !important;
-      outline: none !important; }
-  body .ui-button-icon-only .ui-icon {
-    top: 0 !important;
-    left: 0 !important; }
-  body .ui-corner-all {
-    border-radius: 0; }
-  body .ui-dialog-content {
-    padding: 10px !important; }
+  height: 100%;
+}
+body .ui-dialog {
+  padding: 0 !important;
+  border: solid 1px #555555 !important;
+  border-radius: 3px !important;
+}
+body .ui-dialog * {
+  color: #555555;
+}
+body .ui-dialog-titlebar {
+  background-color: #555555 !important;
+  border: none !important;
+}
+body .ui-dialog-titlebar button {
+  border-radius: 3px !important;
+  outline: none !important;
+}
+body .ui-button-icon-only .ui-icon {
+  top: 0 !important;
+  left: 0 !important;
+}
+body .ui-corner-all {
+  border-radius: 0;
+}
+body .ui-dialog-content {
+  padding: 10px !important;
+}
 
 .zoom-wrapper {
   position: relative;
@@ -31,12 +39,15 @@ body {
   background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
   -webkit-background-size: 10px 10px;
   -moz-background-size: 10px 10px;
-  background-size: 10px 10px; }
-  .zoom-wrapper #base {
-    position: absolute; }
+  background-size: 10px 10px;
+}
+.zoom-wrapper #base {
+  position: absolute;
+}
 
 .redline-tool-wrapper .redline-layer {
-  font-family: "Lato", sans-serif; }
+  font-family: "Lato", sans-serif;
+}
 .redline-tool-wrapper #top-control-panel {
   position: fixed;
   z-index: 99999;
@@ -48,34 +59,38 @@ body {
   height: 60px;
   padding: 0 20px;
   background-color: rgba(17, 17, 17, 0.9);
-  align-items: center; }
-  .redline-tool-wrapper #top-control-panel .zoom-controls {
-    display: flex;
-    width: 150px;
-    margin-left: 15px;
-    justify-content: space-between; }
-    .redline-tool-wrapper #top-control-panel .zoom-controls div {
-      font-size: 22px;
-      font-weight: bold;
-      display: flex;
-      box-sizing: border-box;
-      width: 25px;
-      height: 25px;
-      cursor: pointer;
-      user-select: none;
-      color: #FFFFFF;
-      border-radius: 50%;
-      background-color: #4EDEC2;
-      justify-content: center;
-      align-items: center; }
-    .redline-tool-wrapper #top-control-panel .zoom-controls input {
-      width: 60px;
-      height: 25px;
-      text-align: center;
-      opacity: 0.5;
-      border: none;
-      border-radius: 10px;
-      outline: none; }
+  align-items: center;
+}
+.redline-tool-wrapper #top-control-panel .zoom-controls {
+  display: flex;
+  width: 150px;
+  margin-left: 15px;
+  justify-content: space-between;
+}
+.redline-tool-wrapper #top-control-panel .zoom-controls div {
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  box-sizing: border-box;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  user-select: none;
+  color: #FFFFFF;
+  border-radius: 50%;
+  background-color: #4EDEC2;
+  justify-content: center;
+  align-items: center;
+}
+.redline-tool-wrapper #top-control-panel .zoom-controls input {
+  width: 60px;
+  height: 25px;
+  text-align: center;
+  opacity: 0.5;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
 .redline-tool-wrapper #redline-panel {
   position: fixed;
   z-index: 9999;
@@ -84,101 +99,120 @@ body {
   display: flex;
   width: 290px;
   height: 100%;
-  transition: all 0.1s ease-in-out; }
-  .redline-tool-wrapper #redline-panel #menu-tab-column {
-    width: 20px;
-    height: 100%; }
-    .redline-tool-wrapper #redline-panel #menu-tab-column > div {
-      display: flex;
-      width: 100%;
-      height: 40px;
-      margin-top: 20px;
-      cursor: pointer;
-      border-radius: 20px 0 0 20px;
-      background-color: rgba(17, 17, 17, 0.9);
-      align-items: center;
-      justify-content: space-between; }
-      .redline-tool-wrapper #redline-panel #menu-tab-column > div > div > div {
-        width: 12px;
-        height: 2px;
-        margin: 3px 0 3px 7px;
-        background-color: #FFFFFF; }
-  .redline-tool-wrapper #redline-panel #redline-panel-menu-column {
-    font-size: 12px;
-    overflow-y: auto;
-    box-sizing: border-box;
-    width: 270px;
-    height: 100%;
-    padding: 20px 20px 0 20px;
-    color: #FFFFFF;
-    background-color: rgba(17, 17, 17, 0.9); }
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-tool-enabler {
-      font-size: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center; }
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch {
-      position: absolute;
-      visibility: hidden;
-      margin-left: -9999px; }
-      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label {
-        position: relative;
-        display: block;
-        width: 60px;
-        height: 28px;
-        padding: 2px;
-        cursor: pointer;
-        user-select: none;
-        transition: all 0.15s ease-in-out;
-        border-radius: 28px;
-        outline: none;
-        background-color: #DDDDDD; }
-      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before,
-      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
-        position: absolute;
-        display: block;
-        content: '';
-        transition: all 0.15s ease-in-out; }
-      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before {
-        top: 2px;
-        right: 2px;
-        bottom: 2px;
-        left: 2px;
-        border-radius: 28px;
-        background-color: #FFFFFF; }
-      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
-        top: 4px;
-        bottom: 4px;
-        left: 4px;
-        width: 24px;
-        border-radius: 50%;
-        background-color: #DDDDDD; }
-      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label {
-        background-color: #4EDEC2; }
-      .redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label:after {
-        margin-left: 32px;
-        background-color: #4EDEC2; }
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-panel-section {
-      margin-top: 20px; }
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-panel-section:last-of-type p:last-of-type + * {
-      margin-bottom: 20px; }
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column p {
-      margin: 10px 0 0 0; }
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column input,
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column textarea {
-      font-size: 12px;
-      width: calc(100% - 12px);
-      margin-top: 0;
-      padding: 4px 5px;
-      cursor: text;
-      opacity: 0.5;
-      border: solid 1px #FFFFFF;
-      border-radius: 3px; }
-    .redline-tool-wrapper #redline-panel #redline-panel-menu-column textarea {
-      height: 50px;
-      resize: none; }
+  transition: all 0.1s ease-in-out;
+}
+.redline-tool-wrapper #redline-panel #menu-tab-column {
+  width: 20px;
+  height: 100%;
+}
+.redline-tool-wrapper #redline-panel #menu-tab-column > div {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 20px 0 0 20px;
+  background-color: rgba(17, 17, 17, 0.9);
+  align-items: center;
+  justify-content: space-between;
+}
+.redline-tool-wrapper #redline-panel #menu-tab-column > div > div > div {
+  width: 12px;
+  height: 2px;
+  margin: 3px 0 3px 7px;
+  background-color: #FFFFFF;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column {
+  font-size: 12px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  width: 270px;
+  height: 100%;
+  padding: 20px 20px 0 20px;
+  color: #FFFFFF;
+  background-color: rgba(17, 17, 17, 0.9);
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-tool-enabler {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch {
+  position: absolute;
+  visibility: hidden;
+  margin-left: -9999px;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease-in-out;
+  border-radius: 28px;
+  outline: none;
+  background-color: #DDDDDD;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before,
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
+  position: absolute;
+  display: block;
+  content: '';
+  transition: all 0.15s ease-in-out;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:before {
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  border-radius: 28px;
+  background-color: #FFFFFF;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch + label:after {
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #DDDDDD;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label {
+  background-color: #4EDEC2;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .switch .toggle-switch:checked + label:after {
+  margin-left: 32px;
+  background-color: #4EDEC2;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-panel-section {
+  margin-top: 20px;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column .redline-panel-section:last-of-type p:last-of-type + * {
+  margin-bottom: 20px;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column p {
+  margin: 10px 0 0 0;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column input,
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column textarea {
+  font-size: 12px;
+  width: calc(100% - 12px);
+  margin-top: 0;
+  padding: 4px 5px;
+  cursor: text;
+  opacity: 0.5;
+  border: solid 1px #FFFFFF;
+  border-radius: 3px;
+}
+.redline-tool-wrapper #redline-panel #redline-panel-menu-column textarea {
+  height: 50px;
+  resize: none;
+}
 .redline-tool-wrapper .redline-panel-exposed {
-  transform: translateX(-265px); }
+  transform: translateX(-265px);
+}
 .redline-tool-wrapper .hover-layer,
 .redline-tool-wrapper .hover-o-layer,
 .redline-tool-wrapper .select-layer,
@@ -187,22 +221,26 @@ body {
   position: absolute;
   display: none;
   width: 0;
-  height: 0; }
+  height: 0;
+}
 .redline-tool-wrapper .hover-layer {
   z-index: 9997;
   border: solid 1px #4860FF;
   border-right: none;
-  border-bottom: none; }
+  border-bottom: none;
+}
 .redline-tool-wrapper .hover-o-layer {
   z-index: 9996;
   border: dashed 1px #4860FF;
   border-right: none;
-  border-bottom: none; }
+  border-bottom: none;
+}
 .redline-tool-wrapper .select-layer {
   z-index: 9998;
   border: solid 1px #E89A28;
   border-right: none;
-  border-bottom: none; }
+  border-bottom: none;
+}
 .redline-tool-wrapper .dimension-layer {
   font-size: 10px;
   font-weight: bold;
@@ -216,11 +254,13 @@ body {
   border-radius: 5px;
   background-color: #E89A28;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+}
 .redline-tool-wrapper .measure-layer {
   z-index: 9995;
   border: solid 1px #E89A28;
   border-right: none;
-  border-bottom: none; }
+  border-bottom: none;
+}
 
 /*# sourceMappingURL=measure.css.map */

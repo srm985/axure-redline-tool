@@ -1,9 +1,20 @@
 module.exports = function(grunt) {
-    require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks 
-    grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-newer');
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
+        watch: {
+            css: {
+                files: ['src/scss/**/*'],
+                tasks: ['sass', 'postcss']
+            },
+            src: {
+                files: ['src/**/*'],
+                tasks: ['clean', 'copy', 'sass', 'postcss', 'cssmin', 'uglify', 'file_append', 'copy-part-of-file', 'concat', 'minifyHtml']
+            },
+            options: {
+                livereload: true,
+            }
+        },
         clean: {
             files: [
                 'web/**/*'
@@ -14,6 +25,16 @@ module.exports = function(grunt) {
                 files: [
                     { expand: true, cwd: 'src/supporting', src: ['markup.htm'], dest: 'web/temp/' }
                 ]
+            }
+        },
+        sass: {
+            dist: {
+                options: {
+                    style: 'expanded'
+                },
+                files: {
+                    'src/css/measure.css': 'src/scss/measure.scss',
+                }
             }
         },
         postcss: {
@@ -100,5 +121,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', ['clean', 'copy', 'postcss', 'cssmin', 'uglify', 'file_append', 'copy-part-of-file', 'concat', 'minifyHtml']);
+    grunt.registerTask('develop', ['watch']);
+    grunt.registerTask('build', ['clean', 'copy', 'sass', 'postcss', 'cssmin', 'uglify', 'file_append', 'copy-part-of-file', 'concat', 'minifyHtml']);
+    grunt.registerTask('server', ['connect']);
 };
