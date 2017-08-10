@@ -2,6 +2,16 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
+        connect: {
+            server: {
+                options: {
+                    port: 8080,
+                    hostname: '127.0.0.1',
+                    base: '/',
+                    useAvailablePort: true,
+                }
+            }
+        },
         watch: {
             css: {
                 files: ['src/scss/**/*'],
@@ -122,6 +132,5 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('develop', ['watch']);
-    grunt.registerTask('build', ['clean', 'copy', 'sass', 'postcss', 'cssmin', 'uglify', 'file_append', 'copy-part-of-file', 'concat', 'minifyHtml']);
-    grunt.registerTask('server', ['connect']);
+    grunt.registerTask('default', ['clean', 'copy', 'sass', 'postcss', 'cssmin', 'uglify', 'file_append', 'copy-part-of-file', 'concat', 'minifyHtml']);
 };
