@@ -15,7 +15,7 @@ var enableTool = true,
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
-$(window).on('load', function() {
+$(window).on('load', function () {
     //*****I'm not insane for doubley defining this function. This needs to be done otherwise the demo won't work.*****
     onLoadFunction();
 });
@@ -82,7 +82,7 @@ function initTool() {
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
     //*****First find max dimensions to wrap content.*****
-    $('#base *').each(function() {
+    $('#base *').each(function () {
         currentElement = $(this);
         if (parentElementHorizontal === undefined && parentElementVertical === undefined) {
             parentElementHorizontal = currentElement;
@@ -139,7 +139,7 @@ function initTool() {
     left = $('#base').offset().left;
     $('#base').data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
     //*****Add dimensions to every element in document.*****
-    $('#base *').each(function(i) {
+    $('#base *').each(function (i) {
         width = $(this).outerWidth();
         height = $(this).outerHeight();
         top = $(this).offset().top;
@@ -153,20 +153,20 @@ function initTool() {
 //*************************************************************************************************
 function bindListeners() {
     //*****Enable/Disable Redline Tool*****
-    $('#redline-panel').on('change', '.switch', function() {
+    $('#redline-panel').on('change', '.switch', function () {
         enableTool = $('.toggle-switch').prop('checked');
         enableRedline();
     });
 
     //*****Element Hover*****
-    $('body').on('mouseover', '*', function(e) {
+    $('body').on('mouseover', '*', function (e) {
         e.stopImmediatePropagation();
         clearRedline();
         elementHover($(this));
     });
 
     //*****Element Click/Clickaway*****
-    $('body').on('click', '*', function(e) {
+    $('body').on('click', '*', function (e) {
         e.stopImmediatePropagation();
         if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
             closeRedline();
@@ -176,18 +176,18 @@ function bindListeners() {
     });
 
     //*****Element Scrolling*****
-    $('#base *').on('scroll', function() {
+    $('#base *').on('scroll', function () {
         closeRedline();
     });
 
     //*****Open/Close Redline Panel*****
-    $('#redline-panel').on('click', '#menu-tab-column > div', function(e) {
+    $('#redline-panel').on('click', '#menu-tab-column > div', function (e) {
         e.stopImmediatePropagation();
         $('#redline-panel').toggleClass('redline-panel-exposed');
     });
 
     //*****Global Key Shortcuts*****
-    $(document).on('keydown', function(e) {
+    $(document).on('keydown', function (e) {
         switch (e.keyCode) {
             case 27:
                 closeRedline();
@@ -210,12 +210,12 @@ function bindListeners() {
     });
 
     //*****Autoselect Redline Panel Content****
-    $('#redline-panel').on('mouseup', 'input, textarea', function() {
+    $('#redline-panel').on('mouseup', 'input, textarea', function () {
         $(this).select();
     });
 
     //*****Handle Zoom Controls*****
-    $('#top-control-panel').on('click', '.zoom-control-button', function() {
+    $('#top-control-panel').on('click', '.zoom-control-button', function () {
         clearRedline();
         getZoom();
         if ($(this).children().text() == '+') {
@@ -227,12 +227,12 @@ function bindListeners() {
     });
 
     //*****Allow Zoom Input Value*****
-    $('#top-control-panel').on('focus', '#zoom-value', function(e) {
+    $('#top-control-panel').on('focus', '#zoom-value', function (e) {
         $(this).select();
     });
 
     //*****Pass Zoom Value Input*****
-    $('#top-control-panel').on('blur keypress', '#zoom-value', function(e) {
+    $('#top-control-panel').on('blur keypress', '#zoom-value', function (e) {
         if (e.keyCode == 13) {
             $(this).blur();
             getZoom();
@@ -245,7 +245,7 @@ function bindListeners() {
     });
 
     //*****Intercept Dialog Openings*****
-    $(document).on('dialogopen', '*', function(e) {
+    $(document).on('dialogopen', '*', function (e) {
         var dialogElement, tempZoom;
         e.stopImmediatePropagation();
         dialogElement = $(this);
@@ -265,7 +265,7 @@ function bindListeners() {
     /* redline tool while a dialog was open. */
     /* Yes, I know it looks strange...       */
     /*****************************************/
-    $('body .annotation').on('mousedown', '*', function(e) {
+    $('body .annotation').on('mousedown', '*', function (e) {
         var element, tempZoom;
         e.stopPropagation();
         tempZoom = documentZoom;
@@ -301,7 +301,7 @@ function enableRedline() {
         setCookie('axure-tool-enabled', '1', 1);
     } else {
         setCookie('axure-tool-enabled', '0', 1);
-        setTimeout(function() {
+        setTimeout(function () {
             $('html body').remove();
             $('html').append(documentClone.clone(true));
             $('.toggle-switch').prop('checked', false);
@@ -428,7 +428,7 @@ function highlightSelectElement() {
 //*             Measure distance between selected element to newly hovered element.               *
 //*************************************************************************************************
 function measureIntraElementDistance() {
-    $.each(intraElemMeas, function(i, value) {
+    $.each(intraElemMeas, function (i, value) {
         intraElemMeas[i] = 0;
     });
 
@@ -541,8 +541,8 @@ function drawIntraElementMarkers() {
 function updateRedlinePanel(element) {
     var propMatch;
 
-    $.each(cssProperties, function(i, value) {
-        $.each(cssProperties[i], function(_i, _value) {
+    $.each(cssProperties, function (i, value) {
+        $.each(cssProperties[i], function (_i, _value) {
             if (_i == '_content') {
                 cssProperties[i][_i] = element.text().trim();
             } else {
@@ -551,7 +551,7 @@ function updateRedlinePanel(element) {
         });
     });
 
-    //*****Concat granular values to shorthand and clear.*****    
+    //*****Concat granular values to shorthand and clear.*****
     cssProperties['styles']['border-top'] = cssProperties['styles']['border-top-style'] + ' ' + cssProperties['styles']['border-top-width'] + ' ' + cssProperties['styles']['border-top-color'];
     cssProperties['styles']['border-right'] = cssProperties['styles']['border-right-style'] + ' ' + cssProperties['styles']['border-right-width'] + ' ' + cssProperties['styles']['border-right-color'];
     cssProperties['styles']['border-bottom'] = cssProperties['styles']['border-bottom-style'] + ' ' + cssProperties['styles']['border-bottom-width'] + ' ' + cssProperties['styles']['border-bottom-color'];
@@ -618,10 +618,10 @@ function updateRedlinePanel(element) {
 //*                                Append each property section.                                  *
 //*************************************************************************************************
 function appendRedlinePanel() {
-    $.each(cssProperties, function(i, value) {
+    $.each(cssProperties, function (i, value) {
         $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
         $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
-        $.each(cssProperties[i], function(_i, _value) {
+        $.each(cssProperties[i], function (_i, _value) {
             if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
                 $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':</p>');
                 if (_i != '_content') {
