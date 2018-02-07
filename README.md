@@ -104,4 +104,4 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 #### Version 1.1.2
 
-* Build scripts have been ported from Grunt to Gulp. Additional buld options are now available and the code injection has been improved.
+* Build scripts have been ported from Grunt to Gulp. Additional build options are now available and the code injection has been improved.
