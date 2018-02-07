@@ -6,20 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" type="text/css" href="demo.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     <title>Axure Interactive Redline Tool</title>
+    <!--App Files-->
+    <link rel="stylesheet" type="text/css" href="temp/styles.css">
+    <script type="text/javascript" src="temp/main.js"></script>
+    <!--End Appm Files-->
 </head>
 
 <body>
-    <script type="text/javascript">
-    $(window).on('load', function() {
-        $('.redline-content').load('measure.htm');
-        setTimeout(function() {
-            onLoadFunction();
-        }, 500);
-    });
-    </script>
+    <!-- inject:app -->
     <div class="redline-content"></div>
     <div id="base">
         <div id="div-1"></div>

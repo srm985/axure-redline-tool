@@ -1,6 +1,6 @@
 # Axure Interactive Redline Tool
 
-This plugin intends to mimic some of the functionality of the plugin [Measure](http://utom.design/measure/) for Sketch or InVision Inspect. Within my organization, we overly rely on the use of Axure - which doesn't offer many easy options to provide redlines for developers. As Axure does not support plugins within the application itself, this code resides within and is applied to your AxShare projects. 
+This plugin intends to mimic some of the functionality of the plugin [Measure](http://utom.design/measure/) for Sketch or InVision Inspect. Within my organization, we overly rely on the use of Axure - which doesn't offer many easy options to provide redlines for developers. As Axure does not support plugins within the application itself, this code resides within and is applied to your AxShare projects.
 
 [Super Basic Demo](http://71gjur.AxShare.com/#g=1&p=test)
 
@@ -18,18 +18,18 @@ To apply this code to one of your AxShare hosted projects, navigate to [www.shar
 
 Install [Node.js](https://nodejs.org/en/download/)
 
-Update npm to the latest version.
+Update npm to the latest version:
 
 ```sh
 $ npm install npm@latest -g
 ```
 
-Install [http-server](https://www.npmjs.com/package/http-server) or your own preferred server.
+To launch a demo instance of the plugin in your browser, issue the following commands:
 
 ```sh
-$ npm install http-server -g
-$ cd /axure-redline-tool/src/
-$ http-server
+$ cd axure-redline-tool
+$ npm install
+$ gulp develop
 ```
 
 _Feel free to disregard these instructions if you have your own preferred server package or are running it live._
@@ -40,12 +40,24 @@ This project was built and tested on jQuery 3.2 and Axure RP.
 
 ## Building Modified Plugin
 
-If you've made changes and would like to build a new version of the plugin, run the following commands and plugin.txt will be updated.
+If you've made changes and would like to build a new version of the plugin, run the following commands and plugin.txt will be generated.
+
+If you would like to modify the plugin, two build scripts are available to aid in this.
+
+To quickly build your changes for production issue the following commands:
 
 ```sh
-$ cd /axure-redline-tool/
+$ cd axure-redline-tool
 $ npm install
-$ grunt
+$ gulp build-prod
+```
+
+Because this is a compiled plugin i.e. HTML, CSS, and JS are merged into one file, you can also keep the plugin continuously watching for source changes. This will then automatically rebuild the plugin.txt file and you may then copy the plugin code directly into AxShare. This will not open an instance of the plugin in your browser. For this, issue the following commands:
+
+```sh
+$ cd axure-redline-tool
+$ npm install
+$ gulp build-watch
 ```
 
 ## Bugs / Drawbacks
@@ -64,7 +76,7 @@ Axure chooses to export some common elements such as circles and lines as images
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. 
+We use [SemVer](http://semver.org/) for versioning.
 
 ## Authors
 
@@ -81,11 +93,15 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 #### Version 1.1
 
 * Resolved the issue of overflow scrolling content affecting artboard sizing. In Axure terms, hidden dynamic panel content no longer causes the generated artboard to be bigger than visible elements.
-* Resolved how the tool handle Axure annotations. Annotations can be read while the tool is disabled and while the tool is enabled, their icons are not considered interactive elements.
+* Resolved how the tool handles Axure annotations. Annotations can be read while the tool is disabled. While the tool is enabled, their icons are not considered interactive elements.
 * Added key command functionality to support zoom controls through [Ctrl +] / [Ctrl -] and Esc key to close the redline tool panel / deselect the element.
 * Added zoom tracking support to ensure current zoom level is maintained while progressing through flows.
 
 #### Version 1.1.1
 
-* Revised code to handle artboard rendering issues. Axure uses images instead of CSS for many common elements such as lines and circles. These exported images often have incorrect dimensions which cause the redline tool to incorrectly size the artboard. The code has been revised accordingly to handle these scenarios. 
+* Revised code to handle artboard rendering issues. Axure uses images instead of CSS for many common elements such as lines and circles. These exported images often have incorrect dimensions which cause the redline tool to incorrectly size the artboard. The code has been revised accordingly to handle these scenarios.
 * The tool now removes element focus when the page is scrolled. This issue caused the orange selection box to remain fixed while the element below was scrolled. Code currently closes the redline tool when scrolling occurs. Later enhancement will be to bind orange selection box to the element selected so that even with scrolling the box remains.
+
+#### Version 1.1.2
+
+* Build scripts have been ported from Grunt to Gulp. Additional buld options are now available and the code injection has been improved.
