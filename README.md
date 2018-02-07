@@ -40,11 +40,11 @@ This project was built and tested on jQuery 3.2 and Axure RP.
 
 ## Building Modified Plugin
 
-If you've made changes and would like to build a new version of the plugin, run the following commands and plugin.txt will be updated.
+If you've made changes and would like to build a new version of the plugin, run the following commands and plugin.txt will be generated.
 
 If you would like to modify the plugin, two build scripts are available to aid in this.
 
-To quickly build your changes for production:
+To quickly build your changes for production issue the following commands:
 
 ```sh
 $ cd axure-redline-tool
@@ -52,7 +52,7 @@ $ npm install
 $ gulp build-prod
 ```
 
-Because this is a compiled plugin i.e. HTML, CSS, and JS are merged into one file, you can also keep the plugin continuously watching for source changes. This will then automatically rebuild the plugin and you may copy the plugin code directly into Axshare. This will not open an instance of the plugin in your browser. For this, issue the following commands:
+Because this is a compiled plugin i.e. HTML, CSS, and JS are merged into one file, you can also keep the plugin continuously watching for source changes. This will then automatically rebuild the plugin.txt file and you may then copy the plugin code directly into AxShare. This will not open an instance of the plugin in your browser. For this, issue the following commands:
 
 ```sh
 $ cd axure-redline-tool
@@ -101,3 +101,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 * Revised code to handle artboard rendering issues. Axure uses images instead of CSS for many common elements such as lines and circles. These exported images often have incorrect dimensions which cause the redline tool to incorrectly size the artboard. The code has been revised accordingly to handle these scenarios.
 * The tool now removes element focus when the page is scrolled. This issue caused the orange selection box to remain fixed while the element below was scrolled. Code currently closes the redline tool when scrolling occurs. Later enhancement will be to bind orange selection box to the element selected so that even with scrolling the box remains.
+
+#### Version 1.1.2
+
+* Build scripts have been ported from Grunt to Gulp. Additional buld options are now available and the code injection has been improved.
