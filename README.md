@@ -105,3 +105,8 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 #### Version 1.1.2
 
 * Build scripts have been ported from Grunt to Gulp. Additional build options are now available and the code injection has been improved.
+
+#### Version 1.1.3
+
+* Provided color swatch preview for color and background-color attributes.
+* Now support HEX and RGB(A). Color formats can be toggled by clicking color swatch.

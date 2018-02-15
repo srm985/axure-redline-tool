@@ -794,8 +794,6 @@ function cycleColorFormat(colorValue) {
             colorArr = colorValue.replace('#', '').match(/\w{2}/g);
             newFormat = `rgb(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)})`;
             break;
-
     }
-
     return (newFormat);
 }
