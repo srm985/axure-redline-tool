@@ -240,7 +240,23 @@ body {
                 margin-bottom: 20px;
             }
             p {
+                position: relative;
+                z-index: 1;
+
                 margin: 10px 0 0 0;
+                #swatch-color,
+                #swatch-background-color {
+                    position: absolute;
+                    top: 15px;
+                    right: 0;
+
+                    width: 24px;
+                    height: 24px;
+
+                    cursor: pointer;
+
+                    border-radius: 0 3px 3px 0;
+                }
             }
             input,
             textarea {

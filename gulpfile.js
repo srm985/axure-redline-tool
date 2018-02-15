@@ -197,9 +197,6 @@ gulp.task('watch', () => {
  * and watching relevant files.
  */
 gulp.task('serve', () => {
-    browserSync.use(htmlInjector, {
-        files: 'temp/*.htm'
-    });
     browserSync.init({
         server: {
             baseDir: './web/',

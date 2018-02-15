@@ -231,6 +231,18 @@ function bindListeners() {
         $(this).select();
     });
 
+    //*****Toggle Color RGB/HEX*****
+    $('#top-control-panel').on('click', '#swatch-color', () => {
+        console.log('clicked');
+        $('#input-color').val(cycleColorFormat($('#input-color').val()));
+    });
+
+    //*****Toggle Background Color RGB/HEX*****
+    $('#top-control-panel').on('click', '#swatch-background-color', () => {
+        console.log('clicked');
+        $('#input-background-color').val(cycleColorFormat($('#input-background-color').val()));
+    });
+
     //*****Pass Zoom Value Input*****
     $('#top-control-panel').on('blur keypress', '#zoom-value', function (e) {
         if (e.keyCode == 13) {
@@ -618,14 +630,22 @@ function updateRedlinePanel(element) {
 //*                                Append each property section.                                  *
 //*************************************************************************************************
 function appendRedlinePanel() {
+    let swatch;
+
     $.each(cssProperties, function (i, value) {
         $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
         $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
         $.each(cssProperties[i], function (_i, _value) {
             if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
-                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':</p>');
+                //*****Check if we need to add a color swatch.*****
+                if ((_i.replace('_', '') == 'color' || _i.replace('_', '') == 'background-color') && _value != 'transparent') {
+                    swatch = '<span class="redline-layer" id="swatch-' + _i.replace('_', '') + '" style="background-color:' + _value + ';"></span>';
+                } else {
+                    swatch = '';
+                }
+                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
                 if (_i != '_content') {
-                    $('.redline-panel-section:last').append('<input class="redline-layer" value="' + _value + '" readonly="readonly"></input>');
+                    $('.redline-panel-section:last').append('<input class="redline-layer" id="input-' + _i.replace('_', '') + '" value="' + _value + '" readonly="readonly"></input>');
                 } else {
                     $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
                     $('.redline-panel-section textarea').text(_value);
@@ -737,4 +757,45 @@ function setZoom() {
 //*************************************************************************************************
 function getZoom() {
     documentZoom = parseInt($('#zoom-value').val());
+}
+
+//*************************************************************************************************
+//*                          Cycle through available color formats.                               *
+//*************************************************************************************************
+function cycleColorFormat(colorValue) {
+    let newFormat = '',
+        colorArr,
+        opacity;
+
+    switch (true) {
+        case /rgba/.test(colorValue):
+            colorArr = colorValue.replace(',', '').match(/(\d\.\d)|\d+/g);
+            console.log(colorArr);
+            newFormat = '#';
+            for (let i = 0; i < 3; i++) {
+                newFormat += ('0' + Number(colorArr[i]).toString(16).toUpperCase()).slice(-2);
+            }
+            newFormat += ` ${Number(colorArr[3]) * 100}%`;
+            break;
+        case /\%/.test(colorValue):
+            colorArr = colorValue.replace('#', '').slice(0, 6).match(/\w{2}/g);
+            console.log(colorArr)
+            opacity = Number(colorValue.replace(/\#\w{6}\s/, '').replace('%', '')) / 100;
+            newFormat = `rgba(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)}, ${opacity})`;
+            break;
+        case /rgb\(/.test(colorValue):
+            colorArr = colorValue.replace(',', '').match(/\d+/g);
+            newFormat = '#';
+            colorArr.forEach((color) => {
+                newFormat += ('0' + Number(color).toString(16).toUpperCase()).slice(-2);
+            });
+            break;
+        case /\#/.test(colorValue):
+            colorArr = colorValue.replace('#', '').match(/\w{2}/g);
+            newFormat = `rgb(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)})`;
+            break;
+
+    }
+
+    return (newFormat);
 }
