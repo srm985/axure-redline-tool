@@ -4,6 +4,9 @@ $primary-color-orange: #e89a28;
 $primary-color-background: rgba(17, 17, 17, 0.9);
 $primary-color-blue: #4860ff;
 $primary-color-gray: #555;
+$secondary-color-gray: #333;
+$primary-color-white: #fff;
+$background-color: rgba(0, 0, 0, 0.2);
 $font-stack: 'Lato',
 sans-serif;
 $switch-transition: all 0.15s ease-in-out;
@@ -30,9 +33,11 @@ body {
             outline: none !important;
         }
     }
-    .ui-button-icon-only .ui-icon {
-        top: 0 !important;
-        left: 0 !important;
+    .ui-button-icon-only {
+        .ui-icon {
+            top: 0 !important;
+            left: 0 !important;
+        }
     }
     .ui-corner-all {
         border-radius: 0;
@@ -45,11 +50,11 @@ body {
 .zoom-wrapper {
     position: relative;
 
-    background-color: #333;
-    background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -ms-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
+    background-color: $secondary-color-gray;
+    background-image: -webkit-repeating-radial-gradient(center center, $background-color, $background-color 1px, transparent 1px, transparent 100%);
+    background-image: -moz-repeating-radial-gradient(center center, $background-color, $background-color 1px, transparent 1px, transparent 100%);
+    background-image: -ms-repeating-radial-gradient(center center, $background-color, $background-color 1px, transparent 1px, transparent 100%);
+    background-image: repeating-radial-gradient(center center, $background-color, $background-color 1px, transparent 1px, transparent 100%);
     -webkit-background-size: 10px 10px;
     -moz-background-size: 10px 10px;
     background-size: 10px 10px;
@@ -98,7 +103,7 @@ body {
                 cursor: pointer;
                 user-select: none;
 
-                color: #fff;
+                color: $primary-color-white;
                 border-radius: 50%;
                 background-color: $primary-color-teal;
             }
@@ -130,7 +135,7 @@ body {
         #menu-tab-column {
             width: 20px;
             height: 100%;
-             > div {
+            & > div {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -143,12 +148,12 @@ body {
 
                 border-radius: 20px 0 0 20px;
                 background-color: $primary-color-background;
-                 > div > div {
+                & > div > div {
                     width: 12px;
                     height: 2px;
                     margin: 3px 0 3px 7px;
 
-                    background-color: #fff;
+                    background-color: $primary-color-white;
                 }
             }
         }
@@ -160,9 +165,9 @@ body {
             box-sizing: border-box;
             width: 270px;
             height: 100%;
-            padding: 20px 20px 0 20px;
+            padding: 20px 20px 0;
 
-            color: #fff;
+            color: $primary-color-white;
             background-color: $primary-color-background;
             .redline-tool-enabler {
                 font-size: 16px;
@@ -195,8 +200,8 @@ body {
                         outline: none;
                         background-color: #ddd;
                     }
-                     + label:before,
-                     + label:after {
+                     + label::before,
+                     + label::after {
                         position: absolute;
 
                         display: block;
@@ -211,9 +216,9 @@ body {
                         left: 2px;
 
                         border-radius: 28px;
-                        background-color: #fff;
+                        background-color: $primary-color-white;
                     }
-                     + label:after {
+                     + label::after {
                         top: 4px;
                         bottom: 4px;
                         left: 4px;
@@ -226,7 +231,7 @@ body {
                     &:checked + label {
                         background-color: $primary-color-teal;
                     }
-                    &:checked + label:after {
+                    &:checked + label::after {
                         margin-left: 32px;
 
                         background-color: $primary-color-teal;
@@ -245,7 +250,7 @@ body {
 
                 width: calc(100% - 12px);
                 height: 15px;
-                margin: 10px 0 0 0;
+                margin: 10px 0 0;
                 #swatch-color,
                 #swatch-background-color {
                     position: absolute;
@@ -275,7 +280,7 @@ body {
                 cursor: text;
 
                 opacity: 0.5;
-                border: solid 1px #fff;
+                border: solid 1px $primary-color-white;
                 border-radius: 3px;
             }
             textarea {
@@ -337,7 +342,7 @@ body {
 
         letter-spacing: 1px;
 
-        color: #fff;
+        color: $primary-color-white;
         border-radius: 5px;
         background-color: $primary-color-orange;
     }

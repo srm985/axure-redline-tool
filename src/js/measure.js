@@ -7,7 +7,6 @@ var enableTool = true,
     elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
     elemSelectMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
     intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0, trueTop: 0, trueRight: 0, trueBottom: 0, trueLeft: 0 },
-    redlineClass,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0,
     documentClone,
@@ -139,7 +138,7 @@ function initTool() {
     left = $('#base').offset().left;
     $('#base').data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
     //*****Add dimensions to every element in document.*****
-    $('#base *').each(function (i) {
+    $('#base *').each(function () {
         width = $(this).outerWidth();
         height = $(this).outerHeight();
         top = $(this).offset().top;
@@ -167,7 +166,9 @@ function bindListeners() {
 
     //*****Element Click/Clickaway*****
     $('body').on('click', '*', function (e) {
-        e.stopImmediatePropagation();
+        // Removed 20.2.18. Last used V1.1.4.
+        //e.stopImmediatePropagation();
+        e.stopPropagation();
         if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
             closeRedline();
         } else {
@@ -227,7 +228,7 @@ function bindListeners() {
     });
 
     //*****Allow Zoom Input Value*****
-    $('#top-control-panel').on('focus', '#zoom-value', function (e) {
+    $('#top-control-panel').on('focus', '#zoom-value', function () {
         $(this).select();
     });
 
@@ -300,13 +301,19 @@ function bindListeners() {
 //*************************************************************************************************
 function enableRedline() {
     if (enableTool) {
-        $('.zoom-wrapper').show();
-        $('.zoom-wrapper *').not('script, style').show();
+        // Removed 20.2.18. Last in V1.1.4.
+        //$('.zoom-wrapper').show();
+        //$('.zoom-wrapper *').not('script, style').show();
         setZoom();
         $('.ui-dialog').remove();
         $('*').off();
         bindListeners();
-        $('.zoom-wrapper *').not('script, style').css('cursor', 'pointer');
+
+        // Keep intensive task from running until DOM manipulation is done.
+        setTimeout(() => {
+            $('.zoom-wrapper *').not('script, style').css('cursor', 'pointer');
+        }, 0);
+
         $('.toggle-switch').prop('checked', true);
         setCookie('axure-tool-enabled', '1', 1);
     } else {
@@ -316,8 +323,10 @@ function enableRedline() {
             $('html').append(documentClone.clone(true));
             $('.toggle-switch').prop('checked', false);
             bindListeners();
-            $('.zoom-wrapper').show();
-            $('.zoom-wrapper *').not('script, style').show();
+            // Removed 20.2.18. Last in V1.1.4.
+            //$('.zoom-wrapper').show();
+            //$('.zoom-wrapper *').not('script, style').show();
+            closeRedline();
             setZoom();
         }, 250);
     }
@@ -438,7 +447,7 @@ function highlightSelectElement() {
 //*             Measure distance between selected element to newly hovered element.               *
 //*************************************************************************************************
 function measureIntraElementDistance() {
-    $.each(intraElemMeas, function (i, value) {
+    $.each(intraElemMeas, function (i) {
         intraElemMeas[i] = 0;
     });
 
@@ -551,8 +560,8 @@ function drawIntraElementMarkers() {
 function updateRedlinePanel(element) {
     var propMatch;
 
-    $.each(cssProperties, function (i, value) {
-        $.each(cssProperties[i], function (_i, _value) {
+    $.each(cssProperties, function (i) {
+        $.each(cssProperties[i], function (_i) {
             if (_i == '_content') {
                 cssProperties[i][_i] = element.text().trim();
             } else {
@@ -630,7 +639,7 @@ function updateRedlinePanel(element) {
 function appendRedlinePanel() {
     let swatch;
 
-    $.each(cssProperties, function (i, value) {
+    $.each(cssProperties, function (i) {
         $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
         $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
         $.each(cssProperties[i], function (_i, _value) {
@@ -697,15 +706,16 @@ function clearRedlinePanel() {
 //*************************************************************************************************
 //*                             Find the deepest child element.                                   *
 //*************************************************************************************************
-function findDeepestChild(element) {
-    var current = element;
 
+// Removed 20.2.18. Last used in V1.1.4.
+
+/*function findDeepestChild(element) {
+    var current = element;
     while (current.children().length > 1) {
         current = current.children();
     }
-
     return current;
-}
+}*/
 
 //*************************************************************************************************
 //*                      Set a tracking cookie for tool enabled/disabled.                         *
@@ -774,9 +784,9 @@ function cycleColorFormat(colorValue) {
             }
             newFormat += ` ${Number(colorArr[3]) * 100}%`;
             break;
-        case /\%/.test(colorValue):
+        case /%/.test(colorValue):
             colorArr = colorValue.replace('#', '').slice(0, 6).match(/\w{2}/g);
-            opacity = Number(colorValue.replace(/\#\w{6}\s/, '').replace('%', '')) / 100;
+            opacity = Number(colorValue.replace(/#\w{6}\s/, '').replace('%', '')) / 100;
             newFormat = `rgba(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)}, ${opacity})`;
             break;
         case /rgb\(/.test(colorValue):
@@ -786,7 +796,7 @@ function cycleColorFormat(colorValue) {
                 newFormat += ('0' + Number(color).toString(16).toUpperCase()).slice(-2);
             });
             break;
-        case /\#/.test(colorValue):
+        case /#/.test(colorValue):
             colorArr = colorValue.replace('#', '').match(/\w{2}/g);
             newFormat = `rgb(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)})`;
             break;
