@@ -110,3 +110,8 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 * Provided color swatch preview for color and background-color attributes.
 * Now support HEX and RGB(A). Color formats can be toggled by clicking color swatch.
+
+#### Version 1.1.4
+
+* Provided support for repeater widgets. Updated code to ignore embedded script and style tags.
+* Added box-sizing attribute to inputs to ensure correct sizing across browsers.

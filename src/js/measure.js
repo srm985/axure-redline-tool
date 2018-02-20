@@ -233,13 +233,11 @@ function bindListeners() {
 
     //*****Toggle Color RGB/HEX*****
     $('#top-control-panel').on('click', '#swatch-color', () => {
-        console.log('clicked');
         $('#input-color').val(cycleColorFormat($('#input-color').val()));
     });
 
     //*****Toggle Background Color RGB/HEX*****
     $('#top-control-panel').on('click', '#swatch-background-color', () => {
-        console.log('clicked');
         $('#input-background-color').val(cycleColorFormat($('#input-background-color').val()));
     });
 
@@ -303,12 +301,12 @@ function bindListeners() {
 function enableRedline() {
     if (enableTool) {
         $('.zoom-wrapper').show();
-        $('.zoom-wrapper *').show();
+        $('.zoom-wrapper *').not('script, style').show();
         setZoom();
         $('.ui-dialog').remove();
         $('*').off();
         bindListeners();
-        $('.zoom-wrapper *').css('cursor', 'pointer');
+        $('.zoom-wrapper *').not('script, style').css('cursor', 'pointer');
         $('.toggle-switch').prop('checked', true);
         setCookie('axure-tool-enabled', '1', 1);
     } else {
@@ -319,7 +317,7 @@ function enableRedline() {
             $('.toggle-switch').prop('checked', false);
             bindListeners();
             $('.zoom-wrapper').show();
-            $('.zoom-wrapper *').show();
+            $('.zoom-wrapper *').not('script, style').show();
             setZoom();
         }, 250);
     }
@@ -770,7 +768,6 @@ function cycleColorFormat(colorValue) {
     switch (true) {
         case /rgba/.test(colorValue):
             colorArr = colorValue.replace(',', '').match(/(\d\.\d)|\d+/g);
-            console.log(colorArr);
             newFormat = '#';
             for (let i = 0; i < 3; i++) {
                 newFormat += ('0' + Number(colorArr[i]).toString(16).toUpperCase()).slice(-2);
@@ -779,7 +776,6 @@ function cycleColorFormat(colorValue) {
             break;
         case /\%/.test(colorValue):
             colorArr = colorValue.replace('#', '').slice(0, 6).match(/\w{2}/g);
-            console.log(colorArr)
             opacity = Number(colorValue.replace(/\#\w{6}\s/, '').replace('%', '')) / 100;
             newFormat = `rgba(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)}, ${opacity})`;
             break;
