@@ -116,7 +116,9 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 #### Version 1.2
 
-* Revised how inter-element dimensions are calculated. Previously, all elements were iterated, and data attributes appended. Now this is done in real time on only the active elements. This will help performance on pages with many elements.
-* Corrected the issue where the tool displays unintended hidden content.
-* Corrected small CSS styling changes to improve consistency.
-* Corrected issue where tool throws error when disabling while an element is selected.
+* Revised how inter-element dimensions are calculated. Previously, all elements were iterated, and data attributes appended. Now this is done in real-time, on only the active elements. This will help performance on pages with many elements.
+* Resolved issue where the tool displays unintended hidden content.
+* Resolved small CSS styling changes to improve consistency in displaying attributes.
+* Resolved issue where tool throws error when disabling while an element is selected.
+* Tool now provides correct artboard padding when zooming.
+* Resolved measurement flicker which occurred when hovering over a measurement line or tag.
