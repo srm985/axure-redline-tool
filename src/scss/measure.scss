@@ -48,7 +48,11 @@ body {
 }
 
 .zoom-wrapper {
-    position: relative;
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     background-color: $secondary-color-gray;
     background-image: -webkit-repeating-radial-gradient(center center, $background-color, $background-color 1px, transparent 1px, transparent 100%);
@@ -59,9 +63,9 @@ body {
     -moz-background-size: 10px 10px;
     background-size: 10px 10px;
     #base {
-        position: absolute;
+        position: relative;
 
-        transform-origin: top left;
+        transform-origin: center;
     }
 }
 
