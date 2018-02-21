@@ -32,8 +32,6 @@ $ npm install
 $ gulp develop
 ```
 
-_Feel free to disregard these instructions if you have your own preferred server package or are running it live._
-
 #### Prerequisites / Dependencies
 
 This project was built and tested on jQuery 3.2 and Axure RP.
@@ -115,3 +113,10 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 * Provided support for repeater widgets. Updated code to ignore embedded script and style tags.
 * Added box-sizing attribute to inputs to ensure correct sizing across browsers.
+
+#### Version 1.2
+
+* Revised how inter-element dimensions are calculated. Previously, all elements were iterated, and data attributes appended. Now this is done in real time on only the active elements. This will help performance on pages with many elements.
+* Corrected the issue where the tool displays unintended hidden content.
+* Corrected small CSS styling changes to improve consistency.
+* Corrected issue where tool throws error when disabling while an element is selected.
