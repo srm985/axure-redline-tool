@@ -10,11 +10,11 @@ To use this plugin, you'll need to copy and paste the code found within [**/axur
 
 To apply this code to one of your AxShare hosted projects, navigate to [www.share.axure.com](https://share.axure.com) and log into your account. Once logged in, you will see an inline gear icon to the far right of each Axure project. Hovering over this icon provides a list of options, including *PLUGINS* which you should select. Once on the plugin page, select *NEW PLUGIN*. Name your plugin whatever you deem appropriate and select *End of the Head* as the insertion location. Paste your plugin.min.htm code into the content area and save the plugin. Select all desired pages within which you'd like to have the interactive redline tool. If you would like to have the plugin appended to any new pages, you may select *Add to new pages by default*. Once saved, your plugin should be activated. To modify the plugin, simply select *edit* and paste in any replacement code.
 
+[Previous Releases](https://github.com/srm985/axure-redline-tool/releases)
+
 [Axure Plugin Tutorial](https://www.axure.com/c/forum/AxShare-general-discussion/9953-create-edit-plugin-AxShare-tutorial.html)
 
 ![plugin demo](http://www.seanmcquay.com/axure-redline-tool/axure-redline-tool.gif)
-
-[Previous Releases](https://github.com/srm985/axure-redline-tool/releases)
 
 ## Installation / Running
 
