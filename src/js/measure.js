@@ -1,5 +1,7 @@
 var enableTool = true,
     documentZoom = 100,
+    previousZoom = documentZoom,
+    zoomWrapperPadding = 1000,
     borderThickness = 1,
     labelSpacing = 5,
     hoveredElement = '',
@@ -49,6 +51,9 @@ function checkState() {
 
     if (zoomCookie != '') {
         documentZoom = parseFloat(zoomCookie);
+
+        // Set our previous zoom to 100%. This causes the artboard to center itself correctly.
+        previousZoom = 100;
     }
 }
 
@@ -66,7 +71,6 @@ function initTool() {
         scrollHeightHidden = 0,
         hiddenWidth = false,
         hiddenHeight = false,
-        padding = 1000,
         currentElement,
         parentElementHorizontal,
         parentElementVertical;
@@ -83,7 +87,7 @@ function initTool() {
     $('#base').addClass('redline-layer');
     $('.zoom-wrapper').addClass('redline-layer');
     //*****First find max dimensions to wrap content.*****
-    $('#base *').each(function () {
+    $('#base *').not('script, style').each(function () {
         currentElement = $(this);
         if (parentElementHorizontal === undefined && parentElementVertical === undefined) {
             parentElementHorizontal = currentElement;
@@ -125,14 +129,14 @@ function initTool() {
         }
     });
     //*****Manually size our containers due to absolutely-positioned children.*****
-    $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
-    $('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;' + 'top:' + padding + 'px !important; left:' + padding + 'px !important;');
+    $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * zoomWrapperPadding)) + 'px !important;' + 'height:' + (maxHeight + (2 * zoomWrapperPadding)) + 'px !important;');
+    $('#base').attr('style', `width: ${maxWidth}px !important; height: ${maxHeight}px !important;`);
     //*****If content has no background color, define as #FFFFFF.*****
     if ($('#base').css('background-color') == 'transparent' || $('#base').css('background-color').search(/rgba\(\d+,\s\d+,\s\d+,\s0\)/) >= 0) {
         $('#base').css('background-color', '#FFFFFF');
     }
-    $(document).scrollTop(padding - (($(window).innerHeight() - maxHeight) / 2));
-    $(document).scrollLeft(padding - (($(window).innerWidth() - maxWidth) / 2));
+    $(document).scrollTop(zoomWrapperPadding - (($(window).innerHeight() - maxHeight) / 2));
+    $(document).scrollLeft(zoomWrapperPadding - (($(window).innerWidth() - maxWidth) / 2));
 }
 
 //*************************************************************************************************
@@ -148,7 +152,7 @@ function bindListeners() {
     //*****Element Hover*****
     $('body').on('mouseover', '*', function (e) {
         e.stopImmediatePropagation();
-        clearRedline();
+        //clearRedline();
         elementHover($(this));
     });
 
@@ -327,6 +331,7 @@ function elementHover(element) {
     if (enableTool) {
         hoveredElement = element;
         if (!isRedlineElement(hoveredElement) || hoveredElement.attr('id') == 'base') {
+            clearRedline();
             setMeasurements();
             highlightHoverElement();
             //*****Check if we're hovering over our previously-selected element.*****
@@ -336,6 +341,9 @@ function elementHover(element) {
                 measureIntraElementDistance();
                 drawIntraElementMarkers();
             }
+        } else if (!hoveredElement.hasClass('flicker-prevent')) {
+            // Only clear our measurements if we're not hovering over them. Prevents flickering.
+            clearRedline();
         }
     }
 }
@@ -740,15 +748,32 @@ function getCookie(cname) {
 //*************************************************************************************************
 //*                                    Set zoom level.                                            *
 //*************************************************************************************************
-function setZoom() {
+function setZoom(measurementToggle = false) {
+    const zoomWidth = $('.zoom-wrapper #base').width(),
+        zoomHeight = $('.zoom-wrapper #base').height(),
+        bodyScrollTop = $('body').scrollTop() === 0 ? $('html').scrollTop() : $('body').scrollTop(),
+        bodyScrollLeft = $('body').scrollLeft() === 0 ? $('html').scrollLeft() : $('body').scrollLeft();
+
     documentZoom = documentZoom <= 0 ? 1 : documentZoom;
     $('#zoom-value').val(documentZoom + '%');
-    $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
+    $('.zoom-wrapper #base').css('transform', `scale(${documentZoom / 100})`);
 
-    if (selectedElement) {
-        highlightSelectElement();
+    // Only redraw if we're not toggling for a true measurement.
+    if (!measurementToggle) {
+
+        // Resize our scrollable area when zooming.
+        $('.zoom-wrapper').attr('style', `width: ${(zoomWidth * (documentZoom / 100)) + (zoomWrapperPadding * 2)}px !important; height: ${(zoomHeight * (documentZoom / 100)) + (zoomWrapperPadding * 2)}px !important;`);
+
+        // Adjust our scrolling to compensate for zooming.
+        $('html, body').scrollTop(bodyScrollTop + ((((zoomHeight) * (documentZoom / 100)) - (zoomHeight * (previousZoom / 100))) / 2));
+        $('html, body').scrollLeft(bodyScrollLeft + ((((zoomWidth) * (documentZoom / 100)) - (zoomWidth * (previousZoom / 100))) / 2));
+
+        // Reselect any highlighted element.
+        if (selectedElement) {
+            highlightSelectElement();
+        }
     }
-
+    previousZoom = documentZoom;
     setCookie('axure-tool-zoom', documentZoom, 1);
 }
 
@@ -803,7 +828,7 @@ function setMeasurements() {
     const tempZoom = documentZoom;
 
     documentZoom = 100;
-    setZoom();
+    setZoom(true);
     try {
         selectedMeasurements = {
             width: selectedElement.width(),
@@ -835,5 +860,5 @@ function setMeasurements() {
         };
     }
     documentZoom = tempZoom;
-    setZoom();
+    setZoom(true);
 }
