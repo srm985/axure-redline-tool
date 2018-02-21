@@ -248,9 +248,12 @@ body {
                 position: relative;
                 z-index: 1;
 
-                width: calc(100% - 12px);
+/*width: calc(100% - 12px);*/
+
+                width: 100%;
                 height: 15px;
                 margin: 10px 0 0;
+
                 #swatch-color,
                 #swatch-background-color {
                     position: absolute;
@@ -266,14 +269,16 @@ body {
                 }
             }
             input {
-                box-sizing: border-box;
                 height: 25px;
             }
             input,
             textarea {
                 font-size: 12px;
 
-                width: calc(100% - 12px);
+                box-sizing: border-box;
+
+/*width: calc(100% - 12px);*/
+                width: 100%;
                 margin-top: 0;
                 padding: 4px 5px;
 

@@ -75,3 +75,20 @@ body {
 
     color: #555;
 }
+
+#div-7 {
+    position: absolute;
+    top: 210px;
+    left: 510px;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 5px;
+    background-color: #fff;
+}
+#div-8 {
+    position: relative;
+
+    background-color: #679901;
+}

@@ -10,7 +10,9 @@ var enableTool = true,
     dimensionMarkerWidth = 0,
     dimensionMarkerHeight = 0,
     documentClone,
-    elementPosition;
+    elementPosition,
+    selectedMeasurements,
+    hoveredMeasurements;
 
 var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
 
@@ -131,20 +133,6 @@ function initTool() {
     }
     $(document).scrollTop(padding - (($(window).innerHeight() - maxHeight) / 2));
     $(document).scrollLeft(padding - (($(window).innerWidth() - maxWidth) / 2));
-    //*****By exception, add dimensions to base.*****
-    width = $('#base').innerWidth();
-    height = $('#base').innerHeight();
-    top = $('#base').offset().top;
-    left = $('#base').offset().left;
-    $('#base').data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
-    //*****Add dimensions to every element in document.*****
-    $('#base *').each(function () {
-        width = $(this).outerWidth();
-        height = $(this).outerHeight();
-        top = $(this).offset().top;
-        left = $(this).offset().left;
-        $(this).data('thedimensions', { width: width, height: height, offsetTop: top, offsetLeft: left });
-    });
 }
 
 //*************************************************************************************************
@@ -339,6 +327,7 @@ function elementHover(element) {
     if (enableTool) {
         hoveredElement = element;
         if (!isRedlineElement(hoveredElement) || hoveredElement.attr('id') == 'base') {
+            setMeasurements();
             highlightHoverElement();
             //*****Check if we're hovering over our previously-selected element.*****
             if (hoveredElement[0] == selectedElement[0]) {
@@ -359,6 +348,7 @@ function elementClick(element) {
         if (!isRedlineElement(element)) {
             selectedElement = element;
             clearRedline();
+            setMeasurements();
             highlightSelectElement();
             updateRedlinePanel(selectedElement);
         }
@@ -436,8 +426,8 @@ function highlightSelectElement() {
     $('#r-dimension > span').show();
     dimensionMarkerWidth = $('.dimension-layer').width();
     dimensionMarkerHeight = $('.dimension-layer').height();
-    $('#t-dimension > span').text(Math.round(selectedElement.data('thedimensions').width));
-    $('#r-dimension > span').text(Math.round(selectedElement.data('thedimensions').height));
+    $('#t-dimension > span').text(Math.round(selectedMeasurements.width));
+    $('#r-dimension > span').text(Math.round(selectedMeasurements.height));
 
     $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) - (dimensionMarkerWidth / 2) });
     $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + labelSpacing });
@@ -453,40 +443,40 @@ function measureIntraElementDistance() {
 
     if (elemMeas.offsetTop > elemSelectMeas.offsetTop + elemSelectMeas.height) {
         intraElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
-        intraElemMeas.trueBottom = Math.abs(selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height - hoveredElement.data('thedimensions').offsetTop);
+        intraElemMeas.trueBottom = Math.abs(selectedMeasurements.offsetTop + selectedMeasurements.height - hoveredMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
-        intraElemMeas.trueTop = Math.abs(hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height - selectedElement.data('thedimensions').offsetTop);
+        intraElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop + hoveredMeasurements.height - selectedMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height > elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
-        intraElemMeas.trueTop = Math.abs(hoveredElement.data('thedimensions').offsetTop - selectedElement.data('thedimensions').offsetTop);
+        intraElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop - selectedMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop < elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height < elemMeas.offsetTop + elemMeas.height) {
         intraElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
-        intraElemMeas.trueBottom = Math.abs((hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height) - (selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height));
+        intraElemMeas.trueBottom = Math.abs((hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height));
     } else {
         intraElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
         intraElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
-        intraElemMeas.trueTop = selectedElement.data('thedimensions').offsetTop - hoveredElement.data('thedimensions').offsetTop;
-        intraElemMeas.trueBottom = (hoveredElement.data('thedimensions').offsetTop + hoveredElement.data('thedimensions').height) - (selectedElement.data('thedimensions').offsetTop + selectedElement.data('thedimensions').height);
+        intraElemMeas.trueTop = selectedMeasurements.offsetTop - hoveredMeasurements.offsetTop;
+        intraElemMeas.trueBottom = (hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height);
     }
 
     if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
-        intraElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredElement.data('thedimensions').width - selectedElement.data('thedimensions').offsetLeft);
+        intraElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredMeasurements.width - selectedMeasurements.offsetLeft);
     } else if (elemMeas.offsetLeft > elemSelectMeas.offsetLeft + elemSelectMeas.width) {
         intraElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
-        intraElemMeas.trueRight = Math.abs(selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width - hoveredElement.data('thedimensions').offsetLeft);
+        intraElemMeas.trueRight = Math.abs(selectedMeasurements.offsetLeft + selectedMeasurements.width - hoveredMeasurements.offsetLeft);
     } else if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width > elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
-        intraElemMeas.trueLeft = Math.abs(hoveredElement.data('thedimensions').offsetLeft - selectedElement.data('thedimensions').offsetLeft);
+        intraElemMeas.trueLeft = Math.abs(hoveredMeasurements.offsetLeft - selectedMeasurements.offsetLeft);
     } else if (elemSelectMeas.offsetLeft < elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width < elemMeas.offsetLeft + elemMeas.width) {
         intraElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
-        intraElemMeas.trueRight = Math.abs((hoveredElement.data('thedimensions').offsetLeft + hoveredElement.data('thedimensions').width) - (selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width));
+        intraElemMeas.trueRight = Math.abs((hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width));
     } else {
         intraElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
         intraElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
-        intraElemMeas.trueLeft = selectedElement.data('thedimensions').offsetLeft - hoveredElement.data('thedimensions').offsetLeft;
-        intraElemMeas.trueRight = (hoveredElement.data('thedimensions').offsetLeft + hoveredElement.data('thedimensions').width) - (selectedElement.data('thedimensions').offsetLeft + selectedElement.data('thedimensions').width);
+        intraElemMeas.trueLeft = selectedMeasurements.offsetLeft - hoveredMeasurements.offsetLeft;
+        intraElemMeas.trueRight = (hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width);
     }
 }
 
@@ -496,6 +486,8 @@ function measureIntraElementDistance() {
 function drawIntraElementMarkers() {
     dimensionMarkerWidth = $('.dimension-layer').width();
     dimensionMarkerHeight = $('.dimension-layer').height();
+
+    $('.dimension-layer').hide();
 
     if (intraElemMeas.top != 0) {
         $('#t-measure').show();
@@ -802,4 +794,46 @@ function cycleColorFormat(colorValue) {
             break;
     }
     return (newFormat);
+}
+
+//*************************************************************************************************
+//*                      Toggle zoom to 100% and record measurements.                             *
+//*************************************************************************************************
+function setMeasurements() {
+    const tempZoom = documentZoom;
+
+    documentZoom = 100;
+    setZoom();
+    try {
+        selectedMeasurements = {
+            width: selectedElement.width(),
+            height: selectedElement.height(),
+            offsetTop: selectedElement.offset().top,
+            offsetLeft: selectedElement.offset().left
+        };
+    } catch (err) {
+        selectedMeasurements = {
+            width: 0,
+            height: 0,
+            offsetTop: 0,
+            offsetLeft: 0
+        };
+    }
+    try {
+        hoveredMeasurements = {
+            width: hoveredElement.width(),
+            height: hoveredElement.height(),
+            offsetTop: hoveredElement.offset().top,
+            offsetLeft: hoveredElement.offset().left
+        };
+    } catch (err) {
+        hoveredMeasurements = {
+            width: 0,
+            height: 0,
+            offsetTop: 0,
+            offsetLeft: 0
+        };
+    }
+    documentZoom = tempZoom;
+    setZoom();
 }
