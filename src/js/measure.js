@@ -152,7 +152,7 @@ function bindListeners() {
     //*****Element Hover*****
     $('body').on('mouseover', '*', function (e) {
         e.stopImmediatePropagation();
-        clearRedline();
+        //clearRedline();
         elementHover($(this));
     });
 
@@ -331,6 +331,7 @@ function elementHover(element) {
     if (enableTool) {
         hoveredElement = element;
         if (!isRedlineElement(hoveredElement) || hoveredElement.attr('id') == 'base') {
+            clearRedline();
             setMeasurements();
             highlightHoverElement();
             //*****Check if we're hovering over our previously-selected element.*****
@@ -340,6 +341,9 @@ function elementHover(element) {
                 measureIntraElementDistance();
                 drawIntraElementMarkers();
             }
+        } else if (!hoveredElement.hasClass('flicker-prevent')) {
+            // Only clear our measurements if we're not hovering over them. Prevents flickering.
+            clearRedline();
         }
     }
 }
