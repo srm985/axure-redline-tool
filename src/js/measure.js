@@ -126,7 +126,8 @@ function initTool() {
     });
     //*****Manually size our containers due to absolutely-positioned children.*****
     $('.zoom-wrapper').attr('style', 'width:' + (maxWidth + (2 * padding)) + 'px !important;' + 'height:' + (maxHeight + (2 * padding)) + 'px !important;');
-    $('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;' + 'top:' + padding + 'px !important; left:' + padding + 'px !important;');
+    //$('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;' + 'top:' + padding + 'px !important; left:' + padding + 'px !important;');
+    $('#base').attr('style', 'width:' + maxWidth + 'px !important;' + 'height:' + maxHeight + 'px !important;');
     //*****If content has no background color, define as #FFFFFF.*****
     if ($('#base').css('background-color') == 'transparent' || $('#base').css('background-color').search(/rgba\(\d+,\s\d+,\s\d+,\s0\)/) >= 0) {
         $('#base').css('background-color', '#FFFFFF');
@@ -741,9 +742,19 @@ function getCookie(cname) {
 //*                                    Set zoom level.                                            *
 //*************************************************************************************************
 function setZoom() {
+    console.log('hej')
+    const zoomWidth = $('.zoom-wrapper #base').width(),
+        zoomHeight = $('.zoom-wrapper #base').height();
+
+    console.log(zoomHeight);
+
     documentZoom = documentZoom <= 0 ? 1 : documentZoom;
     $('#zoom-value').val(documentZoom + '%');
     $('.zoom-wrapper #base').css('transform', 'scale(' + documentZoom / 100 + ')');
+
+    $('.zoom-wrapper').attr('style', 'width:' + ((zoomWidth * (documentZoom / 100)) + (1000 * 2)) + 'px !important;' + 'height:' + ((zoomHeight * (documentZoom / 100)) + (1000 * 2)) + 'px !important;');
+    $('#base').css('top', `${1000}px`);
+    $('#base').css('left', `${1000}px`);
 
     if (selectedElement) {
         highlightSelectElement();
