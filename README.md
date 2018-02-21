@@ -14,6 +14,8 @@ To apply this code to one of your AxShare hosted projects, navigate to [www.shar
 
 ![plugin demo](http://www.seanmcquay.com/axure-redline-tool/axure-redline-tool.gif)
 
+[Previous Releases](https://github.com/srm985/axure-redline-tool/releases)
+
 ## Installation / Running
 
 Install [Node.js](https://nodejs.org/en/download/)
