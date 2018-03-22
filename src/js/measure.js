@@ -75,7 +75,9 @@ function initTool() {
         parentElementHorizontal,
         parentElementVertical;
 
-    $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
+    // Label all redline tool elements.
+    $('.redline-tool-wrapper *').addClass('redline-layer');
+
     $('.redline-layer').hide();
     $('.redline-tool-wrapper').show();
     $('#top-control-panel').show();
@@ -274,7 +276,14 @@ function bindListeners() {
         tempZoom = documentZoom;
         documentZoom = 100;
         setZoom();
-        element = $(this).parent().parent().find('.annnoteimage');
+
+        // We're trying to find the annotation icon.
+        if ($(this).hasClass('annnoteimage')) {
+            element = $(this);
+        } else if ($(this).hasClass('annnoteline')) {
+            element = $(this).parent().parent().find('.annnoteimage');
+        }
+
         elementPosition = element.offset();
         elementPosition.top += element.height();
         documentZoom = tempZoom;
@@ -285,6 +294,13 @@ function bindListeners() {
             $(this).trigger('click');
         }
         $(this).trigger('click');
+    });
+
+    // Capture annotation clicks and show our own dialog.
+    $('body .annotation').on('click', '*', (event) => {
+        if ('originalEvent' in event) {
+            console.log('clicked')
+        }
     });
 }
 
@@ -302,8 +318,9 @@ function enableRedline() {
         bindListeners();
 
         // Keep intensive task from running until DOM manipulation is done.
+        // Don't put a pointer on script or style tags or annotations.
         setTimeout(() => {
-            $('.zoom-wrapper *').not('script, style').css('cursor', 'pointer');
+            $('.zoom-wrapper *').not('script, style, .annotation *').css('cursor', 'pointer');
         }, 0);
 
         $('.toggle-switch').prop('checked', true);
