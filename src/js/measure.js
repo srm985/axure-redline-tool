@@ -75,8 +75,7 @@ function initTool() {
         parentElementHorizontal,
         parentElementVertical;
 
-    // Label all redline tool elements.
-    $('.redline-tool-wrapper *').addClass('redline-layer');
+    labelInternalElements();
 
     $('.redline-layer').hide();
     $('.redline-tool-wrapper').show();
@@ -261,6 +260,7 @@ function bindListeners() {
         dialogElement.parent().offset({ top: (elementPosition.top + 5), left: elementPosition.left });
         documentZoom = tempZoom;
         setZoom();
+        preventDialogInteraction();
     });
 
     //*****Intercept Axure Dialog Nonsense*****
@@ -294,14 +294,39 @@ function bindListeners() {
             $(this).trigger('click');
         }
         $(this).trigger('click');
-    });
 
-    // Capture annotation clicks and show our own dialog.
-    $('body .annotation').on('click', '*', (event) => {
-        if ('originalEvent' in event) {
-            console.log('clicked')
-        }
+        /**
+         * Because we have this weird double click function,
+         * the dialog box would snap back to the annotation
+         * icon if it had been dragged away, so we hide it
+         * to prevent jank.
+         */
+        $('.ui-dialog').hide();
     });
+}
+
+/**
+ * This function seeks out and flags all
+ * elements which should not be part of the
+ * redline tool interaction such as the UI
+ * and dialog boxes.
+ */
+function labelInternalElements() {
+    // Label all redline tool elements.
+    $('.redline-tool-wrapper *').addClass('redline-layer');
+
+    // Add no-interact classes where needed.
+    $('.annotation, .annotation *').addClass('no-interact');
+    preventDialogInteraction();
+}
+
+/**
+ * This is a one-off function which is called
+ * on tool load, and called every time a dialog
+ * box is opened.
+ */
+function preventDialogInteraction() {
+    $('.ui-dialog, .ui-dialog *').addClass('no-interact');
 }
 
 //*************************************************************************************************
@@ -314,7 +339,7 @@ function enableRedline() {
         //$('.zoom-wrapper *').not('script, style').show();
         setZoom();
         $('.ui-dialog').remove();
-        $('*').off();
+        $('*').not('.annotation, .annotation *').off();
         bindListeners();
 
         // Keep intensive task from running until DOM manipulation is done.
@@ -384,11 +409,17 @@ function elementClick(element) {
 //*              Ensure we aren't interacting with a redline-specific element.                    *
 //*************************************************************************************************
 function isRedlineElement(element) {
-    var redlineStatus, annotationStatus;
+    /* var redlineStatus, annotationStatus;
 
     redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
     annotationStatus = element.attr('class') === undefined ? '' : element.attr('class');
     if (redlineStatus.search('redline-layer') == '-1' && annotationStatus.search(/ann(n)?ot/) == '-1' && annotationStatus.search('ui-dialog') == '-1') {
+        return false;
+    } else {
+        return true;
+    } */
+
+    if (!element.hasClass('redline-layer') && !element.hasClass('no-interact')) {
         return false;
     } else {
         return true;
