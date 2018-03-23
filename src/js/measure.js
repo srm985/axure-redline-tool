@@ -679,6 +679,18 @@ function updateRedlinePanel(element) {
     clearRedlinePanel();
     appendRedlinePanel();
     $('#redline-panel').addClass('redline-panel-exposed');
+
+    for (let i in document.styleSheets) {
+        try {
+            for (let j in document.styleSheets[i].cssRules) {
+            if (document.styleSheets[i].cssRules[j].selectorText.match(/.*mouseOver.*/)) {
+                    console.log(i)
+                    console.log(j)
+                    console.log(document.styleSheets[i].cssRules[j].cssText);
+                }
+            }
+        } catch (err) { }
+    }
 }
 
 //*************************************************************************************************
