@@ -1,4 +1,33 @@
-var enableTool = true,
+/********************************************************************************/
+/*                            Axure Redline Tool                                */
+/*                                                                              */
+/*                               Sean McQuay                                    */
+/*                   www.seanmcquay.com/axure-redline-tool.htm                  */
+/*                                                                              */
+/*                                 V1.1.4                                       */
+/********************************************************************************/
+
+
+// Define the pseudo classes we'll be collecting for the element.
+const pseudoClasses = {
+    hover: {
+        pseudoName: 'Hover',
+        axureName: 'mouseOver',
+        keyName: "hover"
+    },
+    disabled: {
+        pseudoName: 'Disabled',
+        axureName: 'disabled',
+        keyName: "disabled"
+    },
+    default: {
+        pseudoName: 'Default',
+        axureName: '',
+        keyName: "default"
+    }
+};
+
+let enableTool = true,
     documentZoom = 100,
     previousZoom = documentZoom,
     zoomWrapperPadding = 1000,
@@ -14,9 +43,56 @@ var enableTool = true,
     documentClone,
     elementPosition,
     selectedMeasurements,
-    hoveredMeasurements;
+    hoveredMeasurements,
+    documentCSSList,
+    elementCSS;
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
+let cssProperties = {
+    'properties': {
+        'width': '',
+        'height': ''
+    },
+    'styles': {
+        'background-color': '',
+        'opacity': '',
+        'outline': '',
+        'border-top': '',
+        'border-right': '',
+        'border-bottom': '',
+        'border-left': '',
+        'border-top-style': '',
+        'border-right-style': '',
+        'border-bottom-style': '',
+        'border-left-style': '',
+        'border-top-width': '',
+        'border-right-width': '',
+        'border-bottom-width': '',
+        'border-left-width': '',
+        'border-top-color': '',
+        'border-right-color': '',
+        'border-bottom-color': '',
+        'border-left-color': '',
+        'border-style': '',
+        'border-width': '',
+        'border-color': '',
+        'border-top-left-radius': '',
+        'border': '',
+        'border-top-right-radius': '',
+        'border-bottom-right-radius': '',
+        'border-bottom-left-radius': '',
+        'border-radius': '',
+        'box-shadow': ''
+    },
+    'text': {
+        'font-family': '',
+        'font-size': '',
+        'font-weight': '',
+        'line-height': '',
+        'text-align': '',
+        'color': '',
+        '_content': ''
+    }
+};
 
 $(window).on('load', function () {
     //*****I'm not insane for doubley defining this function. This needs to be done otherwise the demo won't work.*****
@@ -29,6 +105,7 @@ $(window).on('load', function () {
 function onLoadFunction() {
     checkState();
     initTool();
+    buildCSSAttributesList();
     documentClone = $('body').clone(true);
     enableRedline();
     setZoom();
@@ -329,6 +406,68 @@ function preventDialogInteraction() {
     $('.ui-dialog, .ui-dialog *').addClass('no-interact');
 }
 
+/**
+ * This functions parses through the whole document.styleSheets
+ * to create a lookup table for each element. We do it like this
+ * so that we can capture pseudo classes which Axure actually
+ * applies through JavaScript, not CSS.
+ */
+function buildCSSAttributesList() {
+    const documentStyles = document.styleSheets;
+
+    let selectorName,
+        cssContent,
+        pseudoFilter,
+        matched,
+        attributeObject;
+
+    documentCSSList = {};
+
+    // Iterate through list of stylesheets.
+    for (let i in documentStyles) {
+        try {
+            // Iterate through list of rules.
+            for (let j in documentStyles[i].cssRules) {
+                // Iterate through our defined pseudo classes.
+                matched = false;
+                for (let pseudoClass in pseudoClasses) {
+                    try {
+                        if (!matched && RegExp(pseudoClasses[pseudoClass].axureName).test(documentStyles[i].cssRules[j].selectorText)) {
+                            matched = true;
+                            // Extract our "pure" selector name.
+                            if (pseudoClasses[pseudoClass].axureName.length) {
+                                pseudoFilter = new RegExp('\\.' + pseudoClasses[pseudoClass].axureName);
+                                selectorName = documentStyles[i].cssRules[j].selectorText.replace(pseudoFilter, '').trim();
+                            } else {
+                                selectorName = documentStyles[i].cssRules[j].selectorText.trim();
+                            }
+                            cssContent = documentStyles[i].cssRules[j].cssText.replace(/^.*{/, '').replace('}', '').trim();
+                            // Check if the selector exists yet.
+                            if (!(selectorName in documentCSSList)) {
+                                documentCSSList[selectorName] = {};
+                            }
+                            // Update our master CSS attributes list.
+                            attributeObject = {};
+                            // Convert our CSS list into an object.
+                            cssContent.split(';').forEach((attribute) => {
+                                if (attribute.length) {
+                                    attributeObject[attribute.split(':')[0].trim()] = attribute.split(':')[1].trim();
+                                }
+                            })
+                            documentCSSList[selectorName][pseudoClasses[pseudoClass].keyName] = attributeObject;
+                        }
+                    } catch (err) {
+                        // Probably missing a key in the object.
+                    }
+                }
+            }
+        } catch (err) {
+            // Probably missing a key in the object.
+        }
+    }
+    console.log(documentCSSList);
+}
+
 //*************************************************************************************************
 //*                             Enable or disable our tool.                                       *
 //*************************************************************************************************
@@ -409,6 +548,8 @@ function elementClick(element) {
 //*              Ensure we aren't interacting with a redline-specific element.                    *
 //*************************************************************************************************
 function isRedlineElement(element) {
+
+    // Removed 22 March 2018. Last in V1.1.4.
     /* var redlineStatus, annotationStatus;
 
     redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
@@ -606,92 +747,148 @@ function drawIntraElementMarkers() {
 //*                                Update our redline spec panel.                                 *
 //*************************************************************************************************
 function updateRedlinePanel(element) {
-    var propMatch;
+    elementCSS = {};
 
-    $.each(cssProperties, function (i) {
-        $.each(cssProperties[i], function (_i) {
-            if (_i == '_content') {
-                cssProperties[i][_i] = element.text().trim();
-            } else {
-                cssProperties[i][_i] = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+    console.log(element);
+
+    for (let pseudoClass in pseudoClasses) {
+        // We will only create keys for pseudo classes that have attributes.
+        if (pseudoClasses[pseudoClass].keyName in documentCSSList['#' + element[0].id]) {
+
+            // Check if the key yet exists.
+            if (!(pseudoClasses[pseudoClass].keyName in elementCSS)) {
+                elementCSS[pseudoClasses[pseudoClass].keyName] = {};
             }
-        });
-    });
 
-    //*****Concat granular values to shorthand and clear.*****
-    cssProperties['styles']['border-top'] = cssProperties['styles']['border-top-style'] + ' ' + cssProperties['styles']['border-top-width'] + ' ' + cssProperties['styles']['border-top-color'];
-    cssProperties['styles']['border-right'] = cssProperties['styles']['border-right-style'] + ' ' + cssProperties['styles']['border-right-width'] + ' ' + cssProperties['styles']['border-right-color'];
-    cssProperties['styles']['border-bottom'] = cssProperties['styles']['border-bottom-style'] + ' ' + cssProperties['styles']['border-bottom-width'] + ' ' + cssProperties['styles']['border-bottom-color'];
-    cssProperties['styles']['border-left'] = cssProperties['styles']['border-left-style'] + ' ' + cssProperties['styles']['border-left-width'] + ' ' + cssProperties['styles']['border-left-color'];
-    cssProperties['styles']['border-top-style'] = '';
-    cssProperties['styles']['border-right-style'] = '';
-    cssProperties['styles']['border-bottom-style'] = '';
-    cssProperties['styles']['border-left-style'] = '';
-    cssProperties['styles']['border-top-width'] = '';
-    cssProperties['styles']['border-right-width'] = '';
-    cssProperties['styles']['border-bottom-width'] = '';
-    cssProperties['styles']['border-left-width'] = '';
-    cssProperties['styles']['border-top-color'] = '';
-    cssProperties['styles']['border-right-color'] = '';
-    cssProperties['styles']['border-bottom-color'] = '';
-    cssProperties['styles']['border-left-color'] = '';
-
-    //*****Clear our border attribute tags because we'll populate them later.*****
-    cssProperties['styles']['border-style'] = '';
-    cssProperties['styles']['border-width'] = '';
-    cssProperties['styles']['border-color'] = '';
-
-    //*****Check if we have matching border attributes and consolidate.*****
-    propMatch = cssProperties['styles']['border-top'];
-    if (propMatch != '' && propMatch == cssProperties['styles']['border-right'] && propMatch == cssProperties['styles']['border-bottom'] && propMatch == cssProperties['styles']['border-left']) {
-        cssProperties['styles']['border-top'] = '';
-        cssProperties['styles']['border-right'] = '';
-        cssProperties['styles']['border-bottom'] = '';
-        cssProperties['styles']['border-left'] = '';
-
-        cssProperties['styles']['border-style'] = selectedElement.css('border-top-style');
-        if (cssProperties['styles']['border-style'] != 'none') {
-            cssProperties['styles']['border-width'] = selectedElement.css('border-top-width');
-            cssProperties['styles']['border-color'] = selectedElement.css('border-top-color');
-            cssProperties['styles']['border'] = cssProperties['styles']['border-style'] + ' ' + cssProperties['styles']['border-width'] + ' ' + cssProperties['styles']['border-color'];
+            elementCSS[pseudoClasses[pseudoClass].keyName] = compileElementCSS(element, pseudoClasses[pseudoClass]);
         }
-    } else {
-        cssProperties['styles']['border-style'] = '';
-        cssProperties['styles']['border-width'] = '';
-        cssProperties['styles']['border-color'] = '';
     }
 
-    //*****Check if we have matching border-radius attributes and consolidate.*****
-    propMatch = cssProperties['styles']['border-top-left-radius'];
-    if (propMatch != '' && propMatch == cssProperties['styles']['border-top-right-radius'] && propMatch == cssProperties['styles']['border-bottom-right-radius'] && propMatch == cssProperties['styles']['border-bottom-left-radius']) {
-        cssProperties['styles']['border-radius'] = cssProperties['styles']['border-top-right-radius'];
-
-        cssProperties['styles']['border-top-left-radius'] = '';
-        cssProperties['styles']['border-top-right-radius'] = '';
-        cssProperties['styles']['border-bottom-right-radius'] = '';
-        cssProperties['styles']['border-bottom-left-radius'] = '';
-    }
-
-    //*****Clean up our font family attributes.*****
-    cssProperties['text']['font-family'] = cssProperties['text']['font-family'].replace('"', '').split(',')[0];
-
-    console.log(cssProperties);
+    console.log(elementCSS);
     clearRedlinePanel();
     appendRedlinePanel();
     $('#redline-panel').addClass('redline-panel-exposed');
-
-    for (let i in document.styleSheets) {
-        try {
-            for (let j in document.styleSheets[i].cssRules) {
-            if (document.styleSheets[i].cssRules[j].selectorText.match(/.*mouseOver.*/)) {
-                    console.log(i)
-                    console.log(j)
-                    console.log(document.styleSheets[i].cssRules[j].cssText);
-                }
-            }
-        } catch (err) { }
-    }
 }
+
+/**
+ *
+ * @param element Our targetted element.
+ * @param pseudoClass The specific pseudo class we're targetting.
+ *
+ * This function takes in a targetted element and a pseudo class
+ * object and attempts to compile attributes. Once compiled, they
+ * are cleaned in preparation for displaying.
+ */
+function compileElementCSS(element, pseudoClass) {
+    let tempCSSProperties = JSON.parse(JSON.stringify(cssProperties)),
+        propMatch,
+        tempElementCSS,
+        tempCompiledCSS;
+
+    if (pseudoClass.keyName === 'default') {
+        // Fetch our default properties directly from element CSS.
+        $.each(tempCSSProperties, (i) => {
+            $.each(tempCSSProperties[i], (_i) => {
+                if (_i == '_content') {
+                    tempCSSProperties[i][_i] = element.text().trim();
+                } else {
+                    tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    try {
+                        tempCompiledCSS = documentCSSList['#' + element[0].id][pseudoClass.keyName][_i].replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    } catch (err) {
+                        tempCompiledCSS = '';
+                    }
+
+                    /**
+                     * We check to see if there is a default attribute value
+                     * because it might be being overridden by a pseudo class.
+                     */
+                    if (tempCompiledCSS.length) {
+                        tempCSSProperties[i][_i] = tempCompiledCSS;
+                    } else {
+                        tempCSSProperties[i][_i] = tempElementCSS;
+                    }
+                }
+            });
+        });
+    } else {
+        // Fetch pseudo class properties from our compiled attribute list.
+        $.each(tempCSSProperties, (i) => {
+            $.each(tempCSSProperties[i], (_i) => {
+                if (_i == '_content') {
+                    tempCSSProperties[i][_i] = element.text().trim();
+                } else {
+                    // The key may not even exist, so watch for errors.
+                    try {
+                        tempCSSProperties[i][_i] = documentCSSList['#' + element[0].id][pseudoClass.keyName][_i].replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    } catch (err) {
+                        tempCSSProperties[i][_i] = '';
+                    }
+                }
+            });
+        });
+    }
+
+    //*****Concat granular values to shorthand and clear.*****
+    tempCSSProperties['styles']['border-top'] = tempCSSProperties['styles']['border-top-style'] + ' ' + tempCSSProperties['styles']['border-top-width'] + ' ' + tempCSSProperties['styles']['border-top-color'];
+    tempCSSProperties['styles']['border-right'] = tempCSSProperties['styles']['border-right-style'] + ' ' + tempCSSProperties['styles']['border-right-width'] + ' ' + tempCSSProperties['styles']['border-right-color'];
+    tempCSSProperties['styles']['border-bottom'] = tempCSSProperties['styles']['border-bottom-style'] + ' ' + tempCSSProperties['styles']['border-bottom-width'] + ' ' + tempCSSProperties['styles']['border-bottom-color'];
+    tempCSSProperties['styles']['border-left'] = tempCSSProperties['styles']['border-left-style'] + ' ' + tempCSSProperties['styles']['border-left-width'] + ' ' + tempCSSProperties['styles']['border-left-color'];
+    tempCSSProperties['styles']['border-top-style'] = '';
+    tempCSSProperties['styles']['border-right-style'] = '';
+    tempCSSProperties['styles']['border-bottom-style'] = '';
+    tempCSSProperties['styles']['border-left-style'] = '';
+    tempCSSProperties['styles']['border-top-width'] = '';
+    tempCSSProperties['styles']['border-right-width'] = '';
+    tempCSSProperties['styles']['border-bottom-width'] = '';
+    tempCSSProperties['styles']['border-left-width'] = '';
+    tempCSSProperties['styles']['border-top-color'] = '';
+    tempCSSProperties['styles']['border-right-color'] = '';
+    tempCSSProperties['styles']['border-bottom-color'] = '';
+    tempCSSProperties['styles']['border-left-color'] = '';
+
+    //*****Clear our border attribute tags because we'll populate them later.*****
+    tempCSSProperties['styles']['border-style'] = '';
+    tempCSSProperties['styles']['border-width'] = '';
+    tempCSSProperties['styles']['border-color'] = '';
+
+    //*****Check if we have matching border attributes and consolidate.*****
+    propMatch = tempCSSProperties['styles']['border-top'];
+    if (propMatch != '' && propMatch == tempCSSProperties['styles']['border-right'] && propMatch == tempCSSProperties['styles']['border-bottom'] && propMatch == tempCSSProperties['styles']['border-left']) {
+        tempCSSProperties['styles']['border-top'] = '';
+        tempCSSProperties['styles']['border-right'] = '';
+        tempCSSProperties['styles']['border-bottom'] = '';
+        tempCSSProperties['styles']['border-left'] = '';
+
+        tempCSSProperties['styles']['border-style'] = selectedElement.css('border-top-style');
+        if (tempCSSProperties['styles']['border-style'] != 'none') {
+            tempCSSProperties['styles']['border-width'] = selectedElement.css('border-top-width');
+            tempCSSProperties['styles']['border-color'] = selectedElement.css('border-top-color');
+            tempCSSProperties['styles']['border'] = tempCSSProperties['styles']['border-style'] + ' ' + tempCSSProperties['styles']['border-width'] + ' ' + tempCSSProperties['styles']['border-color'];
+        }
+    } else {
+        tempCSSProperties['styles']['border-style'] = '';
+        tempCSSProperties['styles']['border-width'] = '';
+        tempCSSProperties['styles']['border-color'] = '';
+    }
+
+    //*****Check if we have matching border-radius attributes and consolidate.*****
+    propMatch = tempCSSProperties['styles']['border-top-left-radius'];
+    if (propMatch != '' && propMatch == tempCSSProperties['styles']['border-top-right-radius'] && propMatch == tempCSSProperties['styles']['border-bottom-right-radius'] && propMatch == tempCSSProperties['styles']['border-bottom-left-radius']) {
+        tempCSSProperties['styles']['border-radius'] = tempCSSProperties['styles']['border-top-right-radius'];
+
+        tempCSSProperties['styles']['border-top-left-radius'] = '';
+        tempCSSProperties['styles']['border-top-right-radius'] = '';
+        tempCSSProperties['styles']['border-bottom-right-radius'] = '';
+        tempCSSProperties['styles']['border-bottom-left-radius'] = '';
+    }
+
+    //*****Clean up our font family attributes.*****
+    tempCSSProperties['text']['font-family'] = tempCSSProperties['text']['font-family'].replace('"', '').split(',')[0];
+
+    return tempCSSProperties;
+}
+
 
 //*************************************************************************************************
 //*                                Append each property section.                                  *
@@ -699,10 +896,10 @@ function updateRedlinePanel(element) {
 function appendRedlinePanel() {
     let swatch;
 
-    $.each(cssProperties, function (i) {
+    $.each(elementCSS.default, function (i) {
         $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
         $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
-        $.each(cssProperties[i], function (_i, _value) {
+        $.each(elementCSS.default[i], function (_i, _value) {
             if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
                 //*****Check if we need to add a color swatch.*****
                 if ((_i.replace('_', '') == 'color' || _i.replace('_', '') == 'background-color') && _value != 'transparent') {
@@ -726,10 +923,10 @@ function appendRedlinePanel() {
 
     });
     //*****Remove a few items based on special queries.*****
-    if (cssProperties['text']['_content'].length < 1) {
+    if (elementCSS.default['text']['_content'].length < 1) {
         $('p:contains("TEXT")').parent().parent().remove();
     }
-    if (cssProperties['styles']['border-top-width'] == '0px') {
+    if (elementCSS.default['styles']['border-top-width'] == '0px') {
         $('p:contains("border-color")').next().remove();
         $('p:contains("border-color")').remove();
     }
