@@ -222,7 +222,7 @@ function initTool() {
 //*************************************************************************************************
 function bindListeners() {
     //*****Enable/Disable Redline Tool*****
-    $('#redline-panel').on('change', '.switch', function () {
+    $('#top-control-panel').on('change', '.switch', function () {
         enableTool = $('.toggle-switch').prop('checked');
         enableRedline();
     });
