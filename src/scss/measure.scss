@@ -73,6 +73,79 @@ body {
     .redline-layer {
         font-family: $font-stack;
     }
+    .redline-tool-enabler {
+        font-size: 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        color: $primary-color-white;
+        .switch {
+            margin-left: 10px;
+            .toggle-switch {
+                position: absolute;
+
+                visibility: hidden;
+
+                margin-left: -9999px;
+                 + label {
+                    position: relative;
+
+                    display: block;
+
+                    width: 60px;
+                    height: 28px;
+                    padding: 2px;
+
+                    cursor: pointer;
+                    user-select: none;
+                    transition: $switch-transition;
+
+                    border-radius: 28px;
+                    outline: none;
+                    background-color: #ddd;
+                }
+                 + label::before,
+                 + label::after {
+                    position: absolute;
+
+                    display: block;
+
+                    content: '';
+                    transition: $switch-transition;
+                }
+                 + label:before {
+                    top: 2px;
+                    right: 2px;
+                    bottom: 2px;
+                    left: 2px;
+
+                    border-radius: 28px;
+                    background-color: $primary-color-white;
+                }
+                 + label::after {
+                    top: 4px;
+                    bottom: 4px;
+                    left: 4px;
+
+                    width: 24px;
+
+                    border-radius: 50%;
+                    background-color: #ddd;
+                }
+                &:checked + label {
+                    background-color: $primary-color-teal;
+                }
+                &:checked + label::after {
+                    margin-left: 32px;
+
+                    background-color: $primary-color-teal;
+                }
+            }
+        }
+    }
+
     #top-control-panel {
         position: fixed;
         z-index: 99999;
@@ -80,12 +153,13 @@ body {
         left: 0;
 
         display: flex;
-        float: left;
         align-items: center;
+        justify-content: space-between;
 
+        box-sizing: border-box;
         width: 100%;
         height: 60px;
-        padding: 0 20px;
+        padding: 0 30px;
 
         background-color: $primary-color-background;
         .zoom-controls {
@@ -93,7 +167,6 @@ body {
             justify-content: space-between;
 
             width: 150px;
-            margin-left: 15px;
             div {
                 font-size: 22px;
                 font-weight: bold;
@@ -119,9 +192,9 @@ body {
 
                 text-align: center;
 
-                opacity: 0.5;
+                /* opacity: 0.5; */
                 border: none;
-                border-radius: 10px;
+                border-radius: 12px;
                 outline: none;
             }
         }
@@ -175,75 +248,7 @@ body {
 
             color: $primary-color-white;
             background-color: $primary-color-background;
-            .redline-tool-enabler {
-                font-size: 16px;
 
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .switch {
-                .toggle-switch {
-                    position: absolute;
-
-                    visibility: hidden;
-
-                    margin-left: -9999px;
-                     + label {
-                        position: relative;
-
-                        display: block;
-
-                        width: 60px;
-                        height: 28px;
-                        padding: 2px;
-
-                        cursor: pointer;
-                        user-select: none;
-                        transition: $switch-transition;
-
-                        border-radius: 28px;
-                        outline: none;
-                        background-color: #ddd;
-                    }
-                     + label::before,
-                     + label::after {
-                        position: absolute;
-
-                        display: block;
-
-                        content: '';
-                        transition: $switch-transition;
-                    }
-                     + label:before {
-                        top: 2px;
-                        right: 2px;
-                        bottom: 2px;
-                        left: 2px;
-
-                        border-radius: 28px;
-                        background-color: $primary-color-white;
-                    }
-                     + label::after {
-                        top: 4px;
-                        bottom: 4px;
-                        left: 4px;
-
-                        width: 24px;
-
-                        border-radius: 50%;
-                        background-color: #ddd;
-                    }
-                    &:checked + label {
-                        background-color: $primary-color-teal;
-                    }
-                    &:checked + label::after {
-                        margin-left: 32px;
-
-                        background-color: $primary-color-teal;
-                    }
-                }
-            }
             .redline-panel-section {
                 margin-top: 20px;
             }
