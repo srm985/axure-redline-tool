@@ -303,12 +303,12 @@ function bindListeners() {
     });
 
     //*****Toggle Color RGB/HEX*****
-    $('#top-control-panel').on('click', '#swatch-color', () => {
+    $('#redline-panel').on('click', '#swatch-color', () => {
         $('#input-color').val(cycleColorFormat($('#input-color').val()));
     });
 
     //*****Toggle Background Color RGB/HEX*****
-    $('#top-control-panel').on('click', '#swatch-background-color', () => {
+    $('#redline-panel').on('click', '#swatch-background-color', () => {
         $('#input-background-color').val(cycleColorFormat($('#input-background-color').val()));
     });
 
@@ -379,6 +379,12 @@ function bindListeners() {
          * to prevent jank.
          */
         $('.ui-dialog').hide();
+    });
+
+    // Listen for tab changes on pseudo classes.
+    $('#redline-panel').on('click', '.pseudo-tabs .tab', function () {
+        $('.active-tab').removeClass('active-tab');
+        $(this).addClass('active-tab');
     });
 }
 
@@ -750,18 +756,21 @@ function updateRedlinePanel(element) {
     elementCSS = {};
 
     console.log(element);
+    if (element[0].id.length) {
+        for (let pseudoClass in pseudoClasses) {
+            // We will only create keys for pseudo classes that have attributes.
+            if (pseudoClasses[pseudoClass].keyName in documentCSSList['#' + element[0].id]) {
 
-    for (let pseudoClass in pseudoClasses) {
-        // We will only create keys for pseudo classes that have attributes.
-        if (pseudoClasses[pseudoClass].keyName in documentCSSList['#' + element[0].id]) {
+                // Check if the key yet exists.
+                if (!(pseudoClasses[pseudoClass].keyName in elementCSS)) {
+                    elementCSS[pseudoClasses[pseudoClass].keyName] = {};
+                }
 
-            // Check if the key yet exists.
-            if (!(pseudoClasses[pseudoClass].keyName in elementCSS)) {
-                elementCSS[pseudoClasses[pseudoClass].keyName] = {};
+                elementCSS[pseudoClasses[pseudoClass].keyName] = JSON.parse(JSON.stringify(compileElementCSS(element, pseudoClasses[pseudoClass])));
             }
-
-            elementCSS[pseudoClasses[pseudoClass].keyName] = compileElementCSS(element, pseudoClasses[pseudoClass]);
         }
+    } else {
+        elementCSS['default'] = JSON.parse(JSON.stringify(compileElementCSS(element, pseudoClasses.default)));
     }
 
     console.log(elementCSS);
@@ -896,40 +905,51 @@ function compileElementCSS(element, pseudoClass) {
 function appendRedlinePanel() {
     let swatch;
 
-    $.each(elementCSS.default, function (i) {
-        $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
-        $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
-        $.each(elementCSS.default[i], function (_i, _value) {
-            if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
-                //*****Check if we need to add a color swatch.*****
-                if ((_i.replace('_', '') == 'color' || _i.replace('_', '') == 'background-color') && _value != 'transparent') {
-                    swatch = '<span class="redline-layer" id="swatch-' + _i.replace('_', '') + '" style="background-color:' + _value + ';"></span>';
-                } else {
-                    swatch = '';
+    // Create a wrapper for our pseudo class tabs.
+    $('#redline-panel-menu-column').append(`<div class="pseudo-tabs redline-layer"></div>`);
+
+    $.each(elementCSS, (pseudoClass) => {
+        // Apply each of our pseudo tabs as we discover them.
+        $('.pseudo-tabs').append(`<div class="${pseudoClass} tab redline-layer${pseudoClass === 'default' ? ' active-tab' : ''}"><span class="redline-layer">${pseudoClass}</span></div>`);
+        // Append a wrapper for each pseudo class attributes.
+        $('#redline-panel-menu-column').append(`<div class="redline-layer pseudo-wrapper ${pseudoClass}-attributes ${pseudoClass === 'default' ? 'active-attributes' : ''}"></div>`);
+
+        $.each(elementCSS[pseudoClass], (i) => {
+            $('.pseudo-wrapper:last').append('<div class="redline-layer redline-panel-section"></div>');
+            $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
+            $.each(elementCSS[pseudoClass][i], (_i, _value) => {
+                if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
+                    //*****Check if we need to add a color swatch.*****
+                    if ((_i.replace('_', '') == 'color' || _i.replace('_', '') == 'background-color') && _value != 'transparent') {
+                        swatch = '<span class="redline-layer" id="swatch-' + _i.replace('_', '') + '" style="background-color:' + _value + ';"></span>';
+                    } else {
+                        swatch = '';
+                    }
+                    $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
+                    if (_i != '_content') {
+                        $('.redline-panel-section:last').append('<input class="redline-layer" id="input-' + _i.replace('_', '') + '" value="' + _value + '" readonly="readonly"></input>');
+                    } else {
+                        $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
+                        $('.redline-panel-section textarea').text(_value);
+                    }
                 }
-                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
-                if (_i != '_content') {
-                    $('.redline-panel-section:last').append('<input class="redline-layer" id="input-' + _i.replace('_', '') + '" value="' + _value + '" readonly="readonly"></input>');
-                } else {
-                    $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
-                    $('.redline-panel-section textarea').text(_value);
-                }
+            });
+            //*****Remove any sections without CSS properties.*****
+            if ($('.redline-panel-section:last p').length <= 1) {
+                $('.redline-panel-section:last').remove();
             }
+
         });
-        //*****Remove any sections without CSS properties.*****
-        if ($('.redline-panel-section:last p').length <= 1) {
-            $('.redline-panel-section:last').remove();
+        //*****Remove a few items based on special queries.*****
+        if (elementCSS.default['text']['_content'].length < 1) {
+            $('p:contains("TEXT")').parent().parent().remove();
+        }
+        if (elementCSS.default['styles']['border-top-width'] == '0px') {
+            $('p:contains("border-color")').next().remove();
+            $('p:contains("border-color")').remove();
         }
 
     });
-    //*****Remove a few items based on special queries.*****
-    if (elementCSS.default['text']['_content'].length < 1) {
-        $('p:contains("TEXT")').parent().parent().remove();
-    }
-    if (elementCSS.default['styles']['border-top-width'] == '0px') {
-        $('p:contains("border-color")').next().remove();
-        $('p:contains("border-color")').remove();
-    }
 }
 
 //*************************************************************************************************
@@ -957,7 +977,7 @@ function closeRedline() {
 //*                           Clear all content in redline panel.                                 *
 //*************************************************************************************************
 function clearRedlinePanel() {
-    $('#redline-panel-menu-column > *').not('div:first').remove();
+    $('#redline-panel-menu-column > *').remove();
 }
 
 //*************************************************************************************************

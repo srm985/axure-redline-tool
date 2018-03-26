@@ -145,7 +145,6 @@ body {
             }
         }
     }
-
     #top-control-panel {
         position: fixed;
         z-index: 99999;
@@ -192,7 +191,8 @@ body {
 
                 text-align: center;
 
-                /* opacity: 0.5; */
+/* opacity: 0.5; */
+
                 border: none;
                 border-radius: 12px;
                 outline: none;
@@ -221,7 +221,7 @@ body {
 
                 width: 100%;
                 height: 40px;
-                margin-top: 20px;
+                margin-top: 65px;
 
                 cursor: pointer;
 
@@ -368,5 +368,57 @@ body {
         border: solid 1px $primary-color-orange;
         border-right: none;
         border-bottom: none;
+    }
+
+    .pseudo-tabs {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+
+        box-sizing: border-box;
+        width: calc(100% + 40px);
+        height: 25px;
+        margin-left: -20px;
+        padding: 0 5px;
+        .tab {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: center;
+
+            height: 100%;
+            margin: 0 1px;
+
+            cursor: pointer;
+
+            opacity: 0.7;
+            color: $primary-color-gray;
+            border-radius: 3px 3px 0 0;
+            background-color: $primary-color-white;
+        }
+        .active-tab {
+            color: $primary-color-white;
+            border-width: 1px 1px 0;
+            border-style: solid;
+            border-color: $primary-color-white;
+            background-color: transparent;
+        }
+        .default {
+            order: 1;
+        }
+        .hover {
+            order: 2;
+        }
+        .disabled {
+            order: 3;
+        }
+    }
+    .pseudo-wrapper {
+        display: none;
+
+        width: 100%;
+    }
+    .active-attributes {
+        display: inline;
     }
 }
