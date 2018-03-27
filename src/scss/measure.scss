@@ -383,6 +383,7 @@ body {
         .tab {
             display: flex;
             align-items: center;
+            flex-basis: 0;
             flex-grow: 1;
             justify-content: center;
 

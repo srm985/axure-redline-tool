@@ -381,10 +381,12 @@ function bindListeners() {
         $('.ui-dialog').hide();
     });
 
-    // Listen for tab changes on pseudo classes.
+    // Listen for tab changes on pseudo classes and switch between tabs.
     $('#redline-panel').on('click', '.pseudo-tabs .tab', function () {
         $('.active-tab').removeClass('active-tab');
         $(this).addClass('active-tab');
+        $('.active-attributes').removeClass('active-attributes');
+        $(`.pseudo-wrapper.${$(this).text()}-attributes`).addClass('active-attributes');
     });
 }
 
