@@ -303,13 +303,12 @@ function bindListeners() {
     });
 
     //*****Toggle Color RGB/HEX*****
-    $('#redline-panel').on('click', '#swatch-color', () => {
-        $('#input-color').val(cycleColorFormat($('#input-color').val()));
-    });
+    $('#redline-panel').on('click', '.color-swatch', function () {
+        const elemData = $(this).data('swatch').split('-'),
+            fieldWrapper = elemData[0] + '-attributes',
+            field = `input-${elemData[1]}-${elemData[2]}`;
 
-    //*****Toggle Background Color RGB/HEX*****
-    $('#redline-panel').on('click', '#swatch-background-color', () => {
-        $('#input-background-color').val(cycleColorFormat($('#input-background-color').val()));
+        $(`.${fieldWrapper} #${field}`).val(cycleColorFormat($(`.${fieldWrapper} #${field}`).val()));
     });
 
     //*****Pass Zoom Value Input*****
@@ -923,7 +922,7 @@ function appendRedlinePanel() {
                 if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
                     //*****Check if we need to add a color swatch.*****
                     if ((_i.replace('_', '') == 'color' || _i.replace('_', '') == 'background-color') && _value != 'transparent') {
-                        swatch = '<span class="redline-layer" id="swatch-' + _i.replace('_', '') + '" style="background-color:' + _value + ';"></span>';
+                        swatch = `<span class="redline-layer color-swatch" data-swatch="${pseudoClass}-${_i.replace('_', '')}" style="background-color: ${_value};"></span>`
                     } else {
                         swatch = '';
                     }
