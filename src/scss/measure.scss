@@ -145,6 +145,10 @@ body {
             }
         }
     }
+    #top-control-panel,
+    #redline-panel {
+        opacity: 0.9;
+    }
     #top-control-panel {
         position: fixed;
         z-index: 99999;
