@@ -27,27 +27,62 @@ const pseudoClasses = {
     }
 };
 
-let enableTool = true,
-    documentZoom = 100,
-    previousZoom = documentZoom,
-    zoomWrapperPadding = 1000,
-    borderThickness = 1,
-    labelSpacing = 5,
-    hoveredElement = '',
-    selectedElement = '',
-    elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    elemSelectMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0, trueTop: 0, trueRight: 0, trueBottom: 0, trueLeft: 0 },
-    dimensionMarkerWidth = 0,
-    dimensionMarkerHeight = 0,
-    documentClone,
-    elementPosition,
-    selectedMeasurements,
-    hoveredMeasurements,
-    documentCSSList,
-    elementCSS;
+let enableTool,                 // Boolean set true when the tool is enabled.
+    cssProperties,              // List of all CSS properties we will collect for each element.
+    documentZoom,               // Page zoom. Used to scale artboard.
+    previousZoom,               // Zoom tracker needed when we toggle zoom to capture true dimensions.
+    zoomWrapperPadding,         // Default padding of 1000px on all sides around artboard.
+    borderThickness,            // Used to set the thickness of all of our tracing lines.
+    labelSpacing,               // Default offset to space dimension markers correctly.
+    hoveredElement,             // Stores the current element over which the cursor is.
+    selectedElement,            // Stores the latest element clicked - not counting redline elements.
+    elemMeas,                   // Object containing scaled measurements of hovered element, used to position hover lines.
+    elemSelectMeas,             // Object containing scaled measurements of clicked element, used to position selected element lines.
+    interElemMeas,              // Object containing inter-element measurements.
+    dimensionMarkerWidth,       // Stores the numerical value of the selected element width.
+    dimensionMarkerHeight,      // Stores the numerical value of the selected element height.
+    documentClone,              // Stores an entire, untouched copy of the page, used when disabling the tool.
+    elementPosition,            // Stores the offset position of annotation icon, used to position annotation.
+    selectedMeasurements,       // Stores the true, unscaled measurements of selected element.
+    hoveredMeasurements,        // Stores the true, unscaled measurements of the hovered element.
+    documentCSSList,            // A list of all CSS attributes for the entire document.
+    elementCSS;                 // An object containing all CSS attributes and pseudo-class attributes.
 
-let cssProperties = {
+
+// Establish values for globals.
+enableTool = true;
+documentZoom = 100;
+previousZoom = documentZoom;
+zoomWrapperPadding = 1000;
+borderThickness = 1;
+labelSpacing = 5;
+hoveredElement = '';
+selectedElement = '';
+elemMeas = {
+    width: 0,
+    height: 0,
+    offsetTop: 0,
+    offsetLeft: 0
+};
+elemSelectMeas = {
+    width: 0,
+    height: 0,
+    offsetTop: 0,
+    offsetLeft: 0
+};
+interElemMeas = {
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    trueTop: 0,
+    trueRight: 0,
+    trueBottom: 0,
+    trueLeft: 0
+};
+dimensionMarkerWidth = 0;
+dimensionMarkerHeight = 0;
+cssProperties = {
     'properties': {
         'width': '',
         'height': ''
@@ -526,8 +561,8 @@ function elementHover(element) {
             if (hoveredElement[0] == selectedElement[0]) {
                 highlightSelectElement();
             } else if (selectedElement != '') {
-                measureIntraElementDistance();
-                drawIntraElementMarkers();
+                measureInterElementDistance();
+                drawInterElementMarkers();
             }
         } else if (!hoveredElement.hasClass('flicker-prevent')) {
             // Only clear our measurements if we're not hovering over them. Prevents flickering.
@@ -640,113 +675,113 @@ function highlightSelectElement() {
 //*************************************************************************************************
 //*             Measure distance between selected element to newly hovered element.               *
 //*************************************************************************************************
-function measureIntraElementDistance() {
-    $.each(intraElemMeas, function (i) {
-        intraElemMeas[i] = 0;
+function measureInterElementDistance() {
+    $.each(interElemMeas, function (i) {
+        interElemMeas[i] = 0;
     });
 
     if (elemMeas.offsetTop > elemSelectMeas.offsetTop + elemSelectMeas.height) {
-        intraElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
-        intraElemMeas.trueBottom = Math.abs(selectedMeasurements.offsetTop + selectedMeasurements.height - hoveredMeasurements.offsetTop);
+        interElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
+        interElemMeas.trueBottom = Math.abs(selectedMeasurements.offsetTop + selectedMeasurements.height - hoveredMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop + elemMeas.height) {
-        intraElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
-        intraElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop + hoveredMeasurements.height - selectedMeasurements.offsetTop);
+        interElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
+        interElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop + hoveredMeasurements.height - selectedMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height > elemMeas.offsetTop + elemMeas.height) {
-        intraElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
-        intraElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop - selectedMeasurements.offsetTop);
+        interElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
+        interElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop - selectedMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop < elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height < elemMeas.offsetTop + elemMeas.height) {
-        intraElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
-        intraElemMeas.trueBottom = Math.abs((hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height));
+        interElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
+        interElemMeas.trueBottom = Math.abs((hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height));
     } else {
-        intraElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
-        intraElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
-        intraElemMeas.trueTop = selectedMeasurements.offsetTop - hoveredMeasurements.offsetTop;
-        intraElemMeas.trueBottom = (hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height);
+        interElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
+        interElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
+        interElemMeas.trueTop = selectedMeasurements.offsetTop - hoveredMeasurements.offsetTop;
+        interElemMeas.trueBottom = (hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height);
     }
 
     if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft + elemMeas.width) {
-        intraElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
-        intraElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredMeasurements.width - selectedMeasurements.offsetLeft);
+        interElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
+        interElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredMeasurements.width - selectedMeasurements.offsetLeft);
     } else if (elemMeas.offsetLeft > elemSelectMeas.offsetLeft + elemSelectMeas.width) {
-        intraElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
-        intraElemMeas.trueRight = Math.abs(selectedMeasurements.offsetLeft + selectedMeasurements.width - hoveredMeasurements.offsetLeft);
+        interElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
+        interElemMeas.trueRight = Math.abs(selectedMeasurements.offsetLeft + selectedMeasurements.width - hoveredMeasurements.offsetLeft);
     } else if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width > elemMeas.offsetLeft + elemMeas.width) {
-        intraElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
-        intraElemMeas.trueLeft = Math.abs(hoveredMeasurements.offsetLeft - selectedMeasurements.offsetLeft);
+        interElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
+        interElemMeas.trueLeft = Math.abs(hoveredMeasurements.offsetLeft - selectedMeasurements.offsetLeft);
     } else if (elemSelectMeas.offsetLeft < elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width < elemMeas.offsetLeft + elemMeas.width) {
-        intraElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
-        intraElemMeas.trueRight = Math.abs((hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width));
+        interElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
+        interElemMeas.trueRight = Math.abs((hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width));
     } else {
-        intraElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
-        intraElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
-        intraElemMeas.trueLeft = selectedMeasurements.offsetLeft - hoveredMeasurements.offsetLeft;
-        intraElemMeas.trueRight = (hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width);
+        interElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
+        interElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
+        interElemMeas.trueLeft = selectedMeasurements.offsetLeft - hoveredMeasurements.offsetLeft;
+        interElemMeas.trueRight = (hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width);
     }
 }
 
 //*************************************************************************************************
-//*                   Append our intra-element dimension lines and labels.                        *
+//*                   Append our inter-element dimension lines and labels.                        *
 //*************************************************************************************************
-function drawIntraElementMarkers() {
+function drawInterElementMarkers() {
     dimensionMarkerWidth = $('.dimension-layer').width();
     dimensionMarkerHeight = $('.dimension-layer').height();
 
     $('.dimension-layer').hide();
 
-    if (intraElemMeas.top != 0) {
+    if (interElemMeas.top != 0) {
         $('#t-measure').show();
-        $('#t-measure').height(Math.abs(intraElemMeas.top) - borderThickness);
-        if (intraElemMeas.top > 0) {
-            $('#t-measure').offset({ top: elemSelectMeas.offsetTop - intraElemMeas.top, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+        $('#t-measure').height(Math.abs(interElemMeas.top) - borderThickness);
+        if (interElemMeas.top > 0) {
+            $('#t-measure').offset({ top: elemSelectMeas.offsetTop - interElemMeas.top, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         } else {
             $('#t-measure').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         }
         $('#t-dimension').show();
         $('#t-dimension > span').show();
-        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueTop)));
-        $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+        $('#t-dimension > span').text(Math.round(Math.abs(interElemMeas.trueTop)));
+        $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (interElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
-    if (intraElemMeas.right != 0) {
+    if (interElemMeas.right != 0) {
         $('#r-measure').show();
-        $('#r-measure').width(Math.abs(intraElemMeas.right) - borderThickness);
-        if (intraElemMeas.right > 0) {
+        $('#r-measure').width(Math.abs(interElemMeas.right) - borderThickness);
+        if (interElemMeas.right > 0) {
             $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width });
         } else {
-            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + intraElemMeas.right });
+            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + interElemMeas.right });
         }
 
         $('#r-dimension').show();
         $('#r-dimension > span').show();
-        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueRight)));
-        $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
+        $('#r-dimension > span').text(Math.round(Math.abs(interElemMeas.trueRight)));
+        $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (interElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
     }
-    if (intraElemMeas.bottom != 0) {
+    if (interElemMeas.bottom != 0) {
         $('#b-measure').show();
-        $('#b-measure').height(Math.abs(intraElemMeas.bottom) - borderThickness);
-        if (intraElemMeas.bottom > 0) {
+        $('#b-measure').height(Math.abs(interElemMeas.bottom) - borderThickness);
+        if (interElemMeas.bottom > 0) {
             $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         } else {
-            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + intraElemMeas.bottom, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + interElemMeas.bottom, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         }
 
         $('#b-dimension').show();
         $('#b-dimension > span').show();
-        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueBottom)));
-        $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+        $('#b-dimension > span').text(Math.round(Math.abs(interElemMeas.trueBottom)));
+        $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (interElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
-    if (intraElemMeas.left != 0) {
+    if (interElemMeas.left != 0) {
         $('#l-measure').show();
-        $('#l-measure').width(Math.abs(intraElemMeas.left) - borderThickness);
-        if (intraElemMeas.left > 0) {
-            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft - intraElemMeas.left });
+        $('#l-measure').width(Math.abs(interElemMeas.left) - borderThickness);
+        if (interElemMeas.left > 0) {
+            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft - interElemMeas.left });
         } else {
             $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft });
         }
 
         $('#l-dimension').show();
         $('#l-dimension > span').show();
-        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueLeft)));
-        $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
+        $('#l-dimension > span').text(Math.round(Math.abs(interElemMeas.trueLeft)));
+        $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (interElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
     }
 }
 
