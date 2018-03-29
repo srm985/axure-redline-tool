@@ -1175,3 +1175,15 @@ function setMeasurements() {
     documentZoom = tempZoom;
     setZoom(true);
 }
+
+/**
+ * This function steps up until it discovers the
+ * bouding parent component name, set in Axure.
+ */
+function extractParentName() {
+    let componentLabel = '';
+
+    try {
+
+    } catch (err) { }
+}
