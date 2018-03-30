@@ -316,7 +316,7 @@ function bindListeners() {
     });
 
     //*****Autoselect Redline Panel Content****
-    $('#redline-panel').on('mouseup', 'input, textarea', function () {
+    $('#redline-panel-menu-column').on('mouseup', 'input, textarea', function () {
         $(this).select();
     });
 
@@ -939,7 +939,15 @@ function compileElementCSS(element, pseudoClass) {
 //*                                Append each property section.                                  *
 //*************************************************************************************************
 function appendRedlinePanel() {
-    let swatch;
+    let swatch,
+        parentLabel;
+
+    // Check if the component has a label.
+    parentLabel = extractParentName();
+
+    if (parentLabel.length) {
+        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:</p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
+    }
 
     // Create a wrapper for our pseudo class tabs.
     $('#redline-panel-menu-column').append(`<div class="pseudo-tabs redline-layer"></div>`);
@@ -1174,4 +1182,30 @@ function setMeasurements() {
     }
     documentZoom = tempZoom;
     setZoom(true);
+}
+
+/**
+ * This function steps up until it discovers the
+ * bouding parent component name, set in Axure.
+ */
+function extractParentName() {
+    let componentLabel = '',
+        cycleEnd = false,
+        currentElement = selectedElement;
+
+    while (!cycleEnd) {
+        try {
+            if (currentElement.data('label')) {
+                componentLabel = currentElement.data('label').trim();
+                cycleEnd = true;
+            } else if (currentElement.attr('id') === 'base') {
+                cycleEnd = true;
+            } else {
+                currentElement = currentElement.parent();
+            }
+        } catch (err) {
+            cycleEnd = true;
+        }
+    }
+    return (componentLabel);
 }

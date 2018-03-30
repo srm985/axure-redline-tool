@@ -248,7 +248,7 @@ body {
             box-sizing: border-box;
             width: 270px;
             height: 100%;
-            padding: 20px 0 0;
+            padding: 0;
 
             color: $primary-color-white;
             background-color: $primary-color-background;
@@ -382,7 +382,7 @@ body {
         box-sizing: border-box;
         width: 100%;
         height: 25px;
-        padding: 0 5px;
+        padding: 0;
         .tab {
             display: flex;
             align-items: center;
@@ -402,6 +402,13 @@ body {
             color: $primary-color-gray;
             border-radius: 3px 3px 0 0;
             background-color: $primary-color-white;
+
+            &:first-of-type {
+                margin-left: 20px;
+            }
+            &:last-of-type {
+                margin-right: 20px;
+            }
         }
         .active-tab {
             color: $primary-color-white;
@@ -432,5 +439,14 @@ body {
     }
     .active-attributes {
         display: block;
+    }
+}
+.component-name-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 31px;
+    padding: 0 20px;
+    * {
+        width: 100%;
     }
 }
