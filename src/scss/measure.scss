@@ -274,11 +274,13 @@ body {
                     top: 15px;
                     right: 0;
 
+                    box-sizing: border-box;
                     width: 25px;
                     height: 25px;
 
                     cursor: pointer;
 
+                    border-left: solid 1px $primary-color-background;
                     border-radius: 0 3px 3px 0;
                 }
             }
