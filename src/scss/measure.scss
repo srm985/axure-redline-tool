@@ -292,17 +292,13 @@ body {
                 font-size: 12px;
 
                 box-sizing: border-box;
-
-/*width: calc(100% - 12px);*/
                 width: 100%;
                 margin-top: 0;
                 padding: 4px 5px;
 
                 cursor: text;
 
-/* opacity: 0.5; */
-
-                border: solid 1px $primary-color-white;
+                border: none;
                 border-radius: 3px;
             }
             textarea {
@@ -450,5 +446,25 @@ body {
     padding: 0 20px;
     * {
         width: 100%;
+    }
+}
+.links-wrapper {
+    label {
+        color: $primary-color-white;
+    }
+    input {
+        font-size: 12px;
+
+        box-sizing: border-box;
+        height: 25px;
+        margin-right: 15px;
+        padding: 4px 5px;
+
+        cursor: text;
+
+        border: none;
+        border-radius: 3px;
+        outline: none;
+        background-color: $primary-color-white;
     }
 }
