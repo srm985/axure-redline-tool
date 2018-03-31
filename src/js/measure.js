@@ -25,7 +25,9 @@ const pseudoClasses = {
         axureName: '',
         keyName: "default"
     }
-};
+},
+    rgbaReg = /rgb(a)?\(\d+,(\s)?\d+,(\s+)\d+(,(\s+)?\d(\.\d+)?)?\)/,
+    hexReg = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
 let enableTool,                 // Boolean set true when the tool is enabled.
     cssProperties,              // List of all CSS properties we will collect for each element.
@@ -339,9 +341,14 @@ function bindListeners() {
 
     //*****Toggle Color RGB/HEX*****
     $('#redline-panel').on('click', '.color-swatch', function () {
-        const elemData = $(this).data('swatch').split('-'),
+        let elemData = $(this).data('swatch').split('-'),
             fieldWrapper = elemData[0] + '-attributes',
-            field = `input-${elemData[1]}-${elemData[2]}`;
+            field = 'input';
+
+        elemData.shift();
+        elemData.forEach((splitAttribute) => {
+            field += `-${splitAttribute}`;
+        });
 
         $(`.${fieldWrapper} #${field}`).val(cycleColorFormat($(`.${fieldWrapper} #${field}`).val()));
     });
@@ -962,10 +969,26 @@ function appendRedlinePanel() {
             $('.pseudo-wrapper:last').append('<div class="redline-layer redline-panel-section"></div>');
             $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
             $.each(elementCSS[pseudoClass][i], (_i, _value) => {
-                if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
+                if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px' && !((/initial/).test(_value))) {
                     //*****Check if we need to add a color swatch.*****
-                    if ((_i.replace('_', '') == 'color' || _i.replace('_', '') == 'background-color') && _value != 'transparent') {
-                        swatch = `<span class="redline-layer color-swatch" data-swatch="${pseudoClass}-${_i.replace('_', '')}" style="background-color: ${_value};"></span>`
+                    if ((rgbaReg).test(_value) && _value != 'transparent') {
+                        let swatchOpacity,
+                            swatchColor;
+
+                        // If we have RGBA, we round our opacity to two decimals of precision.
+                        if ((/rgba/).test(_value)) {
+                            swatchOpacity = Math.round(Number(_value.match(rgbaReg)[0].match(/\d\.\d+/)[0]) * 100) / 100;
+                            swatchColor = _value.match(rgbaReg)[0].replace(' ', '').replace(/rgba\((\d+),(\d+),(\d+),(\d?\.\d+)\)/, `rgba($1, $2, $3, !*!)`);
+
+                            swatchColor = swatchColor.replace('!*!', swatchOpacity);
+
+                            // Finally, replace it in our CSS attribute as well.
+                            _value = _value.replace(rgbaReg, swatchColor);
+                        } else {
+                            swatchColor = _value.match(rgbaReg)[0];
+                        }
+
+                        swatch = `<span class="redline-layer color-swatch" data-swatch="${pseudoClass}-${_i.replace('_', '')}" style="background-color: ${swatchColor};"></span>`
                     } else {
                         swatch = '';
                     }
@@ -1111,11 +1134,20 @@ function getZoom() {
 function cycleColorFormat(colorValue) {
     let newFormat = '',
         colorArr,
-        opacity;
+        opacity,
+        valueTemplate = '';
+
+    if ((rgbaReg).test(colorValue)) {
+        valueTemplate = colorValue.replace(rgbaReg, '!*!');
+        colorValue = colorValue.match(rgbaReg)[0];
+    } else if ((hexReg).test(colorValue)) {
+        valueTemplate = colorValue.replace(hexReg, '!*!');
+        colorValue = colorValue.match(hexReg)[0];
+    }
 
     switch (true) {
         case /rgba/.test(colorValue):
-            colorArr = colorValue.replace(',', '').match(/(\d\.\d)|\d+/g);
+            colorArr = colorValue.match(/(\d\.\d+)|\d+/g);
             newFormat = '#';
             for (let i = 0; i < 3; i++) {
                 newFormat += ('0' + Number(colorArr[i]).toString(16).toUpperCase()).slice(-2);
@@ -1139,7 +1171,7 @@ function cycleColorFormat(colorValue) {
             newFormat = `rgb(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)})`;
             break;
     }
-    return (newFormat);
+    return (valueTemplate.replace('!*!', newFormat));
 }
 
 //*************************************************************************************************
