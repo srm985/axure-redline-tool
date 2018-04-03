@@ -40,7 +40,8 @@ const pseudoClasses = {
     rgbaReg = /rgb(a)?\(\d+,(\s)?\d+,(\s+)\d+(,(\s+)?\d(\.\d+)?)?\)/,
     hexReg = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
-let enableTool,                 // Boolean set true when the tool is enabled.
+let toolPermitted,              // Boolean set true if tool is permitted to load on page.
+    enableTool,                 // Boolean set true when the tool is enabled.
     cssProperties,              // List of all CSS properties we will collect for each element.
     documentZoom,               // Page zoom. Used to scale artboard.
     previousZoom,               // Zoom tracker needed when we toggle zoom to capture true dimensions.
@@ -63,6 +64,7 @@ let enableTool,                 // Boolean set true when the tool is enabled.
 
 
 // Establish values for globals.
+toolPermitted = true;
 enableTool = true;
 documentZoom = 100;
 previousZoom = documentZoom;
@@ -148,20 +150,22 @@ cssProperties = {
  * of jQuery and our font stack from Google.
  */
 (function deployTool() {
-    document.write(fontURL);
-    document.write(pageHTML);
-    document.write(pageCSS);
-    if (!window.jQuery) {
-        // We're writing a new instance of jQuery to the page.
-        document.write(jqueryURL);
-        jQueryWait();
-    } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
-        // We're loading a newer version of jQuery to the page.
-        document.write(jqueryURL);
-        jQueryWait();
-    } else {
-        // Looks like jQuery is already on the page and up-to-date.
-        onLoadFunction();
+    if (checkToolPermitted()) {
+        document.write(fontURL);
+        document.write(pageHTML);
+        document.write(pageCSS);
+        if (!window.jQuery) {
+            // We're writing a new instance of jQuery to the page.
+            document.write(jqueryURL);
+            jQueryWait();
+        } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
+            // We're loading a newer version of jQuery to the page.
+            document.write(jqueryURL);
+            jQueryWait();
+        } else {
+            // Looks like jQuery is already on the page and up-to-date.
+            onLoadFunction();
+        }
     }
 })();
 
@@ -199,11 +203,41 @@ function onLoadFunction() {
     } else {
         checkState();
         initTool();
+        setSharingLinks();
         buildCSSAttributesList();
         documentClone = $('body').clone(true);
         enableRedline();
         setZoom();
     }
+}
+
+/**
+ * We first check to see if we're loading a dev
+ * or business link. If it's business, we won't
+ * permit the tool to load.
+ */
+function checkToolPermitted() {
+    const pageURL = window.parent.location.href;
+
+    return (/redline=business/).test(pageURL) ? false : true;
+}
+
+
+/**
+ * This function builds out our sharing links for business
+ * and developers.
+ */
+function setSharingLinks() {
+    const pageURL = window.parent.location.href;
+
+    let devURL = '',
+        businessURL = '';
+
+    devURL = pageURL.replace(/\.com(\/)?/, '.com?redline=dev');
+    businessURL = pageURL.replace(/\.com(\/)?/, '.com?redline=business');
+
+    $('.business-url').val(businessURL);
+    $('.dev-url').val(devURL);
 }
 
 //*************************************************************************************************
@@ -376,7 +410,7 @@ function bindListeners() {
     });
 
     //*****Autoselect Redline Panel Content****
-    $('#redline-panel-menu-column').on('mouseup', 'input, textarea', function () {
+    $('.redline-tool-wrapper').on('mouseup', 'input, textarea', function () {
         $(this).select();
     });
 
