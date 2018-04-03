@@ -150,20 +150,22 @@ cssProperties = {
  * of jQuery and our font stack from Google.
  */
 (function deployTool() {
-    document.write(fontURL);
-    document.write(pageHTML);
-    document.write(pageCSS);
-    if (!window.jQuery) {
-        // We're writing a new instance of jQuery to the page.
-        document.write(jqueryURL);
-        jQueryWait();
-    } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
-        // We're loading a newer version of jQuery to the page.
-        document.write(jqueryURL);
-        jQueryWait();
-    } else {
-        // Looks like jQuery is already on the page and up-to-date.
-        onLoadFunction();
+    if (checkToolPermitted()) {
+        document.write(fontURL);
+        document.write(pageHTML);
+        document.write(pageCSS);
+        if (!window.jQuery) {
+            // We're writing a new instance of jQuery to the page.
+            document.write(jqueryURL);
+            jQueryWait();
+        } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
+            // We're loading a newer version of jQuery to the page.
+            document.write(jqueryURL);
+            jQueryWait();
+        } else {
+            // Looks like jQuery is already on the page and up-to-date.
+            onLoadFunction();
+        }
     }
 })();
 
@@ -193,7 +195,6 @@ function jQueryWait() {
  * because we also might have to load jQuery on the page.
  */
 function onLoadFunction() {
-    checkToolPermitted();
     // Check if the page load is complete.
     if (document.readyState !== 'complete') {
         setTimeout(() => {
@@ -202,6 +203,7 @@ function onLoadFunction() {
     } else {
         checkState();
         initTool();
+        setSharingLinks();
         buildCSSAttributesList();
         documentClone = $('body').clone(true);
         enableRedline();
@@ -211,25 +213,31 @@ function onLoadFunction() {
 
 /**
  * We first check to see if we're loading a dev
- * or business link. If it's business, we'll set
- * a tracking cookie and not permit the tool to
- * load.
+ * or business link. If it's business, we won't
+ * permit the tool to load.
  */
 function checkToolPermitted() {
+    const pageURL = window.parent.location.href;
+
+    return (/redline=business/).test(pageURL) ? false : true;
+}
+
+
+/**
+ * This function builds out our sharing links for business
+ * and developers.
+ */
+function setSharingLinks() {
     const pageURL = window.parent.location.href;
 
     let devURL = '',
         businessURL = '';
 
-    if ((/redline=business/).test(pageURL)) {
-        toolPermitted = false;
-    } else {
-        devURL = pageURL.replace(/\.com(\/)?/, '.com?redline=dev');
-        businessURL = pageURL.replace(/\.com(\/)?/, '.com?redline=business');
+    devURL = pageURL.replace(/\.com(\/)?/, '.com?redline=dev');
+    businessURL = pageURL.replace(/\.com(\/)?/, '.com?redline=business');
 
-        $('.business-url').val(businessURL);
-        $('.dev-url').val(devURL);
-    }
+    $('.business-url').val(businessURL);
+    $('.dev-url').val(devURL);
 }
 
 //*************************************************************************************************
@@ -402,7 +410,7 @@ function bindListeners() {
     });
 
     //*****Autoselect Redline Panel Content****
-    $('#redline-panel-menu-column').on('mouseup', 'input, textarea', function () {
+    $('.redline-tool-wrapper').on('mouseup', 'input, textarea', function () {
         $(this).select();
     });
 

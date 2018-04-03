@@ -70,6 +70,10 @@ body {
 }
 
 .redline-tool-wrapper {
+    input,
+    textarea {
+        color: $secondary-color-gray;
+    }
     .redline-layer {
         font-family: $font-stack;
     }
@@ -449,6 +453,7 @@ body {
     }
 }
 .links-wrapper {
+    opacity: 0.5;
     label {
         color: $primary-color-white;
     }
@@ -456,6 +461,7 @@ body {
         font-size: 12px;
 
         box-sizing: border-box;
+        width: 100px;
         height: 25px;
         margin-right: 15px;
         padding: 4px 5px;
@@ -466,5 +472,9 @@ body {
         border-radius: 3px;
         outline: none;
         background-color: $primary-color-white;
+
+        @media screen and (min-width: 1024px) {
+            width: 150px;
+        }
     }
 }
