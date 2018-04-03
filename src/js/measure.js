@@ -7,6 +7,17 @@
 /*                                 V1.1.4                                       */
 /********************************************************************************/
 
+/**
+ * These are placeholders for injected code during app
+ * building. We use double quotes wrapped in a template
+ * literal to force Babel to generate single quotes so that
+ * we don't have to escape double quotes in the injected code.
+ */
+const pageHTML = `"Inject:HTML"`,
+    pageCSS = `"Inject:CSS"`,
+    jqueryURL = `<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>`,
+    fontURL = `<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">`,
+    jqueryMajorVersion = '3';
 
 // Define the pseudo classes we'll be collecting for the element.
 const pseudoClasses = {
@@ -133,17 +144,62 @@ cssProperties = {
     }
 };
 
-$(window).on('load', function () {
-    //*****I'm not insane for doubley defining this function. This needs to be done otherwise the demo won't work.*****
-    onLoadFunction();
-});
+/**
+ * We begin by deploying our tool into the Axure environment
+ * by writing HTML and CSS to the page. We also load our version
+ * of jQuery and our font stack from Google.
+ */
+(function deployTool() {
+    document.write(fontURL);
+    document.write(pageHTML);
+    document.write(pageCSS);
+    if (!window.jQuery) {
+        // We're writing a new instance of jQuery to the page.
+        document.write(jqueryURL);
+        jQueryWait();
+    } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
+        // We're loading a newer version of jQuery to the page.
+        document.write(jqueryURL);
+        jQueryWait();
+    } else {
+        // Looks like jQuery is already on the page and up-to-date.
+        onLoadFunction();
+    }
+})();
 
-//*************************************************************************************************
-//*                   Wrap onLoad events in function to call during demo.                         *
-//*************************************************************************************************
+/**
+ * We keep checking back until jQuery has been loaded on
+ * the page. Once it's loaded we check to make sure it's
+ * at least the same major version as we're loading.
+ */
+function jQueryWait() {
+    if (typeof jQuery == 'undefined') {
+        setTimeout(() => {
+            jQueryWait();
+        }, 50);
+    } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
+        setTimeout(() => {
+            jQueryWait();
+        }, 50);
+    } else {
+        onLoadFunction();
+    }
+}
+
+/**
+ * This function first waits on the page to ensure all
+ * elements have been loaded. It then goes about
+ * initializing the redline tool. We don't use a listener
+ * because we also might have to load jQuery on the page.
+ */
 function onLoadFunction() {
     checkToolPermitted();
-    if (toolPermitted) {
+    // Check if the page load is complete.
+    if (document.readyState !== 'complete') {
+        setTimeout(() => {
+            onLoadFunction();
+        }, 50);
+    } else {
         checkState();
         initTool();
         buildCSSAttributesList();

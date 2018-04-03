@@ -52,14 +52,6 @@ function copyDemo() {
         .pipe(gulp.dest('web/'))
 }
 
-function injectApp() {
-    const APP = fs.readFileSync('web/temp/measure.htm', 'utf-8');
-
-    return gulp.src('web/demo.htm')
-        .pipe(injectString.replace('<!-- inject:app -->', APP))
-        .pipe(gulp.dest('web/'));
-}
-
 /**
  * Clear up our web directory.
  */
@@ -152,14 +144,14 @@ gulp.task('build-js', () => {
  */
 gulp.task('compile-app', () => {
     const HTML = fs.readFileSync('web/temp/measure.htm', 'utf-8'),
-        CSS = fs.readFileSync('web/temp/styles.css', 'utf-8'),
-        JS = fs.readFileSync('web/temp/main.js', 'utf-8');
+        CSS = fs.readFileSync('web/temp/styles.css', 'utf-8');
 
-    return gulp.src('src/resources/template.html')
-        .pipe(injectString.replace('<!-- Inject:HTML -->', HTML))
-        .pipe(injectString.replace('<!-- Inject:CSS -->', `<style>${CSS}</style>`))
-        .pipe(injectString.replace('<!-- Inject:JS -->', `<script>${JS}</script>`))
-        .pipe(htmlmin({ collapseWhitespace: true }))
+    return gulp.src('web/temp/main.js')
+        .pipe(injectString.replace('"Inject:HTML"', HTML))
+        .pipe(injectString.replace('"Inject:CSS"', `<style>${CSS}</style>`))
+        .pipe(rename('axure-redline-plugin.js'))
+        .pipe(gulp.dest('web/'))
+        .pipe(injectString.replace(/(.*)/, '<script>$1</script>'))
         .pipe(rename('plugin.txt'))
         .pipe(gulp.dest('web/'));
 });
@@ -206,21 +198,20 @@ gulp.task('serve', () => {
         reloadDebounce: 250
     });
 
-    gulp.watch('src/*.htm', ['build-html']).on('change', (e) => {
+    gulp.watch('src/measure.htm', ['build-html']);
+    gulp.watch('src/scss/**/*.scss', ['build-css']);
+    gulp.watch('src/js/**/*.js', ['build-js']);
+    gulp.watch('web/temp/*', ['compile-app']).on('change', (e) => {
         copyDemo();
         setTimeout(() => {
-            injectApp();
+            /* injectApp(); */
             browserSync.reload();
         }, 500);
-    });
-    gulp.watch('src/scss/**/*.scss', ['build-css']);
-    gulp.watch('src/js/**/*.js', ['build-js']).on('change', (e) => {
-        browserSync.reload();
-    });
+    })
 });
 
 // Build and watch the app and serve in a demo wrapper.
-gulp.task('develop', gulpSequence(['clean', 'build-html', 'build-css', 'build-js', 'copy-demo'], 'inject-app', 'serve'));
+gulp.task('develop', gulpSequence(['clean', 'build-html', 'build-css', 'build-js', 'copy-demo'], ['compile-app'], 'serve'));
 
 // Build and watch the app - this updates the plugin code to be copied into Axshare.
 gulp.task('build-watch', gulpSequence(['clean', 'build-html', 'build-css', 'build-js'], 'compile-app', 'watch'));
