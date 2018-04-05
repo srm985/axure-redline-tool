@@ -216,7 +216,7 @@ body {
         display: flex;
 
         width: 290px;
-        height: 100%;
+        height: calc(100% - 60px);
 
         transition: all 0.1s ease-in-out;
         #menu-tab-column {
@@ -302,7 +302,6 @@ body {
 
                 cursor: text;
 
-                border: none;
                 border-radius: 3px;
             }
             textarea {
@@ -384,7 +383,7 @@ body {
         box-sizing: border-box;
         width: 100%;
         height: 25px;
-        padding: 0;
+        padding: 0 20px;
         .tab {
             display: flex;
             align-items: center;
@@ -405,12 +404,12 @@ body {
             border-radius: 3px 3px 0 0;
             background-color: $primary-color-white;
 
-            &:first-of-type {
+            /* &:first-of-type {
                 margin-left: 20px;
             }
             &:last-of-type {
                 margin-right: 20px;
-            }
+            } */
         }
         .active-tab {
             color: $primary-color-white;
