@@ -42,6 +42,7 @@ const pseudoClasses = {
 
 let toolPermitted,              // Boolean set true if tool is permitted to load on page.
     enableTool,                 // Boolean set true when the tool is enabled.
+    hotkeyDepressed,            // Boolean set true when user is holding down hotkey.
     cssProperties,              // List of all CSS properties we will collect for each element.
     documentZoom,               // Page zoom. Used to scale artboard.
     previousZoom,               // Zoom tracker needed when we toggle zoom to capture true dimensions.
@@ -55,7 +56,6 @@ let toolPermitted,              // Boolean set true if tool is permitted to load
     interElemMeas,              // Object containing inter-element measurements.
     dimensionMarkerWidth,       // Stores the numerical value of the selected element width.
     dimensionMarkerHeight,      // Stores the numerical value of the selected element height.
-    documentClone,              // Stores an entire, untouched copy of the page, used when disabling the tool.
     elementPosition,            // Stores the offset position of annotation icon, used to position annotation.
     selectedMeasurements,       // Stores the true, unscaled measurements of selected element.
     hoveredMeasurements,        // Stores the true, unscaled measurements of the hovered element.
@@ -66,6 +66,7 @@ let toolPermitted,              // Boolean set true if tool is permitted to load
 // Establish values for globals.
 toolPermitted = true;
 enableTool = true;
+hotkeyDepressed = false;
 documentZoom = 100;
 previousZoom = documentZoom;
 zoomWrapperPadding = 1000;
@@ -205,7 +206,8 @@ function onLoadFunction() {
         initTool();
         setSharingLinks();
         buildCSSAttributesList();
-        documentClone = $('body').clone(true);
+        // Last used V1.1.5 (14.4.18)
+        //documentClone = $('body').clone(true);
         enableRedline();
         setZoom();
     }
@@ -356,22 +358,52 @@ function bindListeners() {
         enableRedline();
     });
 
-    //*****Element Hover*****
-    $('body').on('mouseover', '*', function (e) {
-        e.stopImmediatePropagation();
-        //clearRedline();
-        elementHover($(this));
+    /**
+    * Here we handle element hovers. We're binding event listeners
+    * to every parent component. This is slightly inefficient but
+    * we have to do it this way so that we can block Axure's event
+    * listeners when they bubble up.
+    */
+    $('#base > *').on('mouseover', '*', function (e) {
+        if (enableTool) {
+            if (!hotkeyDepressed) {
+                e.stopPropagation();
+            }
+            elementHover($(this));
+        }
     });
 
-    //*****Element Click/Clickaway*****
-    $('body').on('click', '*', function (e) {
-        // Removed 20.2.18. Last used V1.1.4.
-        //e.stopImmediatePropagation();
-        e.stopPropagation();
-        if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
-            closeRedline();
-        } else {
-            elementClick($(this));
+    /**
+     * Here we handle element clicks. We're binding event listeners
+     * to every parent component. This is slightly inefficient but
+     * we have to do it this way so that we can block Axure's event
+     * listeners when they bubble up.
+     */
+    $('#base > *').on('click', '*', function (e) {
+        if (enableTool) {
+            if (!hotkeyDepressed) {
+                e.stopPropagation();
+            }
+            if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
+                closeRedline();
+            } else {
+                elementClick($(this));
+            }
+        }
+    });
+
+    // Listen for Ctrl which is our hotkey.
+    $(window).on('keydown', (e) => {
+        if (!hotkeyDepressed) {
+            if (e.keyCode == 17) {
+                hotkeyDepressed = true;
+                $(window).on('keyup', (e) => {
+                    if (e.keyCode == 17) {
+                        $(window).off('keyup');
+                        hotkeyDepressed = false;
+                    }
+                });
+            }
         }
     });
 
@@ -619,7 +651,7 @@ function enableRedline() {
         //$('.zoom-wrapper *').not('script, style').show();
         setZoom();
         $('.ui-dialog').remove();
-        $('*').not('.annotation, .annotation *').off();
+        //$('*').not('.annotation, .annotation *').off();
         bindListeners();
 
         // Keep intensive task from running until DOM manipulation is done.
@@ -633,13 +665,11 @@ function enableRedline() {
     } else {
         setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function () {
-            $('html body').remove();
-            $('html').append(documentClone.clone(true));
+            // Last used V1.1.5 (14.4.18)
+            /* $('html body').remove();
+            $('html').append(documentClone.clone(true)); */
             $('.toggle-switch').prop('checked', false);
             bindListeners();
-            // Removed 20.2.18. Last in V1.1.4.
-            //$('.zoom-wrapper').show();
-            //$('.zoom-wrapper *').not('script, style').show();
             closeRedline();
             setZoom();
         }, 250);
