@@ -966,7 +966,24 @@ function compileElementCSS(element, pseudoClass) {
                 if (_i == '_content') {
                     tempCSSProperties[i][_i] = element.text().trim();
                 } else {
-                    tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    // Perform a quick check to see if we're on the opacity attribute.
+                    if (_i === 'opacity') {
+                        /**
+                         * Opacity is actually set on the parent wrapper
+                         * element i.e. "u1" but we can never click on
+                         * this element. We actually click on u1_div. This
+                         * acts as the parent but we wouldn't get the right
+                         * opacity so we have to step up one element.
+                         */
+                        if ((/u\d+_div/).test(element.attr('id'))) {
+                            tempElementCSS = element.parent().css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                        } else {
+                            tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                        }
+                    } else {
+                        tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    }
+                    //tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
                     try {
                         tempCompiledCSS = documentCSSList['#' + element[0].id][pseudoClass.keyName][_i].replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
                     } catch (err) {
@@ -975,7 +992,7 @@ function compileElementCSS(element, pseudoClass) {
 
                     /**
                      * We check to see if there is a default attribute value
-                     * because it might be being overridden by a pseudo class.
+                     * because it might be being overwritten by a pseudo class.
                      */
                     if (tempCompiledCSS.length) {
                         tempCSSProperties[i][_i] = tempCompiledCSS;
