@@ -1,7 +1,7 @@
 //***********************************************************************
 $primary-color-teal: #4edec2;
 $primary-color-orange: #e89a28;
-$primary-color-background: rgba(17, 17, 17, 0.9);
+$primary-color-background: rgba(17, 17, 17, 1);
 $primary-color-blue: #4860ff;
 $primary-color-gray: #555;
 $secondary-color-gray: #333;
@@ -11,6 +11,70 @@ $font-stack: 'Lato',
 sans-serif;
 $switch-transition: all 0.15s ease-in-out;
 //***********************************************************************
+.loading-wrapper {
+    position: fixed;
+    z-index: 999999999;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: $secondary-color-gray;
+
+    /* Credit: http://tobiasahlin.com/spinkit/ */
+    .spinner {
+        position: relative;
+
+        width: 40px;
+        height: 40px;
+        margin: 100px auto;
+
+        .double-bounce1,
+        .double-bounce2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+            animation: sk-bounce 2.0s infinite ease-in-out;
+
+            opacity: 0.6;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        .double-bounce2 {
+            -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+        }
+        @-webkit-keyframes sk-bounce {
+            0%,
+            100% {
+                -webkit-transform: scale(0.0);
+            }
+            50% {
+                -webkit-transform: scale(1.0);
+            }
+        }
+        @keyframes sk-bounce {
+            0%,
+            100% {
+                -webkit-transform: scale(0.0);
+                transform: scale(0.0);
+            } 50% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        }
+    }
+}
 body {
     overflow: scroll;
 
@@ -70,8 +134,88 @@ body {
 }
 
 .redline-tool-wrapper {
+    input,
+    textarea {
+        color: $secondary-color-gray;
+    }
     .redline-layer {
         font-family: $font-stack;
+    }
+    .redline-tool-enabler {
+        font-size: 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        color: $primary-color-white;
+        .switch {
+            margin-left: 10px;
+            .toggle-switch {
+                position: absolute;
+
+                visibility: hidden;
+
+                margin-left: -9999px;
+                 + label {
+                    position: relative;
+
+                    display: block;
+
+                    width: 60px;
+                    height: 28px;
+                    padding: 2px;
+
+                    cursor: pointer;
+                    user-select: none;
+                    transition: $switch-transition;
+
+                    border-radius: 28px;
+                    outline: none;
+                    background-color: #ddd;
+                }
+                 + label::before,
+                 + label::after {
+                    position: absolute;
+
+                    display: block;
+
+                    content: '';
+                    transition: $switch-transition;
+                }
+                 + label:before {
+                    top: 2px;
+                    right: 2px;
+                    bottom: 2px;
+                    left: 2px;
+
+                    border-radius: 28px;
+                    background-color: $primary-color-white;
+                }
+                 + label::after {
+                    top: 4px;
+                    bottom: 4px;
+                    left: 4px;
+
+                    width: 24px;
+
+                    border-radius: 50%;
+                    background-color: #ddd;
+                }
+                &:checked + label {
+                    background-color: $primary-color-teal;
+                }
+                &:checked + label::after {
+                    margin-left: 32px;
+
+                    background-color: $primary-color-teal;
+                }
+            }
+        }
+    }
+    #top-control-panel,
+    #redline-panel {
+        opacity: 0.9;
     }
     #top-control-panel {
         position: fixed;
@@ -80,12 +224,13 @@ body {
         left: 0;
 
         display: flex;
-        float: left;
         align-items: center;
+        justify-content: space-between;
 
+        box-sizing: border-box;
         width: 100%;
         height: 60px;
-        padding: 0 20px;
+        padding: 0 30px;
 
         background-color: $primary-color-background;
         .zoom-controls {
@@ -93,7 +238,6 @@ body {
             justify-content: space-between;
 
             width: 150px;
-            margin-left: 15px;
             div {
                 font-size: 22px;
                 font-weight: bold;
@@ -119,9 +263,10 @@ body {
 
                 text-align: center;
 
-                opacity: 0.5;
+/* opacity: 0.5; */
+
                 border: none;
-                border-radius: 10px;
+                border-radius: 12px;
                 outline: none;
             }
         }
@@ -135,7 +280,7 @@ body {
         display: flex;
 
         width: 290px;
-        height: 100%;
+        height: calc(100% - 60px);
 
         transition: all 0.1s ease-in-out;
         #menu-tab-column {
@@ -148,7 +293,7 @@ body {
 
                 width: 100%;
                 height: 40px;
-                margin-top: 20px;
+                margin-top: 65px;
 
                 cursor: pointer;
 
@@ -171,79 +316,11 @@ body {
             box-sizing: border-box;
             width: 270px;
             height: 100%;
-            padding: 20px 20px 0;
+            padding: 0;
 
             color: $primary-color-white;
             background-color: $primary-color-background;
-            .redline-tool-enabler {
-                font-size: 16px;
 
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .switch {
-                .toggle-switch {
-                    position: absolute;
-
-                    visibility: hidden;
-
-                    margin-left: -9999px;
-                     + label {
-                        position: relative;
-
-                        display: block;
-
-                        width: 60px;
-                        height: 28px;
-                        padding: 2px;
-
-                        cursor: pointer;
-                        user-select: none;
-                        transition: $switch-transition;
-
-                        border-radius: 28px;
-                        outline: none;
-                        background-color: #ddd;
-                    }
-                     + label::before,
-                     + label::after {
-                        position: absolute;
-
-                        display: block;
-
-                        content: '';
-                        transition: $switch-transition;
-                    }
-                     + label:before {
-                        top: 2px;
-                        right: 2px;
-                        bottom: 2px;
-                        left: 2px;
-
-                        border-radius: 28px;
-                        background-color: $primary-color-white;
-                    }
-                     + label::after {
-                        top: 4px;
-                        bottom: 4px;
-                        left: 4px;
-
-                        width: 24px;
-
-                        border-radius: 50%;
-                        background-color: #ddd;
-                    }
-                    &:checked + label {
-                        background-color: $primary-color-teal;
-                    }
-                    &:checked + label::after {
-                        margin-left: 32px;
-
-                        background-color: $primary-color-teal;
-                    }
-                }
-            }
             .redline-panel-section {
                 margin-top: 20px;
             }
@@ -260,17 +337,18 @@ body {
                 height: 15px;
                 margin: 10px 0 0;
 
-                #swatch-color,
-                #swatch-background-color {
+                .color-swatch {
                     position: absolute;
                     top: 15px;
                     right: 0;
 
+                    box-sizing: border-box;
                     width: 25px;
                     height: 25px;
 
                     cursor: pointer;
 
+                    border-left: solid 1px $primary-color-background;
                     border-radius: 0 3px 3px 0;
                 }
             }
@@ -282,16 +360,13 @@ body {
                 font-size: 12px;
 
                 box-sizing: border-box;
-
-/*width: calc(100% - 12px);*/
                 width: 100%;
                 margin-top: 0;
                 padding: 4px 5px;
 
                 cursor: text;
 
-                opacity: 0.5;
-                border: solid 1px $primary-color-white;
+                border: none;
                 border-radius: 3px;
             }
             textarea {
@@ -363,5 +438,107 @@ body {
         border: solid 1px $primary-color-orange;
         border-right: none;
         border-bottom: none;
+    }
+
+    .pseudo-tabs {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+
+        box-sizing: border-box;
+        width: 100%;
+        height: 25px;
+        padding: 0 20px;
+        .tab {
+            display: flex;
+            align-items: center;
+            flex-basis: 0;
+            flex-grow: 1;
+            justify-content: center;
+
+            box-sizing: border-box;
+            max-width: 50%;
+            height: 100%;
+            margin: 0 1px;
+
+            cursor: pointer;
+
+/* opacity: 0.7; */
+
+            color: $primary-color-gray;
+            border-radius: 3px 3px 0 0;
+            background-color: $primary-color-white;
+
+            /* &:first-of-type {
+                margin-left: 20px;
+            }
+            &:last-of-type {
+                margin-right: 20px;
+            } */
+        }
+        .active-tab {
+            color: $primary-color-white;
+            border-width: 1px 1px 0;
+            border-style: solid;
+            border-color: $primary-color-white;
+            background-color: $primary-color-background;
+        }
+        .default {
+            order: 1;
+        }
+        .hover {
+            order: 2;
+        }
+        .disabled {
+            order: 3;
+        }
+    }
+    .pseudo-wrapper {
+        display: none;
+
+        box-sizing: border-box;
+        width: 100%;
+        margin-top: -1px;
+        padding: 0 20px;
+
+        border-top: solid 1px #fff;
+    }
+    .active-attributes {
+        display: block;
+    }
+}
+.component-name-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 31px;
+    padding: 0 20px;
+    * {
+        width: 100%;
+    }
+}
+.links-wrapper {
+    opacity: 0.5;
+    label {
+        color: $primary-color-white;
+    }
+    input {
+        font-size: 12px;
+
+        box-sizing: border-box;
+        width: 100px;
+        height: 25px;
+        margin-right: 15px;
+        padding: 4px 5px;
+
+        cursor: text;
+
+        border: none;
+        border-radius: 3px;
+        outline: none;
+        background-color: $primary-color-white;
+
+        @media screen and (min-width: 1024px) {
+            width: 150px;
+        }
     }
 }
