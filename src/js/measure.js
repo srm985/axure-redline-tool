@@ -16,6 +16,8 @@
 const pageHTML = `"Inject:HTML"`,
     pageCSS = `"Inject:CSS"`,
     jqueryURL = `<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>`,
+    jqueryUI = `<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>`,
+    jqueryUITheme = `<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">`,
     fontURL = `<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">`,
     jqueryMajorVersion = '3';
 
@@ -152,16 +154,14 @@ cssProperties = {
  */
 (function deployTool() {
     if (checkToolPermitted()) {
-        document.write(fontURL);
-        document.write(pageHTML);
-        document.write(pageCSS);
-        if (!window.jQuery) {
-            // We're writing a new instance of jQuery to the page.
-            document.write(jqueryURL);
-            jQueryWait();
-        } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
-            // We're loading a newer version of jQuery to the page.
-            document.write(jqueryURL);
+        document.write(fontURL + pageHTML + pageCSS);
+        if (!window.jQuery || parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
+            /**
+             * Either the page doesn't have jQuery or the major
+             * version isn't the latest. We also need to load
+             * jQuery UI to deal with annotations.
+             */
+            document.write(jqueryURL + jqueryUI + jqueryUITheme);
             jQueryWait();
         } else {
             // Looks like jQuery is already on the page and up-to-date.
@@ -182,6 +182,7 @@ function jQueryWait() {
         }, 50);
     } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
         setTimeout(() => {
+            console.log('wait')
             jQueryWait();
         }, 50);
     } else {
@@ -210,6 +211,7 @@ function onLoadFunction() {
         //documentClone = $('body').clone(true);
         enableRedline();
         setZoom();
+        bindListeners();
     }
 }
 
@@ -328,6 +330,9 @@ function initTool() {
         }
         //*****Check if we've found an element with vertical-scrolling content.*****
         if (!hiddenHeight) {
+            if (maxHeight < top + height) {
+                console.log($(this).attr('id'));
+            }
             maxHeight = maxHeight < top + height ? top + height : maxHeight;
         } else if (currentElement.height() > maxHeight) {
             currentElement.addClass('redline-layer');
@@ -360,36 +365,33 @@ function bindListeners() {
 
     /**
     * Here we handle element hovers. We're binding event listeners
-    * to every parent component. This is slightly inefficient but
-    * we have to do it this way so that we can block Axure's event
-    * listeners when they bubble up.
+    * to every component. This is inefficient but we have to do
+    * it this way so that we can block Axure's event listeners
+    * when they bubble up.
     */
-    $('#base > *').on('mouseover', '*', function (e) {
-        if (enableTool) {
-            if (!hotkeyDepressed) {
-                e.stopPropagation();
-            }
+    $('#base *').on('mouseover', function (e) {
+        if (enableTool && !hotkeyDepressed) {
+            e.stopPropagation();
             elementHover($(this));
         }
     });
 
     /**
      * Here we handle element clicks. We're binding event listeners
-     * to every parent component. This is slightly inefficient but
-     * we have to do it this way so that we can block Axure's event
-     * listeners when they bubble up.
+     * to every component. This is inefficient but we have to do
+     * it this way so that we can block Axure's event listeners
+     * when they bubble up.
      */
-    $('#base > *').on('click', '*', function (e) {
-        if (enableTool) {
-            if (!hotkeyDepressed) {
-                e.stopPropagation();
-            }
-            if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
-                closeRedline();
-            } else {
-                elementClick($(this));
-            }
+    $('#base *').on('click', function (e) {
+        if (enableTool && !hotkeyDepressed) {
+            e.stopPropagation();
+            e.preventDefault();
+            elementClick($(this));
         }
+    });
+
+    $('.zoom-wrapper').click(function () {
+        closeRedline();
     });
 
     // Listen for Ctrl which is our hotkey.
@@ -652,7 +654,7 @@ function enableRedline() {
         setZoom();
         $('.ui-dialog').remove();
         //$('*').not('.annotation, .annotation *').off();
-        bindListeners();
+        //bindListeners();
 
         // Keep intensive task from running until DOM manipulation is done.
         // Don't put a pointer on script or style tags or annotations.
@@ -669,7 +671,7 @@ function enableRedline() {
             /* $('html body').remove();
             $('html').append(documentClone.clone(true)); */
             $('.toggle-switch').prop('checked', false);
-            bindListeners();
+            //bindListeners();
             closeRedline();
             setZoom();
         }, 250);
@@ -920,17 +922,14 @@ function drawInterElementMarkers() {
 function updateRedlinePanel(element) {
     elementCSS = {};
 
-    console.log(element);
-    if (element[0].id.length) {
+    if (element[0].id.length && documentCSSList['#' + element[0].id] !== undefined) {
         for (let pseudoClass in pseudoClasses) {
             // We will only create keys for pseudo classes that have attributes.
             if (pseudoClasses[pseudoClass].keyName in documentCSSList['#' + element[0].id]) {
-
                 // Check if the key yet exists.
                 if (!(pseudoClasses[pseudoClass].keyName in elementCSS)) {
                     elementCSS[pseudoClasses[pseudoClass].keyName] = {};
                 }
-
                 elementCSS[pseudoClasses[pseudoClass].keyName] = JSON.parse(JSON.stringify(compileElementCSS(element, pseudoClasses[pseudoClass])));
             }
         }
