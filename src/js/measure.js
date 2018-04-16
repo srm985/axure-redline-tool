@@ -390,7 +390,11 @@ function bindListeners() {
         }
     });
 
-    $('.zoom-wrapper').click(function () {
+    /**
+     * If we click away from the artboard, we'll close the
+     * redline panel.
+     */
+    $('.zoom-wrapper, #base').click(() => {
         closeRedline();
     });
 
@@ -446,6 +450,7 @@ function bindListeners() {
     //*****Autoselect Redline Panel Content****
     $('.redline-tool-wrapper').on('mouseup', 'input, textarea', function () {
         $(this).select();
+        document.execCommand('Copy')
     });
 
     //*****Handle Zoom Controls*****

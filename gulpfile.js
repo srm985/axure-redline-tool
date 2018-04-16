@@ -152,6 +152,7 @@ gulp.task('compile-app', () => {
         .pipe(rename('axure-redline-plugin.js'))
         .pipe(gulp.dest('web/'))
         .pipe(injectString.replace(/(.*)/g, '<script>$1</script>'))
+        .pipe(injectString.replace('<script></script>', ''))
         .pipe(rename('plugin.txt'))
         .pipe(gulp.dest('web/'));
 });
