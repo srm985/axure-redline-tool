@@ -450,7 +450,13 @@ function bindListeners() {
     //*****Autoselect Redline Panel Content****
     $('.redline-tool-wrapper').on('mouseup', 'input, textarea', function () {
         $(this).select();
-        document.execCommand('Copy')
+        document.execCommand('Copy');
+        $(this).prev().find('.css-copied-tooltip').addClass('tooltip-active');
+        $(this).parent().find('.link-copied-tooltip').addClass('tooltip-active');
+        setTimeout(() => {
+            $(this).prev().find('.css-copied-tooltip').removeClass('tooltip-active');
+            $(this).parent().find('.link-copied-tooltip').removeClass('tooltip-active');
+        }, 750);
     });
 
     //*****Handle Zoom Controls*****
@@ -1096,7 +1102,7 @@ function appendRedlinePanel() {
     parentLabel = extractParentName();
 
     if (parentLabel.length) {
-        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:</p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
+        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:<span class="css-copied-tooltip">copied</span></p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
     }
 
     // Create a wrapper for our pseudo class tabs.
@@ -1135,7 +1141,8 @@ function appendRedlinePanel() {
                     } else {
                         swatch = '';
                     }
-                    $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
+                    //$('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
+                    $('.redline-panel-section:last').append(`<p class="redline-layer">${_i.replace('_', '')}:${swatch}<span class="css-copied-tooltip">copied</span></p>`);
                     if (_i != '_content') {
                         $('.redline-panel-section:last').append('<input class="redline-layer" id="input-' + _i.replace('_', '') + '" value="' + _value + '" readonly="readonly"></input>');
                     } else {
