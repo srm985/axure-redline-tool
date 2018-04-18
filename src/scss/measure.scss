@@ -489,8 +489,11 @@ body {
         .hover {
             order: 2;
         }
-        .disabled {
+        .mousedown {
             order: 3;
+        }
+        .disabled {
+            order: 4;
         }
     }
     .pseudo-wrapper {
@@ -519,7 +522,6 @@ body {
     }
 }
 .links-wrapper {
-    opacity: 0.5;
     label {
         position: relative;
 
@@ -540,16 +542,19 @@ body {
         border-radius: 3px;
         outline: none;
         background-color: $primary-color-white;
-
         @media screen and (min-width: 1024px) {
             width: 150px;
         }
+    }
+    .opacity-adjust {
+        opacity: 0.5;
     }
 }
 %copied-tooltip {
     font-size: 12px;
 
     position: absolute;
+    z-index: 1;
 
     visibility: hidden;
 

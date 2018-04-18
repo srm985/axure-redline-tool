@@ -28,6 +28,11 @@ const pseudoClasses = {
         axureName: 'mouseOver',
         keyName: "hover"
     },
+    mousedown: {
+        pseudoName: 'MouseDown',
+        axureName: 'mouseDown',
+        keyName: 'mousedown'
+    },
     disabled: {
         pseudoName: 'Disabled',
         axureName: 'disabled',
@@ -182,7 +187,6 @@ function jQueryWait() {
         }, 50);
     } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
         setTimeout(() => {
-            console.log('wait')
             jQueryWait();
         }, 50);
     } else {
@@ -331,7 +335,7 @@ function initTool() {
         //*****Check if we've found an element with vertical-scrolling content.*****
         if (!hiddenHeight) {
             if (maxHeight < top + height) {
-                console.log($(this).attr('id'));
+                //console.log($(this).attr('id'));
             }
             maxHeight = maxHeight < top + height ? top + height : maxHeight;
         } else if (currentElement.height() > maxHeight) {
@@ -390,6 +394,13 @@ function bindListeners() {
         }
     });
 
+    $('#base *').on('mousedown mouseup', (e) => {
+        if (enableTool && !hotkeyDepressed) {
+            e.stopPropagation();
+            //e.preventDefault();
+        }
+    })
+
     /**
      * If we click away from the artboard, we'll close the
      * redline panel.
@@ -398,19 +409,23 @@ function bindListeners() {
         closeRedline();
     });
 
-    // Listen for Ctrl which is our hotkey.
-    $(window).on('keydown', (e) => {
+    // Listen for our hotkey events.
+    $('html').on('keydown', (e) => {
+        console.log('keydown')
+        console.log(e.keyCode)
+        console.log(e.metaKey || e.ctrlKey)
         if (!hotkeyDepressed) {
-            if (e.keyCode == 17) {
+            if (e.metaKey || e.ctrlKey) {
+                closeRedline();
                 hotkeyDepressed = true;
-                $(window).on('keyup', (e) => {
-                    if (e.keyCode == 17) {
-                        $(window).off('keyup');
-                        hotkeyDepressed = false;
-                    }
-                });
             }
         }
+    });
+    $('html').on('keyup', (e) => {
+        console.log('keyup')
+        console.log(e.keyCode)
+        console.log(e.metaKey || e.ctrlKey)
+        hotkeyDepressed = false;
     });
 
     //*****Element Scrolling*****
@@ -425,20 +440,20 @@ function bindListeners() {
     });
 
     //*****Global Key Shortcuts*****
-    $(document).on('keydown', function (e) {
+    $('html').on('keydown', function (e) {
         switch (e.keyCode) {
             case 27:
                 closeRedline();
                 break;
             case 187:
-                if (e.ctrlKey) {
+                if (e.ctrlKey || e.metKey) {
                     e.preventDefault();
                     documentZoom += 10;
                     setZoom();
                 }
                 break;
             case 189:
-                if (e.ctrlKey) {
+                if (e.ctrlKey || e.metKey) {
                     e.preventDefault();
                     documentZoom -= 10;
                     setZoom();
