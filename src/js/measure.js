@@ -252,7 +252,7 @@ function setSharingLinks() {
 //*                                   Check our cookies.                                          *
 //*************************************************************************************************
 function checkState() {
-    var trackingCookie = getCookie('axure-tool-enabled'),
+    let trackingCookie = getCookie('axure-tool-enabled'),
         zoomCookie = getCookie('axure-tool-zoom');
 
     if (trackingCookie != '' && trackingCookie == 1) {
@@ -275,7 +275,7 @@ function checkState() {
 //*                                 Initialize our tool.                                          *
 //*************************************************************************************************
 function initTool() {
-    var width = 0,
+    let width = 0,
         height = 0,
         top = 0,
         left = 0,
@@ -386,18 +386,28 @@ function bindListeners() {
      * it this way so that we can block Axure's event listeners
      * when they bubble up.
      */
-    $('#base *').on('click', function (e) {
+    $('#base *').not('.annotation, .annnoteimage, .annnoteline').on('click', function (e) {
         if (enableTool && !hotkeyDepressed) {
             e.stopPropagation();
             e.preventDefault();
             elementClick($(this));
+        } else if (hotkeyDepressed && e.target.nodeName.toLowerCase() === 'select') {
+            /**
+             * There is a bug in chrome where key presses are lost
+             * when clicking on a select. To prevent the hotkeyDepressed
+             * flag from sticking, we just trigger a reset. I think it's
+             * better than sticking.
+             */
+            setTimeout(() => {
+                hotkeyDepressed = false;
+            }, 0);
         }
     });
 
-    $('#base *').on('mousedown mouseup', (e) => {
+    $('#base *').not('.annotation, .annnoteimage, .annnoteline').on('mousedown mouseup', (e) => {
         if (enableTool && !hotkeyDepressed) {
             e.stopPropagation();
-            //e.preventDefault();
+            e.preventDefault();
         }
     })
 
@@ -411,9 +421,6 @@ function bindListeners() {
 
     // Listen for our hotkey events.
     $('html').on('keydown', (e) => {
-        console.log('keydown')
-        console.log(e.keyCode)
-        console.log(e.metaKey || e.ctrlKey)
         if (!hotkeyDepressed) {
             if (e.metaKey || e.ctrlKey) {
                 closeRedline();
@@ -422,9 +429,6 @@ function bindListeners() {
         }
     });
     $('html').on('keyup', (e) => {
-        console.log('keyup')
-        console.log(e.keyCode)
-        console.log(e.metaKey || e.ctrlKey)
         hotkeyDepressed = false;
     });
 
@@ -520,7 +524,7 @@ function bindListeners() {
 
     //*****Intercept Dialog Openings*****
     $(document).on('dialogopen', '*', function (e) {
-        var dialogElement, tempZoom;
+        let dialogElement, tempZoom;
         e.stopImmediatePropagation();
         dialogElement = $(this);
         dialogElement.parent().find('.ui-button').html('<span class="ui-icon ui-icon-closethick">close</span>');
@@ -540,8 +544,9 @@ function bindListeners() {
     /* redline tool while a dialog was open. */
     /* Yes, I know it looks strange...       */
     /*****************************************/
-    $('body .annotation').on('mousedown', '*', function (e) {
-        var element, tempZoom;
+    $('#base .annotation').on('mousedown', '*', function (e) {
+        let element, tempZoom;
+
         e.stopPropagation();
         tempZoom = documentZoom;
         documentZoom = 100;
@@ -749,7 +754,7 @@ function elementClick(element) {
 function isRedlineElement(element) {
 
     // Removed 22 March 2018. Last in V1.1.4.
-    /* var redlineStatus, annotationStatus;
+    /* let redlineStatus, annotationStatus;
 
     redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
     annotationStatus = element.attr('class') === undefined ? '' : element.attr('class');
@@ -1219,7 +1224,7 @@ function clearRedlinePanel() {
 // Removed 20.2.18. Last used in V1.1.4.
 
 /*function findDeepestChild(element) {
-    var current = element;
+    let current = element;
     while (current.children().length > 1) {
         current = current.children();
     }
@@ -1230,9 +1235,9 @@ function clearRedlinePanel() {
 //*                      Set a tracking cookie for tool enabled/disabled.                         *
 //*************************************************************************************************
 function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
+    let d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
+    let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
@@ -1240,10 +1245,10 @@ function setCookie(cname, cvalue, exdays) {
 //*                                     Read cookies.                                             *
 //*************************************************************************************************
 function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
