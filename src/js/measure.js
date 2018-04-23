@@ -47,8 +47,7 @@ const pseudoClasses = {
     rgbaReg = /rgb(a)?\(\d+,(\s)?\d+,(\s+)\d+(,(\s+)?\d(\.\d+)?)?\)/,
     hexReg = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
-let toolPermitted,              // Boolean set true if tool is permitted to load on page.
-    enableTool,                 // Boolean set true when the tool is enabled.
+let enableTool,                 // Boolean set true when the tool is enabled.
     hotkeyDepressed,            // Boolean set true when user is holding down hotkey.
     cssProperties,              // List of all CSS properties we will collect for each element.
     documentZoom,               // Page zoom. Used to scale artboard.
@@ -71,7 +70,6 @@ let toolPermitted,              // Boolean set true if tool is permitted to load
 
 
 // Establish values for globals.
-toolPermitted = true;
 enableTool = true;
 hotkeyDepressed = false;
 documentZoom = 100;
@@ -404,12 +402,16 @@ function bindListeners() {
         }
     });
 
+    /**
+     * This is used to capture and prevent mousedown and mouseup
+     * events when the tool is enabled.
+     */
     $('#base *').not('.annotation, .annnoteimage, .annnoteline').on('mousedown mouseup', (e) => {
         if (enableTool && !hotkeyDepressed) {
             e.stopPropagation();
             e.preventDefault();
         }
-    })
+    });
 
     /**
      * If we click away from the artboard, we'll close the
@@ -428,7 +430,7 @@ function bindListeners() {
             }
         }
     });
-    $('html').on('keyup', (e) => {
+    $('html').on('keyup', () => {
         hotkeyDepressed = false;
     });
 
@@ -526,6 +528,7 @@ function bindListeners() {
     $(document).on('dialogopen', '*', function (e) {
         let dialogElement, tempZoom;
         e.stopImmediatePropagation();
+        closeRedline();
         dialogElement = $(this);
         dialogElement.parent().find('.ui-button').html('<span class="ui-icon ui-icon-closethick">close</span>');
         tempZoom = documentZoom;

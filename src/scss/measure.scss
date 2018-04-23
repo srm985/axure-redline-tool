@@ -48,7 +48,7 @@ $switch-transition: all 0.15s ease-in-out;
 
             opacity: 0.6;
             border-radius: 50%;
-            background-color: #fff;
+            background-color: $primary-color-white;
         }
         .double-bounce2 {
             -webkit-animation-delay: -1.0s;
@@ -504,7 +504,7 @@ body {
         margin-top: -1px;
         padding: 0 20px;
 
-        border-top: solid 1px #fff;
+        border-top: solid 1px $primary-color-white;
     }
     .active-attributes {
         display: block;
@@ -597,7 +597,7 @@ body {
 
         margin-left: -5px;
 
-        border-color: $primary-color-orange transparent transparent transparent;
+        border-color: $primary-color-orange transparent transparent;
     }
 }
 .link-copied-tooltip {
@@ -612,6 +612,6 @@ body {
 
         margin-left: -5px;
 
-        border-color: $primary-color-orange transparent transparent transparent;
+        border-color: $primary-color-orange transparent transparent;
     }
 }
