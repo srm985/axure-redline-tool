@@ -37,25 +37,40 @@
                 <span>+</span>
             </div>
         </div>
-        <div id="redline-panel">
-            <div id="menu-tab-column">
-                <div>
-                    <div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
+        <div class="links-wrapper">
+            <label>
+                <span class="opacity-adjust">Business:</span>
+                <span class="link-copied-tooltip">copied</span>
+                <input class="business-url opacity-adjust" value="" readonly="readonly" type="url"> </label>
+            <label>
+                <span class="opacity-adjust">Dev:</span>
+                <span class="link-copied-tooltip">copied</span>
+                <input class="dev-url opacity-adjust" value="" readonly="readonly" type="url"> </label>
+        </div>
+        <div class="redline-tool-enabler">
+            <div>Redline Tool Enable:</div>
+            <div class="switch">
+                <input id="toggle-enable" class="toggle-switch" type="checkbox">
+                <label for="toggle-enable"></label>
             </div>
-            <div id="redline-panel-menu-column">
-                <div class="redline-tool-enabler">
-                    <div>Redline Tool Enable:</div>
-                    <div class="switch">
-                        <input id="toggle-enable" class="toggle-switch" type="checkbox">
-                        <label for="toggle-enable"></label>
-                    </div>
+        </div>
+    </div>
+    <div id="redline-panel">
+        <div id="menu-tab-column">
+            <div>
+                <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
         </div>
+        <div id="redline-panel-menu-column"> </div>
+    </div>
+</div>
+<div class="loading-wrapper redline-layer">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
     </div>
 </div>

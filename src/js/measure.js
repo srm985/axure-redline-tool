@@ -1,44 +1,256 @@
-var enableTool = true,
-    documentZoom = 100,
-    previousZoom = documentZoom,
-    zoomWrapperPadding = 1000,
-    borderThickness = 1,
-    labelSpacing = 5,
-    hoveredElement = '',
-    selectedElement = '',
-    elemMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    elemSelectMeas = { width: 0, height: 0, offsetTop: 0, offsetLeft: 0 },
-    intraElemMeas = { top: 0, right: 0, bottom: 0, left: 0, trueTop: 0, trueRight: 0, trueBottom: 0, trueLeft: 0 },
-    dimensionMarkerWidth = 0,
-    dimensionMarkerHeight = 0,
-    documentClone,
-    elementPosition,
-    selectedMeasurements,
-    hoveredMeasurements;
+/********************************************************************************/
+/*                            Axure Redline Tool                                */
+/*                                                                              */
+/*                               Sean McQuay                                    */
+/*                   www.seanmcquay.com/axure-redline-tool.htm                  */
+/*                                                                              */
+/*                                 V2.0.1                                       */
+/********************************************************************************/
 
-var cssProperties = { 'properties': { 'width': '', 'height': '' }, 'styles': { 'background-color': '', 'opacity': '', 'border-top': '', 'border-right': '', 'border-bottom': '', 'border-left': '', 'border-top-style': '', 'border-right-style': '', 'border-bottom-style': '', 'border-left-style': '', 'border-top-width': '', 'border-right-width': '', 'border-bottom-width': '', 'border-left-width': '', 'border-top-color': '', 'border-right-color': '', 'border-bottom-color': '', 'border-left-color': '', 'border-style': '', 'border-width': '', 'border-color': '', 'border-top-left-radius': '', 'border': '', 'border-top-right-radius': '', 'border-bottom-right-radius': '', 'border-bottom-left-radius': '', 'border-radius': '', 'box-shadow': '' }, 'text': { 'font-family': '', 'font-size': '', 'font-weight': '', 'line-height': '', 'text-align': '', 'color': '', '_content': '' } };
+/**
+ * These are placeholders for injected code during app
+ * building. We use double quotes wrapped in a template
+ * literal to force Babel to generate single quotes so that
+ * we don't have to escape double quotes in the injected code.
+ */
+const pageHTML = `"Inject:HTML"`,
+    pageCSS = `"Inject:CSS"`,
+    jqueryURL = `<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>`,
+    jqueryUI = `<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>`,
+    jqueryUITheme = `<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">`,
+    fontURL = `<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">`,
+    jqueryMajorVersion = '3';
 
-$(window).on('load', function () {
-    //*****I'm not insane for doubley defining this function. This needs to be done otherwise the demo won't work.*****
-    onLoadFunction();
-});
+// Define the pseudo classes we'll be collecting for the element.
+const pseudoClasses = {
+    hover: {
+        pseudoName: 'Hover',
+        axureName: 'mouseOver',
+        keyName: "hover"
+    },
+    mousedown: {
+        pseudoName: 'MouseDown',
+        axureName: 'mouseDown',
+        keyName: 'mousedown'
+    },
+    disabled: {
+        pseudoName: 'Disabled',
+        axureName: 'disabled',
+        keyName: "disabled"
+    },
+    default: {
+        pseudoName: 'Default',
+        axureName: '',
+        keyName: "default"
+    }
+},
+    rgbaReg = /rgb(a)?\(\d+,(\s)?\d+,(\s+)\d+(,(\s+)?\d(\.\d+)?)?\)/,
+    hexReg = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
-//*************************************************************************************************
-//*                   Wrap onLoad events in function to call during demo.                         *
-//*************************************************************************************************
+let enableTool,                 // Boolean set true when the tool is enabled.
+    hotkeyDepressed,            // Boolean set true when user is holding down hotkey.
+    cssProperties,              // List of all CSS properties we will collect for each element.
+    documentZoom,               // Page zoom. Used to scale artboard.
+    previousZoom,               // Zoom tracker needed when we toggle zoom to capture true dimensions.
+    zoomWrapperPadding,         // Default padding of 1000px on all sides around artboard.
+    borderThickness,            // Used to set the thickness of all of our tracing lines.
+    labelSpacing,               // Default offset to space dimension markers correctly.
+    hoveredElement,             // Stores the current element over which the cursor is.
+    selectedElement,            // Stores the latest element clicked - not counting redline elements.
+    elemMeas,                   // Object containing scaled measurements of hovered element, used to position hover lines.
+    elemSelectMeas,             // Object containing scaled measurements of clicked element, used to position selected element lines.
+    interElemMeas,              // Object containing inter-element measurements.
+    dimensionMarkerWidth,       // Stores the numerical value of the selected element width.
+    dimensionMarkerHeight,      // Stores the numerical value of the selected element height.
+    elementPosition,            // Stores the offset position of annotation icon, used to position annotation.
+    selectedMeasurements,       // Stores the true, unscaled measurements of selected element.
+    hoveredMeasurements,        // Stores the true, unscaled measurements of the hovered element.
+    documentCSSList,            // A list of all CSS attributes for the entire document.
+    elementCSS;                 // An object containing all CSS attributes and pseudo-class attributes.
+
+
+// Establish values for globals.
+enableTool = true;
+hotkeyDepressed = false;
+documentZoom = 100;
+previousZoom = documentZoom;
+zoomWrapperPadding = 1000;
+borderThickness = 1;
+labelSpacing = 5;
+hoveredElement = '';
+selectedElement = '';
+elemMeas = {
+    width: 0,
+    height: 0,
+    offsetTop: 0,
+    offsetLeft: 0
+};
+elemSelectMeas = {
+    width: 0,
+    height: 0,
+    offsetTop: 0,
+    offsetLeft: 0
+};
+interElemMeas = {
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    trueTop: 0,
+    trueRight: 0,
+    trueBottom: 0,
+    trueLeft: 0
+};
+dimensionMarkerWidth = 0;
+dimensionMarkerHeight = 0;
+cssProperties = {
+    'properties': {
+        'width': '',
+        'height': ''
+    },
+    'styles': {
+        'background-color': '',
+        'opacity': '',
+        'outline': '',
+        'border-top': '',
+        'border-right': '',
+        'border-bottom': '',
+        'border-left': '',
+        'border-top-style': '',
+        'border-right-style': '',
+        'border-bottom-style': '',
+        'border-left-style': '',
+        'border-top-width': '',
+        'border-right-width': '',
+        'border-bottom-width': '',
+        'border-left-width': '',
+        'border-top-color': '',
+        'border-right-color': '',
+        'border-bottom-color': '',
+        'border-left-color': '',
+        'border-style': '',
+        'border-width': '',
+        'border-color': '',
+        'border-top-left-radius': '',
+        'border': '',
+        'border-top-right-radius': '',
+        'border-bottom-right-radius': '',
+        'border-bottom-left-radius': '',
+        'border-radius': '',
+        'box-shadow': ''
+    },
+    'text': {
+        'font-family': '',
+        'font-size': '',
+        'font-weight': '',
+        'line-height': '',
+        'text-align': '',
+        'color': '',
+        '_content': ''
+    }
+};
+
+/**
+ * We begin by deploying our tool into the Axure environment
+ * by writing HTML and CSS to the page. We also load our version
+ * of jQuery and our font stack from Google.
+ */
+(function deployTool() {
+    if (checkToolPermitted()) {
+        document.write(fontURL + pageHTML + pageCSS);
+        if (!window.jQuery || parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
+            /**
+             * Either the page doesn't have jQuery or the major
+             * version isn't the latest. We also need to load
+             * jQuery UI to deal with annotations.
+             */
+            document.write(jqueryURL + jqueryUI + jqueryUITheme);
+            jQueryWait();
+        } else {
+            // Looks like jQuery is already on the page and up-to-date.
+            onLoadFunction();
+        }
+    }
+})();
+
+/**
+ * We keep checking back until jQuery has been loaded on
+ * the page. Once it's loaded we check to make sure it's
+ * at least the same major version as we're loading.
+ */
+function jQueryWait() {
+    if (typeof jQuery == 'undefined') {
+        setTimeout(() => {
+            jQueryWait();
+        }, 50);
+    } else if (parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
+        setTimeout(() => {
+            jQueryWait();
+        }, 50);
+    } else {
+        onLoadFunction();
+    }
+}
+
+/**
+ * This function first waits on the page to ensure all
+ * elements have been loaded. It then goes about
+ * initializing the redline tool. We don't use a listener
+ * because we also might have to load jQuery on the page.
+ */
 function onLoadFunction() {
-    checkState();
-    initTool();
-    documentClone = $('body').clone(true);
-    enableRedline();
-    setZoom();
+    // Check if the page load is complete.
+    if (document.readyState !== 'complete') {
+        setTimeout(() => {
+            onLoadFunction();
+        }, 50);
+    } else {
+        checkState();
+        initTool();
+        setSharingLinks();
+        buildCSSAttributesList();
+        // Last used V1.1.5 (14.4.18)
+        //documentClone = $('body').clone(true);
+        enableRedline();
+        setZoom();
+        bindListeners();
+    }
+}
+
+/**
+ * We first check to see if we're loading a dev
+ * or business link. If it's business, we won't
+ * permit the tool to load.
+ */
+function checkToolPermitted() {
+    const pageURL = window.parent.location.href;
+
+    return (/redline=business/).test(pageURL) ? false : true;
+}
+
+
+/**
+ * This function builds out our sharing links for business
+ * and developers.
+ */
+function setSharingLinks() {
+    const pageURL = window.parent.location.href;
+
+    let devURL = '',
+        businessURL = '';
+
+    devURL = pageURL.replace(/\.com(\/)?/, '.com?redline=dev');
+    businessURL = pageURL.replace(/\.com(\/)?/, '.com?redline=business');
+
+    $('.business-url').val(businessURL);
+    $('.dev-url').val(devURL);
 }
 
 //*************************************************************************************************
 //*                                   Check our cookies.                                          *
 //*************************************************************************************************
 function checkState() {
-    var trackingCookie = getCookie('axure-tool-enabled'),
+    let trackingCookie = getCookie('axure-tool-enabled'),
         zoomCookie = getCookie('axure-tool-zoom');
 
     if (trackingCookie != '' && trackingCookie == 1) {
@@ -61,7 +273,7 @@ function checkState() {
 //*                                 Initialize our tool.                                          *
 //*************************************************************************************************
 function initTool() {
-    var width = 0,
+    let width = 0,
         height = 0,
         top = 0,
         left = 0,
@@ -75,7 +287,8 @@ function initTool() {
         parentElementHorizontal,
         parentElementVertical;
 
-    $('.redline-tool-wrapper *').addClass('redline-layer'); //Label all redline tool elelemnts.
+    labelInternalElements();
+
     $('.redline-layer').hide();
     $('.redline-tool-wrapper').show();
     $('#top-control-panel').show();
@@ -119,6 +332,9 @@ function initTool() {
         }
         //*****Check if we've found an element with vertical-scrolling content.*****
         if (!hiddenHeight) {
+            if (maxHeight < top + height) {
+                //console.log($(this).attr('id'));
+            }
             maxHeight = maxHeight < top + height ? top + height : maxHeight;
         } else if (currentElement.height() > maxHeight) {
             currentElement.addClass('redline-layer');
@@ -144,28 +360,78 @@ function initTool() {
 //*************************************************************************************************
 function bindListeners() {
     //*****Enable/Disable Redline Tool*****
-    $('#redline-panel').on('change', '.switch', function () {
+    $('#top-control-panel').on('change', '.switch', function () {
         enableTool = $('.toggle-switch').prop('checked');
         enableRedline();
     });
 
-    //*****Element Hover*****
-    $('body').on('mouseover', '*', function (e) {
-        e.stopImmediatePropagation();
-        //clearRedline();
-        elementHover($(this));
+    /**
+    * Here we handle element hovers. We're binding event listeners
+    * to every component. This is inefficient but we have to do
+    * it this way so that we can block Axure's event listeners
+    * when they bubble up.
+    */
+    $('#base *').on('mouseover', function (e) {
+        if (enableTool && !hotkeyDepressed) {
+            e.stopPropagation();
+            elementHover($(this));
+        }
     });
 
-    //*****Element Click/Clickaway*****
-    $('body').on('click', '*', function (e) {
-        // Removed 20.2.18. Last used V1.1.4.
-        //e.stopImmediatePropagation();
-        e.stopPropagation();
-        if ($(this).hasClass('zoom-wrapper') || $(this).attr('id') == 'base') {
-            closeRedline();
-        } else {
+    /**
+     * Here we handle element clicks. We're binding event listeners
+     * to every component. This is inefficient but we have to do
+     * it this way so that we can block Axure's event listeners
+     * when they bubble up.
+     */
+    $('#base *').not('.annotation, .annnoteimage, .annnoteline').on('click', function (e) {
+        if (enableTool && !hotkeyDepressed) {
+            e.stopPropagation();
+            e.preventDefault();
             elementClick($(this));
+        } else if (hotkeyDepressed && e.target.nodeName.toLowerCase() === 'select') {
+            /**
+             * There is a bug in chrome where key presses are lost
+             * when clicking on a select. To prevent the hotkeyDepressed
+             * flag from sticking, we just trigger a reset. I think it's
+             * better than sticking.
+             */
+            setTimeout(() => {
+                hotkeyDepressed = false;
+            }, 0);
         }
+    });
+
+    /**
+     * This is used to capture and prevent mousedown and mouseup
+     * events when the tool is enabled.
+     */
+    $('#base *').not('.annotation, .annnoteimage, .annnoteline').on('mousedown mouseup', (e) => {
+        if (enableTool && !hotkeyDepressed) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    });
+
+    /**
+     * If we click away from the artboard, we'll close the
+     * redline panel.
+     */
+    $('.zoom-wrapper, #base').click(() => {
+        closeRedline();
+    });
+
+    // Listen for our hotkey events.
+    $('html').on('keydown', (e) => {
+        if (!hotkeyDepressed) {
+            if (e.metaKey || e.ctrlKey) {
+                closeRedline();
+                hotkeyDepressed = true;
+            }
+        }
+    });
+    $('html').on('keyup', () => {
+        hotkeyDepressed = false;
     });
 
     //*****Element Scrolling*****
@@ -180,20 +446,20 @@ function bindListeners() {
     });
 
     //*****Global Key Shortcuts*****
-    $(document).on('keydown', function (e) {
+    $('html').on('keydown', function (e) {
         switch (e.keyCode) {
             case 27:
                 closeRedline();
                 break;
             case 187:
-                if (e.ctrlKey) {
+                if (e.ctrlKey || e.metKey) {
                     e.preventDefault();
                     documentZoom += 10;
                     setZoom();
                 }
                 break;
             case 189:
-                if (e.ctrlKey) {
+                if (e.ctrlKey || e.metKey) {
                     e.preventDefault();
                     documentZoom -= 10;
                     setZoom();
@@ -203,8 +469,15 @@ function bindListeners() {
     });
 
     //*****Autoselect Redline Panel Content****
-    $('#redline-panel').on('mouseup', 'input, textarea', function () {
+    $('.redline-tool-wrapper').on('mouseup', 'input, textarea', function () {
         $(this).select();
+        document.execCommand('Copy');
+        $(this).prev().find('.css-copied-tooltip').addClass('tooltip-active');
+        $(this).parent().find('.link-copied-tooltip').addClass('tooltip-active');
+        setTimeout(() => {
+            $(this).prev().find('.css-copied-tooltip').removeClass('tooltip-active');
+            $(this).parent().find('.link-copied-tooltip').removeClass('tooltip-active');
+        }, 750);
     });
 
     //*****Handle Zoom Controls*****
@@ -225,13 +498,17 @@ function bindListeners() {
     });
 
     //*****Toggle Color RGB/HEX*****
-    $('#top-control-panel').on('click', '#swatch-color', () => {
-        $('#input-color').val(cycleColorFormat($('#input-color').val()));
-    });
+    $('#redline-panel').on('click', '.color-swatch', function () {
+        let elemData = $(this).data('swatch').split('-'),
+            fieldWrapper = elemData[0] + '-attributes',
+            field = 'input';
 
-    //*****Toggle Background Color RGB/HEX*****
-    $('#top-control-panel').on('click', '#swatch-background-color', () => {
-        $('#input-background-color').val(cycleColorFormat($('#input-background-color').val()));
+        elemData.shift();
+        elemData.forEach((splitAttribute) => {
+            field += `-${splitAttribute}`;
+        });
+
+        $(`.${fieldWrapper} #${field}`).val(cycleColorFormat($(`.${fieldWrapper} #${field}`).val()));
     });
 
     //*****Pass Zoom Value Input*****
@@ -249,8 +526,9 @@ function bindListeners() {
 
     //*****Intercept Dialog Openings*****
     $(document).on('dialogopen', '*', function (e) {
-        var dialogElement, tempZoom;
+        let dialogElement, tempZoom;
         e.stopImmediatePropagation();
+        closeRedline();
         dialogElement = $(this);
         dialogElement.parent().find('.ui-button').html('<span class="ui-icon ui-icon-closethick">close</span>');
         tempZoom = documentZoom;
@@ -259,6 +537,7 @@ function bindListeners() {
         dialogElement.parent().offset({ top: (elementPosition.top + 5), left: elementPosition.left });
         documentZoom = tempZoom;
         setZoom();
+        preventDialogInteraction();
     });
 
     //*****Intercept Axure Dialog Nonsense*****
@@ -268,13 +547,21 @@ function bindListeners() {
     /* redline tool while a dialog was open. */
     /* Yes, I know it looks strange...       */
     /*****************************************/
-    $('body .annotation').on('mousedown', '*', function (e) {
-        var element, tempZoom;
+    $('#base .annotation').on('mousedown', '*', function (e) {
+        let element, tempZoom;
+
         e.stopPropagation();
         tempZoom = documentZoom;
         documentZoom = 100;
         setZoom();
-        element = $(this).parent().parent().find('.annnoteimage');
+
+        // We're trying to find the annotation icon.
+        if ($(this).hasClass('annnoteimage')) {
+            element = $(this);
+        } else if ($(this).hasClass('annnoteline')) {
+            element = $(this).parent().parent().find('.annnoteimage');
+        }
+
         elementPosition = element.offset();
         elementPosition.top += element.height();
         documentZoom = tempZoom;
@@ -285,7 +572,109 @@ function bindListeners() {
             $(this).trigger('click');
         }
         $(this).trigger('click');
+
+        /**
+         * Because we have this weird double click function,
+         * the dialog box would snap back to the annotation
+         * icon if it had been dragged away, so we hide it
+         * to prevent jank.
+         */
+        $('.ui-dialog').hide();
     });
+
+    // Listen for tab changes on pseudo classes and switch between tabs.
+    $('#redline-panel').on('click', '.pseudo-tabs .tab', function () {
+        $('.active-tab').removeClass('active-tab');
+        $(this).addClass('active-tab');
+        $('.active-attributes').removeClass('active-attributes');
+        $(`.pseudo-wrapper.${$(this).text()}-attributes`).addClass('active-attributes');
+    });
+}
+
+/**
+ * This function seeks out and flags all
+ * elements which should not be part of the
+ * redline tool interaction such as the UI
+ * and dialog boxes.
+ */
+function labelInternalElements() {
+    // Label all redline tool elements.
+    $('.redline-tool-wrapper *').addClass('redline-layer');
+
+    // Add no-interact classes where needed.
+    $('.annotation, .annotation *').addClass('no-interact');
+    preventDialogInteraction();
+}
+
+/**
+ * This is a one-off function which is called
+ * on tool load, and called every time a dialog
+ * box is opened.
+ */
+function preventDialogInteraction() {
+    $('.ui-dialog, .ui-dialog *').addClass('no-interact');
+}
+
+/**
+ * This functions parses through the whole document.styleSheets
+ * to create a lookup table for each element. We do it like this
+ * so that we can capture pseudo classes which Axure actually
+ * applies through JavaScript, not CSS.
+ */
+function buildCSSAttributesList() {
+    const documentStyles = document.styleSheets;
+
+    let selectorName,
+        cssContent,
+        pseudoFilter,
+        matched,
+        attributeObject;
+
+    documentCSSList = {};
+
+    // Iterate through list of stylesheets.
+    for (let i in documentStyles) {
+        try {
+            // Iterate through list of rules.
+            for (let j in documentStyles[i].cssRules) {
+                // Iterate through our defined pseudo classes.
+                matched = false;
+                for (let pseudoClass in pseudoClasses) {
+                    try {
+                        if (!matched && RegExp(pseudoClasses[pseudoClass].axureName).test(documentStyles[i].cssRules[j].selectorText)) {
+                            matched = true;
+                            // Extract our "pure" selector name.
+                            if (pseudoClasses[pseudoClass].axureName.length) {
+                                pseudoFilter = new RegExp('\\.' + pseudoClasses[pseudoClass].axureName);
+                                selectorName = documentStyles[i].cssRules[j].selectorText.replace(pseudoFilter, '').trim();
+                            } else {
+                                selectorName = documentStyles[i].cssRules[j].selectorText.trim();
+                            }
+                            cssContent = documentStyles[i].cssRules[j].cssText.replace(/^.*{/, '').replace('}', '').trim();
+                            // Check if the selector exists yet.
+                            if (!(selectorName in documentCSSList)) {
+                                documentCSSList[selectorName] = {};
+                            }
+                            // Update our master CSS attributes list.
+                            attributeObject = {};
+                            // Convert our CSS list into an object.
+                            cssContent.split(';').forEach((attribute) => {
+                                if (attribute.length) {
+                                    attributeObject[attribute.split(':')[0].trim()] = attribute.split(':')[1].trim();
+                                }
+                            })
+                            documentCSSList[selectorName][pseudoClasses[pseudoClass].keyName] = attributeObject;
+                        }
+                    } catch (err) {
+                        // Probably missing a key in the object.
+                    }
+                }
+            }
+        } catch (err) {
+            // Probably missing a key in the object.
+        }
+    }
+    console.log(documentCSSList);
 }
 
 //*************************************************************************************************
@@ -298,12 +687,13 @@ function enableRedline() {
         //$('.zoom-wrapper *').not('script, style').show();
         setZoom();
         $('.ui-dialog').remove();
-        $('*').off();
-        bindListeners();
+        //$('*').not('.annotation, .annotation *').off();
+        //bindListeners();
 
         // Keep intensive task from running until DOM manipulation is done.
+        // Don't put a pointer on script or style tags or annotations.
         setTimeout(() => {
-            $('.zoom-wrapper *').not('script, style').css('cursor', 'pointer');
+            $('.zoom-wrapper *').not('script, style, .annotation *').css('cursor', 'pointer');
         }, 0);
 
         $('.toggle-switch').prop('checked', true);
@@ -311,13 +701,11 @@ function enableRedline() {
     } else {
         setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function () {
-            $('html body').remove();
-            $('html').append(documentClone.clone(true));
+            // Last used V1.1.5 (14.4.18)
+            /* $('html body').remove();
+            $('html').append(documentClone.clone(true)); */
             $('.toggle-switch').prop('checked', false);
-            bindListeners();
-            // Removed 20.2.18. Last in V1.1.4.
-            //$('.zoom-wrapper').show();
-            //$('.zoom-wrapper *').not('script, style').show();
+            //bindListeners();
             closeRedline();
             setZoom();
         }, 250);
@@ -338,8 +726,8 @@ function elementHover(element) {
             if (hoveredElement[0] == selectedElement[0]) {
                 highlightSelectElement();
             } else if (selectedElement != '') {
-                measureIntraElementDistance();
-                drawIntraElementMarkers();
+                measureInterElementDistance();
+                drawInterElementMarkers();
             }
         } else if (!hoveredElement.hasClass('flicker-prevent')) {
             // Only clear our measurements if we're not hovering over them. Prevents flickering.
@@ -367,11 +755,19 @@ function elementClick(element) {
 //*              Ensure we aren't interacting with a redline-specific element.                    *
 //*************************************************************************************************
 function isRedlineElement(element) {
-    var redlineStatus, annotationStatus;
+
+    // Removed 22 March 2018. Last in V1.1.4.
+    /* let redlineStatus, annotationStatus;
 
     redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
     annotationStatus = element.attr('class') === undefined ? '' : element.attr('class');
     if (redlineStatus.search('redline-layer') == '-1' && annotationStatus.search(/ann(n)?ot/) == '-1' && annotationStatus.search('ui-dialog') == '-1') {
+        return false;
+    } else {
+        return true;
+    } */
+
+    if (!element.hasClass('redline-layer') && !element.hasClass('no-interact')) {
         return false;
     } else {
         return true;
@@ -444,113 +840,113 @@ function highlightSelectElement() {
 //*************************************************************************************************
 //*             Measure distance between selected element to newly hovered element.               *
 //*************************************************************************************************
-function measureIntraElementDistance() {
-    $.each(intraElemMeas, function (i) {
-        intraElemMeas[i] = 0;
+function measureInterElementDistance() {
+    $.each(interElemMeas, function (i) {
+        interElemMeas[i] = 0;
     });
 
     if (elemMeas.offsetTop > elemSelectMeas.offsetTop + elemSelectMeas.height) {
-        intraElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
-        intraElemMeas.trueBottom = Math.abs(selectedMeasurements.offsetTop + selectedMeasurements.height - hoveredMeasurements.offsetTop);
+        interElemMeas.bottom = Math.abs(elemSelectMeas.offsetTop + elemSelectMeas.height - elemMeas.offsetTop);
+        interElemMeas.trueBottom = Math.abs(selectedMeasurements.offsetTop + selectedMeasurements.height - hoveredMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop + elemMeas.height) {
-        intraElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
-        intraElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop + hoveredMeasurements.height - selectedMeasurements.offsetTop);
+        interElemMeas.top = Math.abs(elemMeas.offsetTop + elemMeas.height - elemSelectMeas.offsetTop);
+        interElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop + hoveredMeasurements.height - selectedMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop > elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height > elemMeas.offsetTop + elemMeas.height) {
-        intraElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
-        intraElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop - selectedMeasurements.offsetTop);
+        interElemMeas.top = Math.abs(elemMeas.offsetTop - elemSelectMeas.offsetTop);
+        interElemMeas.trueTop = Math.abs(hoveredMeasurements.offsetTop - selectedMeasurements.offsetTop);
     } else if (elemSelectMeas.offsetTop < elemMeas.offsetTop && elemSelectMeas.offsetTop + elemSelectMeas.height < elemMeas.offsetTop + elemMeas.height) {
-        intraElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
-        intraElemMeas.trueBottom = Math.abs((hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height));
+        interElemMeas.bottom = Math.abs((elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height));
+        interElemMeas.trueBottom = Math.abs((hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height));
     } else {
-        intraElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
-        intraElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
-        intraElemMeas.trueTop = selectedMeasurements.offsetTop - hoveredMeasurements.offsetTop;
-        intraElemMeas.trueBottom = (hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height);
+        interElemMeas.top = elemSelectMeas.offsetTop - elemMeas.offsetTop;
+        interElemMeas.bottom = (elemMeas.offsetTop + elemMeas.height) - (elemSelectMeas.offsetTop + elemSelectMeas.height);
+        interElemMeas.trueTop = selectedMeasurements.offsetTop - hoveredMeasurements.offsetTop;
+        interElemMeas.trueBottom = (hoveredMeasurements.offsetTop + hoveredMeasurements.height) - (selectedMeasurements.offsetTop + selectedMeasurements.height);
     }
 
     if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft + elemMeas.width) {
-        intraElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
-        intraElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredMeasurements.width - selectedMeasurements.offsetLeft);
+        interElemMeas.left = Math.abs(elemMeas.offsetLeft + elemMeas.width - elemSelectMeas.offsetLeft);
+        interElemMeas.trueLeft = Math.abs(elemMeas.offsetLeft + hoveredMeasurements.width - selectedMeasurements.offsetLeft);
     } else if (elemMeas.offsetLeft > elemSelectMeas.offsetLeft + elemSelectMeas.width) {
-        intraElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
-        intraElemMeas.trueRight = Math.abs(selectedMeasurements.offsetLeft + selectedMeasurements.width - hoveredMeasurements.offsetLeft);
+        interElemMeas.right = Math.abs(elemSelectMeas.offsetLeft + elemSelectMeas.width - elemMeas.offsetLeft);
+        interElemMeas.trueRight = Math.abs(selectedMeasurements.offsetLeft + selectedMeasurements.width - hoveredMeasurements.offsetLeft);
     } else if (elemSelectMeas.offsetLeft > elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width > elemMeas.offsetLeft + elemMeas.width) {
-        intraElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
-        intraElemMeas.trueLeft = Math.abs(hoveredMeasurements.offsetLeft - selectedMeasurements.offsetLeft);
+        interElemMeas.left = Math.abs(elemMeas.offsetLeft - elemSelectMeas.offsetLeft);
+        interElemMeas.trueLeft = Math.abs(hoveredMeasurements.offsetLeft - selectedMeasurements.offsetLeft);
     } else if (elemSelectMeas.offsetLeft < elemMeas.offsetLeft && elemSelectMeas.offsetLeft + elemSelectMeas.width < elemMeas.offsetLeft + elemMeas.width) {
-        intraElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
-        intraElemMeas.trueRight = Math.abs((hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width));
+        interElemMeas.right = Math.abs((elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width));
+        interElemMeas.trueRight = Math.abs((hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width));
     } else {
-        intraElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
-        intraElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
-        intraElemMeas.trueLeft = selectedMeasurements.offsetLeft - hoveredMeasurements.offsetLeft;
-        intraElemMeas.trueRight = (hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width);
+        interElemMeas.left = elemSelectMeas.offsetLeft - elemMeas.offsetLeft;
+        interElemMeas.right = (elemMeas.offsetLeft + elemMeas.width) - (elemSelectMeas.offsetLeft + elemSelectMeas.width);
+        interElemMeas.trueLeft = selectedMeasurements.offsetLeft - hoveredMeasurements.offsetLeft;
+        interElemMeas.trueRight = (hoveredMeasurements.offsetLeft + hoveredMeasurements.width) - (selectedMeasurements.offsetLeft + selectedMeasurements.width);
     }
 }
 
 //*************************************************************************************************
-//*                   Append our intra-element dimension lines and labels.                        *
+//*                   Append our inter-element dimension lines and labels.                        *
 //*************************************************************************************************
-function drawIntraElementMarkers() {
+function drawInterElementMarkers() {
     dimensionMarkerWidth = $('.dimension-layer').width();
     dimensionMarkerHeight = $('.dimension-layer').height();
 
     $('.dimension-layer').hide();
 
-    if (intraElemMeas.top != 0) {
+    if (interElemMeas.top != 0) {
         $('#t-measure').show();
-        $('#t-measure').height(Math.abs(intraElemMeas.top) - borderThickness);
-        if (intraElemMeas.top > 0) {
-            $('#t-measure').offset({ top: elemSelectMeas.offsetTop - intraElemMeas.top, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+        $('#t-measure').height(Math.abs(interElemMeas.top) - borderThickness);
+        if (interElemMeas.top > 0) {
+            $('#t-measure').offset({ top: elemSelectMeas.offsetTop - interElemMeas.top, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         } else {
             $('#t-measure').offset({ top: elemSelectMeas.offsetTop, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         }
         $('#t-dimension').show();
         $('#t-dimension > span').show();
-        $('#t-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueTop)));
-        $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (intraElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+        $('#t-dimension > span').text(Math.round(Math.abs(interElemMeas.trueTop)));
+        $('#t-dimension').offset({ top: elemSelectMeas.offsetTop - (interElemMeas.top / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
-    if (intraElemMeas.right != 0) {
+    if (interElemMeas.right != 0) {
         $('#r-measure').show();
-        $('#r-measure').width(Math.abs(intraElemMeas.right) - borderThickness);
-        if (intraElemMeas.right > 0) {
+        $('#r-measure').width(Math.abs(interElemMeas.right) - borderThickness);
+        if (interElemMeas.right > 0) {
             $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width });
         } else {
-            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + intraElemMeas.right });
+            $('#r-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft + elemSelectMeas.width + interElemMeas.right });
         }
 
         $('#r-dimension').show();
         $('#r-dimension > span').show();
-        $('#r-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueRight)));
-        $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (intraElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
+        $('#r-dimension > span').text(Math.round(Math.abs(interElemMeas.trueRight)));
+        $('#r-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft + elemSelectMeas.width + (interElemMeas.right / 2) - (dimensionMarkerWidth / 2) });
     }
-    if (intraElemMeas.bottom != 0) {
+    if (interElemMeas.bottom != 0) {
         $('#b-measure').show();
-        $('#b-measure').height(Math.abs(intraElemMeas.bottom) - borderThickness);
-        if (intraElemMeas.bottom > 0) {
+        $('#b-measure').height(Math.abs(interElemMeas.bottom) - borderThickness);
+        if (interElemMeas.bottom > 0) {
             $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         } else {
-            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + intraElemMeas.bottom, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
+            $('#b-measure').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + interElemMeas.bottom, left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) });
         }
 
         $('#b-dimension').show();
         $('#b-dimension > span').show();
-        $('#b-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueBottom)));
-        $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (intraElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
+        $('#b-dimension > span').text(Math.round(Math.abs(interElemMeas.trueBottom)));
+        $('#b-dimension').offset({ top: elemSelectMeas.offsetTop + elemSelectMeas.height + (interElemMeas.bottom / 2) - (dimensionMarkerHeight / 2), left: elemSelectMeas.offsetLeft + (elemSelectMeas.width / 2) + labelSpacing });
     }
-    if (intraElemMeas.left != 0) {
+    if (interElemMeas.left != 0) {
         $('#l-measure').show();
-        $('#l-measure').width(Math.abs(intraElemMeas.left) - borderThickness);
-        if (intraElemMeas.left > 0) {
-            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft - intraElemMeas.left });
+        $('#l-measure').width(Math.abs(interElemMeas.left) - borderThickness);
+        if (interElemMeas.left > 0) {
+            $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft - interElemMeas.left });
         } else {
             $('#l-measure').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2), left: elemSelectMeas.offsetLeft });
         }
 
         $('#l-dimension').show();
         $('#l-dimension > span').show();
-        $('#l-dimension > span').text(Math.round(Math.abs(intraElemMeas.trueLeft)));
-        $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (intraElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
+        $('#l-dimension > span').text(Math.round(Math.abs(interElemMeas.trueLeft)));
+        $('#l-dimension').offset({ top: elemSelectMeas.offsetTop + (elemSelectMeas.height / 2) - dimensionMarkerHeight - labelSpacing, left: elemSelectMeas.offsetLeft - (interElemMeas.left / 2) - (dimensionMarkerWidth / 2) });
     }
 }
 
@@ -558,121 +954,242 @@ function drawIntraElementMarkers() {
 //*                                Update our redline spec panel.                                 *
 //*************************************************************************************************
 function updateRedlinePanel(element) {
-    var propMatch;
+    elementCSS = {};
 
-    $.each(cssProperties, function (i) {
-        $.each(cssProperties[i], function (_i) {
-            if (_i == '_content') {
-                cssProperties[i][_i] = element.text().trim();
-            } else {
-                cssProperties[i][_i] = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+    if (element[0].id.length && documentCSSList['#' + element[0].id] !== undefined) {
+        for (let pseudoClass in pseudoClasses) {
+            // We will only create keys for pseudo classes that have attributes.
+            if (pseudoClasses[pseudoClass].keyName in documentCSSList['#' + element[0].id]) {
+                // Check if the key yet exists.
+                if (!(pseudoClasses[pseudoClass].keyName in elementCSS)) {
+                    elementCSS[pseudoClasses[pseudoClass].keyName] = {};
+                }
+                elementCSS[pseudoClasses[pseudoClass].keyName] = JSON.parse(JSON.stringify(compileElementCSS(element, pseudoClasses[pseudoClass])));
             }
-        });
-    });
-
-    //*****Concat granular values to shorthand and clear.*****
-    cssProperties['styles']['border-top'] = cssProperties['styles']['border-top-style'] + ' ' + cssProperties['styles']['border-top-width'] + ' ' + cssProperties['styles']['border-top-color'];
-    cssProperties['styles']['border-right'] = cssProperties['styles']['border-right-style'] + ' ' + cssProperties['styles']['border-right-width'] + ' ' + cssProperties['styles']['border-right-color'];
-    cssProperties['styles']['border-bottom'] = cssProperties['styles']['border-bottom-style'] + ' ' + cssProperties['styles']['border-bottom-width'] + ' ' + cssProperties['styles']['border-bottom-color'];
-    cssProperties['styles']['border-left'] = cssProperties['styles']['border-left-style'] + ' ' + cssProperties['styles']['border-left-width'] + ' ' + cssProperties['styles']['border-left-color'];
-    cssProperties['styles']['border-top-style'] = '';
-    cssProperties['styles']['border-right-style'] = '';
-    cssProperties['styles']['border-bottom-style'] = '';
-    cssProperties['styles']['border-left-style'] = '';
-    cssProperties['styles']['border-top-width'] = '';
-    cssProperties['styles']['border-right-width'] = '';
-    cssProperties['styles']['border-bottom-width'] = '';
-    cssProperties['styles']['border-left-width'] = '';
-    cssProperties['styles']['border-top-color'] = '';
-    cssProperties['styles']['border-right-color'] = '';
-    cssProperties['styles']['border-bottom-color'] = '';
-    cssProperties['styles']['border-left-color'] = '';
-
-    //*****Clear our border attribute tags because we'll populate them later.*****
-    cssProperties['styles']['border-style'] = '';
-    cssProperties['styles']['border-width'] = '';
-    cssProperties['styles']['border-color'] = '';
-
-    //*****Check if we have matching border attributes and consolidate.*****
-    propMatch = cssProperties['styles']['border-top'];
-    if (propMatch != '' && propMatch == cssProperties['styles']['border-right'] && propMatch == cssProperties['styles']['border-bottom'] && propMatch == cssProperties['styles']['border-left']) {
-        cssProperties['styles']['border-top'] = '';
-        cssProperties['styles']['border-right'] = '';
-        cssProperties['styles']['border-bottom'] = '';
-        cssProperties['styles']['border-left'] = '';
-
-        cssProperties['styles']['border-style'] = selectedElement.css('border-top-style');
-        if (cssProperties['styles']['border-style'] != 'none') {
-            cssProperties['styles']['border-width'] = selectedElement.css('border-top-width');
-            cssProperties['styles']['border-color'] = selectedElement.css('border-top-color');
-            cssProperties['styles']['border'] = cssProperties['styles']['border-style'] + ' ' + cssProperties['styles']['border-width'] + ' ' + cssProperties['styles']['border-color'];
         }
     } else {
-        cssProperties['styles']['border-style'] = '';
-        cssProperties['styles']['border-width'] = '';
-        cssProperties['styles']['border-color'] = '';
+        elementCSS['default'] = JSON.parse(JSON.stringify(compileElementCSS(element, pseudoClasses.default)));
     }
 
-    //*****Check if we have matching border-radius attributes and consolidate.*****
-    propMatch = cssProperties['styles']['border-top-left-radius'];
-    if (propMatch != '' && propMatch == cssProperties['styles']['border-top-right-radius'] && propMatch == cssProperties['styles']['border-bottom-right-radius'] && propMatch == cssProperties['styles']['border-bottom-left-radius']) {
-        cssProperties['styles']['border-radius'] = cssProperties['styles']['border-top-right-radius'];
-
-        cssProperties['styles']['border-top-left-radius'] = '';
-        cssProperties['styles']['border-top-right-radius'] = '';
-        cssProperties['styles']['border-bottom-right-radius'] = '';
-        cssProperties['styles']['border-bottom-left-radius'] = '';
-    }
-
-    //*****Clean up our font family attributes.*****
-    cssProperties['text']['font-family'] = cssProperties['text']['font-family'].replace('"', '').split(',')[0];
-
-    console.log(cssProperties);
+    console.log(elementCSS);
     clearRedlinePanel();
     appendRedlinePanel();
     $('#redline-panel').addClass('redline-panel-exposed');
 }
 
+/**
+ *
+ * @param element Our targetted element.
+ * @param pseudoClass The specific pseudo class we're targetting.
+ *
+ * This function takes in a targetted element and a pseudo class
+ * object and attempts to compile attributes. Once compiled, they
+ * are cleaned in preparation for displaying.
+ */
+function compileElementCSS(element, pseudoClass) {
+    let tempCSSProperties = JSON.parse(JSON.stringify(cssProperties)),
+        propMatch,
+        tempElementCSS,
+        tempCompiledCSS;
+
+    if (pseudoClass.keyName === 'default') {
+        // Fetch our default properties directly from element CSS.
+        $.each(tempCSSProperties, (i) => {
+            $.each(tempCSSProperties[i], (_i) => {
+                if (_i == '_content') {
+                    tempCSSProperties[i][_i] = element.text().trim();
+                } else {
+                    // Perform a quick check to see if we're on the opacity attribute.
+                    if (_i === 'opacity') {
+                        /**
+                         * Opacity is actually set on the parent wrapper
+                         * element i.e. "u1" but we can never click on
+                         * this element. We actually click on u1_div. This
+                         * acts as the parent but we wouldn't get the right
+                         * opacity so we have to step up one element.
+                         */
+                        if ((/u\d+_div/).test(element.attr('id'))) {
+                            tempElementCSS = element.parent().css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                        } else {
+                            tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                        }
+                    } else {
+                        tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    }
+                    //tempElementCSS = element.css(_i).replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    try {
+                        tempCompiledCSS = documentCSSList['#' + element[0].id][pseudoClass.keyName][_i].replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    } catch (err) {
+                        tempCompiledCSS = '';
+                    }
+
+                    /**
+                     * We check to see if there is a default attribute value
+                     * because it might be being overwritten by a pseudo class.
+                     */
+                    if (tempCompiledCSS.length) {
+                        tempCSSProperties[i][_i] = tempCompiledCSS;
+                    } else {
+                        tempCSSProperties[i][_i] = tempElementCSS;
+                    }
+                }
+            });
+        });
+    } else {
+        // Fetch pseudo class properties from our compiled attribute list.
+        $.each(tempCSSProperties, (i) => {
+            $.each(tempCSSProperties[i], (_i) => {
+                if (_i == '_content') {
+                    tempCSSProperties[i][_i] = element.text().trim();
+                } else {
+                    // The key may not even exist, so watch for errors.
+                    try {
+                        tempCSSProperties[i][_i] = documentCSSList['#' + element[0].id][pseudoClass.keyName][_i].replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    } catch (err) {
+                        tempCSSProperties[i][_i] = '';
+                    }
+                }
+            });
+        });
+    }
+
+    //*****Concat granular values to shorthand and clear.*****
+    tempCSSProperties['styles']['border-top'] = tempCSSProperties['styles']['border-top-style'] + ' ' + tempCSSProperties['styles']['border-top-width'] + ' ' + tempCSSProperties['styles']['border-top-color'];
+    tempCSSProperties['styles']['border-right'] = tempCSSProperties['styles']['border-right-style'] + ' ' + tempCSSProperties['styles']['border-right-width'] + ' ' + tempCSSProperties['styles']['border-right-color'];
+    tempCSSProperties['styles']['border-bottom'] = tempCSSProperties['styles']['border-bottom-style'] + ' ' + tempCSSProperties['styles']['border-bottom-width'] + ' ' + tempCSSProperties['styles']['border-bottom-color'];
+    tempCSSProperties['styles']['border-left'] = tempCSSProperties['styles']['border-left-style'] + ' ' + tempCSSProperties['styles']['border-left-width'] + ' ' + tempCSSProperties['styles']['border-left-color'];
+    tempCSSProperties['styles']['border-top-style'] = '';
+    tempCSSProperties['styles']['border-right-style'] = '';
+    tempCSSProperties['styles']['border-bottom-style'] = '';
+    tempCSSProperties['styles']['border-left-style'] = '';
+    tempCSSProperties['styles']['border-top-width'] = '';
+    tempCSSProperties['styles']['border-right-width'] = '';
+    tempCSSProperties['styles']['border-bottom-width'] = '';
+    tempCSSProperties['styles']['border-left-width'] = '';
+    tempCSSProperties['styles']['border-top-color'] = '';
+    tempCSSProperties['styles']['border-right-color'] = '';
+    tempCSSProperties['styles']['border-bottom-color'] = '';
+    tempCSSProperties['styles']['border-left-color'] = '';
+
+    //*****Clear our border attribute tags because we'll populate them later.*****
+    tempCSSProperties['styles']['border-style'] = '';
+    tempCSSProperties['styles']['border-width'] = '';
+    tempCSSProperties['styles']['border-color'] = '';
+
+    //*****Check if we have matching border attributes and consolidate.*****
+    propMatch = tempCSSProperties['styles']['border-top'];
+    if (propMatch != '' && propMatch == tempCSSProperties['styles']['border-right'] && propMatch == tempCSSProperties['styles']['border-bottom'] && propMatch == tempCSSProperties['styles']['border-left']) {
+        tempCSSProperties['styles']['border-top'] = '';
+        tempCSSProperties['styles']['border-right'] = '';
+        tempCSSProperties['styles']['border-bottom'] = '';
+        tempCSSProperties['styles']['border-left'] = '';
+
+        tempCSSProperties['styles']['border-style'] = selectedElement.css('border-top-style');
+        if (tempCSSProperties['styles']['border-style'] != 'none') {
+            tempCSSProperties['styles']['border-width'] = selectedElement.css('border-top-width');
+            tempCSSProperties['styles']['border-color'] = selectedElement.css('border-top-color');
+            tempCSSProperties['styles']['border'] = tempCSSProperties['styles']['border-style'] + ' ' + tempCSSProperties['styles']['border-width'] + ' ' + tempCSSProperties['styles']['border-color'];
+        }
+    } else {
+        tempCSSProperties['styles']['border-style'] = '';
+        tempCSSProperties['styles']['border-width'] = '';
+        tempCSSProperties['styles']['border-color'] = '';
+    }
+
+    //*****Check if we have matching border-radius attributes and consolidate.*****
+    propMatch = tempCSSProperties['styles']['border-top-left-radius'];
+    if (propMatch != '' && propMatch == tempCSSProperties['styles']['border-top-right-radius'] && propMatch == tempCSSProperties['styles']['border-bottom-right-radius'] && propMatch == tempCSSProperties['styles']['border-bottom-left-radius']) {
+        tempCSSProperties['styles']['border-radius'] = tempCSSProperties['styles']['border-top-right-radius'];
+
+        tempCSSProperties['styles']['border-top-left-radius'] = '';
+        tempCSSProperties['styles']['border-top-right-radius'] = '';
+        tempCSSProperties['styles']['border-bottom-right-radius'] = '';
+        tempCSSProperties['styles']['border-bottom-left-radius'] = '';
+    }
+
+    //*****Clean up our font family attributes.*****
+    tempCSSProperties['text']['font-family'] = tempCSSProperties['text']['font-family'].replace('"', '').split(',')[0];
+
+    return tempCSSProperties;
+}
+
+
 //*************************************************************************************************
 //*                                Append each property section.                                  *
 //*************************************************************************************************
 function appendRedlinePanel() {
-    let swatch;
+    let swatch,
+        parentLabel;
 
-    $.each(cssProperties, function (i) {
-        $('#redline-panel-menu-column').append('<div class="redline-layer redline-panel-section"></div>');
-        $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
-        $.each(cssProperties[i], function (_i, _value) {
-            if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px') {
-                //*****Check if we need to add a color swatch.*****
-                if ((_i.replace('_', '') == 'color' || _i.replace('_', '') == 'background-color') && _value != 'transparent') {
-                    swatch = '<span class="redline-layer" id="swatch-' + _i.replace('_', '') + '" style="background-color:' + _value + ';"></span>';
-                } else {
-                    swatch = '';
+    // Check if the component has a label.
+    parentLabel = extractParentName();
+
+    if (parentLabel.length) {
+        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:<span class="css-copied-tooltip">copied</span></p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
+    }
+
+    // Create a wrapper for our pseudo class tabs.
+    $('#redline-panel-menu-column').append(`<div class="pseudo-tabs redline-layer"></div>`);
+
+    $.each(elementCSS, (pseudoClass) => {
+        // Apply each of our pseudo tabs as we discover them.
+        $('.pseudo-tabs').append(`<div class="${pseudoClass} tab redline-layer${pseudoClass === 'default' ? ' active-tab' : ''}"><span class="redline-layer">${pseudoClass}</span></div>`);
+        // Append a wrapper for each pseudo class attributes.
+        $('#redline-panel-menu-column').append(`<div class="redline-layer pseudo-wrapper ${pseudoClass}-attributes ${pseudoClass === 'default' ? 'active-attributes' : ''}"></div>`);
+
+        $.each(elementCSS[pseudoClass], (i) => {
+            $('.pseudo-wrapper:last').append('<div class="redline-layer redline-panel-section"></div>');
+            $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
+            $.each(elementCSS[pseudoClass][i], (_i, _value) => {
+                if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px' && !((/initial/).test(_value))) {
+                    //*****Check if we need to add a color swatch.*****
+                    if ((rgbaReg).test(_value) && _value != 'transparent') {
+                        let swatchOpacity,
+                            swatchColor;
+
+                        // If we have RGBA, we round our opacity to two decimals of precision.
+                        if ((/rgba/).test(_value)) {
+                            swatchOpacity = Math.round(Number(_value.match(rgbaReg)[0].match(/\d\.\d+/)[0]) * 100) / 100;
+                            swatchColor = _value.match(rgbaReg)[0].replace(' ', '').replace(/rgba\((\d+),(\d+),(\d+),(\d?\.\d+)\)/, `rgba($1, $2, $3, !*!)`);
+
+                            swatchColor = swatchColor.replace('!*!', swatchOpacity);
+
+                            // Finally, replace it in our CSS attribute as well.
+                            _value = _value.replace(rgbaReg, swatchColor);
+                        } else {
+                            swatchColor = _value.match(rgbaReg)[0];
+                        }
+
+                        swatch = `<span class="redline-layer color-swatch" data-swatch="${pseudoClass}-${_i.replace('_', '')}" style="background-color: ${swatchColor};"></span>`
+                    } else {
+                        swatch = '';
+                    }
+                    //$('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
+                    $('.redline-panel-section:last').append(`<p class="redline-layer">${_i.replace('_', '')}:${swatch}<span class="css-copied-tooltip">copied</span></p>`);
+                    if (_i != '_content') {
+                        $('.redline-panel-section:last').append('<input class="redline-layer" id="input-' + _i.replace('_', '') + '" value="' + _value + '" readonly="readonly"></input>');
+                    } else {
+                        $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
+                        $('.redline-panel-section textarea').text(_value);
+                    }
                 }
-                $('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
-                if (_i != '_content') {
-                    $('.redline-panel-section:last').append('<input class="redline-layer" id="input-' + _i.replace('_', '') + '" value="' + _value + '" readonly="readonly"></input>');
-                } else {
-                    $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
-                    $('.redline-panel-section textarea').text(_value);
-                }
+            });
+            //*****Remove any sections without CSS properties.*****
+            if ($('.redline-panel-section:last p').length <= 1) {
+                $('.redline-panel-section:last').remove();
             }
+
         });
-        //*****Remove any sections without CSS properties.*****
-        if ($('.redline-panel-section:last p').length <= 1) {
-            $('.redline-panel-section:last').remove();
+        //*****Remove a few items based on special queries.*****
+        if (elementCSS.default['text']['_content'].length < 1) {
+            $('p:contains("TEXT")').parent().parent().remove();
+        }
+        if (elementCSS.default['styles']['border-top-width'] == '0px') {
+            $('p:contains("border-color")').next().remove();
+            $('p:contains("border-color")').remove();
         }
 
     });
-    //*****Remove a few items based on special queries.*****
-    if (cssProperties['text']['_content'].length < 1) {
-        $('p:contains("TEXT")').parent().parent().remove();
-    }
-    if (cssProperties['styles']['border-top-width'] == '0px') {
-        $('p:contains("border-color")').next().remove();
-        $('p:contains("border-color")').remove();
-    }
 }
 
 //*************************************************************************************************
@@ -700,7 +1217,7 @@ function closeRedline() {
 //*                           Clear all content in redline panel.                                 *
 //*************************************************************************************************
 function clearRedlinePanel() {
-    $('#redline-panel-menu-column > *').not('div:first').remove();
+    $('#redline-panel-menu-column > *').remove();
 }
 
 //*************************************************************************************************
@@ -710,7 +1227,7 @@ function clearRedlinePanel() {
 // Removed 20.2.18. Last used in V1.1.4.
 
 /*function findDeepestChild(element) {
-    var current = element;
+    let current = element;
     while (current.children().length > 1) {
         current = current.children();
     }
@@ -721,9 +1238,9 @@ function clearRedlinePanel() {
 //*                      Set a tracking cookie for tool enabled/disabled.                         *
 //*************************************************************************************************
 function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
+    let d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
+    let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
@@ -731,10 +1248,10 @@ function setCookie(cname, cvalue, exdays) {
 //*                                     Read cookies.                                             *
 //*************************************************************************************************
 function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
@@ -790,11 +1307,20 @@ function getZoom() {
 function cycleColorFormat(colorValue) {
     let newFormat = '',
         colorArr,
-        opacity;
+        opacity,
+        valueTemplate = '';
+
+    if ((rgbaReg).test(colorValue)) {
+        valueTemplate = colorValue.replace(rgbaReg, '!*!');
+        colorValue = colorValue.match(rgbaReg)[0];
+    } else if ((hexReg).test(colorValue)) {
+        valueTemplate = colorValue.replace(hexReg, '!*!');
+        colorValue = colorValue.match(hexReg)[0];
+    }
 
     switch (true) {
         case /rgba/.test(colorValue):
-            colorArr = colorValue.replace(',', '').match(/(\d\.\d)|\d+/g);
+            colorArr = colorValue.match(/(\d\.\d+)|\d+/g);
             newFormat = '#';
             for (let i = 0; i < 3; i++) {
                 newFormat += ('0' + Number(colorArr[i]).toString(16).toUpperCase()).slice(-2);
@@ -818,7 +1344,7 @@ function cycleColorFormat(colorValue) {
             newFormat = `rgb(${parseInt(colorArr[0], 16)}, ${parseInt(colorArr[1], 16)}, ${parseInt(colorArr[2], 16)})`;
             break;
     }
-    return (newFormat);
+    return (valueTemplate.replace('!*!', newFormat));
 }
 
 //*************************************************************************************************
@@ -861,4 +1387,30 @@ function setMeasurements() {
     }
     documentZoom = tempZoom;
     setZoom(true);
+}
+
+/**
+ * This function steps up until it discovers the
+ * bouding parent component name, set in Axure.
+ */
+function extractParentName() {
+    let componentLabel = '',
+        cycleEnd = false,
+        currentElement = selectedElement;
+
+    while (!cycleEnd) {
+        try {
+            if (currentElement.data('label')) {
+                componentLabel = currentElement.data('label').trim();
+                cycleEnd = true;
+            } else if (currentElement.attr('id') === 'base') {
+                cycleEnd = true;
+            } else {
+                currentElement = currentElement.parent();
+            }
+        } catch (err) {
+            cycleEnd = true;
+        }
+    }
+    return (componentLabel);
 }
