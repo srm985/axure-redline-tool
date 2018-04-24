@@ -8,12 +8,12 @@ This plugin intends to mimic some of the functionality of the plugin [Measure](h
 
 Latest Version
 ```sh
-<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool/web/axure-redline-plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@latest/web/axure-redline-plugin.js"></script>
 ```
 
 Current Version
 ```sh
-<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@2.0.1/web/axure-redline-plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@2.0.2/web/axure-redline-plugin.js"></script>
 ```
 
 There are several ways to use this "install" this plugin. The easiest option is to copy the script link above into your AxShare project as a plugin. Copy the script of the version you'd like to use, or simply use the script marked "latest" to ensure you're always subscribed to the latest application updates. The code in the scripts above is served from a CDN to ensure a fast response, no matter your location.
