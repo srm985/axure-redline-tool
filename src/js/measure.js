@@ -1118,8 +1118,13 @@ function compileElementCSS(element, pseudoClass) {
 //*                                Append each property section.                                  *
 //*************************************************************************************************
 function appendRedlinePanel() {
+    const copyDialogText = 'copied';
+
     let swatch,
-        parentLabel;
+        parentLabel,
+        measuredCSSAttributes,
+        measuredCSSValues,
+        cssBlockProperties;
 
     // Check if the component has a label.
     parentLabel = extractParentName();
@@ -1165,7 +1170,7 @@ function appendRedlinePanel() {
                         swatch = '';
                     }
                     //$('.redline-panel-section:last').append('<p class="redline-layer">' + _i.replace('_', '') + ':' + swatch + '</p>');
-                    $('.redline-panel-section:last').append(`<p class="redline-layer">${_i.replace('_', '')}:${swatch}<span class="css-copied-tooltip">copied</span></p>`);
+                    $('.redline-panel-section:last').append(`<p class="redline-layer">${_i.replace('_', '')}:${swatch}<span class="css-copied-tooltip">${copyDialogText}</span></p>`);
                     if (_i != '_content') {
                         $('.redline-panel-section:last').append('<input class="redline-layer" id="input-' + _i.replace('_', '') + '" value="' + _value + '" readonly="readonly"></input>');
                     } else {
@@ -1189,6 +1194,37 @@ function appendRedlinePanel() {
             $('p:contains("border-color")').remove();
         }
 
+        measuredCSSAttributes = [];
+        measuredCSSValues = [];
+
+        // Iterate through displayed values.
+        $('.pseudo-wrapper:last .redline-panel-section').each(function () {
+            $(this).children('p').each((_index, _element) => {
+                measuredCSSAttributes.push(_element.innerText);
+            });
+            $(this).children('input').each((_index, _element) => {
+                measuredCSSValues.push(_element.value);
+            });
+        });
+
+        // Strip out any text content we might have captured.
+        measuredCSSAttributes = measuredCSSAttributes.filter(attribute => attribute !== 'content:');
+
+        // If we actually have attributes to display, prepare the block of attributes.
+        if (measuredCSSAttributes.length && measuredCSSAttributes.length === measuredCSSValues.length) {
+            cssBlockProperties = '';
+            measuredCSSAttributes.forEach((value, index) => {
+                cssBlockProperties += `${measuredCSSAttributes[index]} ${cycleColorFormat(measuredCSSValues[index], true)};\n`;
+            });
+            cssBlockProperties = cssBlockProperties.replace(/\n$/, '').replace(copyDialogText, '');
+
+            // Add our textarea and required labels.
+            $('.pseudo-wrapper:last').append('<div class="redline-layer redline-panel-section"></div>');
+            $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">CSS BLOCK ATTRIBUTES</p></b>');
+            $('.redline-panel-section:last').append(`<p class="redline-layer">properties:<span class="css-copied-tooltip">copied</span></p>`);
+            $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
+            $('.redline-panel-section:last textarea').text(cssBlockProperties);
+        }
     });
 }
 
@@ -1304,7 +1340,7 @@ function getZoom() {
 //*************************************************************************************************
 //*                          Cycle through available color formats.                               *
 //*************************************************************************************************
-function cycleColorFormat(colorValue) {
+function cycleColorFormat(colorValue, preserveValidOpacity = false) {
     let newFormat = '',
         colorArr,
         opacity,
@@ -1316,16 +1352,22 @@ function cycleColorFormat(colorValue) {
     } else if ((hexReg).test(colorValue)) {
         valueTemplate = colorValue.replace(hexReg, '!*!');
         colorValue = colorValue.match(hexReg)[0];
+    } else {
+        // If we end up not passing a color at all.
+        valueTemplate = colorValue;
     }
 
     switch (true) {
-        case /rgba/.test(colorValue):
+        case /rgba/.test(colorValue) && !preserveValidOpacity:
             colorArr = colorValue.match(/(\d\.\d+)|\d+/g);
             newFormat = '#';
             for (let i = 0; i < 3; i++) {
                 newFormat += ('0' + Number(colorArr[i]).toString(16).toUpperCase()).slice(-2);
             }
             newFormat += ` ${Number(colorArr[3]) * 100}%`;
+            break;
+        case /rgba/.test(colorValue) && preserveValidOpacity:
+            newFormat = colorValue;
             break;
         case /%/.test(colorValue):
             colorArr = colorValue.replace('#', '').slice(0, 6).match(/\w{2}/g);
