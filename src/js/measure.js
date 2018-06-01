@@ -1130,7 +1130,7 @@ function appendRedlinePanel() {
     parentLabel = extractParentName();
 
     if (parentLabel.length) {
-        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:<span class="css-copied-tooltip">copied</span></p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
+        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:<span class="css-copied-tooltip">${copyDialogText}</span></p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
     }
 
     // Create a wrapper for our pseudo class tabs.
@@ -1221,7 +1221,7 @@ function appendRedlinePanel() {
             // Add our textarea and required labels.
             $('.pseudo-wrapper:last').append('<div class="redline-layer redline-panel-section"></div>');
             $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">CSS BLOCK ATTRIBUTES</p></b>');
-            $('.redline-panel-section:last').append(`<p class="redline-layer">properties:<span class="css-copied-tooltip">copied</span></p>`);
+            $('.redline-panel-section:last').append(`<p class="redline-layer">properties:<span class="css-copied-tooltip">${copyDialogText}</span></p>`);
             $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
             $('.redline-panel-section:last textarea').text(cssBlockProperties);
         }
