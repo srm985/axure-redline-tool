@@ -1,6 +1,6 @@
 {
   "name": "axure-redline-tool",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "An interactive redline tool plugin for Axure remotely-hosted projects.",
   "main": "gulpfile.js",
   "scripts": {
