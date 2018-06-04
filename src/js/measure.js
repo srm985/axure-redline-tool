@@ -44,7 +44,7 @@ const pseudoClasses = {
         keyName: "default"
     }
 },
-    rgbaReg = /rgb(a)?\(\d+,(\s)?\d+,(\s+)\d+(,(\s+)?\d(\.\d+)?)?\)/,
+    rgbaReg = /rgb(a)?\(\d+,(\s+)?\d+,(\s+)?\d+(,(\s+)?\d(\.\d+)?)?\)/,
     hexReg = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
 let enableTool,                 // Boolean set true when the tool is enabled.
@@ -1124,13 +1124,14 @@ function appendRedlinePanel() {
         parentLabel,
         measuredCSSAttributes,
         measuredCSSValues,
-        cssBlockProperties;
+        cssBlockProperties,
+        rgbaExtraction;
 
     // Check if the component has a label.
     parentLabel = extractParentName();
 
     if (parentLabel.length) {
-        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:<span class="css-copied-tooltip">copied</span></p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
+        $('#redline-panel-menu-column').append(`<div class="redline-layer component-name-wrapper"><p class="redline-layer">parent component name:<span class="css-copied-tooltip">${copyDialogText}</span></p><input class="redline-layer" value="${parentLabel}" readonly="readonly"></div>`);
     }
 
     // Create a wrapper for our pseudo class tabs.
@@ -1146,20 +1147,32 @@ function appendRedlinePanel() {
             $('.pseudo-wrapper:last').append('<div class="redline-layer redline-panel-section"></div>');
             $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">' + i.toUpperCase() + '</p></b>');
             $.each(elementCSS[pseudoClass][i], (_i, _value) => {
-                if (_value !== undefined && _value.length > 0 && _value.indexOf('none') < 0 && _value != '0px' && !((/initial/).test(_value))) {
+                if (isValidAttribute(_i, _value)) {
                     //*****Check if we need to add a color swatch.*****
                     if ((rgbaReg).test(_value) && _value != 'transparent') {
                         let swatchOpacity,
                             swatchColor;
 
-                        // If we have RGBA, we round our opacity to two decimals of precision.
+                        /**
+                         * If we have RGBA, we round our opacity to two decimals of
+                         * precision. If the opacity is 1, we'll convert to RGB.
+                         */
                         if ((/rgba/).test(_value)) {
-                            swatchOpacity = Math.round(Number(_value.match(rgbaReg)[0].match(/\d\.\d+/)[0]) * 100) / 100;
-                            swatchColor = _value.match(rgbaReg)[0].replace(' ', '').replace(/rgba\((\d+),(\d+),(\d+),(\d?\.\d+)\)/, `rgba($1, $2, $3, !*!)`);
+                            // Extract our RGBA substring.
+                            rgbaExtraction = _value.match(rgbaReg)[0].replace(' ', '');
+
+                            swatchOpacity = Math.round(Number(rgbaExtraction.replace(/rgba\(\d+,\d+,\d+,(\d?(\.\d+)?)\)/, '$1')) * 100) / 100;
+                            swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, `rgba($1, $2, $3, !*!)`);
 
                             swatchColor = swatchColor.replace('!*!', swatchOpacity);
 
-                            // Finally, replace it in our CSS attribute as well.
+                            /**
+                             * If our RGBA opacity is 1, then let's just convert
+                             * things to RGB.
+                             */
+                            if (swatchOpacity == 1) {
+                                swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, `rgb($1, $2, $3)`);
+                            }
                             _value = _value.replace(rgbaReg, swatchColor);
                         } else {
                             swatchColor = _value.match(rgbaReg)[0];
@@ -1200,10 +1213,10 @@ function appendRedlinePanel() {
         // Iterate through displayed values.
         $('.pseudo-wrapper:last .redline-panel-section').each(function () {
             $(this).children('p').each((_index, _element) => {
-                measuredCSSAttributes.push(_element.innerText);
+                measuredCSSAttributes.push(_element.innerText.trim());
             });
             $(this).children('input').each((_index, _element) => {
-                measuredCSSValues.push(_element.value);
+                measuredCSSValues.push(_element.value.trim());
             });
         });
 
@@ -1221,11 +1234,31 @@ function appendRedlinePanel() {
             // Add our textarea and required labels.
             $('.pseudo-wrapper:last').append('<div class="redline-layer redline-panel-section"></div>');
             $('.redline-panel-section:last').append('<b class="redline-layer"><p class="redline-layer">CSS BLOCK ATTRIBUTES</p></b>');
-            $('.redline-panel-section:last').append(`<p class="redline-layer">properties:<span class="css-copied-tooltip">copied</span></p>`);
+            $('.redline-panel-section:last').append(`<p class="redline-layer">properties:<span class="css-copied-tooltip">${copyDialogText}</span></p>`);
             $('.redline-panel-section:last').append('<textarea class="redline-layer" readonly="readonly"></textarea>');
             $('.redline-panel-section:last textarea').text(cssBlockProperties);
         }
     });
+}
+
+/**
+ * Here we check to see if the attribute we're about
+ * to write out is something valid.
+ */
+function isValidAttribute(attribute, value) {
+    let isValid = false;
+
+    if (value !== undefined
+        && value.length > 0
+        && value.indexOf('none') < 0
+        && value != '0px'
+        && value !== 'medium'
+        && !((/initial/).test(value))
+        && !(attribute === 'opacity' && Number(value) == 1)) {
+        isValid = true;
+    }
+
+    return isValid;
 }
 
 //*************************************************************************************************
