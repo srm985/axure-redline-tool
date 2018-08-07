@@ -4,7 +4,7 @@
 /*                               Sean McQuay                                    */
 /*                   www.seanmcquay.com/axure-redline-tool.htm                  */
 /*                                                                              */
-/*                                 V2.0.2                                       */
+/*                                 V2.0.5                                       */
 /********************************************************************************/
 
 /**
@@ -234,7 +234,13 @@ function checkToolPermitted() {
  * and developers.
  */
 function setSharingLinks() {
-    const pageURL = window.parent.location.href;
+    const pageURL = window.parent.location.href,
+        disableAnnotations = 'fn=0';
+
+    // Ensure we always select the PAGES tab.
+    const selectHomePage = (pageURL) => {
+        return pageURL.replace(/g=\d&/, 'g=1&');
+    }
 
     let devURL = '',
         businessURL = '';
@@ -242,8 +248,10 @@ function setSharingLinks() {
     devURL = pageURL.replace(/\.com(\/)?/, '.com?redline=dev');
     businessURL = pageURL.replace(/\.com(\/)?/, '.com?redline=business');
 
-    $('.business-url').val(businessURL);
-    $('.dev-url').val(devURL);
+    businessURL = `${businessURL}&${disableAnnotations}`;
+
+    $('.business-url').val(selectHomePage(businessURL));
+    $('.dev-url').val(selectHomePage(devURL));
 }
 
 //*************************************************************************************************

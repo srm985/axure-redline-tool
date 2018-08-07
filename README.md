@@ -157,3 +157,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 * When RGBA colors are displayed with an opacity of 1, we now convert them to RGB.
 * If a CSS attribute opacity is 1, we now don't bother displaying it.
 * Resolved bug in Microsoft Edge creating issues when displaying RGBA color values.
+
+#### Version 2.0.5
+
+* When sharing the business link, annotations are disabled by default through the AxShare interface panel.
