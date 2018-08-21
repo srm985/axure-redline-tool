@@ -235,18 +235,32 @@ function checkToolPermitted() {
  */
 function setSharingLinks() {
     const pageURL = window.parent.location.href,
-        disableAnnotations = 'fn=0';
+        disableAnnotations = 'fn=0',
+        regexBaseURL = /^.*(\/|\.html)/;
 
     // Ensure we always select the PAGES tab.
     const selectHomePage = (pageURL) => {
         return pageURL.replace(/g=\d&/, 'g=1&');
-    }
+    };
+
+    // Extract our base URL up until last forward slash found or .html extension.
+    const extractedBaseURL = () => {
+        let extractedURL = '';
+
+        try {
+            extractedURL = pageURL.match(regexBaseURL)[0];
+        } catch (err) {
+            extractedURL = '';
+        }
+
+        return extractedURL;
+    };
 
     let devURL = '',
         businessURL = '';
 
-    devURL = pageURL.replace(/\.com(\/)?/, '.com?redline=dev');
-    businessURL = pageURL.replace(/\.com(\/)?/, '.com?redline=business');
+    devURL = pageURL.replace(extractedBaseURL(), `${extractedBaseURL()}?redline=dev`);
+    businessURL = pageURL.replace(extractedBaseURL(), `${extractedBaseURL()}?redline=business`);
 
     businessURL = `${businessURL}&${disableAnnotations}`;
 
