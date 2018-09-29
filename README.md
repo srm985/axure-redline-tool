@@ -165,3 +165,9 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 #### Version 2.0.6
 
 * Revised how sharing links are formed to accommodate private enterprise server links.
+
+#### Version 2.0.7
+
+* Corrected page loading of HTML, CSS, and Google fonts. Loading of fonts was causing incorrect jQuery measurements of elements.
+* Updated CSS to support RP9 artboard generation.
+* Updated to support RP9 annotations.
