@@ -4,7 +4,7 @@
 /*                               Sean McQuay                                    */
 /*                   www.seanmcquay.com/axure-redline-tool.htm                  */
 /*                                                                              */
-/*                                 V2.0.5                                       */
+/*                                 V2.0.7                                       */
 /********************************************************************************/
 
 /**
@@ -20,6 +20,13 @@ const pageHTML = `"Inject:HTML"`,
     jqueryUITheme = `<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">`,
     fontURL = `<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">`,
     jqueryMajorVersion = '3';
+
+const ANNOTATION_ELEMENTS = [
+    '.annotation',      // RP8 Syntax
+    '.annotation *',
+    '.annnote',         // RP9 Syntax
+    '.annnote *',
+]
 
 // Define the pseudo classes we'll be collecting for the element.
 const pseudoClasses = {
@@ -156,19 +163,25 @@ cssProperties = {
  * of jQuery and our font stack from Google.
  */
 (function deployTool() {
+    const BASE_DOCUMENT = pageHTML + pageCSS;
+
     if (checkToolPermitted()) {
-        document.write(fontURL + pageHTML + pageCSS);
         if (!window.jQuery || parseInt(jQuery.fn.jquery) != jqueryMajorVersion) {
             /**
              * Either the page doesn't have jQuery or the major
              * version isn't the latest. We also need to load
              * jQuery UI to deal with annotations.
              */
-            document.write(jqueryURL + jqueryUI + jqueryUITheme);
-            jQueryWait();
+            setTimeout(() => {
+                $('body').append(BASE_DOCUMENT + jqueryURL + jqueryUI + jqueryUITheme);
+                jQueryWait();
+            }, 0);
         } else {
             // Looks like jQuery is already on the page and up-to-date.
-            onLoadFunction();
+            setTimeout(() => {
+                $('body').append(BASE_DOCUMENT);
+                onLoadFunction();
+            }, 0);
         }
     }
 })();
@@ -209,8 +222,6 @@ function onLoadFunction() {
         initTool();
         setSharingLinks();
         buildCSSAttributesList();
-        // Last used V1.1.5 (14.4.18)
-        //documentClone = $('body').clone(true);
         enableRedline();
         setZoom();
         bindListeners();
@@ -328,20 +339,24 @@ function initTool() {
             parentElementHorizontal = currentElement;
             parentElementVertical = currentElement;
         }
+
         width = currentElement.outerWidth();
         height = currentElement.outerHeight();
         scrollWidthHidden = currentElement[0].scrollWidth;
         scrollHeightHidden = currentElement[0].scrollHeight;
         top = currentElement.offset().top;
         left = currentElement.offset().left;
+
         //*****Check if we're still within the parent containing horizontal-scrolling overflow.*****
         if (!$.contains(parentElementHorizontal[0], currentElement[0])) {
             hiddenWidth = false;
         }
+
         //*****Check if we're still within the parent containing vertical-scrolling overflow.*****
         if (!$.contains(parentElementVertical[0], currentElement[0])) {
             hiddenHeight = false;
         }
+
         //*****Check if we've found an element with horizontal-scrolling content.*****
         if (!hiddenWidth) {
             maxWidth = maxWidth < left + width ? left + width : maxWidth;
@@ -352,11 +367,9 @@ function initTool() {
             hiddenWidth = true;
             parentElementHorizontal = currentElement;
         }
+
         //*****Check if we've found an element with vertical-scrolling content.*****
         if (!hiddenHeight) {
-            if (maxHeight < top + height) {
-                //console.log($(this).attr('id'));
-            }
             maxHeight = maxHeight < top + height ? top + height : maxHeight;
         } else if (currentElement.height() > maxHeight) {
             currentElement.addClass('redline-layer');
@@ -393,7 +406,7 @@ function bindListeners() {
     * it this way so that we can block Axure's event listeners
     * when they bubble up.
     */
-    $('#base *').on('mouseover', function (e) {
+    $('#base, #base *').on('mouseover', function (e) {
         if (enableTool && !hotkeyDepressed) {
             e.stopPropagation();
             elementHover($(this));
@@ -406,7 +419,7 @@ function bindListeners() {
      * it this way so that we can block Axure's event listeners
      * when they bubble up.
      */
-    $('#base *').not('.annotation, .annnoteimage, .annnoteline').on('click', function (e) {
+    $('#base *').not(ANNOTATION_ELEMENTS.join(', ')).on('click', function (e) {
         if (enableTool && !hotkeyDepressed) {
             e.stopPropagation();
             e.preventDefault();
@@ -428,7 +441,7 @@ function bindListeners() {
      * This is used to capture and prevent mousedown and mouseup
      * events when the tool is enabled.
      */
-    $('#base *').not('.annotation, .annnoteimage, .annnoteline').on('mousedown mouseup', (e) => {
+    $('#base *').not(ANNOTATION_ELEMENTS.join(', ')).on('mousedown mouseup', (e) => {
         if (enableTool && !hotkeyDepressed) {
             e.stopPropagation();
             e.preventDefault();
@@ -620,11 +633,17 @@ function bindListeners() {
  * and dialog boxes.
  */
 function labelInternalElements() {
+    const NO_INTERACTION = 'no-interact';
+
     // Label all redline tool elements.
     $('.redline-tool-wrapper *').addClass('redline-layer');
 
     // Add no-interact classes where needed.
-    $('.annotation, .annotation *').addClass('no-interact');
+    $('.annotation, .annotation *').addClass(NO_INTERACTION);
+
+    // New for RP9. Don't interact with note icon.
+    $('.annnote, .annnote *').addClass(NO_INTERACTION);
+
     preventDialogInteraction();
 }
 
@@ -703,19 +722,20 @@ function buildCSSAttributesList() {
 //*                             Enable or disable our tool.                                       *
 //*************************************************************************************************
 function enableRedline() {
+    const RESTRICTED_ELEMENTS = [
+        ...ANNOTATION_ELEMENTS,
+        'script',
+        'style'
+    ];
+
     if (enableTool) {
-        // Removed 20.2.18. Last in V1.1.4.
-        //$('.zoom-wrapper').show();
-        //$('.zoom-wrapper *').not('script, style').show();
         setZoom();
         $('.ui-dialog').remove();
-        //$('*').not('.annotation, .annotation *').off();
-        //bindListeners();
 
         // Keep intensive task from running until DOM manipulation is done.
         // Don't put a pointer on script or style tags or annotations.
         setTimeout(() => {
-            $('.zoom-wrapper *').not('script, style, .annotation *').css('cursor', 'pointer');
+            $('.zoom-wrapper *').not(RESTRICTED_ELEMENTS.join(', ')).css('cursor', 'pointer');
         }, 0);
 
         $('.toggle-switch').prop('checked', true);
@@ -723,11 +743,7 @@ function enableRedline() {
     } else {
         setCookie('axure-tool-enabled', '0', 1);
         setTimeout(function () {
-            // Last used V1.1.5 (14.4.18)
-            /* $('html body').remove();
-            $('html').append(documentClone.clone(true)); */
             $('.toggle-switch').prop('checked', false);
-            //bindListeners();
             closeRedline();
             setZoom();
         }, 250);
@@ -777,18 +793,6 @@ function elementClick(element) {
 //*              Ensure we aren't interacting with a redline-specific element.                    *
 //*************************************************************************************************
 function isRedlineElement(element) {
-
-    // Removed 22 March 2018. Last in V1.1.4.
-    /* let redlineStatus, annotationStatus;
-
-    redlineStatus = element.attr('class') === undefined ? '' : element.attr('class');
-    annotationStatus = element.attr('class') === undefined ? '' : element.attr('class');
-    if (redlineStatus.search('redline-layer') == '-1' && annotationStatus.search(/ann(n)?ot/) == '-1' && annotationStatus.search('ui-dialog') == '-1') {
-        return false;
-    } else {
-        return true;
-    } */
-
     if (!element.hasClass('redline-layer') && !element.hasClass('no-interact')) {
         return false;
     } else {
@@ -800,8 +804,8 @@ function isRedlineElement(element) {
 //*                  Highlight our hovered element and add extension lines.                       *
 //*************************************************************************************************
 function highlightHoverElement() {
-    elemMeas.width = (hoveredElement.outerWidth() * (documentZoom / 100));
-    elemMeas.height = (hoveredElement.outerHeight() * (documentZoom / 100));
+    elemMeas.width = hoveredElement.outerWidth() * (documentZoom / 100);
+    elemMeas.height = hoveredElement.outerHeight() * (documentZoom / 100);
     elemMeas.offsetTop = hoveredElement.offset().top;
     elemMeas.offsetLeft = hoveredElement.offset().left;
     $('.hover-layer').show();
@@ -831,8 +835,8 @@ function highlightHoverElement() {
 //*                  Highlight our selected element and add extension lines.                      *
 //*************************************************************************************************
 function highlightSelectElement() {
-    elemSelectMeas.width = (selectedElement.outerWidth() * (documentZoom / 100));
-    elemSelectMeas.height = (selectedElement.outerHeight() * (documentZoom / 100));
+    elemSelectMeas.width = selectedElement.outerWidth() * (documentZoom / 100);
+    elemSelectMeas.height = selectedElement.outerHeight() * (documentZoom / 100);
     elemSelectMeas.offsetTop = selectedElement.offset().top;
     elemSelectMeas.offsetLeft = selectedElement.offset().left;
     $('.select-layer').show();

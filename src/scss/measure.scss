@@ -76,6 +76,9 @@ $switch-transition: all 0.15s ease-in-out;
     }
 }
 body {
+    position: static;
+    left: auto;
+
     overflow: scroll;
 
     width: 100vw;
