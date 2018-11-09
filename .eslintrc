@@ -1,33 +1,75 @@
 {
     "env": {
         "browser": true,
-        "es6": true,
-        "jquery": true
+        "jest": true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
-    },
+    "extends": "airbnb",
     "rules": {
-        "indent": [
-            "warn",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
-        "quotes": [
-            "warn",
-            "single"
-        ],
-        "semi": [
+        "arrow-parens": [
             "error",
             "always"
         ],
-        "no-unused-vars": [
-            "warn",
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "curly": [
+            "error",
             "all"
+        ],
+        "import/no-dynamic-require": false,
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    "./*.js",
+                    "./tasks/**/*.js"
+                ]
+            }
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "no-empty": [
+            "error",
+            {
+                "allowEmptyCatch": true
+            }
+        ],
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "react/jsx-indent": [
+            "error",
+            4
+        ],
+        "sort-imports": [
+            "error",
+            {
+                "ignoreCase": false,
+                "ignoreMemberSort": false,
+                "memberSyntaxSortOrder": [
+                    "single",
+                    "multiple",
+                    "all",
+                    "none"
+                ]
+            }
+        ],
+        "sort-keys": [
+            "error",
+            "asc",
+            {
+                "caseSensitive": true,
+                "natural": true
+            }
         ]
     }
 }
