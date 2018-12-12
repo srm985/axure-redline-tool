@@ -12,7 +12,12 @@
             }
         ],
         "brace-style": 2,
-        "class-name-format": 2,
+        "class-name-format": [
+            2,
+            {
+                "convention": "hyphenatedbem"
+            }
+        ],
         "clean-import-paths": 2,
         "declarations-before-nesting": 2,
         "empty-args": 1,

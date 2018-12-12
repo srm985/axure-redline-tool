@@ -1,0 +1,33 @@
+@import '../../styles/constants';
+
+.ArtboardModule {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $secondary-color-gray;
+    background-image: radial-gradient($background-color 1px, transparent 0);
+    background-size: 10px 10px;
+
+    &__artboard {
+        position: absolute;
+    }
+
+    // sass-lint:disable no-ids
+    #base {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+
+        transform-origin: center;
+    }
+
+    &.--tool-enabled {
+        * {
+            cursor: pointer;
+        }
+    }
+}

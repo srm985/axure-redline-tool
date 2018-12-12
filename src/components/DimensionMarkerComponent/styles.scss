@@ -1,0 +1,19 @@
+@import '../../styles/constants';
+
+.DimensionMarkerComponent {
+    font-size: 10px;
+    font-weight: bold;
+
+    position: absolute;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    letter-spacing: 1px;
+
+    color: $primary-color-white;
+    border-radius: 5px;
+    background-color: $primary-color-orange;
+}

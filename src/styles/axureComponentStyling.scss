@@ -1,0 +1,53 @@
+// sass-lint:disable no-important
+body {
+    position: static;
+    left: auto;
+    // overflow: scroll;
+
+    // sass-lint:disable property-units
+    width: 100vw;
+    height: 100vh;
+    // sass-lint:enable property-units
+
+    #base {
+        span {
+            display: inline-block;
+        }
+    }
+
+    .ui-dialog {
+        padding: 0 !important;
+
+        border: solid 1px $primary-color-gray !important;
+        border-radius: 3px !important;
+
+        * {
+            color: $primary-color-gray;
+        }
+    }
+
+    .ui-dialog-titlebar {
+        border: none !important;
+        background-color: $primary-color-gray !important;
+
+        button {
+            border-radius: 3px !important;
+            outline: none !important;
+        }
+    }
+
+    .ui-button-icon-only {
+        .ui-icon {
+            top: 0 !important;
+            left: 0 !important;
+        }
+    }
+
+    .ui-corner-all {
+        border-radius: 0;
+    }
+
+    .ui-dialog-content {
+        padding: 10px !important;
+    }
+}

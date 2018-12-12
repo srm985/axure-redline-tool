@@ -86,6 +86,82 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionLineComponent/styles.scss":
+/*!******************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionLineComponent/styles.scss ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".DimensionLineComponent {\n  position: absolute; }\n  .DimensionLineComponent.\\--hovered-solid {\n    border-width: 0;\n    border-style: solid;\n    border-color: #4860ff; }\n  .DimensionLineComponent.\\--hovered-dashed {\n    border-width: 0;\n    border-style: dashed;\n    border-color: #4860ff; }\n  .DimensionLineComponent.\\--selected-solid {\n    border-width: 0;\n    border-style: solid;\n    border-color: #e89a28; }\n  .DimensionLineComponent.\\--selected-dashed {\n    border-width: 0;\n    border-style: dashed;\n    border-color: #e89a28; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionMarkerComponent/styles.scss":
+/*!********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionMarkerComponent/styles.scss ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".DimensionMarkerComponent {\n  font-size: 10px;\n  font-weight: bold;\n  position: absolute;\n  z-index: 9999;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  letter-spacing: 1px;\n  color: #fff;\n  border-radius: 5px;\n  background-color: #e89a28; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/modules/ArtboardModule/styles.scss":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/modules/ArtboardModule/styles.scss ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".ArtboardModule {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #333;\n  background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);\n  background-size: 10px 10px; }\n  .ArtboardModule__artboard {\n    position: absolute; }\n  .ArtboardModule #base {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    transform-origin: center; }\n  .ArtboardModule.\\--tool-enabled * {\n    cursor: pointer; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/modules/HeaderModule/styles.scss":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/modules/HeaderModule/styles.scss ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".HeaderModule {\n  position: fixed;\n  z-index: 99999;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  width: 100%;\n  height: 60px;\n  padding: 0 30px;\n  opacity: 0.9;\n  background-color: #111111; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/styles.scss":
 /*!********************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/styles.scss ***!
@@ -95,10 +171,10 @@
 
 exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:400,700);", ""]);
 
 // module
-exports.push([module.i, "body {\n  background-color: green; }\n", ""]);
+exports.push([module.i, "body {\n  position: static;\n  left: auto;\n  width: 100vw;\n  height: 100vh; }\n  body #base span {\n    display: inline-block; }\n  body .ui-dialog {\n    padding: 0 !important;\n    border: solid 1px #555 !important;\n    border-radius: 3px !important; }\n    body .ui-dialog * {\n      color: #555; }\n  body .ui-dialog-titlebar {\n    border: none !important;\n    background-color: #555 !important; }\n    body .ui-dialog-titlebar button {\n      border-radius: 3px !important;\n      outline: none !important; }\n  body .ui-button-icon-only .ui-icon {\n    top: 0 !important;\n    left: 0 !important; }\n  body .ui-corner-all {\n    border-radius: 0; }\n  body .ui-dialog-content {\n    padding: 10px !important; }\n\nbody {\n  font-family: \"Lato\", sans-serif; }\n", ""]);
 
 // exports
 
@@ -295,6 +371,608 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
+/***/ "./node_modules/prop-types/factoryWithTypeCheckers.js":
+/*!************************************************************!*\
+  !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var assign = __webpack_require__(/*! object-assign */ "./node_modules/prop-types/node_modules/object-assign/index.js");
+
+var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ "./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+var checkPropTypes = __webpack_require__(/*! ./checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
+
+var printWarning = function() {};
+
+if (true) {
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+function emptyFunctionThatReturnsNull() {
+  return null;
+}
+
+module.exports = function(isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker,
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message) {
+    this.message = message;
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+
+  function createChainableTypeChecker(validate) {
+    if (true) {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+
+      if (secret !== ReactPropTypesSecret) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          var err = new Error(
+            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+            'Use `PropTypes.checkPropTypes()` to call them. ' +
+            'Read more at http://fb.me/use-check-prop-types'
+          );
+          err.name = 'Invariant Violation';
+          throw err;
+        } else if ( true && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (
+            !manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
+            manualPropTypeWarningCount < 3
+          ) {
+            printWarning(
+              'You are manually calling a React.PropTypes validation ' +
+              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
+              'and will throw in the standalone `prop-types` package. ' +
+              'You may be seeing this warning due to a third-party PropTypes ' +
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
+            );
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+
+    return chainedCheckType;
+  }
+
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+  }
+
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+       true ? printWarning('Invalid argument supplied to oneOf, expected an instance of array.') : undefined;
+      return emptyFunctionThatReturnsNull;
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+
+      var valuesString = JSON.stringify(expectedValues);
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (propValue.hasOwnProperty(key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+       true ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : undefined;
+      return emptyFunctionThatReturnsNull;
+    }
+
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        printWarning(
+          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
+        );
+        return emptyFunctionThatReturnsNull;
+      }
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+          return null;
+        }
+      }
+
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      // We need to check all keys in case some are required but missing from
+      // props.
+      var allKeys = assign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          return new PropTypeError(
+            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+          );
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+
+    return createChainableTypeChecker(validate);
+  }
+
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+
+  ReactPropTypes.checkPropTypes = checkPropTypes;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/prop-types/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/prop-types/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (true) {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(/*! ./factoryWithTypeCheckers */ "./node_modules/prop-types/factoryWithTypeCheckers.js")(isValidElement, throwOnDirectAccess);
+} else {}
+
+
+/***/ }),
+
 /***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*************************************************************!*\
   !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
@@ -315,6 +993,108 @@ module.exports = checkPropTypes;
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+
+/***/ "./node_modules/prop-types/node_modules/object-assign/index.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/prop-types/node_modules/object-assign/index.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
 
 
 /***/ }),
@@ -22010,18 +22790,41 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ "./src/Square/index.js":
-/*!*****************************!*\
-  !*** ./src/Square/index.js ***!
-  \*****************************/
+/***/ "./src/components/DimensionLineComponent/constants.js":
+/*!************************************************************!*\
+  !*** ./src/components/DimensionLineComponent/constants.js ***!
+  \************************************************************/
+/*! exports provided: LINE_TYPE_DASHED_HOVERED, LINE_TYPE_DASHED_SELECTED, LINE_TYPE_SOLID_HOVERED, LINE_TYPE_SOLID_SELECTED */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_DASHED_HOVERED", function() { return LINE_TYPE_DASHED_HOVERED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_DASHED_SELECTED", function() { return LINE_TYPE_DASHED_SELECTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_SOLID_HOVERED", function() { return LINE_TYPE_SOLID_HOVERED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_SOLID_SELECTED", function() { return LINE_TYPE_SOLID_SELECTED; });
+var LINE_TYPE_DASHED_HOVERED = 'hovered-dashed';
+var LINE_TYPE_DASHED_SELECTED = 'selected-dashed';
+var LINE_TYPE_SOLID_HOVERED = 'hovered-solid';
+var LINE_TYPE_SOLID_SELECTED = 'selected-solid';
+
+/***/ }),
+
+/***/ "./src/components/DimensionLineComponent/index.js":
+/*!********************************************************!*\
+  !*** ./src/components/DimensionLineComponent/index.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Square; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.scss */ "./src/components/DimensionLineComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22042,39 +22845,245 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Square =
+
+
+var DimensionLineComponent =
 /*#__PURE__*/
-function (_React$Component) {
-  _inherits(Square, _React$Component);
+function (_React$PureComponent) {
+  _inherits(DimensionLineComponent, _React$PureComponent);
 
-  function Square(props) {
-    var _this;
+  function DimensionLineComponent() {
+    _classCallCheck(this, DimensionLineComponent);
 
-    _classCallCheck(this, Square);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Square).call(this, props));
-    _this.state = {
-      random: 'true'
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(DimensionLineComponent).apply(this, arguments));
   }
 
-  _createClass(Square, [{
+  _createClass(DimensionLineComponent, [{
     key: "render",
     value: function render() {
-      var random = this.state.random;
-      console.log('injected!');
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "square",
-        type: "button"
-      }, "8585485".concat(random));
+      var _this$props = this.props,
+          _this$props$elementMa = _this$props.elementMarkerThickness,
+          elementMarkerThickness = _this$props$elementMa === void 0 ? 0 : _this$props$elementMa,
+          _this$props$height = _this$props.height,
+          height = _this$props$height === void 0 ? 0 : _this$props$height,
+          _this$props$left = _this$props.left,
+          left = _this$props$left === void 0 ? 0 : _this$props$left,
+          _this$props$lineType = _this$props.lineType,
+          lineType = _this$props$lineType === void 0 ? '' : _this$props$lineType,
+          _this$props$top = _this$props.top,
+          top = _this$props$top === void 0 ? 0 : _this$props$top,
+          _this$props$width = _this$props.width,
+          width = _this$props$width === void 0 ? 0 : _this$props$width;
+      var componentStyle = {
+        borderLeftWidth: !width ? elementMarkerThickness : 0,
+        borderTopWidth: !height ? elementMarkerThickness : 0,
+        height: height,
+        left: left,
+        top: top,
+        width: width
+      };
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(DimensionLineComponent.name, " ").concat(lineType ? "--".concat(lineType) : ''),
+        style: componentStyle
+      });
     }
   }]);
 
-  return Square;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+  return DimensionLineComponent;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+DimensionLineComponent.propTypes = {
+  elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  left: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  lineType: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired,
+  top: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  width: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (DimensionLineComponent);
+
+/***/ }),
+
+/***/ "./src/components/DimensionLineComponent/styles.scss":
+/*!***********************************************************!*\
+  !*** ./src/components/DimensionLineComponent/styles.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionLineComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/DimensionMarkerComponent/index.js":
+/*!**********************************************************!*\
+  !*** ./src/components/DimensionMarkerComponent/index.js ***!
+  \**********************************************************/
+/*! exports provided: VERTICAL_DIMENSION, HORIZONTAL_DIMENSION, DimensionMarkerComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VERTICAL_DIMENSION", function() { return VERTICAL_DIMENSION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HORIZONTAL_DIMENSION", function() { return HORIZONTAL_DIMENSION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DimensionMarkerComponent", function() { return DimensionMarkerComponent; });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.scss */ "./src/components/DimensionMarkerComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var VERTICAL_DIMENSION = 'VERTICAL';
+var HORIZONTAL_DIMENSION = 'HORIZONTAL';
+var DimensionMarkerComponent =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(DimensionMarkerComponent, _React$PureComponent);
+
+  function DimensionMarkerComponent() {
+    _classCallCheck(this, DimensionMarkerComponent);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DimensionMarkerComponent).apply(this, arguments));
+  }
+
+  _createClass(DimensionMarkerComponent, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          dimensionType = _this$props.dimensionType,
+          measurement = _this$props.measurement,
+          offsetLeft = _this$props.offsetLeft,
+          offsetTop = _this$props.offsetTop;
+      var top = 0;
+      var left = 0;
+
+      if (dimensionType === HORIZONTAL_DIMENSION) {
+        left = offsetLeft - DimensionMarkerComponent.width / 2;
+        top = offsetTop - DimensionMarkerComponent.height - DimensionMarkerComponent.padding;
+      } else if (dimensionType === VERTICAL_DIMENSION) {
+        left = offsetLeft + DimensionMarkerComponent.padding;
+        top = offsetTop - DimensionMarkerComponent.height / 2;
+      }
+
+      var componentStyle = {
+        height: DimensionMarkerComponent.height,
+        left: left,
+        top: top,
+        width: DimensionMarkerComponent.width
+      };
+      var cleanedMeasurement = Math.round(measurement);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: DimensionMarkerComponent.name,
+        style: componentStyle
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, cleanedMeasurement));
+    }
+  }]);
+
+  return DimensionMarkerComponent;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+_defineProperty(DimensionMarkerComponent, "height", 20);
+
+_defineProperty(DimensionMarkerComponent, "padding", 5);
+
+_defineProperty(DimensionMarkerComponent, "width", 30);
+
+DimensionMarkerComponent.propTypes = {
+  dimensionType: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired,
+  measurement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  offsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  offsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired
+};
+
+/***/ }),
+
+/***/ "./src/components/DimensionMarkerComponent/styles.scss":
+/*!*************************************************************!*\
+  !*** ./src/components/DimensionMarkerComponent/styles.scss ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionMarkerComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/globalConstants.js":
+/*!********************************!*\
+  !*** ./src/globalConstants.js ***!
+  \********************************/
+/*! exports provided: ANNOTATION_ELEMENTS, NO_INTERACT_CLASS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ANNOTATION_ELEMENTS", function() { return ANNOTATION_ELEMENTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO_INTERACT_CLASS", function() { return NO_INTERACT_CLASS; });
+var ANNOTATION_ELEMENTS = [// RP8 Syntax
+'.annnoteimage', '.annnoteline', '.annotation', '.ui-dialog', '.ui-dialog *', // RP9 Syntax
+'.annnote', '.annnote *'];
+var NO_INTERACT_CLASS = 'no-interact';
 
 /***/ }),
 
@@ -22082,27 +23091,1161 @@ function (_React$Component) {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: default */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return test; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Square__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Square */ "./src/Square/index.js");
+/* harmony import */ var _views_InspectView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/InspectView */ "./src/views/InspectView/index.js");
 /* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.scss */ "./src/styles.scss");
 /* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Square__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('redline-tool'));
-function test(value) {
-  return value + 1;
-}
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_views_InspectView__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('redline-tool'));
+
+/***/ }),
+
+/***/ "./src/interfacers/artboardInterfacer.js":
+/*!***********************************************!*\
+  !*** ./src/interfacers/artboardInterfacer.js ***!
+  \***********************************************/
+/*! exports provided: scrollCenterArtboard, calculateScrollAfterZoom, injectArtboard, sizeArtboard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scrollCenterArtboard", function() { return scrollCenterArtboard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateScrollAfterZoom", function() { return calculateScrollAfterZoom; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "injectArtboard", function() { return injectArtboard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sizeArtboard", function() { return sizeArtboard; });
+/**
+ * We invoke this function to handle document scrolling. This is useful
+ * after artboard sizing or when zooming.
+ *
+ * @param {object} scrollValues
+ */
+var scrollDocument = function scrollDocument(scrollValues) {
+  var left = scrollValues.left,
+      top = scrollValues.top;
+  $('html, body').scrollTop(top);
+  $('html, body').scrollLeft(left);
+};
+/**
+ * We invoke this function to correctly center our artboard after
+ * we have sized it and our wrapper.
+ *
+ * @param {Object} dimensions
+ */
+
+
+var scrollCenterArtboard = function scrollCenterArtboard(dimensions) {
+  var artboardHeight = dimensions.artboardHeight,
+      artboardWidth = dimensions.artboardWidth,
+      zoomWrapperPadding = dimensions.zoomWrapperPadding;
+  var left = zoomWrapperPadding - ($(window).innerWidth() - artboardWidth) / 2;
+  var top = zoomWrapperPadding - ($(window).innerHeight() - artboardHeight) / 2;
+  scrollDocument({
+    left: left,
+    top: top
+  });
+};
+/**
+ * We invoke this function to recenter our artboard after zooming to
+ * keep our zooms looking smooth.
+ *
+ * @param {object} dimensions
+ */
+
+var calculateScrollAfterZoom = function calculateScrollAfterZoom(dimensions) {
+  var artboardHeight = dimensions.artboardHeight,
+      artboardWidth = dimensions.artboardWidth,
+      documentZoom = dimensions.documentZoom,
+      previousZoom = dimensions.previousZoom;
+  var bodyScrollTop = $('body').scrollTop() === 0 ? $('html').scrollTop() : $('body').scrollTop();
+  var bodyScrollLeft = $('body').scrollLeft() === 0 ? $('html').scrollLeft() : $('body').scrollLeft();
+  var top = bodyScrollTop + (artboardHeight * (documentZoom / 100) - artboardHeight * (previousZoom / 100)) / 2;
+  var left = bodyScrollLeft + (artboardWidth * (documentZoom / 100) - artboardWidth * (previousZoom / 100)) / 2;
+  scrollDocument({
+    left: left,
+    top: top
+  });
+};
+/**
+ * If our base wrapper doesn't already have a background color set,
+ * we'll go ahead and set it as white.
+ */
+
+var styleArtboardBase = function styleArtboardBase() {
+  if ($('#base').css('background-color') === 'transparent' || $('#base').css('background-color').search(/rgba\(\d+,\s\d+,\s\d+,\s0\)/) >= 0) {
+    $('#base').css('background-color', '#FFFFFF');
+  }
+};
+
+var injectArtboard = function injectArtboard(className) {
+  return new Promise(function (resolve) {
+    var artboard = document.getElementsByClassName(className)[0];
+    var loadingTime = 0; // Keep checking back until AxShare has loaded.
+
+    var waitBaseRenderInterval = setInterval(function () {
+      var base = document.getElementById('base'); // Track our loading time.
+
+      loadingTime += 50;
+
+      if (base) {
+        clearInterval(waitBaseRenderInterval);
+        artboard.appendChild(base);
+        resolve(loadingTime);
+      }
+    }, 50);
+  });
+};
+var sizeArtboard = function sizeArtboard() {
+  return new Promise(function (resolve) {
+    var currentElement;
+    var height = 0;
+    var hiddenHeight = false;
+    var hiddenWidth = false;
+    var left = 0;
+    var maxHeight = 0;
+    var maxWidth = 0;
+    var parentElementHorizontal;
+    var parentElementVertical;
+    var scrollHeightHidden = 0;
+    var scrollWidthHidden = 0;
+    var top = 0;
+    var width = 0;
+    $('#base *').not('script, style').each(function (index, node) {
+      // Capture jQuery reference to node.
+      currentElement = $(node);
+
+      if (parentElementHorizontal === undefined && parentElementVertical === undefined) {
+        parentElementHorizontal = currentElement;
+        parentElementVertical = currentElement;
+      }
+
+      width = currentElement.outerWidth();
+      height = currentElement.outerHeight();
+      scrollWidthHidden = currentElement[0].scrollWidth;
+      scrollHeightHidden = currentElement[0].scrollHeight;
+      top = currentElement.offset().top; // eslint-disable-line prefer-destructuring
+
+      left = currentElement.offset().left; // eslint-disable-line prefer-destructuring
+      // Check if we're still within the parent containing horizontal-scrolling overflow.
+
+      if (!$.contains(parentElementHorizontal[0], currentElement[0])) {
+        hiddenWidth = false;
+      } // Check if we're still within the parent containing vertical-scrolling overflow.
+
+
+      if (!$.contains(parentElementVertical[0], currentElement[0])) {
+        hiddenHeight = false;
+      } // Check if we've found an element with horizontal-scrolling content.
+
+
+      if (!hiddenWidth) {
+        maxWidth = maxWidth < left + width ? left + width : maxWidth;
+      } else if (currentElement.width() > maxWidth) {
+        currentElement.addClass('redline-layer');
+      }
+
+      if (scrollWidthHidden > width && !hiddenWidth && width > 0) {
+        hiddenWidth = true;
+        parentElementHorizontal = currentElement;
+      } // Check if we've found an element with vertical-scrolling content.
+
+
+      if (!hiddenHeight) {
+        maxHeight = maxHeight < top + height ? top + height : maxHeight;
+      } else if (currentElement.height() > maxHeight) {
+        currentElement.addClass('redline-layer');
+      }
+
+      if (scrollHeightHidden > height && !hiddenHeight && height > 0) {
+        hiddenHeight = true;
+        parentElementVertical = currentElement;
+      }
+    });
+    styleArtboardBase();
+    resolve({
+      artboardHeight: maxHeight,
+      artboardWidth: maxWidth
+    });
+  });
+};
+
+/***/ }),
+
+/***/ "./src/interfacers/eventsInterfacer.js":
+/*!*********************************************!*\
+  !*** ./src/interfacers/eventsInterfacer.js ***!
+  \*********************************************/
+/*! exports provided: addGlobalMouseoverListener, addGlobalClickListener, addGlobalMouseToggleListener, addHotkeyListener, addGlobalZoomListener */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addGlobalMouseoverListener", function() { return addGlobalMouseoverListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addGlobalClickListener", function() { return addGlobalClickListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addGlobalMouseToggleListener", function() { return addGlobalMouseToggleListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addHotkeyListener", function() { return addHotkeyListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addGlobalZoomListener", function() { return addGlobalZoomListener; });
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+
+/**
+ * Here we handle element hovers. We're binding event listeners
+ * to every component. This is inefficient but we have to do
+ * it this way so that we can block Axure's event listeners
+ * when they bubble up.
+ *
+ * @param {function} callback
+ */
+
+var addGlobalMouseoverListener = function addGlobalMouseoverListener(callback) {
+  $(_globalConstants__WEBPACK_IMPORTED_MODULE_0__["ANNOTATION_ELEMENTS"].join(', ')).addClass(_globalConstants__WEBPACK_IMPORTED_MODULE_0__["NO_INTERACT_CLASS"]);
+  $('#base, #base *').on('mouseover', function (event) {
+    callback(event);
+  });
+};
+/**
+ * Here we handle element clicks. We're binding event listeners to every
+ * component. This is inefficient but we have to do it this way so that
+ * we can block Axure's event listeners when they bubble up.
+ *
+ * @param {function} callback
+ */
+
+var addGlobalClickListener = function addGlobalClickListener(callback) {
+  $('#base *').not(_globalConstants__WEBPACK_IMPORTED_MODULE_0__["ANNOTATION_ELEMENTS"].join(', ')).on('click', function (event) {
+    callback(event);
+  });
+};
+/**
+ * This is used to capture and prevent mousedown and mouseup events when the
+ * tool is enabled.
+ *
+ * @param {function} callback
+ */
+
+var addGlobalMouseToggleListener = function addGlobalMouseToggleListener(callback) {
+  $('#base *').not(_globalConstants__WEBPACK_IMPORTED_MODULE_0__["ANNOTATION_ELEMENTS"].join(', ')).on('mousedown mouseup', function (event) {
+    callback(event);
+  });
+};
+/**
+ * Here we listen for a keypress of our defined hotkeys. These keys disable the
+ * redline tool and all direct interaction with Axure elements while the key
+ * is depressed.
+ *
+ * @param {function} callback
+ */
+
+var addHotkeyListener = function addHotkeyListener(callback) {
+  $('html').on('keydown', function (event) {
+    if (event.metaKey || event.ctrlKey) {
+      callback(true);
+    }
+  });
+  $('html').on('keyup', function () {
+    callback(false);
+  });
+};
+/**
+ * Here we listener for zoom key combinations used to scale the artboard
+ * content larger or smaller.
+ *
+ * @param {function} callback
+ */
+
+var addGlobalZoomListener = function addGlobalZoomListener(callback) {
+  $('html').on('keydown', function (event) {
+    callback(event);
+  });
+};
+
+/***/ }),
+
+/***/ "./src/modules/ArtboardModule/index.js":
+/*!*********************************************!*\
+  !*** ./src/modules/ArtboardModule/index.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ElementInteractionModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementInteractionModule */ "./src/modules/ElementInteractionModule/index.js");
+/* harmony import */ var _interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfacers/artboardInterfacer */ "./src/interfacers/artboardInterfacer.js");
+/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ArtboardModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_5__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+
+
+
+var ArtboardModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(ArtboardModule, _React$PureComponent);
+
+  function ArtboardModule(props) {
+    var _this;
+
+    _classCallCheck(this, ArtboardModule);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ArtboardModule).call(this, props));
+    _this.artboardRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.updateArtboardMeasurements = _this.updateArtboardMeasurements.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      artboardOffsetLeft: 0,
+      artboardOffsetTop: 0,
+      artboardTrueHeight: 0,
+      artboardTrueWidth: 0
+    };
+    return _this;
+  }
+
+  _createClass(ArtboardModule, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var _this$props = this.props,
+          setArtboardDimensions = _this$props.setArtboardDimensions,
+          setAxureLoaded = _this$props.setAxureLoaded,
+          zoomWrapperPadding = _this$props.zoomWrapperPadding;
+      Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_3__["injectArtboard"])("".concat(ArtboardModule.name, "__artboard")).then(function () {
+        Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_3__["sizeArtboard"])().then(function (dimensions) {
+          var artboardHeight = dimensions.artboardHeight,
+              artboardWidth = dimensions.artboardWidth;
+          setArtboardDimensions({
+            artboardHeight: artboardHeight,
+            artboardWidth: artboardWidth
+          });
+          Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_3__["scrollCenterArtboard"])({
+            artboardHeight: artboardHeight,
+            artboardWidth: artboardWidth,
+            zoomWrapperPadding: zoomWrapperPadding
+          });
+          setAxureLoaded();
+
+          _this2.updateArtboardMeasurements();
+        });
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var previousZoom = prevProps.documentZoom;
+      var _this$props2 = this.props,
+          artboardHeight = _this$props2.artboardHeight,
+          artboardWidth = _this$props2.artboardWidth,
+          documentZoom = _this$props2.documentZoom;
+      this.updateArtboardMeasurements(); // Check if a zoom operation took place.
+
+      if (documentZoom !== previousZoom) {
+        Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_3__["calculateScrollAfterZoom"])({
+          artboardHeight: artboardHeight,
+          artboardWidth: artboardWidth,
+          documentZoom: documentZoom,
+          previousZoom: previousZoom
+        });
+      }
+    }
+  }, {
+    key: "updateArtboardMeasurements",
+    value: function updateArtboardMeasurements() {
+      var artboardElement = this.artboardRef.current;
+
+      var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__["default"])(artboardElement),
+          artboardOffsetLeft = _calculateGlobalOffse.offsetLeft,
+          artboardOffsetTop = _calculateGlobalOffse.offsetTop,
+          artboardTrueHeight = _calculateGlobalOffse.trueHeight,
+          artboardTrueWidth = _calculateGlobalOffse.trueWidth;
+
+      var _this$state = this.state,
+          currentArtboardOffsetLeft = _this$state.artboardOffsetLeft,
+          currentArtboardOffsetTop = _this$state.artboardOffsetTop,
+          currentArtboardTrueHeight = _this$state.artboardTrueHeight,
+          currentArtboardTrueWidth = _this$state.artboardTrueWidth; // Check if we should update state.
+
+      if (currentArtboardOffsetLeft !== artboardOffsetLeft || currentArtboardOffsetTop !== artboardOffsetTop || currentArtboardTrueHeight !== artboardTrueHeight || currentArtboardTrueWidth !== artboardTrueWidth) {
+        this.setState({
+          artboardOffsetLeft: artboardOffsetLeft,
+          artboardOffsetTop: artboardOffsetTop,
+          artboardTrueHeight: artboardTrueHeight,
+          artboardTrueWidth: artboardTrueWidth
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props3 = this.props,
+          artboardHeight = _this$props3.artboardHeight,
+          artboardWidth = _this$props3.artboardWidth,
+          artboardWrapperHeight = _this$props3.artboardWrapperHeight,
+          artboardWrapperWidth = _this$props3.artboardWrapperWidth,
+          documentZoom = _this$props3.documentZoom,
+          elementMarkerThickness = _this$props3.elementMarkerThickness,
+          hoveredElement = _this$props3.hoveredElement,
+          isToolEnabled = _this$props3.isToolEnabled,
+          selectedElement = _this$props3.selectedElement,
+          zoomWrapperPadding = _this$props3.zoomWrapperPadding;
+      var _this$state2 = this.state,
+          artboardOffsetLeft = _this$state2.artboardOffsetLeft,
+          artboardOffsetTop = _this$state2.artboardOffsetTop,
+          artboardTrueHeight = _this$state2.artboardTrueHeight,
+          artboardTrueWidth = _this$state2.artboardTrueWidth;
+      var artboardWrapperStyle = {
+        height: artboardWrapperHeight,
+        width: artboardWrapperWidth
+      };
+      var artboardStyle = {
+        height: artboardHeight,
+        transform: "scale(".concat(documentZoom / 100, ")"),
+        width: artboardWidth
+      };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "".concat(ArtboardModule.name, " ").concat(isToolEnabled ? '--tool-enabled' : ''),
+        style: artboardWrapperStyle
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "".concat(ArtboardModule.name, "__artboard"),
+        ref: this.artboardRef,
+        style: artboardStyle
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ElementInteractionModule__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        artboardOffsetLeft: artboardOffsetLeft,
+        artboardOffsetTop: artboardOffsetTop,
+        artboardTrueHeight: artboardTrueHeight,
+        artboardTrueWidth: artboardTrueWidth,
+        elementMarkerThickness: elementMarkerThickness,
+        hoveredElement: hoveredElement,
+        selectedElement: selectedElement,
+        zoomWrapperPadding: zoomWrapperPadding
+      }));
+    }
+  }]);
+
+  return ArtboardModule;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.PureComponent);
+
+ArtboardModule.propTypes = {
+  artboardHeight: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  artboardWidth: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  artboardWrapperHeight: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  artboardWrapperWidth: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  documentZoom: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(Element).isRequired,
+  isToolEnabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
+  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(Element).isRequired,
+  setArtboardDimensions: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  setAxureLoaded: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  zoomWrapperPadding: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (ArtboardModule);
+
+/***/ }),
+
+/***/ "./src/modules/ArtboardModule/styles.scss":
+/*!************************************************!*\
+  !*** ./src/modules/ArtboardModule/styles.scss ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/modules/ArtboardModule/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/modules/ElementInteractionModule/index.js":
+/*!*******************************************************!*\
+  !*** ./src/modules/ElementInteractionModule/index.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _HoveredElementModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../HoveredElementModule */ "./src/modules/HoveredElementModule/index.js");
+/* harmony import */ var _InterElementDimensionsModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../InterElementDimensionsModule */ "./src/modules/InterElementDimensionsModule/index.js");
+/* harmony import */ var _SelectedElementModule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../SelectedElementModule */ "./src/modules/SelectedElementModule/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var ElementInteractionModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(ElementInteractionModule, _React$PureComponent);
+
+  function ElementInteractionModule() {
+    _classCallCheck(this, ElementInteractionModule);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ElementInteractionModule).apply(this, arguments));
+  }
+
+  _createClass(ElementInteractionModule, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          artboardOffsetLeft = _this$props.artboardOffsetLeft,
+          artboardOffsetTop = _this$props.artboardOffsetTop,
+          artboardTrueHeight = _this$props.artboardTrueHeight,
+          artboardTrueWidth = _this$props.artboardTrueWidth,
+          elementMarkerThickness = _this$props.elementMarkerThickness,
+          hoveredElement = _this$props.hoveredElement,
+          selectedElement = _this$props.selectedElement;
+      var hoveredElementTarget = hoveredElement.target;
+      var selectedElementTarget = selectedElement.target;
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, hoveredElementTarget && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HoveredElementModule__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        artboardOffsetLeft: artboardOffsetLeft,
+        artboardOffsetTop: artboardOffsetTop,
+        artboardTrueHeight: artboardTrueHeight,
+        artboardTrueWidth: artboardTrueWidth,
+        elementMarkerThickness: elementMarkerThickness,
+        hoveredElement: hoveredElement
+      }), selectedElementTarget && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_SelectedElementModule__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        selectedElement: selectedElement
+      }), hoveredElementTarget && selectedElementTarget && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_InterElementDimensionsModule__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        hoveredElement: hoveredElement,
+        selectedElement: selectedElement
+      }));
+    }
+  }]);
+
+  return ElementInteractionModule;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+ElementInteractionModule.propTypes = {
+  artboardOffsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardOffsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardTrueHeight: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardTrueWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.instanceOf(Element).isRequired,
+  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.instanceOf(Element).isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (ElementInteractionModule);
+
+/***/ }),
+
+/***/ "./src/modules/HeaderModule/index.js":
+/*!*******************************************!*\
+  !*** ./src/modules/HeaderModule/index.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/HeaderModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var HeaderModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(HeaderModule, _React$PureComponent);
+
+  function HeaderModule() {
+    _classCallCheck(this, HeaderModule);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(HeaderModule).apply(this, arguments));
+  }
+
+  _createClass(HeaderModule, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: HeaderModule.name
+      });
+    }
+  }]);
+
+  return HeaderModule;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.PureComponent);
+
+/* harmony default export */ __webpack_exports__["default"] = (HeaderModule);
+
+/***/ }),
+
+/***/ "./src/modules/HeaderModule/styles.scss":
+/*!**********************************************!*\
+  !*** ./src/modules/HeaderModule/styles.scss ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/modules/HeaderModule/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/modules/HoveredElementModule/index.js":
+/*!***************************************************!*\
+  !*** ./src/modules/HoveredElementModule/index.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/DimensionLineComponent */ "./src/components/DimensionLineComponent/index.js");
+/* harmony import */ var _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/DimensionLineComponent/constants */ "./src/components/DimensionLineComponent/constants.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var HoveredElementModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(HoveredElementModule, _React$PureComponent);
+
+  function HoveredElementModule() {
+    _classCallCheck(this, HoveredElementModule);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(HoveredElementModule).apply(this, arguments));
+  }
+
+  _createClass(HoveredElementModule, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          artboardOffsetLeft = _this$props.artboardOffsetLeft,
+          artboardOffsetTop = _this$props.artboardOffsetTop,
+          artboardTrueHeight = _this$props.artboardTrueHeight,
+          artboardTrueWidth = _this$props.artboardTrueWidth,
+          elementMarkerThickness = _this$props.elementMarkerThickness,
+          _this$props$hoveredEl = _this$props.hoveredElement,
+          height = _this$props$hoveredEl.height,
+          offsetLeft = _this$props$hoveredEl.offsetLeft,
+          offsetTop = _this$props$hoveredEl.offsetTop,
+          width = _this$props$hoveredEl.width;
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: height,
+        left: offsetLeft - elementMarkerThickness,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_HOVERED"],
+        top: offsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: height,
+        left: offsetLeft + width,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_HOVERED"],
+        top: offsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: offsetLeft - elementMarkerThickness,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_HOVERED"],
+        top: offsetTop,
+        width: width + 2 * elementMarkerThickness
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: offsetLeft - elementMarkerThickness,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_HOVERED"],
+        top: offsetTop + height,
+        width: width + 2 * elementMarkerThickness
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: artboardTrueHeight,
+        left: offsetLeft - elementMarkerThickness,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
+        top: artboardOffsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: artboardTrueHeight,
+        left: offsetLeft + width,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
+        top: artboardOffsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: artboardOffsetLeft,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
+        top: offsetTop,
+        width: artboardTrueWidth
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: artboardOffsetLeft,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
+        top: offsetTop + height,
+        width: artboardTrueWidth
+      }));
+    }
+  }]);
+
+  return HoveredElementModule;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+HoveredElementModule.propTypes = {
+  artboardOffsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardOffsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardTrueHeight: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardTrueWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+    height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    width: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired
+  }).isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (HoveredElementModule);
+
+/***/ }),
+
+/***/ "./src/modules/InterElementDimensionsModule/index.js":
+/*!***********************************************************!*\
+  !*** ./src/modules/InterElementDimensionsModule/index.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/DimensionLineComponent */ "./src/components/DimensionLineComponent/index.js");
+/* harmony import */ var _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/DimensionMarkerComponent */ "./src/components/DimensionMarkerComponent/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var InterElementDimensionsModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(InterElementDimensionsModule, _React$PureComponent);
+
+  function InterElementDimensionsModule() {
+    _classCallCheck(this, InterElementDimensionsModule);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(InterElementDimensionsModule).apply(this, arguments));
+  }
+
+  _createClass(InterElementDimensionsModule, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          elementMarkerThickness = _this$props.elementMarkerThickness,
+          _this$props$hoveredEl = _this$props.hoveredElement,
+          hoveredElementHeight = _this$props$hoveredEl.height,
+          hoveredElementOffsetLeft = _this$props$hoveredEl.offsetLeft,
+          hoveredElementOffsetTop = _this$props$hoveredEl.offsetTop,
+          hoveredElementWidth = _this$props$hoveredEl.width,
+          _this$props$selectedE = _this$props.selectedElement,
+          selectedElementHeight = _this$props$selectedE.height,
+          selectedElementOffsetLeft = _this$props$selectedE.offsetLeft,
+          selectedElementOffsetTop = _this$props$selectedE.offsetTop,
+          selectedElementWidth = _this$props$selectedE.width;
+      var LINE_TYPE_SOLID = 'selected-solid';
+      var diffSelectedLeftHoveredRight = selectedElementOffsetLeft - (hoveredElementOffsetLeft + hoveredElementWidth);
+      var diffSelectedLeftHoveredLeft = selectedElementOffsetLeft - hoveredElementOffsetLeft;
+      var diffSelectedRightHoveredRight = hoveredElementOffsetLeft + hoveredElementWidth - (selectedElementOffsetLeft + selectedElementWidth);
+      var diffSelectedRightHoveredLeft = hoveredElementOffsetLeft - (selectedElementOffsetLeft + selectedElementWidth);
+      var diffSelectedTopHoveredBottom = selectedElementOffsetTop - (hoveredElementOffsetTop + hoveredElementHeight);
+      var diffSelectedTopHoveredTop = selectedElementOffsetTop - hoveredElementOffsetTop;
+      var diffSelectedBottomHoveredBottom = hoveredElementOffsetTop + hoveredElementHeight - (selectedElementOffsetTop + selectedElementHeight);
+      var diffSelectedBottomHoveredTop = hoveredElementOffsetTop - (selectedElementOffsetTop + selectedElementHeight);
+      var leftLineLength = 0;
+      var leftLineOffsetLeft = 0;
+      var rightLineLength = 0;
+      var rightLineOffsetLeft = 0;
+      var topLineLength = 0;
+      var topLineOffsetTop = 0;
+      var bottomLineLength = 0;
+      var bottomLineOffsetTop = 0; // Left inter-element dimension line calculations.
+
+      if (diffSelectedLeftHoveredRight > 0) {
+        leftLineLength = diffSelectedLeftHoveredRight;
+        leftLineOffsetLeft = hoveredElementOffsetLeft + hoveredElementWidth;
+      } else if (diffSelectedLeftHoveredLeft > 0) {
+        leftLineLength = diffSelectedLeftHoveredLeft;
+        leftLineOffsetLeft = hoveredElementOffsetLeft;
+      } else if (diffSelectedLeftHoveredRight < 0 && diffSelectedLeftHoveredLeft < 0 && diffSelectedRightHoveredLeft < 0 && diffSelectedRightHoveredRight < 0) {
+        leftLineLength = Math.abs(diffSelectedLeftHoveredLeft);
+        leftLineOffsetLeft = selectedElementOffsetLeft;
+      } // Right inter-element dimension line calculations.
+
+
+      if (diffSelectedRightHoveredLeft > 0) {
+        rightLineLength = diffSelectedRightHoveredLeft;
+        rightLineOffsetLeft = selectedElementOffsetLeft + selectedElementWidth;
+      } else if (diffSelectedRightHoveredRight > 0) {
+        rightLineLength = diffSelectedRightHoveredRight;
+        rightLineOffsetLeft = selectedElementOffsetLeft + selectedElementWidth;
+      } else if (diffSelectedLeftHoveredRight < 0 && diffSelectedLeftHoveredLeft < 0 && diffSelectedRightHoveredLeft < 0 && diffSelectedRightHoveredRight < 0) {
+        rightLineLength = Math.abs(diffSelectedRightHoveredRight);
+        rightLineOffsetLeft = hoveredElementOffsetLeft + hoveredElementWidth;
+      } // Top inter-element dimension line calculations.
+
+
+      if (diffSelectedTopHoveredBottom > 0) {
+        topLineLength = diffSelectedTopHoveredBottom;
+        topLineOffsetTop = hoveredElementOffsetTop + hoveredElementHeight;
+      } else if (diffSelectedTopHoveredTop > 0) {
+        topLineLength = diffSelectedTopHoveredTop;
+        topLineOffsetTop = hoveredElementOffsetTop;
+      } else if (diffSelectedTopHoveredBottom < 0 && diffSelectedTopHoveredTop < 0 && diffSelectedBottomHoveredBottom < 0 && diffSelectedBottomHoveredTop < 0) {
+        topLineLength = Math.abs(diffSelectedTopHoveredTop);
+        topLineOffsetTop = selectedElementOffsetTop;
+      } // Bottom inter-element dimension line calculations.
+
+
+      if (diffSelectedBottomHoveredTop > 0) {
+        bottomLineLength = diffSelectedBottomHoveredTop;
+        bottomLineOffsetTop = selectedElementOffsetTop + selectedElementHeight;
+      } else if (diffSelectedBottomHoveredBottom > 0) {
+        bottomLineLength = diffSelectedBottomHoveredBottom;
+        bottomLineOffsetTop = selectedElementOffsetTop + selectedElementHeight;
+      } else if (diffSelectedTopHoveredBottom < 0 && diffSelectedTopHoveredTop < 0 && diffSelectedBottomHoveredBottom < 0 && diffSelectedBottomHoveredTop < 0) {
+        bottomLineLength = Math.abs(diffSelectedBottomHoveredBottom);
+        bottomLineOffsetTop = hoveredElementOffsetTop + hoveredElementHeight;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, leftLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: leftLineOffsetLeft,
+        lineType: LINE_TYPE_SOLID,
+        top: selectedElementOffsetTop + selectedElementHeight / 2,
+        width: leftLineLength
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["HORIZONTAL_DIMENSION"],
+        measurement: leftLineLength,
+        offsetLeft: leftLineOffsetLeft + leftLineLength / 2,
+        offsetTop: selectedElementOffsetTop + selectedElementHeight / 2
+      })), rightLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: rightLineOffsetLeft,
+        lineType: LINE_TYPE_SOLID,
+        top: selectedElementOffsetTop + selectedElementHeight / 2,
+        width: rightLineLength
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["HORIZONTAL_DIMENSION"],
+        measurement: rightLineLength,
+        offsetLeft: rightLineOffsetLeft + rightLineLength / 2,
+        offsetTop: selectedElementOffsetTop + selectedElementHeight / 2
+      })), topLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: topLineLength,
+        left: selectedElementOffsetLeft + selectedElementWidth / 2,
+        lineType: LINE_TYPE_SOLID,
+        top: topLineOffsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["VERTICAL_DIMENSION"],
+        measurement: topLineLength,
+        offsetLeft: selectedElementOffsetLeft + selectedElementWidth / 2,
+        offsetTop: topLineOffsetTop + topLineLength / 2
+      })), bottomLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: bottomLineLength,
+        left: selectedElementOffsetLeft + selectedElementWidth / 2,
+        lineType: LINE_TYPE_SOLID,
+        top: bottomLineOffsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["VERTICAL_DIMENSION"],
+        measurement: bottomLineLength,
+        offsetLeft: selectedElementOffsetLeft + selectedElementWidth / 2,
+        offsetTop: bottomLineOffsetTop + bottomLineLength / 2
+      })));
+    }
+  }]);
+
+  return InterElementDimensionsModule;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+InterElementDimensionsModule.propTypes = {
+  elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+    height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    width: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired
+  }).isRequired,
+  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+    height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    width: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired
+  }).isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (InterElementDimensionsModule);
+
+/***/ }),
+
+/***/ "./src/modules/SelectedElementModule/index.js":
+/*!****************************************************!*\
+  !*** ./src/modules/SelectedElementModule/index.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/DimensionLineComponent */ "./src/components/DimensionLineComponent/index.js");
+/* harmony import */ var _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/DimensionLineComponent/constants */ "./src/components/DimensionLineComponent/constants.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var SelectedElementModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(SelectedElementModule, _React$PureComponent);
+
+  function SelectedElementModule() {
+    _classCallCheck(this, SelectedElementModule);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SelectedElementModule).apply(this, arguments));
+  }
+
+  _createClass(SelectedElementModule, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          elementMarkerThickness = _this$props.elementMarkerThickness,
+          _this$props$selectedE = _this$props.selectedElement,
+          height = _this$props$selectedE.height,
+          offsetLeft = _this$props$selectedE.offsetLeft,
+          offsetTop = _this$props$selectedE.offsetTop,
+          width = _this$props$selectedE.width;
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: height,
+        left: offsetLeft - elementMarkerThickness,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_SELECTED"],
+        top: offsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: height,
+        left: offsetLeft + width,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_SELECTED"],
+        top: offsetTop,
+        width: 0
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: offsetLeft - elementMarkerThickness,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_SELECTED"],
+        top: offsetTop,
+        width: width + 2 * elementMarkerThickness
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        elementMarkerThickness: elementMarkerThickness,
+        height: 0,
+        left: offsetLeft - elementMarkerThickness,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_SOLID_SELECTED"],
+        top: offsetTop + height,
+        width: width + 2 * elementMarkerThickness
+      }));
+    }
+  }]);
+
+  return SelectedElementModule;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+SelectedElementModule.propTypes = {
+  elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+    height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    offsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+    width: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired
+  }).isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (SelectedElementModule);
 
 /***/ }),
 
@@ -22133,6 +24276,514 @@ var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
+
+/***/ }),
+
+/***/ "./src/utils/calculateGlobalOffset.js":
+/*!********************************************!*\
+  !*** ./src/utils/calculateGlobalOffset.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var calculateGlobalOffset = function calculateGlobalOffset(element) {
+  var _element$getBoundingC = element.getBoundingClientRect(),
+      trueHeight = _element$getBoundingC.height,
+      left = _element$getBoundingC.left,
+      top = _element$getBoundingC.top,
+      trueWidth = _element$getBoundingC.width;
+
+  var _window = window,
+      pageXOffset = _window.pageXOffset,
+      pageYOffset = _window.pageYOffset;
+  var offsetLeft = left + pageXOffset;
+  var offsetTop = top + pageYOffset;
+  return {
+    offsetLeft: offsetLeft,
+    offsetTop: offsetTop,
+    trueHeight: trueHeight,
+    trueWidth: trueWidth
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (calculateGlobalOffset);
+
+/***/ }),
+
+/***/ "./src/views/InspectView/index.js":
+/*!****************************************!*\
+  !*** ./src/views/InspectView/index.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/ArtboardModule */ "./src/modules/ArtboardModule/index.js");
+/* harmony import */ var _modules_HeaderModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/HeaderModule */ "./src/modules/HeaderModule/index.js");
+/* harmony import */ var _interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfacers/eventsInterfacer */ "./src/interfacers/eventsInterfacer.js");
+/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../globalConstants */ "./src/globalConstants.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+
+
+
+var InspectView =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(InspectView, _React$Component);
+
+  function InspectView(props) {
+    var _this;
+
+    _classCallCheck(this, InspectView);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(InspectView).call(this, props));
+    _this.clearToolStatus = _this.clearToolStatus.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleClickCallback = _this.handleClickCallback.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleHotkeyCallback = _this.handleHotkeyCallback.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleMouseToggleCallback = _this.handleMouseToggleCallback.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleMouseoverCallback = _this.handleMouseoverCallback.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleZoomingCallback = _this.handleZoomingCallback.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.setArtboardDimensions = _this.setArtboardDimensions.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.setArtboardZoom = _this.setArtboardZoom.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.setAxureLoaded = _this.setAxureLoaded.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      artboardHeight: 0,
+      artboardWidth: 0,
+      artboardWrapperHeight: 0,
+      artboardWrapperWidth: 0,
+      axureLoaded: false,
+      documentZoom: 100,
+      elementMarkerThickness: 1,
+      hoveredElement: {
+        height: 0,
+        offsetLeft: 0,
+        offsetTop: 0,
+        target: null,
+        width: 0
+      },
+      isHotkeyDepressed: false,
+      isToolEnabled: false,
+      selectedElement: {
+        height: 0,
+        offsetLeft: 0,
+        offsetTop: 0,
+        target: null,
+        width: 0
+      },
+      zoomWrapperPadding: 1000
+      /* cssProperties: {
+          'properties': {
+              'width': '',
+              'height': ''
+          },
+          'styles': {
+              'opacity': '',
+              'border': '',
+              'border-width': '',
+              'border-style': '',
+              'border-color': '',
+              'border-top': '',
+              'border-top-width': '',
+              'border-top-style': '',
+              'border-top-color': '',
+              'border-right': '',
+              'border-right-width': '',
+              'border-right-style': '',
+              'border-right-color': '',
+              'border-bottom': '',
+              'border-bottom-width': '',
+              'border-bottom-style': '',
+              'border-bottom-color': '',
+              'border-left': '',
+              'border-left-width': '',
+              'border-left-style': '',
+              'border-left-color': '',
+              'border-radius': '',
+              'border-top-left-radius': '',
+              'border-top-right-radius': '',
+              'border-bottom-right-radius': '',
+              'border-bottom-left-radius': '',
+              'outline': '',
+              'background-color': '',
+              'box-shadow': ''
+          },
+          'text': {
+              'font-family': '',
+              'font-size': '',
+              'font-weight': '',
+              'line-height': '',
+              'text-align': '',
+              'color': '',
+              '_content': ''
+          }
+      },
+      dimensionMarkerHeight: 0,
+      dimensionMarkerWidth: 0,
+      documentCSSList: '',
+      elementCSS: '',
+      elementPosition: '',
+      elemMeas: {
+          height: 0,
+          offsetLeft: 0,
+          offsetTop: 0,
+          width: 0
+      },
+      elemSelectMeas: {
+          height: 0,
+          offsetLeft: 0,
+          offsetTop: 0,
+          width: 0
+      },
+      hoveredMeasurements: '',
+      interElemMeas: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          trueBottom: 0,
+          trueLeft: 0,
+          trueRight: 0,
+          trueTop: 0
+      },
+      labelSpacing: 5,
+      previousZoom: 100,
+      selectedMeasurements: '',
+      */
+
+    };
+    return _this;
+  }
+
+  _createClass(InspectView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        isToolEnabled: true
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      console.log('State:', this.state);
+    }
+  }, {
+    key: "setAxureLoaded",
+    value: function setAxureLoaded() {
+      var _this2 = this;
+
+      this.setState({
+        axureLoaded: true
+      }, function () {
+        _this2.initializerListeners();
+      });
+    }
+    /**
+     * We use this function to control the artboard zoom level by passing
+     * in our desired new zoom level.
+     *
+     * @param {number} zoomLevel
+     */
+
+  }, {
+    key: "setArtboardZoom",
+    value: function setArtboardZoom(zoomLevel) {
+      var _this3 = this;
+
+      this.setState({
+        documentZoom: zoomLevel <= 1 ? 1 : zoomLevel
+      }, function () {
+        _this3.setArtboardDimensions();
+      });
+    }
+  }, {
+    key: "setArtboardDimensions",
+    value: function setArtboardDimensions() {
+      var dimensions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var _this$state = this.state,
+          zoomWrapperPadding = _this$state.zoomWrapperPadding,
+          documentZoom = _this$state.documentZoom,
+          artboardHeightFromState = _this$state.artboardHeight,
+          artboardWidthFromState = _this$state.artboardWidth;
+      var _dimensions$artboardH = dimensions.artboardHeight,
+          artboardHeight = _dimensions$artboardH === void 0 ? artboardHeightFromState : _dimensions$artboardH,
+          _dimensions$artboardW = dimensions.artboardWidth,
+          artboardWidth = _dimensions$artboardW === void 0 ? artboardWidthFromState : _dimensions$artboardW;
+      this.setState({
+        artboardHeight: artboardHeight,
+        artboardWidth: artboardWidth,
+        artboardWrapperHeight: artboardHeight * (documentZoom / 100) + zoomWrapperPadding * 2,
+        artboardWrapperWidth: artboardWidth * (documentZoom / 100) + zoomWrapperPadding * 2
+      });
+    }
+  }, {
+    key: "toggleArtboardZoom",
+    value: function toggleArtboardZoom() {
+      var _this4 = this;
+
+      var documentZoom = this.state.documentZoom;
+
+      var restoreZoom = function restoreZoom(originalDocumentZoom) {
+        _this4.setState({
+          documentZoom: originalDocumentZoom
+        });
+      };
+
+      return new Promise(function (resolve) {
+        _this4.setState({
+          documentZoom: 100
+        }, function () {
+          resolve(restoreZoom(documentZoom));
+        });
+      });
+    }
+  }, {
+    key: "initializerListeners",
+    value: function initializerListeners() {
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalClickListener"])(this.handleClickCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalMouseToggleListener"])(this.handleMouseToggleCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalMouseoverListener"])(this.handleMouseoverCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalZoomListener"])(this.handleZoomingCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addHotkeyListener"])(this.handleHotkeyCallback);
+    }
+    /**
+     * We use this function to essentially close the tool. For example,
+     * if we have a selected element and the redline specs panel is
+     * open, we'll deselect the element and close the panel.
+     */
+
+  }, {
+    key: "clearToolStatus",
+    value: function clearToolStatus() {
+      this.setState({
+        hoveredElement: {
+          height: 0,
+          offsetLeft: 0,
+          offsetTop: 0,
+          target: null,
+          width: 0
+        },
+        selectedElement: {
+          height: 0,
+          offsetLeft: 0,
+          offsetTop: 0,
+          target: null,
+          width: 0
+        }
+      });
+    }
+  }, {
+    key: "handleMouseoverCallback",
+    value: function handleMouseoverCallback(event) {
+      var _this$state2 = this.state,
+          isToolEnabled = _this$state2.isToolEnabled,
+          isHotkeyDepressed = _this$state2.isHotkeyDepressed;
+      var target = event.target;
+
+      var isInteractableElement = function isInteractableElement() {
+        return !target.classList.contains(_globalConstants__WEBPACK_IMPORTED_MODULE_5__["NO_INTERACT_CLASS"]);
+      };
+
+      if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
+        event.stopPropagation();
+
+        var _target$getBoundingCl = target.getBoundingClientRect(),
+            height = _target$getBoundingCl.height,
+            width = _target$getBoundingCl.width;
+
+        var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__["default"])(target),
+            offsetLeft = _calculateGlobalOffse.offsetLeft,
+            offsetTop = _calculateGlobalOffse.offsetTop;
+
+        this.setState({
+          hoveredElement: {
+            height: height,
+            offsetLeft: offsetLeft,
+            offsetTop: offsetTop,
+            target: target,
+            width: width
+          }
+        });
+      }
+    }
+  }, {
+    key: "handleClickCallback",
+    value: function handleClickCallback(event) {
+      var _this$state3 = this.state,
+          isToolEnabled = _this$state3.isToolEnabled,
+          isHotkeyDepressed = _this$state3.isHotkeyDepressed;
+      console.log('click event:', event.target);
+
+      if (isToolEnabled && !isHotkeyDepressed) {
+        event.stopPropagation();
+        event.preventDefault();
+        var target = event.target;
+
+        var _target$getBoundingCl2 = target.getBoundingClientRect(),
+            height = _target$getBoundingCl2.height,
+            width = _target$getBoundingCl2.width;
+
+        var _calculateGlobalOffse2 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__["default"])(target),
+            offsetLeft = _calculateGlobalOffse2.offsetLeft,
+            offsetTop = _calculateGlobalOffse2.offsetTop;
+
+        this.setState({
+          selectedElement: {
+            height: height,
+            offsetLeft: offsetLeft,
+            offsetTop: offsetTop,
+            target: target,
+            width: width
+          }
+        });
+      } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
+        /**
+         * There is a bug in chrome where key presses are lost
+         * when clicking on a select. To prevent the isHotkeyDepressed
+         * flag from sticking, we just trigger a reset. I think it's
+         * better than sticking.
+         */
+        this.setState({
+          isHotkeyDepressed: false
+        });
+        /* setTimeout(() => {
+            isHotkeyDepressed = false;
+        }, 0); */
+      }
+    }
+  }, {
+    key: "handleMouseToggleCallback",
+    value: function handleMouseToggleCallback(event) {
+      var _this$state4 = this.state,
+          isToolEnabled = _this$state4.isToolEnabled,
+          isHotkeyDepressed = _this$state4.isHotkeyDepressed;
+
+      if (isToolEnabled && !isHotkeyDepressed) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+    }
+  }, {
+    key: "handleHotkeyCallback",
+    value: function handleHotkeyCallback(isHotkeyDepressed) {
+      var _this5 = this;
+
+      var isHotkeyDepressedPrevious = this.state.isHotkeyDepressed;
+
+      if (isHotkeyDepressed !== isHotkeyDepressedPrevious) {
+        this.setState({
+          isHotkeyDepressed: isHotkeyDepressed
+        }, function () {
+          _this5.clearToolStatus();
+        });
+      }
+    }
+  }, {
+    key: "handleZoomingCallback",
+    value: function handleZoomingCallback(event) {
+      var documentZoom = this.state.documentZoom;
+      var ESCAPE = 27;
+      var PLUS = 187;
+      var MINUS = 189;
+      var ZOOM_STEP = 10;
+
+      var roundZoom = function roundZoom(zoom) {
+        return Math.round(zoom / 10) * 10;
+      };
+
+      switch (event.keyCode) {
+        case ESCAPE:
+          this.clearToolStatus();
+          break;
+
+        case PLUS:
+          if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+            var newZoom = roundZoom(documentZoom + ZOOM_STEP);
+            this.setArtboardZoom(newZoom);
+          }
+
+          break;
+
+        case MINUS:
+          if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+
+            var _newZoom = roundZoom(documentZoom - ZOOM_STEP);
+
+            this.setArtboardZoom(_newZoom);
+          }
+
+          break;
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state5 = this.state,
+          artboardHeight = _this$state5.artboardHeight,
+          artboardWidth = _this$state5.artboardWidth,
+          artboardWrapperHeight = _this$state5.artboardWrapperHeight,
+          artboardWrapperWidth = _this$state5.artboardWrapperWidth,
+          documentZoom = _this$state5.documentZoom,
+          elementMarkerThickness = _this$state5.elementMarkerThickness,
+          hoveredElement = _this$state5.hoveredElement,
+          isToolEnabled = _this$state5.isToolEnabled,
+          selectedElement = _this$state5.selectedElement,
+          zoomWrapperPadding = _this$state5.zoomWrapperPadding;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: InspectView.name,
+        onScroll: this.clearToolStatus
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modules_HeaderModule__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        artboardHeight: artboardHeight,
+        artboardWidth: artboardWidth,
+        artboardWrapperHeight: artboardWrapperHeight,
+        artboardWrapperWidth: artboardWrapperWidth,
+        documentZoom: documentZoom,
+        elementMarkerThickness: elementMarkerThickness,
+        hoveredElement: hoveredElement,
+        isToolEnabled: isToolEnabled,
+        selectedElement: selectedElement,
+        setArtboardDimensions: this.setArtboardDimensions,
+        setAxureLoaded: this.setAxureLoaded,
+        zoomWrapperPadding: zoomWrapperPadding
+      }));
+    }
+  }]);
+
+  return InspectView;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (InspectView);
 
 /***/ })
 

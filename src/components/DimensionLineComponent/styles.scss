@@ -1,0 +1,29 @@
+@import '../../styles/constants';
+
+.DimensionLineComponent {
+    position: absolute;
+
+    &.--hovered-solid {
+        border-width: 0;
+        border-style: solid;
+        border-color: $primary-color-blue;
+    }
+
+    &.--hovered-dashed {
+        border-width: 0;
+        border-style: dashed;
+        border-color: $primary-color-blue;
+    }
+
+    &.--selected-solid {
+        border-width: 0;
+        border-style: solid;
+        border-color: $primary-color-orange;
+    }
+
+    &.--selected-dashed {
+        border-width: 0;
+        border-style: dashed;
+        border-color: $primary-color-orange;
+    }
+}

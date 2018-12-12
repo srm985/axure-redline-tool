@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import InspectView from './views/InspectView';
+
 import './styles.scss';
 
 ReactDOM.render(
-    <div>test app</div>,
+    <InspectView />,
     document.getElementById('redline-tool')
 );
