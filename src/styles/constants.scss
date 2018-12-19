@@ -1,3 +1,4 @@
+// Colors
 $primary-color-teal: #4edec2;
 $primary-color-orange: #e89a28;
 $primary-color-background: rgba(17, 17, 17, 1);
@@ -5,8 +6,25 @@ $primary-color-blue: #4860ff;
 $primary-color-gray: #555;
 $secondary-color-gray: #333;
 $primary-color-white: #fff;
+
+// Loading Spinner Background
 $background-color: rgba(0, 0, 0, 0.2);
+
+// Fonts
 $font-stack: 'Lato',
 sans-serif;
-$switch-transition: all 0.15s ease-in-out;
+
+// GUI Opacity
 $ui-opacity: 0.9;
+
+// Header Height
+$header-height: 60px;
+
+// Z-Index Ranking
+$z-index-header: 99999;
+$z-index-sidebar: 99998;
+$z-index-dimension-marker: 99997;
+$z-index-selected-solid-line: 99996;
+$z-index-hover-dashed-line: 99995;
+$z-index-hover-solid-line: 99994;
+$z-index-inter-dimension-line: 99993;

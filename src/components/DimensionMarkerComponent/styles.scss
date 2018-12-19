@@ -5,7 +5,7 @@
     font-weight: bold;
 
     position: absolute;
-    z-index: 9999;
+    z-index: $z-index-dimension-marker;
 
     display: flex;
     align-items: center;
@@ -13,6 +13,7 @@
 
     letter-spacing: 1px;
 
+    opacity: $ui-opacity;
     color: $primary-color-white;
     border-radius: 5px;
     background-color: $primary-color-orange;

@@ -1,0 +1,54 @@
+@import '../../styles/constants';
+
+// Module Constants
+$side-pull-width: 20px;
+$sidebar-width: 270px;
+
+.ElementPropertiesSidebarModule {
+    position: fixed;
+    z-index: $z-index-sidebar;
+    top: $header-height;
+    right: -#{$sidebar-width - 5px};
+
+    box-sizing: border-box;
+    width: $sidebar-width;
+    height: calc(100% - #{$header-height});
+
+    transition: right 0.1s ease-in-out;
+
+    opacity: $ui-opacity;
+    background-color: $primary-color-background;
+
+    &--visible {
+        right: 0;
+    }
+
+    &__side-pull {
+        position: absolute;
+        top: 65px;
+        left: -#{$side-pull-width};
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+
+        box-sizing: border-box;
+        width: $side-pull-width;
+        height: #{2 * $side-pull-width};
+        padding: 13px 0 13px 7px;
+
+        cursor: pointer;
+
+        border-radius: $side-pull-width 0 0 $side-pull-width;
+        outline: none;
+        background-color: inherit;
+
+        & > span {
+            width: 100%;
+            height: 2px;
+
+            background-color: $primary-color-white;
+        }
+    }
+}

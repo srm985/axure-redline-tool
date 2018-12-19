@@ -98,7 +98,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".DimensionLineComponent {\n  position: absolute; }\n  .DimensionLineComponent.\\--hovered-solid {\n    border-width: 0;\n    border-style: solid;\n    border-color: #4860ff; }\n  .DimensionLineComponent.\\--hovered-dashed {\n    border-width: 0;\n    border-style: dashed;\n    border-color: #4860ff; }\n  .DimensionLineComponent.\\--selected-solid {\n    border-width: 0;\n    border-style: solid;\n    border-color: #e89a28; }\n  .DimensionLineComponent.\\--selected-dashed {\n    border-width: 0;\n    border-style: dashed;\n    border-color: #e89a28; }\n", ""]);
+exports.push([module.i, ".DimensionLineComponent {\n  position: absolute; }\n  .DimensionLineComponent.\\--hovered-solid {\n    z-index: 99994;\n    border-width: 0;\n    border-style: solid;\n    border-color: #4860ff; }\n  .DimensionLineComponent.\\--hovered-dashed {\n    z-index: 99995;\n    border-width: 0;\n    border-style: dashed;\n    border-color: #4860ff; }\n  .DimensionLineComponent.\\--selected-solid {\n    z-index: 99996;\n    border-width: 0;\n    border-style: solid;\n    border-color: #e89a28; }\n  .DimensionLineComponent.\\--inter-element-dimension {\n    z-index: 99993;\n    border-width: 0;\n    border-style: solid;\n    border-color: #e89a28; }\n", ""]);
 
 // exports
 
@@ -117,7 +117,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".DimensionMarkerComponent {\n  font-size: 10px;\n  font-weight: bold;\n  position: absolute;\n  z-index: 9999;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  letter-spacing: 1px;\n  color: #fff;\n  border-radius: 5px;\n  background-color: #e89a28; }\n", ""]);
+exports.push([module.i, ".DimensionMarkerComponent {\n  font-size: 10px;\n  font-weight: bold;\n  position: absolute;\n  z-index: 99997;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  letter-spacing: 1px;\n  opacity: 0.9;\n  color: #fff;\n  border-radius: 5px;\n  background-color: #e89a28; }\n", ""]);
 
 // exports
 
@@ -137,6 +137,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".ArtboardModule {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #333;\n  background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);\n  background-size: 10px 10px; }\n  .ArtboardModule__artboard {\n    position: absolute; }\n  .ArtboardModule #base {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    transform-origin: center; }\n  .ArtboardModule.\\--tool-enabled * {\n    cursor: pointer; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/modules/ElementPropertiesSidebarModule/styles.scss":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/modules/ElementPropertiesSidebarModule/styles.scss ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      background-color: #fff; }\n", ""]);
 
 // exports
 
@@ -22794,17 +22813,17 @@ module.exports = function (css) {
 /*!************************************************************!*\
   !*** ./src/components/DimensionLineComponent/constants.js ***!
   \************************************************************/
-/*! exports provided: LINE_TYPE_DASHED_HOVERED, LINE_TYPE_DASHED_SELECTED, LINE_TYPE_SOLID_HOVERED, LINE_TYPE_SOLID_SELECTED */
+/*! exports provided: LINE_TYPE_DASHED_HOVERED, LINE_TYPE_INTER_ELEMENT, LINE_TYPE_SOLID_HOVERED, LINE_TYPE_SOLID_SELECTED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_DASHED_HOVERED", function() { return LINE_TYPE_DASHED_HOVERED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_DASHED_SELECTED", function() { return LINE_TYPE_DASHED_SELECTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_INTER_ELEMENT", function() { return LINE_TYPE_INTER_ELEMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_SOLID_HOVERED", function() { return LINE_TYPE_SOLID_HOVERED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LINE_TYPE_SOLID_SELECTED", function() { return LINE_TYPE_SOLID_SELECTED; });
 var LINE_TYPE_DASHED_HOVERED = 'hovered-dashed';
-var LINE_TYPE_DASHED_SELECTED = 'selected-dashed';
+var LINE_TYPE_INTER_ELEMENT = 'inter-element-dimension';
 var LINE_TYPE_SOLID_HOVERED = 'hovered-solid';
 var LINE_TYPE_SOLID_SELECTED = 'selected-solid';
 
@@ -23429,8 +23448,8 @@ function (_React$PureComponent) {
     _this.state = {
       artboardOffsetLeft: 0,
       artboardOffsetTop: 0,
-      artboardTrueHeight: 0,
-      artboardTrueWidth: 0
+      artboardScaledHeight: 0,
+      artboardScaledWidth: 0
     };
     return _this;
   }
@@ -23488,23 +23507,23 @@ function (_React$PureComponent) {
       var artboardElement = this.artboardRef.current;
 
       var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__["default"])(artboardElement),
-          artboardOffsetLeft = _calculateGlobalOffse.offsetLeft,
-          artboardOffsetTop = _calculateGlobalOffse.offsetTop,
-          artboardTrueHeight = _calculateGlobalOffse.trueHeight,
-          artboardTrueWidth = _calculateGlobalOffse.trueWidth;
+          artboardScaledHeight = _calculateGlobalOffse.scaledHeight,
+          artboardOffsetLeft = _calculateGlobalOffse.scaledOffsetLeft,
+          artboardOffsetTop = _calculateGlobalOffse.scaledOffsetTop,
+          artboardScaledWidth = _calculateGlobalOffse.scaledWidth;
 
       var _this$state = this.state,
           currentArtboardOffsetLeft = _this$state.artboardOffsetLeft,
           currentArtboardOffsetTop = _this$state.artboardOffsetTop,
-          currentArtboardTrueHeight = _this$state.artboardTrueHeight,
-          currentArtboardTrueWidth = _this$state.artboardTrueWidth; // Check if we should update state.
+          currentArtboardScaledHeight = _this$state.artboardScaledHeight,
+          currentArtboardScaledWidth = _this$state.artboardScaledWidth; // Check if we should update state.
 
-      if (currentArtboardOffsetLeft !== artboardOffsetLeft || currentArtboardOffsetTop !== artboardOffsetTop || currentArtboardTrueHeight !== artboardTrueHeight || currentArtboardTrueWidth !== artboardTrueWidth) {
+      if (currentArtboardOffsetLeft !== artboardOffsetLeft || currentArtboardOffsetTop !== artboardOffsetTop || currentArtboardScaledHeight !== artboardScaledHeight || currentArtboardScaledWidth !== artboardScaledWidth) {
         this.setState({
           artboardOffsetLeft: artboardOffsetLeft,
           artboardOffsetTop: artboardOffsetTop,
-          artboardTrueHeight: artboardTrueHeight,
-          artboardTrueWidth: artboardTrueWidth
+          artboardScaledHeight: artboardScaledHeight,
+          artboardScaledWidth: artboardScaledWidth
         });
       }
     }
@@ -23525,8 +23544,8 @@ function (_React$PureComponent) {
       var _this$state2 = this.state,
           artboardOffsetLeft = _this$state2.artboardOffsetLeft,
           artboardOffsetTop = _this$state2.artboardOffsetTop,
-          artboardTrueHeight = _this$state2.artboardTrueHeight,
-          artboardTrueWidth = _this$state2.artboardTrueWidth;
+          artboardScaledHeight = _this$state2.artboardScaledHeight,
+          artboardScaledWidth = _this$state2.artboardScaledWidth;
       var artboardWrapperStyle = {
         height: artboardWrapperHeight,
         width: artboardWrapperWidth
@@ -23546,8 +23565,8 @@ function (_React$PureComponent) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ElementInteractionModule__WEBPACK_IMPORTED_MODULE_2__["default"], {
         artboardOffsetLeft: artboardOffsetLeft,
         artboardOffsetTop: artboardOffsetTop,
-        artboardTrueHeight: artboardTrueHeight,
-        artboardTrueWidth: artboardTrueWidth,
+        artboardScaledHeight: artboardScaledHeight,
+        artboardScaledWidth: artboardScaledWidth,
         elementMarkerThickness: elementMarkerThickness,
         hoveredElement: hoveredElement,
         selectedElement: selectedElement,
@@ -23566,9 +23585,9 @@ ArtboardModule.propTypes = {
   artboardWrapperWidth: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
   documentZoom: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
   elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
-  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(Element).isRequired,
+  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({}).isRequired,
   isToolEnabled: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
-  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(Element).isRequired,
+  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({}).isRequired,
   setArtboardDimensions: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   setAxureLoaded: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   zoomWrapperPadding: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired
@@ -23664,8 +23683,8 @@ function (_React$PureComponent) {
       var _this$props = this.props,
           artboardOffsetLeft = _this$props.artboardOffsetLeft,
           artboardOffsetTop = _this$props.artboardOffsetTop,
-          artboardTrueHeight = _this$props.artboardTrueHeight,
-          artboardTrueWidth = _this$props.artboardTrueWidth,
+          artboardScaledHeight = _this$props.artboardScaledHeight,
+          artboardScaledWidth = _this$props.artboardScaledWidth,
           elementMarkerThickness = _this$props.elementMarkerThickness,
           hoveredElement = _this$props.hoveredElement,
           selectedElement = _this$props.selectedElement;
@@ -23674,8 +23693,8 @@ function (_React$PureComponent) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, hoveredElementTarget && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HoveredElementModule__WEBPACK_IMPORTED_MODULE_2__["default"], {
         artboardOffsetLeft: artboardOffsetLeft,
         artboardOffsetTop: artboardOffsetTop,
-        artboardTrueHeight: artboardTrueHeight,
-        artboardTrueWidth: artboardTrueWidth,
+        artboardScaledHeight: artboardScaledHeight,
+        artboardScaledWidth: artboardScaledWidth,
         elementMarkerThickness: elementMarkerThickness,
         hoveredElement: hoveredElement
       }), selectedElementTarget && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_SelectedElementModule__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -23695,13 +23714,183 @@ function (_React$PureComponent) {
 ElementInteractionModule.propTypes = {
   artboardOffsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
   artboardOffsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
-  artboardTrueHeight: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
-  artboardTrueWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardScaledHeight: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardScaledWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
   elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
-  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.instanceOf(Element).isRequired,
-  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.instanceOf(Element).isRequired
+  hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({}).isRequired,
+  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({}).isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (ElementInteractionModule);
+
+/***/ }),
+
+/***/ "./src/modules/ElementPropertiesSidebarModule/index.js":
+/*!*************************************************************!*\
+  !*** ./src/modules/ElementPropertiesSidebarModule/index.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/compileCSSAttributes */ "./src/utils/compileCSSAttributes.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ElementPropertiesSidebarModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var ElementPropertiesSidebarModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(ElementPropertiesSidebarModule, _React$PureComponent);
+
+  function ElementPropertiesSidebarModule(props) {
+    var _this;
+
+    _classCallCheck(this, ElementPropertiesSidebarModule);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ElementPropertiesSidebarModule).call(this, props));
+    Object(_utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_2__["default"])(ElementPropertiesSidebarModule.pseudoClasses);
+    _this.toggleSidebar = _this.toggleSidebar.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      isSidebarVisible: false
+    };
+    return _this;
+  }
+
+  _createClass(ElementPropertiesSidebarModule, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var prevTarget = prevProps.selectedElement.target;
+      var target = this.props.selectedElement.target;
+
+      if (target !== prevTarget) {
+        this.setState({
+          isSidebarVisible: !!target
+        });
+      }
+    }
+  }, {
+    key: "toggleSidebar",
+    value: function toggleSidebar() {
+      this.setState(function (prevState) {
+        var isSidebarVisiblePrev = prevState.isSidebarVisible;
+        return {
+          isSidebarVisible: !isSidebarVisiblePrev
+        };
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var isSidebarVisible = this.state.isSidebarVisible;
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(ElementPropertiesSidebarModule.name, " ").concat(isSidebarVisible && "".concat(ElementPropertiesSidebarModule.name, "--visible"))
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(ElementPropertiesSidebarModule.name, "__side-pull"),
+        onClick: this.toggleSidebar,
+        onKeyUp: this.toggleSidebar,
+        role: 'button',
+        tabIndex: 0
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null)));
+    }
+  }]);
+
+  return ElementPropertiesSidebarModule;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+_defineProperty(ElementPropertiesSidebarModule, "pseudoClasses", {
+  default: {
+    axureName: '',
+    keyName: 'default',
+    pseudoName: 'Default'
+  },
+  disabled: {
+    axureName: 'disabled',
+    keyName: 'disabled',
+    pseudoName: 'Disabled'
+  },
+  hover: {
+    axureName: 'mouseOver',
+    keyName: 'hover',
+    pseudoName: 'Hover'
+  },
+  mousedown: {
+    axureName: 'mouseDown',
+    keyName: 'mousedown',
+    pseudoName: 'MouseDown'
+  }
+});
+
+ElementPropertiesSidebarModule.propTypes = {
+  selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({})
+};
+ElementPropertiesSidebarModule.defaultProps = {
+  selectedElement: {
+    height: 0,
+    offsetLeft: 0,
+    offsetTop: 0,
+    target: null,
+    width: 0
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (ElementPropertiesSidebarModule);
+
+/***/ }),
+
+/***/ "./src/modules/ElementPropertiesSidebarModule/styles.scss":
+/*!****************************************************************!*\
+  !*** ./src/modules/ElementPropertiesSidebarModule/styles.scss ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/modules/ElementPropertiesSidebarModule/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -23851,8 +24040,8 @@ function (_React$PureComponent) {
       var _this$props = this.props,
           artboardOffsetLeft = _this$props.artboardOffsetLeft,
           artboardOffsetTop = _this$props.artboardOffsetTop,
-          artboardTrueHeight = _this$props.artboardTrueHeight,
-          artboardTrueWidth = _this$props.artboardTrueWidth,
+          artboardScaledHeight = _this$props.artboardScaledHeight,
+          artboardScaledWidth = _this$props.artboardScaledWidth,
           elementMarkerThickness = _this$props.elementMarkerThickness,
           _this$props$hoveredEl = _this$props.hoveredElement,
           height = _this$props$hoveredEl.height,
@@ -23889,14 +24078,14 @@ function (_React$PureComponent) {
         width: width + 2 * elementMarkerThickness
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         elementMarkerThickness: elementMarkerThickness,
-        height: artboardTrueHeight,
+        height: artboardScaledHeight,
         left: offsetLeft - elementMarkerThickness,
         lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
         top: artboardOffsetTop,
         width: 0
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         elementMarkerThickness: elementMarkerThickness,
-        height: artboardTrueHeight,
+        height: artboardScaledHeight,
         left: offsetLeft + width,
         lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
         top: artboardOffsetTop,
@@ -23907,14 +24096,14 @@ function (_React$PureComponent) {
         left: artboardOffsetLeft,
         lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
         top: offsetTop,
-        width: artboardTrueWidth
+        width: artboardScaledWidth
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         elementMarkerThickness: elementMarkerThickness,
         height: 0,
         left: artboardOffsetLeft,
         lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_DASHED_HOVERED"],
         top: offsetTop + height,
-        width: artboardTrueWidth
+        width: artboardScaledWidth
       }));
     }
   }]);
@@ -23925,8 +24114,8 @@ function (_React$PureComponent) {
 HoveredElementModule.propTypes = {
   artboardOffsetLeft: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
   artboardOffsetTop: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
-  artboardTrueHeight: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
-  artboardTrueWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardScaledHeight: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  artboardScaledWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
   elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
   hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
     height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
@@ -23953,7 +24142,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/DimensionLineComponent */ "./src/components/DimensionLineComponent/index.js");
-/* harmony import */ var _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/DimensionMarkerComponent */ "./src/components/DimensionMarkerComponent/index.js");
+/* harmony import */ var _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/DimensionLineComponent/constants */ "./src/components/DimensionLineComponent/constants.js");
+/* harmony import */ var _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/DimensionMarkerComponent */ "./src/components/DimensionMarkerComponent/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23971,6 +24161,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -23998,12 +24189,20 @@ function (_React$PureComponent) {
           hoveredElementOffsetLeft = _this$props$hoveredEl.offsetLeft,
           hoveredElementOffsetTop = _this$props$hoveredEl.offsetTop,
           hoveredElementWidth = _this$props$hoveredEl.width,
+          hoveredElementTrueHeight = _this$props$hoveredEl.trueHeight,
+          hoveredElementTrueWidth = _this$props$hoveredEl.trueWidth,
+          hoveredElementTrueOffsetTop = _this$props$hoveredEl.trueOffsetTop,
+          hoveredElementTrueOffsetLeft = _this$props$hoveredEl.trueOffsetLeft,
           _this$props$selectedE = _this$props.selectedElement,
           selectedElementHeight = _this$props$selectedE.height,
           selectedElementOffsetLeft = _this$props$selectedE.offsetLeft,
           selectedElementOffsetTop = _this$props$selectedE.offsetTop,
-          selectedElementWidth = _this$props$selectedE.width;
-      var LINE_TYPE_SOLID = 'selected-solid';
+          selectedElementWidth = _this$props$selectedE.width,
+          selectedElementTrueHeight = _this$props$selectedE.trueHeight,
+          selectedElementTrueWidth = _this$props$selectedE.trueWidth,
+          selectedElementTrueOffsetTop = _this$props$selectedE.trueOffsetTop,
+          selectedElementTrueOffsetLeft = _this$props$selectedE.trueOffsetLeft; // Scaled element measurements.
+
       var diffSelectedLeftHoveredRight = selectedElementOffsetLeft - (hoveredElementOffsetLeft + hoveredElementWidth);
       var diffSelectedLeftHoveredLeft = selectedElementOffsetLeft - hoveredElementOffsetLeft;
       var diffSelectedRightHoveredRight = hoveredElementOffsetLeft + hoveredElementWidth - (selectedElementOffsetLeft + selectedElementWidth);
@@ -24011,109 +24210,158 @@ function (_React$PureComponent) {
       var diffSelectedTopHoveredBottom = selectedElementOffsetTop - (hoveredElementOffsetTop + hoveredElementHeight);
       var diffSelectedTopHoveredTop = selectedElementOffsetTop - hoveredElementOffsetTop;
       var diffSelectedBottomHoveredBottom = hoveredElementOffsetTop + hoveredElementHeight - (selectedElementOffsetTop + selectedElementHeight);
-      var diffSelectedBottomHoveredTop = hoveredElementOffsetTop - (selectedElementOffsetTop + selectedElementHeight);
+      var diffSelectedBottomHoveredTop = hoveredElementOffsetTop - (selectedElementOffsetTop + selectedElementHeight); // True element measurements.
+
+      var trueDiffSelectedLeftHoveredRight = selectedElementTrueOffsetLeft - (hoveredElementTrueOffsetLeft + hoveredElementTrueWidth);
+      var trueDiffSelectedLeftHoveredLeft = selectedElementTrueOffsetLeft - hoveredElementTrueOffsetLeft;
+      var trueDiffSelectedRightHoveredRight = hoveredElementTrueOffsetLeft + hoveredElementTrueWidth - (selectedElementTrueOffsetLeft + selectedElementTrueWidth);
+      var trueDiffSelectedRightHoveredLeft = hoveredElementTrueOffsetLeft - (selectedElementTrueOffsetLeft + selectedElementTrueWidth);
+      var trueDiffSelectedTopHoveredBottom = selectedElementTrueOffsetTop - (hoveredElementTrueOffsetTop + hoveredElementTrueHeight);
+      var trueDiffSelectedTopHoveredTop = selectedElementTrueOffsetTop - hoveredElementTrueOffsetTop;
+      var trueDiffSelectedBottomHoveredBottom = hoveredElementTrueOffsetTop + hoveredElementTrueHeight - (selectedElementTrueOffsetTop + selectedElementTrueHeight);
+      var trueDiffSelectedBottomHoveredTop = hoveredElementTrueOffsetTop - (selectedElementTrueOffsetTop + selectedElementTrueHeight);
+      var bottomLineLength = 0;
+      var bottomLineOffsetTop = 0;
       var leftLineLength = 0;
       var leftLineOffsetLeft = 0;
       var rightLineLength = 0;
       var rightLineOffsetLeft = 0;
       var topLineLength = 0;
       var topLineOffsetTop = 0;
-      var bottomLineLength = 0;
-      var bottomLineOffsetTop = 0; // Left inter-element dimension line calculations.
+      var trueInterElementBottomLineWidth = 0;
+      var trueInterElementLeftLineWidth = 0;
+      var trueInterElementRightLineWidth = 0;
+      var trueInterElementTopLineWidth = 0; // Left inter-element dimension line calculations.
 
       if (diffSelectedLeftHoveredRight > 0) {
+        // Scaled measurement calculations.
         leftLineLength = diffSelectedLeftHoveredRight;
-        leftLineOffsetLeft = hoveredElementOffsetLeft + hoveredElementWidth;
+        leftLineOffsetLeft = hoveredElementOffsetLeft + hoveredElementWidth; // True inter-element dimensions.
+
+        trueInterElementLeftLineWidth = trueDiffSelectedLeftHoveredRight;
       } else if (diffSelectedLeftHoveredLeft > 0) {
+        // Scaled measurement calculations.
         leftLineLength = diffSelectedLeftHoveredLeft;
-        leftLineOffsetLeft = hoveredElementOffsetLeft;
+        leftLineOffsetLeft = hoveredElementOffsetLeft; // True inter-element dimensions.
+
+        trueInterElementLeftLineWidth = trueDiffSelectedLeftHoveredLeft;
       } else if (diffSelectedLeftHoveredRight < 0 && diffSelectedLeftHoveredLeft < 0 && diffSelectedRightHoveredLeft < 0 && diffSelectedRightHoveredRight < 0) {
+        // Scaled measurement calculations.
         leftLineLength = Math.abs(diffSelectedLeftHoveredLeft);
-        leftLineOffsetLeft = selectedElementOffsetLeft;
+        leftLineOffsetLeft = selectedElementOffsetLeft; // True inter-element dimensions.
+
+        trueInterElementLeftLineWidth = Math.abs(trueDiffSelectedLeftHoveredLeft);
       } // Right inter-element dimension line calculations.
 
 
       if (diffSelectedRightHoveredLeft > 0) {
+        // Scaled measurement calculations.
         rightLineLength = diffSelectedRightHoveredLeft;
-        rightLineOffsetLeft = selectedElementOffsetLeft + selectedElementWidth;
+        rightLineOffsetLeft = selectedElementOffsetLeft + selectedElementWidth; // True inter-element dimensions.
+
+        trueInterElementRightLineWidth = trueDiffSelectedRightHoveredLeft;
       } else if (diffSelectedRightHoveredRight > 0) {
+        // Scaled measurement calculations.
         rightLineLength = diffSelectedRightHoveredRight;
-        rightLineOffsetLeft = selectedElementOffsetLeft + selectedElementWidth;
+        rightLineOffsetLeft = selectedElementOffsetLeft + selectedElementWidth; // True inter-element dimensions.
+
+        trueInterElementRightLineWidth = trueDiffSelectedRightHoveredRight;
       } else if (diffSelectedLeftHoveredRight < 0 && diffSelectedLeftHoveredLeft < 0 && diffSelectedRightHoveredLeft < 0 && diffSelectedRightHoveredRight < 0) {
+        // Scaled measurement calculations.
         rightLineLength = Math.abs(diffSelectedRightHoveredRight);
-        rightLineOffsetLeft = hoveredElementOffsetLeft + hoveredElementWidth;
+        rightLineOffsetLeft = hoveredElementOffsetLeft + hoveredElementWidth; // True inter-element dimensions.
+
+        trueInterElementRightLineWidth = Math.abs(trueDiffSelectedRightHoveredRight);
       } // Top inter-element dimension line calculations.
 
 
       if (diffSelectedTopHoveredBottom > 0) {
+        // Scaled measurement calculations.
         topLineLength = diffSelectedTopHoveredBottom;
-        topLineOffsetTop = hoveredElementOffsetTop + hoveredElementHeight;
+        topLineOffsetTop = hoveredElementOffsetTop + hoveredElementHeight; // True inter-element dimensions.
+
+        trueInterElementTopLineWidth = trueDiffSelectedTopHoveredBottom;
       } else if (diffSelectedTopHoveredTop > 0) {
+        // Scaled measurement calculations.
         topLineLength = diffSelectedTopHoveredTop;
-        topLineOffsetTop = hoveredElementOffsetTop;
+        topLineOffsetTop = hoveredElementOffsetTop; // True inter-element dimensions.
+
+        trueInterElementTopLineWidth = trueDiffSelectedTopHoveredTop;
       } else if (diffSelectedTopHoveredBottom < 0 && diffSelectedTopHoveredTop < 0 && diffSelectedBottomHoveredBottom < 0 && diffSelectedBottomHoveredTop < 0) {
+        // Scaled measurement calculations.
         topLineLength = Math.abs(diffSelectedTopHoveredTop);
-        topLineOffsetTop = selectedElementOffsetTop;
+        topLineOffsetTop = selectedElementOffsetTop; // True inter-element dimensions.
+
+        trueInterElementTopLineWidth = Math.abs(trueDiffSelectedTopHoveredTop);
       } // Bottom inter-element dimension line calculations.
 
 
       if (diffSelectedBottomHoveredTop > 0) {
+        // Scaled measurement calculations.
         bottomLineLength = diffSelectedBottomHoveredTop;
-        bottomLineOffsetTop = selectedElementOffsetTop + selectedElementHeight;
+        bottomLineOffsetTop = selectedElementOffsetTop + selectedElementHeight; // True inter-element dimensions.
+
+        trueInterElementBottomLineWidth = trueDiffSelectedBottomHoveredTop;
       } else if (diffSelectedBottomHoveredBottom > 0) {
+        // Scaled measurement calculations.
         bottomLineLength = diffSelectedBottomHoveredBottom;
-        bottomLineOffsetTop = selectedElementOffsetTop + selectedElementHeight;
+        bottomLineOffsetTop = selectedElementOffsetTop + selectedElementHeight; // True inter-element dimensions.
+
+        trueInterElementBottomLineWidth = trueDiffSelectedBottomHoveredBottom;
       } else if (diffSelectedTopHoveredBottom < 0 && diffSelectedTopHoveredTop < 0 && diffSelectedBottomHoveredBottom < 0 && diffSelectedBottomHoveredTop < 0) {
+        // Scaled measurement calculations.
         bottomLineLength = Math.abs(diffSelectedBottomHoveredBottom);
-        bottomLineOffsetTop = hoveredElementOffsetTop + hoveredElementHeight;
+        bottomLineOffsetTop = hoveredElementOffsetTop + hoveredElementHeight; // True inter-element dimensions.
+
+        trueInterElementBottomLineWidth = Math.abs(trueDiffSelectedBottomHoveredBottom);
       }
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, leftLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         elementMarkerThickness: elementMarkerThickness,
         height: 0,
         left: leftLineOffsetLeft,
-        lineType: LINE_TYPE_SOLID,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_INTER_ELEMENT"],
         top: selectedElementOffsetTop + selectedElementHeight / 2,
         width: leftLineLength
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
-        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["HORIZONTAL_DIMENSION"],
-        measurement: leftLineLength,
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["HORIZONTAL_DIMENSION"],
+        measurement: trueInterElementLeftLineWidth,
         offsetLeft: leftLineOffsetLeft + leftLineLength / 2,
         offsetTop: selectedElementOffsetTop + selectedElementHeight / 2
       })), rightLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         elementMarkerThickness: elementMarkerThickness,
         height: 0,
         left: rightLineOffsetLeft,
-        lineType: LINE_TYPE_SOLID,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_INTER_ELEMENT"],
         top: selectedElementOffsetTop + selectedElementHeight / 2,
         width: rightLineLength
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
-        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["HORIZONTAL_DIMENSION"],
-        measurement: rightLineLength,
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["HORIZONTAL_DIMENSION"],
+        measurement: trueInterElementRightLineWidth,
         offsetLeft: rightLineOffsetLeft + rightLineLength / 2,
         offsetTop: selectedElementOffsetTop + selectedElementHeight / 2
       })), topLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         elementMarkerThickness: elementMarkerThickness,
         height: topLineLength,
         left: selectedElementOffsetLeft + selectedElementWidth / 2,
-        lineType: LINE_TYPE_SOLID,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_INTER_ELEMENT"],
         top: topLineOffsetTop,
         width: 0
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
-        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["VERTICAL_DIMENSION"],
-        measurement: topLineLength,
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["VERTICAL_DIMENSION"],
+        measurement: trueInterElementTopLineWidth,
         offsetLeft: selectedElementOffsetLeft + selectedElementWidth / 2,
         offsetTop: topLineOffsetTop + topLineLength / 2
       })), bottomLineLength && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionLineComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         elementMarkerThickness: elementMarkerThickness,
         height: bottomLineLength,
         left: selectedElementOffsetLeft + selectedElementWidth / 2,
-        lineType: LINE_TYPE_SOLID,
+        lineType: _components_DimensionLineComponent_constants__WEBPACK_IMPORTED_MODULE_3__["LINE_TYPE_INTER_ELEMENT"],
         top: bottomLineOffsetTop,
         width: 0
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["DimensionMarkerComponent"], {
-        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_3__["VERTICAL_DIMENSION"],
-        measurement: bottomLineLength,
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["DimensionMarkerComponent"], {
+        dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_4__["VERTICAL_DIMENSION"],
+        measurement: trueInterElementBottomLineWidth,
         offsetLeft: selectedElementOffsetLeft + selectedElementWidth / 2,
         offsetTop: bottomLineOffsetTop + bottomLineLength / 2
       })));
@@ -24290,25 +24538,135 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 var calculateGlobalOffset = function calculateGlobalOffset(element) {
   var _element$getBoundingC = element.getBoundingClientRect(),
-      trueHeight = _element$getBoundingC.height,
-      left = _element$getBoundingC.left,
-      top = _element$getBoundingC.top,
-      trueWidth = _element$getBoundingC.width;
+      scaledHeight = _element$getBoundingC.height,
+      scaledLeft = _element$getBoundingC.left,
+      scaledTop = _element$getBoundingC.top,
+      scaledWidth = _element$getBoundingC.width;
 
   var _window = window,
       pageXOffset = _window.pageXOffset,
       pageYOffset = _window.pageYOffset;
-  var offsetLeft = left + pageXOffset;
-  var offsetTop = top + pageYOffset;
+  var scaledOffsetLeft = scaledLeft + pageXOffset;
+  var scaledOffsetTop = scaledTop + pageYOffset;
   return {
-    offsetLeft: offsetLeft,
-    offsetTop: offsetTop,
-    trueHeight: trueHeight,
-    trueWidth: trueWidth
+    scaledHeight: scaledHeight,
+    scaledOffsetLeft: scaledOffsetLeft,
+    scaledOffsetTop: scaledOffsetTop,
+    scaledWidth: scaledWidth
   };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calculateGlobalOffset);
+
+/***/ }),
+
+/***/ "./src/utils/calculateTrueArtboardOffset.js":
+/*!**************************************************!*\
+  !*** ./src/utils/calculateTrueArtboardOffset.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var calculateTrueArtboardOffset = function calculateTrueArtboardOffset(element) {
+  var offsetHeight = element.offsetHeight,
+      offsetWidth = element.offsetWidth;
+  var currentElement = element;
+  var trueOffsetLeft = 0;
+  var trueOffsetTop = 0;
+
+  while (currentElement.id !== 'base') {
+    var _currentElement = currentElement,
+        offsetLeft = _currentElement.offsetLeft,
+        offsetParent = _currentElement.offsetParent,
+        offsetTop = _currentElement.offsetTop;
+    trueOffsetLeft += offsetLeft;
+    trueOffsetTop += offsetTop;
+    currentElement = offsetParent;
+  }
+
+  return {
+    trueHeight: offsetHeight,
+    trueOffsetLeft: trueOffsetLeft,
+    trueOffsetTop: trueOffsetTop,
+    trueWidth: offsetWidth
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (calculateTrueArtboardOffset);
+
+/***/ }),
+
+/***/ "./src/utils/compileCSSAttributes.js":
+/*!*******************************************!*\
+  !*** ./src/utils/compileCSSAttributes.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var compileCSSAttributes = function compileCSSAttributes(pseudoClasses) {
+  var _document = document,
+      _document$styleSheets = _document.styleSheets,
+      documentStyles = _document$styleSheets === void 0 ? {} : _document$styleSheets;
+  var documentCSSList = {};
+  var selectorName;
+  var cssContent;
+  var pseudoFilter;
+  var matched;
+  var attributeObject; // Iterate through list of stylesheets.
+
+  Object.values(documentStyles).forEach(function (stylesheet) {
+    try {
+      var cssRules = stylesheet.cssRules; // Iterate through list of rules.
+
+      Object.values(cssRules).forEach(function (cssRule) {
+        // Iterate through our defined pseudo classes.
+        matched = false;
+        Object.values(pseudoClasses).forEach(function (pseudoClass) {
+          try {
+            var axureName = pseudoClass.axureName,
+                keyName = pseudoClass.keyName;
+
+            if (!matched && RegExp(axureName).test(cssRule.selectorText)) {
+              matched = true; // Extract our "pure" selector name.
+
+              if (axureName.length) {
+                pseudoFilter = new RegExp("\\.".concat(axureName));
+                selectorName = cssRule.selectorText.replace(pseudoFilter, '').trim();
+              } else {
+                selectorName = cssRule.selectorText.trim();
+              }
+
+              cssContent = cssRule.cssText.replace(/^.*{/, '').replace('}', '').trim(); // Check if the selector exists yet.
+
+              if (!(selectorName in documentCSSList)) {
+                documentCSSList[selectorName] = {};
+              } // Update our master CSS attributes list.
+
+
+              attributeObject = {}; // Convert our CSS list into an object.
+
+              cssContent.split(';').forEach(function (attribute) {
+                if (attribute.length) {
+                  attributeObject[attribute.split(':')[0].trim()] = attribute.split(':')[1].trim();
+                }
+              });
+              documentCSSList[selectorName][keyName] = attributeObject;
+            }
+          } catch (err) {// Probably missing a key in the object.
+          }
+        });
+      });
+    } catch (err) {// Probably missing a key in the object.
+    }
+  });
+  console.log(documentCSSList);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (compileCSSAttributes);
 
 /***/ }),
 
@@ -24325,9 +24683,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/ArtboardModule */ "./src/modules/ArtboardModule/index.js");
 /* harmony import */ var _modules_HeaderModule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/HeaderModule */ "./src/modules/HeaderModule/index.js");
-/* harmony import */ var _interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfacers/eventsInterfacer */ "./src/interfacers/eventsInterfacer.js");
-/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _modules_ElementPropertiesSidebarModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../modules/ElementPropertiesSidebarModule */ "./src/modules/ElementPropertiesSidebarModule/index.js");
+/* harmony import */ var _interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../interfacers/eventsInterfacer */ "./src/interfacers/eventsInterfacer.js");
+/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
+/* harmony import */ var _utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/calculateTrueArtboardOffset */ "./src/utils/calculateTrueArtboardOffset.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../globalConstants */ "./src/globalConstants.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24345,6 +24705,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
 
 
 
@@ -24386,6 +24748,10 @@ function (_React$Component) {
         offsetLeft: 0,
         offsetTop: 0,
         target: null,
+        trueHeight: 0,
+        trueOffsetLeft: 0,
+        trueOffsetTop: 0,
+        trueWidth: 0,
         width: 0
       },
       isHotkeyDepressed: false,
@@ -24395,6 +24761,10 @@ function (_React$Component) {
         offsetLeft: 0,
         offsetTop: 0,
         target: null,
+        trueHeight: 0,
+        trueOffsetLeft: 0,
+        trueOffsetTop: 0,
+        trueWidth: 0,
         width: 0
       },
       zoomWrapperPadding: 1000
@@ -24566,11 +24936,11 @@ function (_React$Component) {
   }, {
     key: "initializerListeners",
     value: function initializerListeners() {
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalClickListener"])(this.handleClickCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalMouseToggleListener"])(this.handleMouseToggleCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalMouseoverListener"])(this.handleMouseoverCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addGlobalZoomListener"])(this.handleZoomingCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_3__["addHotkeyListener"])(this.handleHotkeyCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_4__["addGlobalClickListener"])(this.handleClickCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_4__["addGlobalMouseToggleListener"])(this.handleMouseToggleCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_4__["addGlobalMouseoverListener"])(this.handleMouseoverCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_4__["addGlobalZoomListener"])(this.handleZoomingCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_4__["addHotkeyListener"])(this.handleHotkeyCallback);
     }
     /**
      * We use this function to essentially close the tool. For example,
@@ -24587,6 +24957,10 @@ function (_React$Component) {
           offsetLeft: 0,
           offsetTop: 0,
           target: null,
+          trueHeight: 0,
+          trueOffsetLeft: 0,
+          trueOffsetTop: 0,
+          trueWidth: 0,
           width: 0
         },
         selectedElement: {
@@ -24594,6 +24968,10 @@ function (_React$Component) {
           offsetLeft: 0,
           offsetTop: 0,
           target: null,
+          trueHeight: 0,
+          trueOffsetLeft: 0,
+          trueOffsetTop: 0,
+          trueWidth: 0,
           width: 0
         }
       });
@@ -24607,19 +24985,23 @@ function (_React$Component) {
       var target = event.target;
 
       var isInteractableElement = function isInteractableElement() {
-        return !target.classList.contains(_globalConstants__WEBPACK_IMPORTED_MODULE_5__["NO_INTERACT_CLASS"]);
+        return !target.classList.contains(_globalConstants__WEBPACK_IMPORTED_MODULE_7__["NO_INTERACT_CLASS"]);
       };
 
       if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
         event.stopPropagation();
 
-        var _target$getBoundingCl = target.getBoundingClientRect(),
-            height = _target$getBoundingCl.height,
-            width = _target$getBoundingCl.width;
+        var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_5__["default"])(target),
+            height = _calculateGlobalOffse.scaledHeight,
+            offsetLeft = _calculateGlobalOffse.scaledOffsetLeft,
+            offsetTop = _calculateGlobalOffse.scaledOffsetTop,
+            width = _calculateGlobalOffse.scaledWidth;
 
-        var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__["default"])(target),
-            offsetLeft = _calculateGlobalOffse.offsetLeft,
-            offsetTop = _calculateGlobalOffse.offsetTop;
+        var _calculateTrueArtboar = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_6__["default"])(target),
+            trueHeight = _calculateTrueArtboar.trueHeight,
+            trueOffsetLeft = _calculateTrueArtboar.trueOffsetLeft,
+            trueOffsetTop = _calculateTrueArtboar.trueOffsetTop,
+            trueWidth = _calculateTrueArtboar.trueWidth;
 
         this.setState({
           hoveredElement: {
@@ -24627,6 +25009,10 @@ function (_React$Component) {
             offsetLeft: offsetLeft,
             offsetTop: offsetTop,
             target: target,
+            trueHeight: trueHeight,
+            trueOffsetLeft: trueOffsetLeft,
+            trueOffsetTop: trueOffsetTop,
+            trueWidth: trueWidth,
             width: width
           }
         });
@@ -24645,13 +25031,17 @@ function (_React$Component) {
         event.preventDefault();
         var target = event.target;
 
-        var _target$getBoundingCl2 = target.getBoundingClientRect(),
-            height = _target$getBoundingCl2.height,
-            width = _target$getBoundingCl2.width;
+        var _calculateGlobalOffse2 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_5__["default"])(target),
+            height = _calculateGlobalOffse2.scaledHeight,
+            offsetLeft = _calculateGlobalOffse2.scaledOffsetLeft,
+            offsetTop = _calculateGlobalOffse2.scaledOffsetTop,
+            width = _calculateGlobalOffse2.scaledWidth;
 
-        var _calculateGlobalOffse2 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_4__["default"])(target),
-            offsetLeft = _calculateGlobalOffse2.offsetLeft,
-            offsetTop = _calculateGlobalOffse2.offsetTop;
+        var _calculateTrueArtboar2 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_6__["default"])(target),
+            trueHeight = _calculateTrueArtboar2.trueHeight,
+            trueOffsetLeft = _calculateTrueArtboar2.trueOffsetLeft,
+            trueOffsetTop = _calculateTrueArtboar2.trueOffsetTop,
+            trueWidth = _calculateTrueArtboar2.trueWidth;
 
         this.setState({
           selectedElement: {
@@ -24659,6 +25049,10 @@ function (_React$Component) {
             offsetLeft: offsetLeft,
             offsetTop: offsetTop,
             target: target,
+            trueHeight: trueHeight,
+            trueOffsetLeft: trueOffsetLeft,
+            trueOffsetTop: trueOffsetTop,
+            trueWidth: trueWidth,
             width: width
           }
         });
@@ -24763,7 +25157,9 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: InspectView.name,
         onScroll: this.clearToolStatus
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modules_HeaderModule__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modules_HeaderModule__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modules_ElementPropertiesSidebarModule__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        selectedElement: selectedElement
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_1__["default"], {
         artboardHeight: artboardHeight,
         artboardWidth: artboardWidth,
         artboardWrapperHeight: artboardWrapperHeight,

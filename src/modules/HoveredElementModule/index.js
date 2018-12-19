@@ -13,8 +13,8 @@ class HoveredElementModule extends React.PureComponent {
         const {
             artboardOffsetLeft,
             artboardOffsetTop,
-            artboardTrueHeight,
-            artboardTrueWidth,
+            artboardScaledHeight,
+            artboardScaledWidth,
             elementMarkerThickness,
             hoveredElement: {
                 height,
@@ -61,7 +61,7 @@ class HoveredElementModule extends React.PureComponent {
 
                 <DimensionLineComponent
                     elementMarkerThickness={elementMarkerThickness}
-                    height={artboardTrueHeight}
+                    height={artboardScaledHeight}
                     left={offsetLeft - elementMarkerThickness}
                     lineType={LINE_TYPE_DASHED_HOVERED}
                     top={artboardOffsetTop}
@@ -69,7 +69,7 @@ class HoveredElementModule extends React.PureComponent {
                 />
                 <DimensionLineComponent
                     elementMarkerThickness={elementMarkerThickness}
-                    height={artboardTrueHeight}
+                    height={artboardScaledHeight}
                     left={offsetLeft + width}
                     lineType={LINE_TYPE_DASHED_HOVERED}
                     top={artboardOffsetTop}
@@ -81,7 +81,7 @@ class HoveredElementModule extends React.PureComponent {
                     left={artboardOffsetLeft}
                     lineType={LINE_TYPE_DASHED_HOVERED}
                     top={offsetTop}
-                    width={artboardTrueWidth}
+                    width={artboardScaledWidth}
                 />
                 <DimensionLineComponent
                     elementMarkerThickness={elementMarkerThickness}
@@ -89,7 +89,7 @@ class HoveredElementModule extends React.PureComponent {
                     left={artboardOffsetLeft}
                     lineType={LINE_TYPE_DASHED_HOVERED}
                     top={offsetTop + height}
-                    width={artboardTrueWidth}
+                    width={artboardScaledWidth}
                 />
             </React.Fragment>
         );
@@ -99,8 +99,8 @@ class HoveredElementModule extends React.PureComponent {
 HoveredElementModule.propTypes = {
     artboardOffsetLeft: PropTypes.number.isRequired,
     artboardOffsetTop: PropTypes.number.isRequired,
-    artboardTrueHeight: PropTypes.number.isRequired,
-    artboardTrueWidth: PropTypes.number.isRequired,
+    artboardScaledHeight: PropTypes.number.isRequired,
+    artboardScaledWidth: PropTypes.number.isRequired,
     elementMarkerThickness: PropTypes.number.isRequired,
     hoveredElement: PropTypes.shape({
         height: PropTypes.number.isRequired,

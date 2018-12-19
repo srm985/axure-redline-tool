@@ -4,26 +4,34 @@
     position: absolute;
 
     &.--hovered-solid {
+        z-index: $z-index-hover-solid-line;
+
         border-width: 0;
         border-style: solid;
         border-color: $primary-color-blue;
     }
 
     &.--hovered-dashed {
+        z-index: $z-index-hover-dashed-line;
+
         border-width: 0;
         border-style: dashed;
         border-color: $primary-color-blue;
     }
 
     &.--selected-solid {
+        z-index: $z-index-selected-solid-line;
+
         border-width: 0;
         border-style: solid;
         border-color: $primary-color-orange;
     }
 
-    &.--selected-dashed {
+    &.--inter-element-dimension {
+        z-index: $z-index-inter-dimension-line;
+
         border-width: 0;
-        border-style: dashed;
+        border-style: solid;
         border-color: $primary-color-orange;
     }
 }

@@ -25,8 +25,8 @@ class ArtboardModule extends React.PureComponent {
         this.state = {
             artboardOffsetLeft: 0,
             artboardOffsetTop: 0,
-            artboardTrueHeight: 0,
-            artboardTrueWidth: 0
+            artboardScaledHeight: 0,
+            artboardScaledWidth: 0
         };
     }
 
@@ -91,31 +91,31 @@ class ArtboardModule extends React.PureComponent {
         } = this.artboardRef;
 
         const {
-            offsetLeft: artboardOffsetLeft,
-            offsetTop: artboardOffsetTop,
-            trueHeight: artboardTrueHeight,
-            trueWidth: artboardTrueWidth
+            scaledHeight: artboardScaledHeight,
+            scaledOffsetLeft: artboardOffsetLeft,
+            scaledOffsetTop: artboardOffsetTop,
+            scaledWidth: artboardScaledWidth
         } = calculateGlobalOffset(artboardElement);
 
         const {
             artboardOffsetLeft: currentArtboardOffsetLeft,
             artboardOffsetTop: currentArtboardOffsetTop,
-            artboardTrueHeight: currentArtboardTrueHeight,
-            artboardTrueWidth: currentArtboardTrueWidth
+            artboardScaledHeight: currentArtboardScaledHeight,
+            artboardScaledWidth: currentArtboardScaledWidth
         } = this.state;
 
         // Check if we should update state.
         if (
             currentArtboardOffsetLeft !== artboardOffsetLeft
             || currentArtboardOffsetTop !== artboardOffsetTop
-            || currentArtboardTrueHeight !== artboardTrueHeight
-            || currentArtboardTrueWidth !== artboardTrueWidth
+            || currentArtboardScaledHeight !== artboardScaledHeight
+            || currentArtboardScaledWidth !== artboardScaledWidth
         ) {
             this.setState({
                 artboardOffsetLeft,
                 artboardOffsetTop,
-                artboardTrueHeight,
-                artboardTrueWidth
+                artboardScaledHeight,
+                artboardScaledWidth
             });
         }
     }
@@ -137,8 +137,8 @@ class ArtboardModule extends React.PureComponent {
         const {
             artboardOffsetLeft,
             artboardOffsetTop,
-            artboardTrueHeight,
-            artboardTrueWidth
+            artboardScaledHeight,
+            artboardScaledWidth
         } = this.state;
 
         const artboardWrapperStyle = {
@@ -165,8 +165,8 @@ class ArtboardModule extends React.PureComponent {
                 <ElementInteractionModule
                     artboardOffsetLeft={artboardOffsetLeft}
                     artboardOffsetTop={artboardOffsetTop}
-                    artboardTrueHeight={artboardTrueHeight}
-                    artboardTrueWidth={artboardTrueWidth}
+                    artboardScaledHeight={artboardScaledHeight}
+                    artboardScaledWidth={artboardScaledWidth}
                     elementMarkerThickness={elementMarkerThickness}
                     hoveredElement={hoveredElement}
                     selectedElement={selectedElement}
@@ -184,9 +184,9 @@ ArtboardModule.propTypes = {
     artboardWrapperWidth: PropTypes.number.isRequired,
     documentZoom: PropTypes.number.isRequired,
     elementMarkerThickness: PropTypes.number.isRequired,
-    hoveredElement: PropTypes.instanceOf(Element).isRequired,
+    hoveredElement: PropTypes.shape({}).isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
-    selectedElement: PropTypes.instanceOf(Element).isRequired,
+    selectedElement: PropTypes.shape({}).isRequired,
     setArtboardDimensions: PropTypes.func.isRequired,
     setAxureLoaded: PropTypes.func.isRequired,
     zoomWrapperPadding: PropTypes.number.isRequired

@@ -10,8 +10,8 @@ class ElementInteractionModule extends React.PureComponent {
         const {
             artboardOffsetLeft,
             artboardOffsetTop,
-            artboardTrueHeight,
-            artboardTrueWidth,
+            artboardScaledHeight,
+            artboardScaledWidth,
             elementMarkerThickness,
             hoveredElement,
             selectedElement
@@ -33,8 +33,8 @@ class ElementInteractionModule extends React.PureComponent {
                         <HoveredElementModule
                             artboardOffsetLeft={artboardOffsetLeft}
                             artboardOffsetTop={artboardOffsetTop}
-                            artboardTrueHeight={artboardTrueHeight}
-                            artboardTrueWidth={artboardTrueWidth}
+                            artboardScaledHeight={artboardScaledHeight}
+                            artboardScaledWidth={artboardScaledWidth}
                             elementMarkerThickness={elementMarkerThickness}
                             hoveredElement={hoveredElement}
                         />
@@ -68,11 +68,11 @@ class ElementInteractionModule extends React.PureComponent {
 ElementInteractionModule.propTypes = {
     artboardOffsetLeft: PropTypes.number.isRequired,
     artboardOffsetTop: PropTypes.number.isRequired,
-    artboardTrueHeight: PropTypes.number.isRequired,
-    artboardTrueWidth: PropTypes.number.isRequired,
+    artboardScaledHeight: PropTypes.number.isRequired,
+    artboardScaledWidth: PropTypes.number.isRequired,
     elementMarkerThickness: PropTypes.number.isRequired,
-    hoveredElement: PropTypes.instanceOf(Element).isRequired,
-    selectedElement: PropTypes.instanceOf(Element).isRequired
+    hoveredElement: PropTypes.shape({}).isRequired,
+    selectedElement: PropTypes.shape({}).isRequired
 };
 
 export default ElementInteractionModule;

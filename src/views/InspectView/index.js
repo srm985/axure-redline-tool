@@ -2,6 +2,7 @@ import React from 'react';
 
 import ArtboardModule from '../../modules/ArtboardModule';
 import HeaderModule from '../../modules/HeaderModule';
+import ElementPropertiesSidebarModule from '../../modules/ElementPropertiesSidebarModule';
 
 import {
     addGlobalClickListener,
@@ -12,6 +13,7 @@ import {
 } from '../../interfacers/eventsInterfacer';
 
 import calculateGlobalOffset from '../../utils/calculateGlobalOffset';
+import calculateTrueArtboardOffset from '../../utils/calculateTrueArtboardOffset';
 
 import { NO_INTERACT_CLASS } from '../../globalConstants';
 
@@ -42,6 +44,10 @@ class InspectView extends React.Component {
                 offsetLeft: 0,
                 offsetTop: 0,
                 target: null,
+                trueHeight: 0,
+                trueOffsetLeft: 0,
+                trueOffsetTop: 0,
+                trueWidth: 0,
                 width: 0
             },
             isHotkeyDepressed: false,
@@ -51,6 +57,10 @@ class InspectView extends React.Component {
                 offsetLeft: 0,
                 offsetTop: 0,
                 target: null,
+                trueHeight: 0,
+                trueOffsetLeft: 0,
+                trueOffsetTop: 0,
+                trueWidth: 0,
                 width: 0
             },
             zoomWrapperPadding: 1000
@@ -228,6 +238,10 @@ class InspectView extends React.Component {
                 offsetLeft: 0,
                 offsetTop: 0,
                 target: null,
+                trueHeight: 0,
+                trueOffsetLeft: 0,
+                trueOffsetTop: 0,
+                trueWidth: 0,
                 width: 0
             },
             selectedElement: {
@@ -235,6 +249,10 @@ class InspectView extends React.Component {
                 offsetLeft: 0,
                 offsetTop: 0,
                 target: null,
+                trueHeight: 0,
+                trueOffsetLeft: 0,
+                trueOffsetTop: 0,
+                trueWidth: 0,
                 width: 0
             }
         });
@@ -256,14 +274,18 @@ class InspectView extends React.Component {
             event.stopPropagation();
 
             const {
-                height,
-                width
-            } = target.getBoundingClientRect();
+                scaledHeight: height,
+                scaledOffsetLeft: offsetLeft,
+                scaledOffsetTop: offsetTop,
+                scaledWidth: width
+            } = calculateGlobalOffset(target);
 
             const {
-                offsetLeft,
-                offsetTop
-            } = calculateGlobalOffset(target);
+                trueHeight,
+                trueOffsetLeft,
+                trueOffsetTop,
+                trueWidth
+            } = calculateTrueArtboardOffset(target);
 
             this.setState({
                 hoveredElement: {
@@ -271,6 +293,10 @@ class InspectView extends React.Component {
                     offsetLeft,
                     offsetTop,
                     target,
+                    trueHeight,
+                    trueOffsetLeft,
+                    trueOffsetTop,
+                    trueWidth,
                     width
                 }
             });
@@ -293,14 +319,18 @@ class InspectView extends React.Component {
             } = event;
 
             const {
-                height,
-                width
-            } = target.getBoundingClientRect();
+                scaledHeight: height,
+                scaledOffsetLeft: offsetLeft,
+                scaledOffsetTop: offsetTop,
+                scaledWidth: width
+            } = calculateGlobalOffset(target);
 
             const {
-                offsetLeft,
-                offsetTop
-            } = calculateGlobalOffset(target);
+                trueHeight,
+                trueOffsetLeft,
+                trueOffsetTop,
+                trueWidth
+            } = calculateTrueArtboardOffset(target);
 
             this.setState({
                 selectedElement: {
@@ -308,6 +338,10 @@ class InspectView extends React.Component {
                     offsetLeft,
                     offsetTop,
                     target,
+                    trueHeight,
+                    trueOffsetLeft,
+                    trueOffsetTop,
+                    trueWidth,
                     width
                 }
             });
@@ -413,6 +447,9 @@ class InspectView extends React.Component {
                 onScroll={this.clearToolStatus}
             >
                 <HeaderModule />
+                <ElementPropertiesSidebarModule
+                    selectedElement={selectedElement}
+                />
                 <ArtboardModule
                     artboardHeight={artboardHeight}
                     artboardWidth={artboardWidth}

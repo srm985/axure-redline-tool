@@ -1,9 +1,9 @@
 const calculateGlobalOffset = (element) => {
     const {
-        height: trueHeight,
-        left,
-        top,
-        width: trueWidth
+        height: scaledHeight,
+        left: scaledLeft,
+        top: scaledTop,
+        width: scaledWidth
     } = element.getBoundingClientRect();
 
     const {
@@ -11,14 +11,15 @@ const calculateGlobalOffset = (element) => {
         pageYOffset
     } = window;
 
-    const offsetLeft = left + pageXOffset;
-    const offsetTop = top + pageYOffset;
+    const scaledOffsetLeft = scaledLeft + pageXOffset;
+    const scaledOffsetTop = scaledTop + pageYOffset;
+
 
     return ({
-        offsetLeft,
-        offsetTop,
-        trueHeight,
-        trueWidth
+        scaledHeight,
+        scaledOffsetLeft,
+        scaledOffsetTop,
+        scaledWidth
     });
 };
 

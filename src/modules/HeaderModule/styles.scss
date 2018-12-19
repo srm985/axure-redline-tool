@@ -2,7 +2,7 @@
 
 .HeaderModule {
     position: fixed;
-    z-index: 99999;
+    z-index: $z-index-header;
     top: 0;
     left: 0;
 
@@ -12,7 +12,7 @@
 
     box-sizing: border-box;
     width: 100%;
-    height: 60px;
+    height: $header-height;
     padding: 0 30px;
 
     opacity: $ui-opacity;
