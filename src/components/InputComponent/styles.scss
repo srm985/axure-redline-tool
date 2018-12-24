@@ -1,0 +1,34 @@
+@import '../../styles/constants';
+
+.InputComponent {
+    &__label {
+        font-family: $font-stack;
+        font-size: 12px;
+
+        position: relative;
+
+        display: block;
+
+        color: $primary-color-white;
+    }
+
+    &__input {
+        font-family: $font-stack;
+        font-size: 12px;
+
+        position: relative;
+
+        box-sizing: border-box;
+        width: 100%;
+        height: 25px;
+        margin-top: 0;
+        padding: 4px 5px;
+
+        cursor: text;
+
+        color: $secondary-color-gray;
+        border: none;
+        border-radius: 3px;
+        outline: none;
+    }
+}

@@ -55,6 +55,12 @@
                 "allowEmptyCatch": true
             }
         ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ],
         "react/jsx-curly-brace-presence": [
             "error",
             {

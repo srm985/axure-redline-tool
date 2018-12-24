@@ -86,6 +86,25 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSwatchComponent/styles.scss":
+/*!****************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSwatchComponent/styles.scss ***!
+  \****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".ColorSwatchComponent {\n  position: absolute;\n  z-index: 1;\n  right: 0;\n  bottom: 0;\n  width: 25px;\n  height: 25px;\n  cursor: pointer;\n  border-left: solid 1px #111111;\n  border-radius: 0 3px 3px 0;\n  outline: none; }\n  .ColorSwatchComponent__swatch {\n    position: absolute;\n    z-index: 2;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n  .ColorSwatchComponent__checkerboard {\n    position: absolute;\n    z-index: 1;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-image: linear-gradient(45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(-45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%), linear-gradient(-45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%);\n    background-position: 0 0, 0 5px, 5px -5px, -5px 0;\n    background-size: 10px 10px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionLineComponent/styles.scss":
 /*!******************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionLineComponent/styles.scss ***!
@@ -124,6 +143,25 @@ exports.push([module.i, ".DimensionMarkerComponent {\n  font-size: 10px;\n  font
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/InputComponent/styles.scss":
+/*!**********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/components/InputComponent/styles.scss ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".InputComponent__label {\n  font-family: \"Lato\", sans-serif;\n  font-size: 12px;\n  position: relative;\n  display: block;\n  color: #fff; }\n\n.InputComponent__input {\n  font-family: \"Lato\", sans-serif;\n  font-size: 12px;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  height: 25px;\n  margin-top: 0;\n  padding: 4px 5px;\n  cursor: text;\n  color: #333;\n  border: none;\n  border-radius: 3px;\n  outline: none; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/modules/ArtboardModule/styles.scss":
 /*!*******************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/modules/ArtboardModule/styles.scss ***!
@@ -155,7 +193,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      background-color: #fff; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--header > div {\n        display: flex;\n        align-items: center;\n        flex-basis: 0;\n        flex-grow: 1;\n        justify-content: center;\n        box-sizing: border-box;\n        max-width: 50%;\n        height: 100%;\n        margin: 0 1px;\n        cursor: pointer;\n        color: #555;\n        border-radius: 3px 3px 0 0;\n        background-color: #fff; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      box-sizing: border-box;\n      width: 100%;\n      padding: 0 20px;\n      border-top: solid 1px #fff; }\n", ""]);
 
 // exports
 
@@ -22809,6 +22847,119 @@ module.exports = function (css) {
 
 /***/ }),
 
+/***/ "./src/components/ColorSwatchComponent/index.js":
+/*!******************************************************!*\
+  !*** ./src/components/ColorSwatchComponent/index.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.scss */ "./src/components/ColorSwatchComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var ColorSwatchComponent =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(ColorSwatchComponent, _React$PureComponent);
+
+  function ColorSwatchComponent() {
+    _classCallCheck(this, ColorSwatchComponent);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ColorSwatchComponent).apply(this, arguments));
+  }
+
+  _createClass(ColorSwatchComponent, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          setSwatchValue = _this$props.setSwatchValue,
+          swatchColor = _this$props.swatchColor;
+      var componentStyle = {
+        backgroundColor: swatchColor
+      };
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: ColorSwatchComponent.name,
+        onClick: setSwatchValue,
+        onKeyUp: setSwatchValue,
+        role: 'button',
+        tabIndex: 0
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(ColorSwatchComponent.name, "__swatch"),
+        style: componentStyle
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(ColorSwatchComponent.name, "__checkerboard")
+      }));
+    }
+  }]);
+
+  return ColorSwatchComponent;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+ColorSwatchComponent.propTypes = {
+  setSwatchValue: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func.isRequired,
+  swatchColor: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (ColorSwatchComponent);
+
+/***/ }),
+
+/***/ "./src/components/ColorSwatchComponent/styles.scss":
+/*!*********************************************************!*\
+  !*** ./src/components/ColorSwatchComponent/styles.scss ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSwatchComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./src/components/DimensionLineComponent/constants.js":
 /*!************************************************************!*\
   !*** ./src/components/DimensionLineComponent/constants.js ***!
@@ -23067,6 +23218,253 @@ DimensionMarkerComponent.propTypes = {
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/DimensionMarkerComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/InputComponent/index.js":
+/*!************************************************!*\
+  !*** ./src/components/InputComponent/index.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ColorSwatchComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ColorSwatchComponent */ "./src/components/ColorSwatchComponent/index.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.scss */ "./src/components/InputComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var InputComponent =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(InputComponent, _React$PureComponent);
+
+  function InputComponent(props) {
+    var _this;
+
+    _classCallCheck(this, InputComponent);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(InputComponent).call(this, props));
+    console.log('construct');
+    _this.checkColorSwatchRequired = _this.checkColorSwatchRequired.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.setSwatchValue = _this.setSwatchValue.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      inputValue: '',
+      swatchColor: null
+    };
+    return _this;
+  }
+
+  _createClass(InputComponent, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.checkColorSwatchRequired();
+    }
+  }, {
+    key: "setSwatchValue",
+    value: function setSwatchValue() {
+      var inputValue = this.state.inputValue;
+      var placeholder = '!*!';
+      var colorArr;
+      var extractedColorString = '';
+      var newFormat = '';
+      var opacity;
+      var valueTemplate = ''; // Determine if we're looking at a RGB(A) or hex value.
+
+      if (InputComponent.rgbaRegEx.test(inputValue)) {
+        var _inputValue$match = inputValue.match(InputComponent.rgbaRegEx);
+
+        var _inputValue$match2 = _slicedToArray(_inputValue$match, 1);
+
+        extractedColorString = _inputValue$match2[0];
+        valueTemplate = inputValue.replace(InputComponent.rgbaRegEx, placeholder);
+      } else if (InputComponent.hexRegEx.test(inputValue)) {
+        var _inputValue$match3 = inputValue.match(InputComponent.hexRegEx);
+
+        var _inputValue$match4 = _slicedToArray(_inputValue$match3, 1);
+
+        extractedColorString = _inputValue$match4[0];
+        valueTemplate = inputValue.replace(InputComponent.hexRegEx, placeholder);
+      } else {
+        // If we end up not passing a color at all.
+        valueTemplate = inputValue;
+      }
+
+      if (/rgba/.test(extractedColorString)) {
+        colorArr = extractedColorString.match(/(\d\.\d+)|\d+/g);
+        newFormat = '#';
+
+        for (var i = 0; i < 3; i++) {
+          newFormat += "0".concat(Number(colorArr[i]).toString(16).toUpperCase()).slice(-2);
+        }
+
+        newFormat += " ".concat(Number(colorArr[3]) * 100, "%");
+      } else if (/%/.test(extractedColorString)) {
+        colorArr = extractedColorString.replace('#', '').slice(0, 6).match(/\w{2}/g);
+        opacity = Number(extractedColorString.replace(/#\w{6}\s/, '').replace('%', '')) / 100;
+        newFormat = "rgba(".concat(parseInt(colorArr[0], 16), ", ").concat(parseInt(colorArr[1], 16), ", ").concat(parseInt(colorArr[2], 16), ", ").concat(opacity, ")");
+      } else if (/rgb\(/.test(extractedColorString)) {
+        colorArr = extractedColorString.replace(',', '').match(/\d+/g);
+        newFormat = '#';
+        colorArr.forEach(function (color) {
+          newFormat += "0".concat(Number(color).toString(16).toUpperCase()).slice(-2);
+        });
+      } else if (/#/.test(extractedColorString)) {
+        colorArr = extractedColorString.replace('#', '').match(/\w{2}/g);
+        newFormat = "rgb(".concat(parseInt(colorArr[0], 16), ", ").concat(parseInt(colorArr[1], 16), ", ").concat(parseInt(colorArr[2], 16), ")");
+      }
+
+      valueTemplate = valueTemplate.replace(placeholder, newFormat);
+      this.setState({
+        inputValue: valueTemplate
+      });
+    }
+  }, {
+    key: "checkColorSwatchRequired",
+    value: function checkColorSwatchRequired() {
+      var inputValue = this.props.inputValue;
+      var placeholder = '!*!';
+      var swatchOpacity;
+      var conditionedInputColorValue;
+      var swatchColor;
+
+      if (InputComponent.rgbaRegEx.test(inputValue) && inputValue !== 'transparent') {
+        /**
+         * If we have RGBA, we round our opacity to two decimals of
+         * precision. If the opacity is 1, we'll convert to RGB.
+         */
+        if (/rgba/.test(inputValue)) {
+          // Extract our RGBA substring.
+          var rgbaExtraction = inputValue.match(InputComponent.rgbaRegEx)[0].replace(' ', '');
+          swatchOpacity = Math.round(Number(rgbaExtraction.replace(/rgba\(\d+,\d+,\d+,(\d?(\.\d+)?)\)/, '$1')) * 100) / 100;
+          swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, "rgba($1, $2, $3, ".concat(placeholder, ")"));
+          swatchColor = swatchColor.replace(placeholder, swatchOpacity);
+          /**
+           * If our RGBA opacity is 1, then let's just convert
+           * things to RGB.
+           */
+
+          if (swatchOpacity === 1) {
+            swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, 'rgb($1, $2, $3)');
+          }
+
+          conditionedInputColorValue = inputValue.replace(InputComponent.rgbaRegEx, swatchColor);
+        } else {
+          var _inputValue$match5 = inputValue.match(InputComponent.rgbaRegEx);
+
+          var _inputValue$match6 = _slicedToArray(_inputValue$match5, 1);
+
+          swatchColor = _inputValue$match6[0];
+        }
+
+        this.setState({
+          inputValue: conditionedInputColorValue || inputValue,
+          swatchColor: swatchColor
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var label = this.props.label;
+      var _this$state = this.state,
+          inputValue = _this$state.inputValue,
+          swatchColor = _this$state.swatchColor;
+      console.log('state needed:', swatchColor);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: InputComponent.name
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "".concat(InputComponent.name, "__label")
+      }, label, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        className: "".concat(InputComponent.name, "__input"),
+        readOnly: true,
+        value: inputValue
+      }), swatchColor && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ColorSwatchComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        className: "".concat(InputComponent.name, "__color-swatch"),
+        setSwatchValue: this.setSwatchValue,
+        swatchColor: swatchColor
+      })));
+    }
+  }]);
+
+  return InputComponent;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.PureComponent);
+
+_defineProperty(InputComponent, "rgbaRegEx", /rgb(a)?\(\d+,(\s+)?\d+,(\s+)?\d+(,(\s+)?\d(\.\d+)?)?\)/);
+
+_defineProperty(InputComponent, "hexRegEx", /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/);
+
+InputComponent.propTypes = {
+  inputValue: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (InputComponent);
+
+/***/ }),
+
+/***/ "./src/components/InputComponent/styles.scss":
+/*!***************************************************!*\
+  !*** ./src/components/InputComponent/styles.scss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/components/InputComponent/styles.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -23737,9 +24135,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/compileCSSAttributes */ "./src/utils/compileCSSAttributes.js");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ElementPropertiesSidebarModule/styles.scss");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_InputComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/InputComponent */ "./src/components/InputComponent/index.js");
+/* harmony import */ var _utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/compileCSSAttributes */ "./src/utils/compileCSSAttributes.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ElementPropertiesSidebarModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23765,6 +24164,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var ElementPropertiesSidebarModule =
 /*#__PURE__*/
 function (_React$PureComponent) {
@@ -23776,7 +24176,7 @@ function (_React$PureComponent) {
     _classCallCheck(this, ElementPropertiesSidebarModule);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ElementPropertiesSidebarModule).call(this, props));
-    Object(_utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_2__["default"])(ElementPropertiesSidebarModule.pseudoClasses);
+    Object(_utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_3__["default"])(ElementPropertiesSidebarModule.pseudoClasses);
     _this.toggleSidebar = _this.toggleSidebar.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
       isSidebarVisible: false
@@ -23807,9 +24207,27 @@ function (_React$PureComponent) {
       });
     }
   }, {
+    key: "renderPseudoClassTabs",
+    value: function renderPseudoClassTabs() {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs")
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--header")
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--body")
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        label: 'border:',
+        inputValue: 'solid 1px rgba(255, 255, 0, 0.5)'
+      })));
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this$props$selectedE = this.props.selectedElement;
+      _this$props$selectedE = _this$props$selectedE === void 0 ? {} : _this$props$selectedE;
+      var target = _this$props$selectedE.target;
       var isSidebarVisible = this.state.isSidebarVisible;
+      var isElementSelected = !!target;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, " ").concat(isSidebarVisible && "".concat(ElementPropertiesSidebarModule.name, "--visible"))
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -23818,7 +24236,7 @@ function (_React$PureComponent) {
         onKeyUp: this.toggleSidebar,
         role: 'button',
         tabIndex: 0
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null)));
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null)), isElementSelected && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, this.renderPseudoClassTabs()));
     }
   }]);
 

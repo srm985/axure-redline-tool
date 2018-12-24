@@ -1,4 +1,48 @@
+@import '../../styles/constants';
+
+// Checkerboard Styling
+$grid-size: 5px;
+$checkerboard-color: rgba($primary-color-gray, 0.5);
+
 .ColorSwatchComponent {
-    width: 50px;
-    height: 50px;
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+
+    width: 25px;
+    height: 25px;
+
+    cursor: pointer;
+
+    border-left: solid 1px $primary-color-background;
+    border-radius: 0 3px 3px 0;
+    outline: none;
+
+    &__swatch {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    &__checkerboard {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-image: linear-gradient(45deg, $checkerboard-color 25%, transparent 25%),
+        linear-gradient(-45deg, $checkerboard-color 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, $checkerboard-color 75%),
+        linear-gradient(-45deg, transparent 75%, $checkerboard-color 75%);
+        background-position: 0 0, 0 $grid-size, $grid-size -#{$grid-size}, -#{$grid-size} 0;
+        background-size: #{$grid-size * 2} #{$grid-size * 2};
+    }
 }

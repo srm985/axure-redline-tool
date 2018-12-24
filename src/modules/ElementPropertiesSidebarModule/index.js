@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import InputComponent from '../../components/InputComponent';
+
 import compileCSSAttributes from '../../utils/compileCSSAttributes';
 
 import './styles.scss';
@@ -71,10 +73,34 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         });
     }
 
+    renderPseudoClassTabs() {
+        return (
+            <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs`}>
+                <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--header`}>
+                    <div />
+                </div>
+                <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--body`}>
+                    <InputComponent
+                        label={'border:'}
+                        inputValue={'solid 1px rgba(255, 255, 0, 0.5)'}
+                    />
+                </div>
+            </div>
+        );
+    }
+
     render() {
+        const {
+            selectedElement: {
+                target
+            } = {}
+        } = this.props;
+
         const {
             isSidebarVisible
         } = this.state;
+
+        const isElementSelected = !!target;
 
         return (
             <div className={`${ElementPropertiesSidebarModule.name} ${isSidebarVisible && `${ElementPropertiesSidebarModule.name}--visible`}`}>
@@ -89,6 +115,14 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     <span />
                     <span />
                 </div>
+                {
+                    isElementSelected
+                    && (
+                        <React.Fragment>
+                            {this.renderPseudoClassTabs()}
+                        </React.Fragment>
+                    )
+                }
             </div>
         );
     }

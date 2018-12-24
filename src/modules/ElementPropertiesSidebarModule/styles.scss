@@ -2,6 +2,7 @@
 
 // Module Constants
 $side-pull-width: 20px;
+$sidebar-padding: 20px;
 $sidebar-width: 270px;
 
 .ElementPropertiesSidebarModule {
@@ -48,7 +49,50 @@ $sidebar-width: 270px;
             width: 100%;
             height: 2px;
 
+            border-radius: 1px;
             background-color: $primary-color-white;
+        }
+    }
+
+    &__pseudo-tabs {
+        width: 100%;
+
+        &--header {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+
+            box-sizing: border-box;
+            width: 100%;
+            height: 25px;
+            padding: 0 $sidebar-padding;
+
+            & > div {
+                display: flex;
+                align-items: center;
+                flex-basis: 0;
+                flex-grow: 1;
+                justify-content: center;
+
+                box-sizing: border-box;
+                max-width: 50%;
+                height: 100%;
+                margin: 0 1px;
+
+                cursor: pointer;
+
+                color: $primary-color-gray;
+                border-radius: 3px 3px 0 0;
+                background-color: $primary-color-white;
+            }
+        }
+
+        &--body {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0 $sidebar-padding;
+
+            border-top: solid 1px $primary-color-white;
         }
     }
 }
