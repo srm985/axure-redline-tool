@@ -1,10 +1,13 @@
 // sass-lint:disable no-important
+
+$default-border-radius: 3px;
+
 body {
     position: static;
     left: auto;
     // overflow: scroll;
-
     // sass-lint:disable property-units
+
     width: 100vw;
     height: 100vh;
     // sass-lint:enable property-units
@@ -15,11 +18,20 @@ body {
         }
     }
 
+    .annotation {
+        cursor: help !important;
+
+        * {
+            cursor: help !important;
+        }
+    }
+
     .ui-dialog {
         padding: 0 !important;
 
+        opacity: $ui-opacity;
         border: solid 1px $primary-color-gray !important;
-        border-radius: 3px !important;
+        border-radius: $default-border-radius !important;
 
         * {
             color: $primary-color-gray;
@@ -31,9 +43,13 @@ body {
         background-color: $primary-color-gray !important;
 
         button {
-            border-radius: 3px !important;
+            border-radius: $default-border-radius !important;
             outline: none !important;
         }
+    }
+
+    .ui-dialog-content {
+        border-radius: $default-border-radius;
     }
 
     .ui-button-icon-only {

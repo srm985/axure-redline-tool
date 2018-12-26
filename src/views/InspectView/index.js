@@ -21,6 +21,8 @@ class InspectView extends React.Component {
     constructor(props) {
         super(props);
 
+        this.clearHoveredElement = this.clearHoveredElement.bind(this);
+        this.clearSelectedElement = this.clearSelectedElement.bind(this);
         this.clearToolStatus = this.clearToolStatus.bind(this);
         this.handleClickCallback = this.handleClickCallback.bind(this);
         this.handleHotkeyCallback = this.handleHotkeyCallback.bind(this);
@@ -226,12 +228,7 @@ class InspectView extends React.Component {
         addHotkeyListener(this.handleHotkeyCallback);
     }
 
-    /**
-     * We use this function to essentially close the tool. For example,
-     * if we have a selected element and the redline specs panel is
-     * open, we'll deselect the element and close the panel.
-     */
-    clearToolStatus() {
+    async clearHoveredElement() {
         this.setState({
             hoveredElement: {
                 height: 0,
@@ -243,7 +240,12 @@ class InspectView extends React.Component {
                 trueOffsetTop: 0,
                 trueWidth: 0,
                 width: 0
-            },
+            }
+        });
+    }
+
+    async clearSelectedElement() {
+        this.setState({
             selectedElement: {
                 height: 0,
                 offsetLeft: 0,
@@ -258,6 +260,16 @@ class InspectView extends React.Component {
         });
     }
 
+    /**
+     * We use this function to essentially close the tool. For example,
+     * if we have a selected element and the redline specs panel is
+     * open, we'll deselect the element and close the panel.
+     */
+    clearToolStatus() {
+        this.clearHoveredElement();
+        this.clearSelectedElement();
+    }
+
     handleMouseoverCallback(event) {
         const {
             isToolEnabled,
@@ -265,10 +277,13 @@ class InspectView extends React.Component {
         } = this.state;
 
         const {
-            target
+            target,
+            target: {
+                classList: selectedElementClassList
+            }
         } = event;
 
-        const isInteractableElement = () => !target.classList.contains(NO_INTERACT_CLASS);
+        const isInteractableElement = () => !selectedElementClassList.contains(NO_INTERACT_CLASS);
 
         if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
             event.stopPropagation();
@@ -300,6 +315,8 @@ class InspectView extends React.Component {
                     width
                 }
             });
+        } else if (isToolEnabled && !isInteractableElement()) {
+            this.clearHoveredElement();
         }
     }
 
@@ -309,14 +326,23 @@ class InspectView extends React.Component {
             isHotkeyDepressed
         } = this.state;
 
-        console.log('click event:', event.target);
-        if (isToolEnabled && !isHotkeyDepressed) {
+        const {
+            target,
+            target: {
+                classList: clickedElementClassList
+            }
+        } = event;
+
+        const {
+            name: artboardModuleName
+        } = ArtboardModule;
+
+        console.log('click event:', event.target, ArtboardModule.name);
+        if (clickedElementClassList.contains(artboardModuleName)) {
+            this.clearSelectedElement();
+        } else if (isToolEnabled && !isHotkeyDepressed) {
             event.stopPropagation();
             event.preventDefault();
-
-            const {
-                target
-            } = event;
 
             const {
                 scaledHeight: height,
@@ -457,6 +483,7 @@ class InspectView extends React.Component {
                     artboardWrapperWidth={artboardWrapperWidth}
                     documentZoom={documentZoom}
                     elementMarkerThickness={elementMarkerThickness}
+                    handleClickCallback={this.handleClickCallback}
                     hoveredElement={hoveredElement}
                     isToolEnabled={isToolEnabled}
                     selectedElement={selectedElement}

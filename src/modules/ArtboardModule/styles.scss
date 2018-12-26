@@ -26,8 +26,12 @@
     }
 
     &.--tool-enabled {
-        * {
+        .ArtboardModule__artboard {
             cursor: pointer;
+
+            * {
+                cursor: pointer;
+            }
         }
     }
 }

@@ -128,6 +128,7 @@ class ArtboardModule extends React.PureComponent {
             artboardWrapperWidth,
             documentZoom,
             elementMarkerThickness,
+            handleClickCallback,
             hoveredElement,
             isToolEnabled,
             selectedElement,
@@ -155,6 +156,7 @@ class ArtboardModule extends React.PureComponent {
         return (
             <div
                 className={`${ArtboardModule.name} ${isToolEnabled ? '--tool-enabled' : ''}`}
+                onClick={handleClickCallback}
                 style={artboardWrapperStyle}
             >
                 <div
@@ -184,6 +186,7 @@ ArtboardModule.propTypes = {
     artboardWrapperWidth: PropTypes.number.isRequired,
     documentZoom: PropTypes.number.isRequired,
     elementMarkerThickness: PropTypes.number.isRequired,
+    handleClickCallback: PropTypes.func.isRequired,
     hoveredElement: PropTypes.shape({}).isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
     selectedElement: PropTypes.shape({}).isRequired,
