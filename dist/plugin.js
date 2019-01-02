@@ -450,7 +450,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ColorSwatchComponent {\n  position: absolute;\n  z-index: 1;\n  right: 0;\n  bottom: 0;\n  width: 25px;\n  height: 25px;\n  cursor: pointer;\n  border-left: solid 1px #111111;\n  border-radius: 0 3px 3px 0;\n  outline: none; }\n  .ColorSwatchComponent__swatch {\n    position: absolute;\n    z-index: 2;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n  .ColorSwatchComponent__checkerboard {\n    position: absolute;\n    z-index: 1;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-image: linear-gradient(45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(-45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%), linear-gradient(-45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%);\n    background-position: 0 0, 0 5px, 5px -5px, -5px 0;\n    background-size: 10px 10px; }\n", ""]);
+exports.push([module.i, ".ColorSwatchComponent {\n  position: absolute;\n  z-index: 1;\n  right: 0;\n  bottom: 0;\n  width: 25px;\n  height: 25px;\n  cursor: pointer;\n  border-left: solid 1px #111111;\n  border-radius: 0 3px 3px 0;\n  outline: none; }\n  .ColorSwatchComponent__swatch {\n    position: absolute;\n    z-index: 2;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border-radius: inherit; }\n  .ColorSwatchComponent__checkerboard {\n    position: absolute;\n    z-index: 1;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border-radius: inherit;\n    background-image: linear-gradient(45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(-45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%), linear-gradient(-45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%);\n    background-position: 0 0, 0 5px, 5px -5px, -5px 0;\n    background-size: 10px 10px; }\n", ""]);
 
 // exports
 
@@ -545,7 +545,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--header > div {\n        display: flex;\n        align-items: center;\n        flex-basis: 0;\n        flex-grow: 1;\n        justify-content: center;\n        box-sizing: border-box;\n        max-width: 50%;\n        height: 100%;\n        margin: 0 1px;\n        cursor: pointer;\n        color: #555;\n        border-radius: 3px 3px 0 0;\n        background-color: #fff; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      box-sizing: border-box;\n      width: 100%;\n      padding: 0 20px;\n      border-top: solid 1px #fff; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--header > div {\n        display: flex;\n        align-items: center;\n        flex-basis: 0;\n        flex-grow: 1;\n        justify-content: center;\n        box-sizing: border-box;\n        max-width: 50%;\n        height: 100%;\n        margin: 0 1px;\n        cursor: pointer;\n        color: #555;\n        border-radius: 3px 3px 0 0;\n        background-color: #fff; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      box-sizing: border-box;\n      width: 100%;\n      padding: 0 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent {\n    margin-top: 10px; }\n", ""]);
 
 // exports
 
@@ -24530,12 +24530,12 @@ function (_React$PureComponent) {
 
           swatchColor = _inputValue$match6[0];
         }
-
-        this.setState({
-          inputValue: conditionedInputColorValue || inputValue,
-          swatchColor: swatchColor
-        });
       }
+
+      this.setState({
+        inputValue: conditionedInputColorValue || inputValue,
+        swatchColor: swatchColor
+      });
     }
   }, {
     key: "render",
@@ -24544,7 +24544,6 @@ function (_React$PureComponent) {
       var _this$state = this.state,
           inputValue = _this$state.inputValue,
           swatchColor = _this$state.swatchColor;
-      console.log('state needed:', swatchColor);
       return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         className: InputComponent.name
       }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("label", {
@@ -25297,25 +25296,104 @@ function (_React$PureComponent) {
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, ElementPropertiesSidebarModule);
 
     _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(ElementPropertiesSidebarModule).call(this, props));
-    Object(_utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_10__["default"])(ElementPropertiesSidebarModule.pseudoClasses);
+    _this.clearCSSAttributes = _this.clearCSSAttributes.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
+    _this.extractDefaultCSS = _this.extractDefaultCSS.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
     _this.toggleSidebar = _this.toggleSidebar.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
     _this.state = {
+      defaultCSSAttributes: {},
+      documentCSSAttributes: {},
       isSidebarVisible: false
     };
     return _this;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ElementPropertiesSidebarModule, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var documentCSSAttributes = Object(_utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_10__["default"])(ElementPropertiesSidebarModule.pseudoClasses);
+      this.setState({
+        documentCSSAttributes: documentCSSAttributes
+      });
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      var _this2 = this;
+
       var prevTarget = prevProps.selectedElement.target;
       var target = this.props.selectedElement.target;
+      var isElementSelected = !!target;
 
       if (target !== prevTarget) {
-        this.setState({
-          isSidebarVisible: !!target
+        // Don't set visible until we've cleared previous CSS to prevent conflicts.
+        this.clearCSSAttributes().then(function () {
+          if (isElementSelected) {
+            _this2.extractDefaultCSS();
+          }
+
+          _this2.setState({
+            isSidebarVisible: isElementSelected
+          });
         });
       }
+    }
+  }, {
+    key: "clearCSSAttributes",
+    value: function clearCSSAttributes() {
+      var _this3 = this;
+
+      var statefulDefaultCSSAttributes = this.state.defaultCSSAttributes;
+      var defaultCSSAttributes = JSON.parse(JSON.stringify(statefulDefaultCSSAttributes));
+      Object.keys(defaultCSSAttributes).forEach(function (attributeFamily) {
+        Object.keys(attributeFamily).forEach(function (attribute) {
+          defaultCSSAttributes[attributeFamily][attribute] = '';
+        });
+      });
+      return new Promise(function (resolve) {
+        _this3.setState({
+          defaultCSSAttributes: defaultCSSAttributes
+        }, function () {
+          resolve();
+        });
+      });
+    }
+  }, {
+    key: "extractDefaultCSS",
+    value: function extractDefaultCSS() {
+      var target = this.props.selectedElement.target;
+      var defaultCSSAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
+      Object.keys(defaultCSSAttributes).forEach(function (attributeFamily) {
+        Object.keys(defaultCSSAttributes[attributeFamily]).forEach(function (attribute) {
+          if (attribute === '_content') {
+            defaultCSSAttributes[attributeFamily][attribute] = target.value || target.innerText;
+          } else if (attribute === 'opacity') {
+            /**
+             * For immediate children of Axure page elements, their opacity
+             * is actually set at the parent level. For example, if we click
+             * on "u1_div", its opacity is actually set at the parent, "u1".
+             */
+            var parentElement = target.parentElement,
+                _target$parentElement = target.parentElement;
+            _target$parentElement = _target$parentElement === void 0 ? {} : _target$parentElement;
+            var _target$parentElement2 = _target$parentElement.id,
+                parentID = _target$parentElement2 === void 0 ? '' : _target$parentElement2;
+            var isImmediateChildRegex = /u\d+_div/;
+            var isImmediateChild = isImmediateChildRegex.test(parentID);
+
+            if (isImmediateChild) {
+              defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(parentElement).getPropertyValue(attribute);
+            } else {
+              defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(target).getPropertyValue(attribute);
+            }
+          } else {
+            defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(target).getPropertyValue(attribute);
+          }
+        });
+      });
+      console.log('default element CSS:', defaultCSSAttributes);
+      this.setState({
+        defaultCSSAttributes: defaultCSSAttributes
+      });
     }
   }, {
     key: "toggleSidebar",
@@ -25330,16 +25408,30 @@ function (_React$PureComponent) {
   }, {
     key: "renderPseudoClassTabs",
     value: function renderPseudoClassTabs() {
+      var defaultCSSAttributes = this.state.defaultCSSAttributes;
+
+      var listAttributes = function listAttributes() {
+        var pushedAttributes = [];
+        Object.keys(defaultCSSAttributes).forEach(function (attributeFamily) {
+          pushedAttributes.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", null, attributeFamily));
+          Object.keys(defaultCSSAttributes[attributeFamily]).forEach(function (attribute) {
+            console.log('pushing val:', defaultCSSAttributes[attributeFamily][attribute]);
+            pushedAttributes.push(react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
+              label: "".concat(attribute, ":"),
+              inputValue: defaultCSSAttributes[attributeFamily][attribute]
+            }));
+          });
+        });
+        return pushedAttributes;
+      };
+
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs")
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--header")
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--body")
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        label: 'border:',
-        inputValue: 'solid 1px rgba(255, 255, 0, 0.5)'
-      })));
+      }, listAttributes()));
     }
   }, {
     key: "render",
@@ -25363,6 +25455,56 @@ function (_React$PureComponent) {
 
   return ElementPropertiesSidebarModule;
 }(react__WEBPACK_IMPORTED_MODULE_8___default.a.PureComponent);
+
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(ElementPropertiesSidebarModule, "cssAttributesList", {
+  /* eslint-disable quote-props, sort-keys */
+  properties: {
+    'width': '',
+    'height': ''
+  },
+  styles: {
+    'opacity': '',
+    'border': '',
+    'border-width': '',
+    'border-style': '',
+    'border-color': '',
+    'border-top': '',
+    'border-top-width': '',
+    'border-top-style': '',
+    'border-top-color': '',
+    'border-right': '',
+    'border-right-width': '',
+    'border-right-style': '',
+    'border-right-color': '',
+    'border-bottom': '',
+    'border-bottom-width': '',
+    'border-bottom-style': '',
+    'border-bottom-color': '',
+    'border-left': '',
+    'border-left-width': '',
+    'border-left-style': '',
+    'border-left-color': '',
+    'border-radius': '',
+    'border-top-left-radius': '',
+    'border-top-right-radius': '',
+    'border-bottom-right-radius': '',
+    'border-bottom-left-radius': '',
+    'outline': '',
+    'background-color': '',
+    'box-shadow': ''
+  },
+  text: {
+    'font-family': '',
+    'font-size': '',
+    'font-weight': '',
+    'line-height': '',
+    'text-align': '',
+    'color': '',
+    '_content': ''
+    /* eslint-enable quote-props, sort-keys */
+
+  }
+});
 
 _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(ElementPropertiesSidebarModule, "pseudoClasses", {
   default: {
@@ -26203,7 +26345,8 @@ var compileCSSAttributes = function compileCSSAttributes(pseudoClasses) {
     } catch (err) {// Probably missing a key in the object.
     }
   });
-  console.log(documentCSSList);
+  console.log('document CSS:', documentCSSList);
+  return documentCSSList;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (compileCSSAttributes);
@@ -26316,52 +26459,7 @@ function (_React$Component) {
         width: 0
       },
       zoomWrapperPadding: 1000
-      /* cssProperties: {
-          'properties': {
-              'width': '',
-              'height': ''
-          },
-          'styles': {
-              'opacity': '',
-              'border': '',
-              'border-width': '',
-              'border-style': '',
-              'border-color': '',
-              'border-top': '',
-              'border-top-width': '',
-              'border-top-style': '',
-              'border-top-color': '',
-              'border-right': '',
-              'border-right-width': '',
-              'border-right-style': '',
-              'border-right-color': '',
-              'border-bottom': '',
-              'border-bottom-width': '',
-              'border-bottom-style': '',
-              'border-bottom-color': '',
-              'border-left': '',
-              'border-left-width': '',
-              'border-left-style': '',
-              'border-left-color': '',
-              'border-radius': '',
-              'border-top-left-radius': '',
-              'border-top-right-radius': '',
-              'border-bottom-right-radius': '',
-              'border-bottom-left-radius': '',
-              'outline': '',
-              'background-color': '',
-              'box-shadow': ''
-          },
-          'text': {
-              'font-family': '',
-              'font-size': '',
-              'font-weight': '',
-              'line-height': '',
-              'text-align': '',
-              'color': '',
-              '_content': ''
-          }
-      },
+      /*
       dimensionMarkerHeight: 0,
       dimensionMarkerWidth: 0,
       documentCSSList: '',

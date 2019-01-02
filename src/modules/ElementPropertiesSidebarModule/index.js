@@ -8,6 +8,55 @@ import compileCSSAttributes from '../../utils/compileCSSAttributes';
 import './styles.scss';
 
 class ElementPropertiesSidebarModule extends React.PureComponent {
+    static cssAttributesList = {
+        /* eslint-disable quote-props, sort-keys */
+        properties: {
+            'width': '',
+            'height': ''
+        },
+        styles: {
+            'opacity': '',
+            'border': '',
+            'border-width': '',
+            'border-style': '',
+            'border-color': '',
+            'border-top': '',
+            'border-top-width': '',
+            'border-top-style': '',
+            'border-top-color': '',
+            'border-right': '',
+            'border-right-width': '',
+            'border-right-style': '',
+            'border-right-color': '',
+            'border-bottom': '',
+            'border-bottom-width': '',
+            'border-bottom-style': '',
+            'border-bottom-color': '',
+            'border-left': '',
+            'border-left-width': '',
+            'border-left-style': '',
+            'border-left-color': '',
+            'border-radius': '',
+            'border-top-left-radius': '',
+            'border-top-right-radius': '',
+            'border-bottom-right-radius': '',
+            'border-bottom-left-radius': '',
+            'outline': '',
+            'background-color': '',
+            'box-shadow': ''
+        },
+        text: {
+            'font-family': '',
+            'font-size': '',
+            'font-weight': '',
+            'line-height': '',
+            'text-align': '',
+            'color': '',
+            '_content': ''
+        }
+        /* eslint-enable quote-props, sort-keys */
+    };
+
     static pseudoClasses = {
         default: {
             axureName: '',
@@ -34,13 +83,23 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        compileCSSAttributes(ElementPropertiesSidebarModule.pseudoClasses);
-
+        this.clearCSSAttributes = this.clearCSSAttributes.bind(this);
+        this.extractDefaultCSS = this.extractDefaultCSS.bind(this);
         this.toggleSidebar = this.toggleSidebar.bind(this);
 
         this.state = {
+            defaultCSSAttributes: {},
+            documentCSSAttributes: {},
             isSidebarVisible: false
         };
+    }
+
+    componentDidMount() {
+        const documentCSSAttributes = compileCSSAttributes(ElementPropertiesSidebarModule.pseudoClasses);
+
+        this.setState({
+            documentCSSAttributes
+        });
     }
 
     componentDidUpdate(prevProps) {
@@ -56,11 +115,89 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             }
         } = this.props;
 
+        const isElementSelected = !!target;
+
         if (target !== prevTarget) {
-            this.setState({
-                isSidebarVisible: !!target
+            // Don't set visible until we've cleared previous CSS to prevent conflicts.
+            this.clearCSSAttributes().then(() => {
+                if (isElementSelected) {
+                    this.extractDefaultCSS();
+                }
+
+                this.setState({
+                    isSidebarVisible: isElementSelected
+                });
             });
         }
+    }
+
+    clearCSSAttributes() {
+        const {
+            defaultCSSAttributes: statefulDefaultCSSAttributes
+        } = this.state;
+
+        const defaultCSSAttributes = JSON.parse(JSON.stringify(statefulDefaultCSSAttributes));
+
+        Object.keys(defaultCSSAttributes).forEach((attributeFamily) => {
+            Object.keys(attributeFamily).forEach((attribute) => {
+                defaultCSSAttributes[attributeFamily][attribute] = '';
+            });
+        });
+
+        return new Promise((resolve) => {
+            this.setState({
+                defaultCSSAttributes
+            }, () => {
+                resolve();
+            });
+        });
+    }
+
+    extractDefaultCSS() {
+        const {
+            selectedElement: {
+                target
+            }
+        } = this.props;
+
+        const defaultCSSAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
+
+        Object.keys(defaultCSSAttributes).forEach((attributeFamily) => {
+            Object.keys(defaultCSSAttributes[attributeFamily]).forEach((attribute) => {
+                if (attribute === '_content') {
+                    defaultCSSAttributes[attributeFamily][attribute] = target.value || target.innerText;
+                } else if (attribute === 'opacity') {
+                    /**
+                     * For immediate children of Axure page elements, their opacity
+                     * is actually set at the parent level. For example, if we click
+                     * on "u1_div", its opacity is actually set at the parent, "u1".
+                     */
+
+                    const {
+                        parentElement,
+                        parentElement: {
+                            id: parentID = ''
+                        } = {}
+                    } = target;
+
+                    const isImmediateChildRegex = /u\d+_div/;
+                    const isImmediateChild = isImmediateChildRegex.test(parentID);
+
+                    if (isImmediateChild) {
+                        defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(parentElement).getPropertyValue(attribute);
+                    } else {
+                        defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(target).getPropertyValue(attribute);
+                    }
+                } else {
+                    defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(target).getPropertyValue(attribute);
+                }
+            });
+        });
+
+        console.log('default element CSS:', defaultCSSAttributes);
+        this.setState({
+            defaultCSSAttributes
+        });
     }
 
     toggleSidebar() {
@@ -74,16 +211,41 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
     }
 
     renderPseudoClassTabs() {
+        const {
+            defaultCSSAttributes
+        } = this.state;
+
+        const listAttributes = () => {
+            const pushedAttributes = [];
+
+            Object.keys(defaultCSSAttributes).forEach((attributeFamily) => {
+                pushedAttributes.push(
+                    <p>{attributeFamily}</p>
+                );
+
+                Object.keys(defaultCSSAttributes[attributeFamily]).forEach((attribute) => {
+                    console.log('pushing val:', defaultCSSAttributes[attributeFamily][attribute]);
+                    pushedAttributes.push(
+                        <InputComponent
+                            label={`${attribute}:`}
+                            inputValue={defaultCSSAttributes[attributeFamily][attribute]}
+                        />
+                    );
+                });
+            });
+
+            return pushedAttributes;
+        };
+
         return (
             <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs`}>
                 <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--header`}>
                     <div />
                 </div>
                 <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--body`}>
-                    <InputComponent
-                        label={'border:'}
-                        inputValue={'solid 1px rgba(255, 255, 0, 0.5)'}
-                    />
+                    {
+                        listAttributes()
+                    }
                 </div>
             </div>
         );

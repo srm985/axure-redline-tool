@@ -119,12 +119,12 @@ class InputComponent extends React.PureComponent {
             } else {
                 [swatchColor] = inputValue.match(InputComponent.rgbaRegEx);
             }
-
-            this.setState({
-                inputValue: conditionedInputColorValue || inputValue,
-                swatchColor
-            });
         }
+
+        this.setState({
+            inputValue: conditionedInputColorValue || inputValue,
+            swatchColor
+        });
     }
 
     render() {
@@ -136,8 +136,6 @@ class InputComponent extends React.PureComponent {
             inputValue,
             swatchColor
         } = this.state;
-
-        console.log('state needed:', swatchColor);
 
         return (
             <div className={InputComponent.name}>

@@ -66,52 +66,7 @@ class InspectView extends React.Component {
                 width: 0
             },
             zoomWrapperPadding: 1000
-            /* cssProperties: {
-                'properties': {
-                    'width': '',
-                    'height': ''
-                },
-                'styles': {
-                    'opacity': '',
-                    'border': '',
-                    'border-width': '',
-                    'border-style': '',
-                    'border-color': '',
-                    'border-top': '',
-                    'border-top-width': '',
-                    'border-top-style': '',
-                    'border-top-color': '',
-                    'border-right': '',
-                    'border-right-width': '',
-                    'border-right-style': '',
-                    'border-right-color': '',
-                    'border-bottom': '',
-                    'border-bottom-width': '',
-                    'border-bottom-style': '',
-                    'border-bottom-color': '',
-                    'border-left': '',
-                    'border-left-width': '',
-                    'border-left-style': '',
-                    'border-left-color': '',
-                    'border-radius': '',
-                    'border-top-left-radius': '',
-                    'border-top-right-radius': '',
-                    'border-bottom-right-radius': '',
-                    'border-bottom-left-radius': '',
-                    'outline': '',
-                    'background-color': '',
-                    'box-shadow': ''
-                },
-                'text': {
-                    'font-family': '',
-                    'font-size': '',
-                    'font-weight': '',
-                    'line-height': '',
-                    'text-align': '',
-                    'color': '',
-                    '_content': ''
-                }
-            },
+            /*
             dimensionMarkerHeight: 0,
             dimensionMarkerWidth: 0,
             documentCSSList: '',

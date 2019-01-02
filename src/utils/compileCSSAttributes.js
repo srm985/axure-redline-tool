@@ -67,7 +67,8 @@ const compileCSSAttributes = (pseudoClasses) => {
         }
     });
 
-    console.log(documentCSSList);
+    console.log('document CSS:', documentCSSList);
+    return documentCSSList;
 };
 
 export default compileCSSAttributes;

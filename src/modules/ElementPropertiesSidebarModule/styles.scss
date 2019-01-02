@@ -93,6 +93,21 @@ $sidebar-width: 270px;
             padding: 0 $sidebar-padding;
 
             border-top: solid 1px $primary-color-white;
+
+            p {
+                font-size: 12px;
+                font-weight: bold;
+
+                margin-top: 20px;
+
+                text-transform: uppercase;
+
+                color: $primary-color-white;
+            }
         }
+    }
+
+    .InputComponent {
+        margin-top: 10px;
     }
 }
