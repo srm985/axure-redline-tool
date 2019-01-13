@@ -11,8 +11,6 @@ class InputComponent extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        console.log('construct');
-
         this.checkColorSwatchRequired = this.checkColorSwatchRequired.bind(this);
         this.setSwatchValue = this.setSwatchValue.bind(this);
 
@@ -101,7 +99,7 @@ class InputComponent extends React.PureComponent {
              */
             if ((/rgba/).test(inputValue)) {
                 // Extract our RGBA substring.
-                const rgbaExtraction = inputValue.match(InputComponent.rgbaRegEx)[0].replace(' ', '');
+                const rgbaExtraction = inputValue.match(InputComponent.rgbaRegEx)[0].replace(/\s+/g, '');
 
                 swatchOpacity = Math.round(Number(rgbaExtraction.replace(/rgba\(\d+,\d+,\d+,(\d?(\.\d+)?)\)/, '$1')) * 100) / 100;
                 swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, `rgba($1, $2, $3, ${placeholder})`);

@@ -20,6 +20,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-transform-es2017-object-entries": "0.0.5",
     "browser-sync": "^2.26.3",
     "concurrently": "^4.0.1",
     "css-loader": "^1.0.1",

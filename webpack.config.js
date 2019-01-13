@@ -32,7 +32,9 @@ module.exports = () => {
     return {
         devServer: {},
         devtool: !isProduction ? 'source-map' : '',
-        entry: `${srcDirectory}/index.js`,
+        entry: [
+            `${srcDirectory}/index.js`
+        ],
         mode: environment,
         module: {
             rules: [

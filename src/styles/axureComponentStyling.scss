@@ -7,10 +7,10 @@ body {
     left: auto;
     // overflow: scroll;
     // sass-lint:disable property-units
-
     width: 100vw;
     height: 100vh;
     // sass-lint:enable property-units
+    margin: 0;
 
     #base {
         span {
