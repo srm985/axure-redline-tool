@@ -1,0 +1,43 @@
+@import '../../styles/constants';
+
+.TooltipComponent {
+    font-size: 12px;
+
+    position: absolute;
+    z-index: 1;
+
+    visibility: hidden;
+
+    box-sizing: border-box;
+    padding: 3px 5px;
+
+    cursor: default;
+    transition: all ease-in-out 0.5s;
+
+    opacity: 0;
+    color: $primary-color-white;
+    border-radius: 3px;
+    background-color: $primary-color-orange;
+
+    &::after {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+
+        margin-left: -5px;
+
+        content: '';
+
+        border-width: 5px;
+        border-style: solid;
+        border-color: $primary-color-orange transparent transparent;
+    }
+
+    &--active {
+        visibility: visible;
+
+        transition: all 0s;
+
+        opacity: 1;
+    }
+}

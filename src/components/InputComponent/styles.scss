@@ -1,6 +1,8 @@
 @import '../../styles/constants';
 
 .InputComponent {
+    position: relative;
+
     &__label {
         font-family: $font-stack;
         font-size: 12px;
@@ -30,5 +32,10 @@
         border: none;
         border-radius: 3px;
         outline: none;
+    }
+
+    .TooltipComponent {
+        top: -11px;
+        left: 0;
     }
 }

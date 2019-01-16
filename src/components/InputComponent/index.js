@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import ColorSwatchComponent from '../ColorSwatchComponent';
+import TooltipComponent from '../TooltipComponent';
 
 import './styles.scss';
 
@@ -12,16 +13,37 @@ class InputComponent extends React.PureComponent {
     constructor(props) {
         super(props);
         this.checkColorSwatchRequired = this.checkColorSwatchRequired.bind(this);
+        this.handleCopy = this.handleCopy.bind(this);
         this.setSwatchValue = this.setSwatchValue.bind(this);
 
         this.state = {
             inputValue: '',
+            isCopiedTooltipActive: false,
             swatchColor: null
         };
     }
 
     componentDidMount() {
         this.checkColorSwatchRequired();
+    }
+
+    handleCopy(event) {
+        const {
+            target: inputField
+        } = event;
+
+        inputField.select();
+        document.execCommand('Copy');
+
+        this.setState({
+            isCopiedTooltipActive: true
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    isCopiedTooltipActive: false
+                });
+            }, 750);
+        });
     }
 
     setSwatchValue() {
@@ -132,8 +154,11 @@ class InputComponent extends React.PureComponent {
 
         const {
             inputValue,
+            isCopiedTooltipActive,
             swatchColor
         } = this.state;
+
+        const tooltipVisibleClass = isCopiedTooltipActive ? '`${InputComponent.name}__tooltip--active`' : '';
 
         return (
             <div className={InputComponent.name}>
@@ -143,6 +168,7 @@ class InputComponent extends React.PureComponent {
                         className={`${InputComponent.name}__input`}
                         readOnly
                         value={inputValue}
+                        onMouseUp={this.handleCopy}
                     />
                     {
                         swatchColor
@@ -155,6 +181,7 @@ class InputComponent extends React.PureComponent {
                         )
                     }
                 </label>
+                <TooltipComponent isVisible={isCopiedTooltipActive} />
             </div>
         );
     }

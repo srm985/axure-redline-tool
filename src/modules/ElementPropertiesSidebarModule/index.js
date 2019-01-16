@@ -291,10 +291,14 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 delete tempElementAttributes.styles['border-right'];
                 delete tempElementAttributes.styles['border-top'];
 
+                tempElementAttributes.styles['border'] = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
+
                 tempElementAttributes.styles['border-color'] = borderTopColor;
                 tempElementAttributes.styles['border-style'] = borderTopStyle;
                 tempElementAttributes.styles['border-width'] = borderTopWidth;
             } else {
+                delete tempElementAttributes.styles['border'];
+
                 delete tempElementAttributes.styles['border-style'];
                 delete tempElementAttributes.styles['border-width'];
                 delete tempElementAttributes.styles['border-color'];
