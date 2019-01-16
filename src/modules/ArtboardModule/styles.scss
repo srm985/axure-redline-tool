@@ -15,8 +15,7 @@
         position: absolute;
     }
 
-    // sass-lint:disable no-ids
-    #base {
+    #base { // sass-lint:disable-line no-ids
         position: relative;
 
         width: 100%;
@@ -25,7 +24,7 @@
         transform-origin: center;
     }
 
-    &.--tool-enabled {
+    &--enabled {
         .ArtboardModule__artboard {
             cursor: pointer;
 

@@ -5,14 +5,15 @@ $default-border-radius: 3px;
 body {
     position: static;
     left: auto;
-    // overflow: scroll;
+
     // sass-lint:disable property-units
     width: 100vw;
     height: 100vh;
     // sass-lint:enable property-units
+
     margin: 0;
 
-    #base {
+    #base { // sass-lint:disable-line no-ids
         span {
             display: inline-block;
         }
@@ -49,6 +50,8 @@ body {
     }
 
     .ui-dialog-content {
+        padding: 10px !important;
+
         border-radius: $default-border-radius;
     }
 
@@ -61,9 +64,5 @@ body {
 
     .ui-corner-all {
         border-radius: 0;
-    }
-
-    .ui-dialog-content {
-        padding: 10px !important;
     }
 }

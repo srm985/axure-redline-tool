@@ -23,10 +23,11 @@ class DimensionLineComponent extends React.PureComponent {
             width
         };
 
+        const lineTypeClass = lineType ? `${DimensionLineComponent.name}--${lineType}` : '';
 
         return (
             <div
-                className={`${DimensionLineComponent.name} ${lineType ? `--${lineType}` : ''}`}
+                className={`${DimensionLineComponent.name} ${lineTypeClass}`}
                 style={componentStyle}
             />
         );

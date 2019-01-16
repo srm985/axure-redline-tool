@@ -3,7 +3,7 @@
 .DimensionLineComponent {
     position: absolute;
 
-    &.--hovered-solid {
+    &--hovered-solid {
         z-index: $z-index-hover-solid-line;
 
         border-width: 0;
@@ -11,7 +11,7 @@
         border-color: $primary-color-blue;
     }
 
-    &.--hovered-dashed {
+    &--hovered-dashed {
         z-index: $z-index-hover-dashed-line;
 
         border-width: 0;
@@ -19,7 +19,7 @@
         border-color: $primary-color-blue;
     }
 
-    &.--selected-solid {
+    &--selected-solid {
         z-index: $z-index-selected-solid-line;
 
         border-width: 0;
@@ -27,7 +27,7 @@
         border-color: $primary-color-orange;
     }
 
-    &.--inter-element-dimension {
+    &--inter-element-dimension {
         z-index: $z-index-inter-dimension-line;
 
         border-width: 0;

@@ -12,7 +12,7 @@
     padding: 3px 5px;
 
     cursor: default;
-    transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5;
 
     opacity: 0;
     color: $primary-color-white;
@@ -36,7 +36,7 @@
     &--active {
         visibility: visible;
 
-        transition: all 0s;
+        transition: all 0;
 
         opacity: 1;
     }

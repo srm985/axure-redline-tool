@@ -153,9 +153,11 @@ class ArtboardModule extends React.PureComponent {
             width: artboardWidth
         };
 
+        const toolEnabledClass = isToolEnabled ? `${ArtboardModule.name}--enabled` : '';
+
         return (
             <div
-                className={`${ArtboardModule.name} ${isToolEnabled ? '--tool-enabled' : ''}`}
+                className={`${ArtboardModule.name} ${toolEnabledClass}`}
                 onClick={handleClickCallback}
                 style={artboardWrapperStyle}
             >
