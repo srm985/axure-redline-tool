@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 import {
     ANNOTATION_ELEMENTS,
     NO_INTERACT_CLASS

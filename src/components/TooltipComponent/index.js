@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import './styles.scss';
 
-export const TooltipComponent = (props) => {
+const TooltipComponent = (props) => {
     const {
         isVisible
     } = props;
@@ -14,6 +15,10 @@ export const TooltipComponent = (props) => {
     return (
         <span className={`${COMPONENT_NAME} ${tooltipVisibleClass}`}>copied</span>
     );
+};
+
+TooltipComponent.propTypes = {
+    isVisible: PropTypes.bool.isRequired
 };
 
 export default TooltipComponent;

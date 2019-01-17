@@ -11,18 +11,21 @@
     <div id="redline-tool"></div>
     <style>
         #div-1 {
+            position: absolute;
+            top: 125px;
+            left: 0px;
             width: 150px;
             height: 275px;
-            margin-top: 125px;
             border: solid 2px #555;
             background-color: red;
         }
 
         #div-2 {
+            position: absolute;
+            top: 125px;
+            left: 600px;
             width: 150px;
             height: 175px;
-            margin-top: 125px;
-            margin-left: 600px;
             border-top-right-radius: 7px;
             background-color: yellow;
         }
@@ -30,7 +33,7 @@
         #div-3 {
             position: absolute;
             top: 200px;
-            left: 50px;
+            left: 120px;
             width: 100px;
             height: 95px;
             background-color: rgba(0, 0, 255, 0.5);
@@ -61,12 +64,16 @@
         }
 
         #item-6 {
+            position: absolute;
+            top: 600px;
+            left: 100px;
             font-family: arial;
             font-size: 14px;
             font-weight: bold;
             width: 50%;
             color: #555;
             border-radius: 3px 2px;
+            height: 200px;
         }
 
         #div-7 {
@@ -83,6 +90,16 @@
             position: relative;
             background-color: #679901;
         }
+
+        #div-9 {
+            position: absolute;
+            top: 250px;
+            left: 170px;
+            width: 100px;
+            height: 95px;
+            background-color: pink;
+            opacity: 0.7;
+        }
     </style>
     <div id="base">
         <div id="div-1"></div>
@@ -94,6 +111,7 @@
         <div id="div-7">
             <span id="div-8">AA</span>
         </div>
+        <div id="div-9"></div>
     </div>
 </body>
 

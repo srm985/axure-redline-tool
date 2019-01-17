@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 /**
  * We invoke this function to handle document scrolling. This is useful
  * after artboard sizing or when zooming.

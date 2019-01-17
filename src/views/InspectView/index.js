@@ -423,30 +423,33 @@ class InspectView extends React.Component {
         } = this.state;
 
         return (
-            <div
-                className={InspectView.name}
-                onScroll={this.clearToolStatus}
-            >
-                <HeaderModule />
-                <ElementPropertiesSidebarModule
-                    selectedElement={selectedElement}
-                />
-                <ArtboardModule
-                    artboardHeight={artboardHeight}
-                    artboardWidth={artboardWidth}
-                    artboardWrapperHeight={artboardWrapperHeight}
-                    artboardWrapperWidth={artboardWrapperWidth}
-                    documentZoom={documentZoom}
-                    elementMarkerThickness={elementMarkerThickness}
-                    handleClickCallback={this.handleClickCallback}
-                    hoveredElement={hoveredElement}
-                    isToolEnabled={isToolEnabled}
-                    selectedElement={selectedElement}
-                    setArtboardDimensions={this.setArtboardDimensions}
-                    setAxureLoaded={this.setAxureLoaded}
-                    zoomWrapperPadding={zoomWrapperPadding}
-                />
-            </div>
+            isToolEnabled
+            && (
+                <div
+                    className={InspectView.name}
+                    onScroll={this.clearToolStatus}
+                >
+                    <HeaderModule />
+                    <ElementPropertiesSidebarModule
+                        selectedElement={selectedElement}
+                    />
+                    <ArtboardModule
+                        artboardHeight={artboardHeight}
+                        artboardWidth={artboardWidth}
+                        artboardWrapperHeight={artboardWrapperHeight}
+                        artboardWrapperWidth={artboardWrapperWidth}
+                        documentZoom={documentZoom}
+                        elementMarkerThickness={elementMarkerThickness}
+                        handleClickCallback={this.handleClickCallback}
+                        hoveredElement={hoveredElement}
+                        isToolEnabled={isToolEnabled}
+                        selectedElement={selectedElement}
+                        setArtboardDimensions={this.setArtboardDimensions}
+                        setAxureLoaded={this.setAxureLoaded}
+                        zoomWrapperPadding={zoomWrapperPadding}
+                    />
+                </div>
+            )
         );
     }
 }
