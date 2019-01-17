@@ -27,25 +27,6 @@ class InputComponent extends React.PureComponent {
         this.checkColorSwatchRequired();
     }
 
-    handleCopy(event) {
-        const {
-            target: inputField
-        } = event;
-
-        inputField.select();
-        document.execCommand('Copy');
-
-        this.setState({
-            isCopiedTooltipActive: true
-        }, () => {
-            setTimeout(() => {
-                this.setState({
-                    isCopiedTooltipActive: false
-                });
-            }, 750);
-        });
-    }
-
     setSwatchValue() {
         const {
             inputValue
@@ -103,6 +84,31 @@ class InputComponent extends React.PureComponent {
         });
     }
 
+    /**
+     * This function handles our mouseup event and selects the
+     * field text.
+     *
+     * @param {mouseup event} event
+     */
+    handleCopy(event) {
+        const {
+            target: inputField
+        } = event;
+
+        inputField.select();
+        document.execCommand('Copy');
+
+        this.setState({
+            isCopiedTooltipActive: true
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    isCopiedTooltipActive: false
+                });
+            }, 750);
+        });
+    }
+
     checkColorSwatchRequired() {
         const {
             inputValue
@@ -157,8 +163,6 @@ class InputComponent extends React.PureComponent {
             isCopiedTooltipActive,
             swatchColor
         } = this.state;
-
-        const tooltipVisibleClass = isCopiedTooltipActive ? '`${InputComponent.name}__tooltip--active`' : '';
 
         return (
             <div className={InputComponent.name}>
