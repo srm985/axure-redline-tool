@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import InputComponent from '../../components/InputComponent';
+import TextAreaComponent from '../../components/TextAreaComponent';
 
 import compileCSSAttributes from '../../utils/compileCSSAttributes';
 
@@ -344,12 +345,27 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 const value = tempElementAttributes[attributeFamily][attribute];
 
                 if (isValidAttribute(attribute, value)) {
+                    const attributeBlock = () => (attribute === '_content'
+                        ? (
+                            <TextAreaComponent
+                                inputValue={value}
+                                key={attribute}
+                                label={'content:'}
+                            />
+                        )
+                        : (
+                            <InputComponent
+                                inputValue={value}
+                                key={attribute}
+                                label={`${attribute}:`}
+                            />
+                        ));
+
+
+                    console.log('att:', attributeBlock());
+
                     elementAttributes.push(
-                        <InputComponent
-                            inputValue={value}
-                            key={attribute}
-                            label={`${attribute}:`}
-                        />
+                        attributeBlock()
                     );
                 }
             });

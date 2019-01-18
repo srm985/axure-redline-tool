@@ -12,3 +12,5 @@ export const ANNOTATION_ELEMENTS = [
 ];
 
 export const NO_INTERACT_CLASS = 'no-interact';
+
+export const TOOLTIP_VISIBLE_TIME = 750; // 750ms

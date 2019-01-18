@@ -4,6 +4,8 @@ import React from 'react';
 import ColorSwatchComponent from '../ColorSwatchComponent';
 import TooltipComponent from '../TooltipComponent';
 
+import { TOOLTIP_VISIBLE_TIME } from '../../globalConstants';
+
 import './styles.scss';
 
 class InputComponent extends React.PureComponent {
@@ -105,7 +107,7 @@ class InputComponent extends React.PureComponent {
                 this.setState({
                     isCopiedTooltipActive: false
                 });
-            }, 750);
+            }, TOOLTIP_VISIBLE_TIME);
         });
     }
 
