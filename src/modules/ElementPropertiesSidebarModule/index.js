@@ -345,17 +345,20 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 const value = tempElementAttributes[attributeFamily][attribute];
 
                 if (isValidAttribute(attribute, value)) {
+                    // If RGBA opacity is set to 0, let's just call it transparent.
+                    let cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+
                     const attributeBlock = () => (attribute === '_content'
                         ? (
                             <TextAreaComponent
-                                inputValue={value}
+                                inputValue={cleanedValue}
                                 key={attribute}
                                 label={'content:'}
                             />
                         )
                         : (
                             <InputComponent
-                                inputValue={value}
+                                inputValue={cleanedValue}
                                 key={attribute}
                                 label={`${attribute}:`}
                             />

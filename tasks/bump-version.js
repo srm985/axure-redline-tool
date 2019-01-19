@@ -1,6 +1,6 @@
 const bump = require('gulp-bump');
 const gulp = require('gulp');
-const prompt = require('gulp-prompt');
+const inquirer = require('inquirer');
 
 const {
     directories: {
@@ -12,13 +12,13 @@ const {
     }
 } = require('../gulp.config.js')();
 
-gulp.task(bumpVersion, () => gulp.src(packageJSON)
-    .pipe(prompt.prompt({
+gulp.task(bumpVersion, () => {
+    inquirer.prompt({
         choices: ['patch', 'minor', 'major'],
         message: 'Please select bump type.',
         name: 'bumpType',
         type: 'checkbox'
-    }, (selection) => {
+    }).then((selection) => {
         const {
             bumpType
         } = selection;
@@ -26,4 +26,5 @@ gulp.task(bumpVersion, () => gulp.src(packageJSON)
         gulp.src(packageJSON)
             .pipe(bump({ type: bumpType[0] }))
             .pipe(gulp.dest(rootDirectory));
-    })));
+    });
+});
