@@ -583,7 +583,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1 ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--header > div {\n        display: flex;\n        align-items: center;\n        flex-basis: 0;\n        flex-grow: 1;\n        justify-content: center;\n        box-sizing: border-box;\n        max-width: 50%;\n        height: 100%;\n        margin: 0 1px;\n        cursor: pointer;\n        color: #555;\n        border-radius: 3px 3px 0 0;\n        background-color: #fff; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      box-sizing: border-box;\n      width: 100%;\n      padding: 0 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1 ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--header > div {\n        display: flex;\n        align-items: center;\n        flex-basis: 0;\n        flex-grow: 1;\n        justify-content: center;\n        box-sizing: border-box;\n        max-width: 50%;\n        height: 100%;\n        margin: 0 1px;\n        cursor: pointer;\n        color: #555;\n        border-radius: 3px 3px 0 0;\n        background-color: #fff; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n", ""]);
 
 // exports
 
@@ -39345,8 +39345,9 @@ function (_React$Component) {
     _this.clearToolStatus = _this.clearToolStatus.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.handleClickCallback = _this.handleClickCallback.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.handleHotkeyCallback = _this.handleHotkeyCallback.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
-    _this.handleMouseToggleCallback = _this.handleMouseToggleCallback.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.handleMouseoverCallback = _this.handleMouseoverCallback.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
+    _this.handleMouseToggleCallback = _this.handleMouseToggleCallback.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
+    _this.handleScroll = _this.handleScroll.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.handleZoomingCallback = _this.handleZoomingCallback.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.setArtboardDimensions = _this.setArtboardDimensions.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.setArtboardZoom = _this.setArtboardZoom.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
@@ -39601,6 +39602,23 @@ function (_React$Component) {
       this.clearHoveredElement();
       this.clearSelectedElement();
     }
+    /**
+     * Some sroll events are permitted and should not trigger a
+     * closure of the tool. We filter them here.
+     *
+     * @param {event} event
+     */
+
+  }, {
+    key: "handleScroll",
+    value: function handleScroll(event) {
+      var classList = event.target.classList;
+      var isPermittedScroll = classList.contains('ElementPropertiesSidebarModule__pseudo-tabs--body');
+
+      if (!isPermittedScroll) {
+        this.clearToolStatus();
+      }
+    }
   }, {
     key: "handleMouseoverCallback",
     value: function handleMouseoverCallback(event) {
@@ -39655,7 +39673,6 @@ function (_React$Component) {
       var target = event.target,
           clickedElementClassList = event.target.classList;
       var artboardModuleName = _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_9__["default"].name;
-      console.log('click event:', event.target, _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_9__["default"].name);
 
       if (clickedElementClassList.contains(artboardModuleName)) {
         this.clearSelectedElement();
@@ -39788,7 +39805,7 @@ function (_React$Component) {
           zoomWrapperPadding = _this$state5.zoomWrapperPadding;
       return isToolEnabled && react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: InspectView.name,
-        onScroll: this.clearToolStatus
+        onScroll: this.handleScroll
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_modules_HeaderModule__WEBPACK_IMPORTED_MODULE_10__["default"], null), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_modules_ElementPropertiesSidebarModule__WEBPACK_IMPORTED_MODULE_11__["default"], {
         selectedElement: selectedElement
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_9__["default"], {

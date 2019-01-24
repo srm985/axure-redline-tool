@@ -26,8 +26,9 @@ class InspectView extends React.Component {
         this.clearToolStatus = this.clearToolStatus.bind(this);
         this.handleClickCallback = this.handleClickCallback.bind(this);
         this.handleHotkeyCallback = this.handleHotkeyCallback.bind(this);
-        this.handleMouseToggleCallback = this.handleMouseToggleCallback.bind(this);
         this.handleMouseoverCallback = this.handleMouseoverCallback.bind(this);
+        this.handleMouseToggleCallback = this.handleMouseToggleCallback.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
         this.handleZoomingCallback = this.handleZoomingCallback.bind(this);
         this.setArtboardDimensions = this.setArtboardDimensions.bind(this);
         this.setArtboardZoom = this.setArtboardZoom.bind(this);
@@ -225,6 +226,26 @@ class InspectView extends React.Component {
         this.clearSelectedElement();
     }
 
+    /**
+     * Some sroll events are permitted and should not trigger a
+     * closure of the tool. We filter them here.
+     *
+     * @param {event} event
+     */
+    handleScroll(event) {
+        const {
+            target: {
+                classList
+            }
+        } = event;
+
+        const isPermittedScroll = classList.contains('ElementPropertiesSidebarModule__pseudo-tabs--body');
+
+        if (!isPermittedScroll) {
+            this.clearToolStatus();
+        }
+    }
+
     handleMouseoverCallback(event) {
         const {
             isToolEnabled,
@@ -292,7 +313,6 @@ class InspectView extends React.Component {
             name: artboardModuleName
         } = ArtboardModule;
 
-        console.log('click event:', event.target, ArtboardModule.name);
         if (clickedElementClassList.contains(artboardModuleName)) {
             this.clearSelectedElement();
         } else if (isToolEnabled && !isHotkeyDepressed) {
@@ -427,7 +447,7 @@ class InspectView extends React.Component {
             && (
                 <div
                     className={InspectView.name}
-                    onScroll={this.clearToolStatus}
+                    onScroll={this.handleScroll}
                 >
                     <HeaderModule />
                     <ElementPropertiesSidebarModule
