@@ -335,6 +335,8 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             delete tempElementAttributes.text;
         }
 
+        let blockProperties;
+
 
         Object.keys(tempElementAttributes).forEach((attributeFamily) => {
             elementAttributes.push(
@@ -346,7 +348,10 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
                 if (isValidAttribute(attribute, value)) {
                     // If RGBA opacity is set to 0, let's just call it transparent.
-                    let cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+                    const cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+
+                    // Concat all valid properties to use later for the CSS block.
+                    blockProperties += `${attribute}: ${cleanedValue}\n`;
 
                     const attributeBlock = () => (attribute === '_content'
                         ? (
@@ -373,6 +378,16 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 }
             });
         });
+
+        // Create a block containing all CSS attributes.
+        elementAttributes.push([
+            <p key={'css-block-attributes-header'}>CSS BLOCK ATTRIBUTES</p>,
+            <TextAreaComponent
+                inputValue={blockProperties}
+                key={'css-block-attributes-body'}
+                label={'properties:'}
+            />
+        ]);
 
         return elementAttributes;
     }

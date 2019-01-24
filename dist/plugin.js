@@ -38294,6 +38294,7 @@ function (_React$PureComponent) {
         delete tempElementAttributes.text;
       }
 
+      var blockProperties;
       Object.keys(tempElementAttributes).forEach(function (attributeFamily) {
         elementAttributes.push(react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", {
           key: attributeFamily
@@ -38303,7 +38304,9 @@ function (_React$PureComponent) {
 
           if (isValidAttribute(attribute, value)) {
             // If RGBA opacity is set to 0, let's just call it transparent.
-            var cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
+            var cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent'); // Concat all valid properties to use later for the CSS block.
+
+            blockProperties += "".concat(attribute, ": ").concat(cleanedValue, "\n");
 
             var attributeBlock = function attributeBlock() {
               return attribute === '_content' ? react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -38321,7 +38324,15 @@ function (_React$PureComponent) {
             elementAttributes.push(attributeBlock());
           }
         });
-      });
+      }); // Create a block containing all CSS attributes.
+
+      elementAttributes.push([react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", {
+        key: 'css-block-attributes-header'
+      }, "CSS BLOCK ATTRIBUTES"), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        inputValue: blockProperties,
+        key: 'css-block-attributes-body',
+        label: 'properties:'
+      })]);
       return elementAttributes;
     }
   }, {
