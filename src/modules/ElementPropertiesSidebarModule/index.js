@@ -81,6 +81,8 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         }
     };
 
+    static COPY_BLOCK_NAME = '_content';
+
     constructor(props) {
         super(props);
 
@@ -165,7 +167,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
         Object.keys(defaultCSSAttributes).forEach((attributeFamily) => {
             Object.keys(defaultCSSAttributes[attributeFamily]).forEach((attribute) => {
-                if (attribute === '_content') {
+                if (attribute === ElementPropertiesSidebarModule.COPY_BLOCK_NAME) {
                     defaultCSSAttributes[attributeFamily][attribute] = target.value || target.innerText;
                 } else if (attribute === 'opacity') {
                     /**
@@ -335,7 +337,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             delete tempElementAttributes.text;
         }
 
-        let blockProperties;
+        let blockProperties = '';
 
 
         Object.keys(tempElementAttributes).forEach((attributeFamily) => {
@@ -351,9 +353,11 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     const cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent');
 
                     // Concat all valid properties to use later for the CSS block.
-                    blockProperties += `${attribute}: ${cleanedValue}\n`;
+                    if (attribute !== ElementPropertiesSidebarModule.COPY_BLOCK_NAME) {
+                        blockProperties += `${attribute}: ${cleanedValue};\n`;
+                    }
 
-                    const attributeBlock = () => (attribute === '_content'
+                    const attributeBlock = () => (attribute === ElementPropertiesSidebarModule.COPY_BLOCK_NAME
                         ? (
                             <TextAreaComponent
                                 inputValue={cleanedValue}
@@ -368,9 +372,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                                 label={`${attribute}:`}
                             />
                         ));
-
-
-                    console.log('att:', attributeBlock());
 
                     elementAttributes.push(
                         attributeBlock()

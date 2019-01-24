@@ -38127,7 +38127,7 @@ function (_React$PureComponent) {
       var defaultCSSAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
       Object.keys(defaultCSSAttributes).forEach(function (attributeFamily) {
         Object.keys(defaultCSSAttributes[attributeFamily]).forEach(function (attribute) {
-          if (attribute === '_content') {
+          if (attribute === ElementPropertiesSidebarModule.COPY_BLOCK_NAME) {
             defaultCSSAttributes[attributeFamily][attribute] = target.value || target.innerText;
           } else if (attribute === 'opacity') {
             /**
@@ -38294,7 +38294,7 @@ function (_React$PureComponent) {
         delete tempElementAttributes.text;
       }
 
-      var blockProperties;
+      var blockProperties = '';
       Object.keys(tempElementAttributes).forEach(function (attributeFamily) {
         elementAttributes.push(react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", {
           key: attributeFamily
@@ -38306,10 +38306,12 @@ function (_React$PureComponent) {
             // If RGBA opacity is set to 0, let's just call it transparent.
             var cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent'); // Concat all valid properties to use later for the CSS block.
 
-            blockProperties += "".concat(attribute, ": ").concat(cleanedValue, "\n");
+            if (attribute !== ElementPropertiesSidebarModule.COPY_BLOCK_NAME) {
+              blockProperties += "".concat(attribute, ": ").concat(cleanedValue, ";\n");
+            }
 
             var attributeBlock = function attributeBlock() {
-              return attribute === '_content' ? react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              return attribute === ElementPropertiesSidebarModule.COPY_BLOCK_NAME ? react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
                 inputValue: cleanedValue,
                 key: attribute,
                 label: 'content:'
@@ -38320,7 +38322,6 @@ function (_React$PureComponent) {
               });
             };
 
-            console.log('att:', attributeBlock());
             elementAttributes.push(attributeBlock());
           }
         });
@@ -38442,6 +38443,8 @@ _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(Ele
     pseudoName: 'MouseDown'
   }
 });
+
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(ElementPropertiesSidebarModule, "COPY_BLOCK_NAME", '_content');
 
 ElementPropertiesSidebarModule.propTypes = {
   selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.shape({})
@@ -39613,9 +39616,19 @@ function (_React$Component) {
     key: "handleScroll",
     value: function handleScroll(event) {
       var classList = event.target.classList;
-      var isPermittedScroll = classList.contains('ElementPropertiesSidebarModule__pseudo-tabs--body');
+      var PERMITTED_SCROLL_EVENTS = ['ElementPropertiesSidebarModule__pseudo-tabs--body', 'TextAreaComponent__textarea'];
 
-      if (!isPermittedScroll) {
+      var isPermittedScroll = function isPermittedScroll() {
+        var matchFound = false;
+        PERMITTED_SCROLL_EVENTS.forEach(function (extractedClass) {
+          if (classList.contains(extractedClass)) {
+            matchFound = true;
+          }
+        });
+        return matchFound;
+      };
+
+      if (!isPermittedScroll()) {
         this.clearToolStatus();
       }
     }

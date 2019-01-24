@@ -239,9 +239,24 @@ class InspectView extends React.Component {
             }
         } = event;
 
-        const isPermittedScroll = classList.contains('ElementPropertiesSidebarModule__pseudo-tabs--body');
+        const PERMITTED_SCROLL_EVENTS = [
+            'ElementPropertiesSidebarModule__pseudo-tabs--body',
+            'TextAreaComponent__textarea'
+        ];
 
-        if (!isPermittedScroll) {
+        const isPermittedScroll = () => {
+            let matchFound = false;
+
+            PERMITTED_SCROLL_EVENTS.forEach((extractedClass) => {
+                if (classList.contains(extractedClass)) {
+                    matchFound = true;
+                }
+            });
+
+            return matchFound;
+        };
+
+        if (!isPermittedScroll()) {
             this.clearToolStatus();
         }
     }
