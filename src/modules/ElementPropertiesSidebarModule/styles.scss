@@ -68,25 +68,47 @@ $pseudo-tab-height: 25px;
             width: 100%;
             height: $pseudo-tab-height;
             padding: 0 $sidebar-padding;
+        }
 
-            & > div {
-                display: flex;
-                align-items: center;
-                flex-basis: 0;
-                flex-grow: 1;
-                justify-content: center;
+        &--tab {
+            font-family: $font-stack;
+            font-size: 12px;
 
-                box-sizing: border-box;
-                max-width: 50%;
-                height: 100%;
-                margin: 0 1px;
+            display: flex;
+            align-items: center;
+            flex-basis: 0;
+            flex-grow: 1;
+            justify-content: center;
 
-                cursor: pointer;
+            box-sizing: border-box;
+            max-width: 50%;
+            height: 100%;
+            margin: 0 1px;
+            padding: 0 5px;
 
-                color: $primary-color-gray;
-                border-radius: 3px 3px 0 0;
-                background-color: $primary-color-white;
+            cursor: pointer;
+
+            color: $primary-color-gray;
+            border-radius: 3px 3px 0 0;
+            background-color: $primary-color-white;
+
+            span {
+                overflow: hidden;
+
+                width: 100%;
+
+                text-align: center;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
+        }
+
+        &--tab-active {
+            color: $primary-color-white;
+            border-width: 1px 1px 0;
+            border-style: solid;
+            border-color: $primary-color-white;
+            background-color: $primary-color-background;
         }
 
         &--body {
@@ -95,6 +117,7 @@ $pseudo-tab-height: 25px;
             box-sizing: border-box;
             width: 100%;
             height: calc(100% - #{$pseudo-tab-height});
+            margin-top: -1px;
             padding: 0 $sidebar-padding 20px;
 
             border-top: solid 1px $primary-color-white;

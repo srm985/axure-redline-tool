@@ -58,28 +58,28 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         /* eslint-enable quote-props, sort-keys */
     };
 
-    static pseudoClasses = {
-        default: {
+    static pseudoClasses = [
+        {
             axureName: '',
             keyName: 'default',
             pseudoName: 'Default'
         },
-        disabled: {
-            axureName: 'disabled',
-            keyName: 'disabled',
-            pseudoName: 'Disabled'
-        },
-        hover: {
+        {
             axureName: 'mouseOver',
             keyName: 'hover',
             pseudoName: 'Hover'
         },
-        mousedown: {
+        {
             axureName: 'mouseDown',
             keyName: 'mousedown',
             pseudoName: 'MouseDown'
+        },
+        {
+            axureName: 'disabled',
+            keyName: 'disabled',
+            pseudoName: 'Disabled'
         }
-    };
+    ];
 
     static COPY_BLOCK_NAME = '_content';
 
@@ -91,6 +91,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         this.toggleSidebar = this.toggleSidebar.bind(this);
 
         this.state = {
+            activeTab: 'default',
             defaultCSSAttributes: {},
             documentCSSAttributes: {},
             isSidebarVisible: false
@@ -395,13 +396,46 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
     renderPseudoClassTabs() {
         const {
+            activeTab,
             defaultCSSAttributes
         } = this.state;
+
+        const setActiveTab = (activatedTab) => {
+            this.setState({
+                activeTab: activatedTab
+            });
+        };
+
+        const renderTabs = () => {
+            const tabs = [];
+
+            ElementPropertiesSidebarModule.pseudoClasses.forEach((pseudoClass) => {
+                const {
+                    keyName
+                } = pseudoClass;
+
+                const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-active` : '';
+
+                tabs.push(
+                    <div
+                        className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab ${tabActivate}`}
+                        key={keyName}
+                        onClick={() => setActiveTab(keyName)}
+                    >
+                        <span>{keyName}</span>
+                    </div>
+                );
+            });
+
+            return tabs;
+        };
 
         return (
             <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs`}>
                 <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--header`}>
-                    <div />
+                    {
+                        renderTabs()
+                    }
                 </div>
                 <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--body`}>
                     {

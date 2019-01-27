@@ -583,7 +583,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1 ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--header > div {\n        display: flex;\n        align-items: center;\n        flex-basis: 0;\n        flex-grow: 1;\n        justify-content: center;\n        box-sizing: border-box;\n        max-width: 50%;\n        height: 100%;\n        margin: 0 1px;\n        cursor: pointer;\n        color: #555;\n        border-radius: 3px 3px 0 0;\n        background-color: #fff; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1 ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n", ""]);
 
 // exports
 
@@ -37195,8 +37195,10 @@ function (_React$PureComponent) {
 
     _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(TextAreaComponent).call(this, props));
     _this.handleCopy = _this.handleCopy.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
+    _this.handleScroll = _this.handleScroll.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)));
     _this.state = {
-      isCopiedTooltipActive: false
+      isCopiedTooltipActive: false,
+      isScrolling: false
     };
     return _this;
   }
@@ -37213,17 +37215,35 @@ function (_React$PureComponent) {
     value: function handleCopy(event) {
       var _this2 = this;
 
+      var isScrolling = this.state.isScrolling;
       var inputField = event.target;
-      inputField.select();
-      document.execCommand('Copy');
+
+      if (!isScrolling) {
+        inputField.select();
+        document.execCommand('Copy');
+        this.setState({
+          isCopiedTooltipActive: true
+        }, function () {
+          setTimeout(function () {
+            _this2.setState({
+              isCopiedTooltipActive: false
+            });
+          }, _globalConstants__WEBPACK_IMPORTED_MODULE_9__["TOOLTIP_VISIBLE_TIME"]);
+        });
+      } // Debounce our scroll event.
+
+
+      setTimeout(function () {
+        _this2.setState({
+          isScrolling: false
+        });
+      }, 100);
+    }
+  }, {
+    key: "handleScroll",
+    value: function handleScroll() {
       this.setState({
-        isCopiedTooltipActive: true
-      }, function () {
-        setTimeout(function () {
-          _this2.setState({
-            isCopiedTooltipActive: false
-          });
-        }, _globalConstants__WEBPACK_IMPORTED_MODULE_9__["TOOLTIP_VISIBLE_TIME"]);
+        isScrolling: true
       });
     }
   }, {
@@ -37240,8 +37260,10 @@ function (_React$PureComponent) {
       }, label, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("textarea", {
         className: "".concat(TextAreaComponent.name, "__textarea"),
         readOnly: true,
-        onMouseUp: this.handleCopy
-      }, inputValue)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_TooltipComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        onMouseUp: this.handleCopy,
+        onScroll: this.handleScroll,
+        value: inputValue
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_TooltipComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
         isVisible: isCopiedTooltipActive
       }));
     }
@@ -38063,6 +38085,7 @@ function (_React$PureComponent) {
     _this.extractDefaultCSS = _this.extractDefaultCSS.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6___default()(_this)));
     _this.toggleSidebar = _this.toggleSidebar.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6___default()(_this)));
     _this.state = {
+      activeTab: 'default',
       defaultCSSAttributes: {},
       documentCSSAttributes: {},
       isSidebarVisible: false
@@ -38339,12 +38362,39 @@ function (_React$PureComponent) {
   }, {
     key: "renderPseudoClassTabs",
     value: function renderPseudoClassTabs() {
-      var defaultCSSAttributes = this.state.defaultCSSAttributes;
+      var _this4 = this;
+
+      var _this$state = this.state,
+          activeTab = _this$state.activeTab,
+          defaultCSSAttributes = _this$state.defaultCSSAttributes;
+
+      var setActiveTab = function setActiveTab(activatedTab) {
+        _this4.setState({
+          activeTab: activatedTab
+        });
+      };
+
+      var renderTabs = function renderTabs() {
+        var tabs = [];
+        ElementPropertiesSidebarModule.pseudoClasses.forEach(function (pseudoClass) {
+          var keyName = pseudoClass.keyName;
+          var tabActivate = keyName === activeTab ? "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--tab-active") : '';
+          tabs.push(react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
+            className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--tab ").concat(tabActivate),
+            key: keyName,
+            onClick: function onClick() {
+              return setActiveTab(keyName);
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", null, keyName)));
+        });
+        return tabs;
+      };
+
       return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs")
       }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--header")
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
+      }, renderTabs()), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--body")
       }, this.renderAttributes(defaultCSSAttributes)));
     }
@@ -38421,28 +38471,23 @@ _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(Ele
   }
 });
 
-_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(ElementPropertiesSidebarModule, "pseudoClasses", {
-  default: {
-    axureName: '',
-    keyName: 'default',
-    pseudoName: 'Default'
-  },
-  disabled: {
-    axureName: 'disabled',
-    keyName: 'disabled',
-    pseudoName: 'Disabled'
-  },
-  hover: {
-    axureName: 'mouseOver',
-    keyName: 'hover',
-    pseudoName: 'Hover'
-  },
-  mousedown: {
-    axureName: 'mouseDown',
-    keyName: 'mousedown',
-    pseudoName: 'MouseDown'
-  }
-});
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(ElementPropertiesSidebarModule, "pseudoClasses", [{
+  axureName: '',
+  keyName: 'default',
+  pseudoName: 'Default'
+}, {
+  axureName: 'mouseOver',
+  keyName: 'hover',
+  pseudoName: 'Hover'
+}, {
+  axureName: 'mouseDown',
+  keyName: 'mousedown',
+  pseudoName: 'MouseDown'
+}, {
+  axureName: 'disabled',
+  keyName: 'disabled',
+  pseudoName: 'Disabled'
+}]);
 
 _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(ElementPropertiesSidebarModule, "COPY_BLOCK_NAME", '_content');
 

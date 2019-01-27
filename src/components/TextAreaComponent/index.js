@@ -11,9 +11,11 @@ class TextAreaComponent extends React.PureComponent {
     constructor(props) {
         super(props);
         this.handleCopy = this.handleCopy.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
 
         this.state = {
-            isCopiedTooltipActive: false
+            isCopiedTooltipActive: false,
+            isScrolling: false
         };
     }
 
@@ -25,20 +27,39 @@ class TextAreaComponent extends React.PureComponent {
      */
     handleCopy(event) {
         const {
+            isScrolling
+        } = this.state;
+
+        const {
             target: inputField
         } = event;
 
-        inputField.select();
-        document.execCommand('Copy');
+        if (!isScrolling) {
+            inputField.select();
+            document.execCommand('Copy');
 
+            this.setState({
+                isCopiedTooltipActive: true
+            }, () => {
+                setTimeout(() => {
+                    this.setState({
+                        isCopiedTooltipActive: false
+                    });
+                }, TOOLTIP_VISIBLE_TIME);
+            });
+        }
+
+        // Debounce our scroll event.
+        setTimeout(() => {
+            this.setState({
+                isScrolling: false
+            });
+        }, 100);
+    }
+
+    handleScroll() {
         this.setState({
-            isCopiedTooltipActive: true
-        }, () => {
-            setTimeout(() => {
-                this.setState({
-                    isCopiedTooltipActive: false
-                });
-            }, TOOLTIP_VISIBLE_TIME);
+            isScrolling: true
         });
     }
 
@@ -60,9 +81,9 @@ class TextAreaComponent extends React.PureComponent {
                         className={`${TextAreaComponent.name}__textarea`}
                         readOnly
                         onMouseUp={this.handleCopy}
-                    >
-                        {inputValue}
-                    </textarea>
+                        onScroll={this.handleScroll}
+                        value={inputValue}
+                    />
                 </label>
                 <TooltipComponent isVisible={isCopiedTooltipActive} />
             </div>
