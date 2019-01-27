@@ -121,6 +121,14 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
         const isElementSelected = !!target;
 
+        const [
+            defaultAttributes
+        ] = ElementPropertiesSidebarModule.pseudoClasses;
+
+        const {
+            keyName: defaultAttributesTab
+        } = defaultAttributes;
+
         if (target !== prevTarget) {
             // Don't set visible until we've cleared previous CSS to prevent conflicts.
             this.clearCSSAttributes().then(() => {
@@ -129,6 +137,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 }
 
                 this.setState({
+                    activeTab: defaultAttributesTab,
                     isSidebarVisible: isElementSelected
                 });
             });
@@ -295,7 +304,10 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 delete tempElementAttributes.styles['border-right'];
                 delete tempElementAttributes.styles['border-top'];
 
-                tempElementAttributes.styles.border = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
+                // Bug: Force Synchronous
+                setTimeout(() => {
+                    tempElementAttributes.styles.border = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
+                }, 0);
 
                 tempElementAttributes.styles['border-color'] = borderTopColor;
                 tempElementAttributes.styles['border-style'] = borderTopStyle;
@@ -338,7 +350,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             delete tempElementAttributes.text;
         }
 
-        let blockProperties = '';
+        const blockProperties = [];
 
 
         Object.keys(tempElementAttributes).forEach((attributeFamily) => {
@@ -355,7 +367,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
                     // Concat all valid properties to use later for the CSS block.
                     if (attribute !== ElementPropertiesSidebarModule.COPY_BLOCK_NAME) {
-                        blockProperties += `${attribute}: ${cleanedValue};\n`;
+                        blockProperties.push(`${attribute}: ${cleanedValue};`);
                     }
 
                     const attributeBlock = () => (attribute === ElementPropertiesSidebarModule.COPY_BLOCK_NAME
@@ -385,7 +397,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         elementAttributes.push([
             <p key={'css-block-attributes-header'}>CSS BLOCK ATTRIBUTES</p>,
             <TextAreaComponent
-                inputValue={blockProperties}
+                inputValue={blockProperties.join('\n')}
                 key={'css-block-attributes-body'}
                 label={'properties:'}
             />
@@ -396,8 +408,15 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
     renderPseudoClassTabs() {
         const {
+            selectedElement: {
+                target
+            }
+        } = this.props;
+
+        const {
             activeTab,
-            defaultCSSAttributes
+            defaultCSSAttributes,
+            documentCSSAttributes
         } = this.state;
 
         const setActiveTab = (activatedTab) => {
@@ -430,6 +449,79 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             return tabs;
         };
 
+        const renderAttributeBody = () => {
+            const {
+                id: elementID
+            } = target;
+
+            const [
+                defaultAttributes
+            ] = ElementPropertiesSidebarModule.pseudoClasses;
+
+            const {
+                keyName: defaultAttributesTab
+            } = defaultAttributes;
+
+            const retrieveAxureName = () => {
+                let axureKeyName = '';
+
+                ElementPropertiesSidebarModule.pseudoClasses.forEach((pseudoClass) => {
+                    const {
+                        axureName,
+                        keyName
+                    } = pseudoClass;
+
+                    if (keyName === activeTab) {
+                        axureKeyName = axureName;
+                    }
+                });
+
+                return axureKeyName;
+            };
+
+            const formatAttributes = (attributeList) => {
+                const tempElementAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
+
+                Object.keys(tempElementAttributes).forEach((attributeFamily) => {
+                    Object.keys(tempElementAttributes[attributeFamily]).forEach((attribute) => {
+                        if (attribute in attributeList) {
+                            const {
+                                [attribute]: extractedAttributeValue
+                            } = attributeList;
+
+                            tempElementAttributes[attributeFamily][attribute] = extractedAttributeValue;
+                        }
+                    });
+                });
+
+                return tempElementAttributes;
+            };
+
+            let attributesList = {};
+
+            if (activeTab === defaultAttributesTab) {
+                attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
+            } else {
+                try {
+                    const {
+                        [`#${elementID}.${retrieveAxureName()}`]: {
+                            default: pseudoAttributes
+                        }
+                    } = documentCSSAttributes;
+
+                    attributesList = formatAttributes(pseudoAttributes);
+                } catch (error) {
+                    /**
+                     * This gets called before we reset to default tab so
+                     * if our element doesn't have pseudo attributes, it'll
+                     * throw an error.
+                     */
+                }
+            }
+
+            return this.renderAttributes(attributesList);
+        };
+
         return (
             <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs`}>
                 <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--header`}>
@@ -439,7 +531,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 </div>
                 <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--body`}>
                     {
-                        this.renderAttributes(defaultCSSAttributes)
+                        renderAttributeBody()
                     }
                 </div>
             </div>

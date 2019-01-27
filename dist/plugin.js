@@ -583,7 +583,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1 ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99998;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1 ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: center;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n", ""]);
 
 // exports
 
@@ -36943,6 +36943,11 @@ function (_React$PureComponent) {
       this.checkColorSwatchRequired();
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.checkColorSwatchRequired();
+    }
+  }, {
     key: "setSwatchValue",
     value: function setSwatchValue() {
       var inputValue = this.state.inputValue;
@@ -38110,6 +38115,11 @@ function (_React$PureComponent) {
       var target = this.props.selectedElement.target;
       var isElementSelected = !!target;
 
+      var _ElementPropertiesSid = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(ElementPropertiesSidebarModule.pseudoClasses, 1),
+          defaultAttributes = _ElementPropertiesSid[0];
+
+      var defaultAttributesTab = defaultAttributes.keyName;
+
       if (target !== prevTarget) {
         // Don't set visible until we've cleared previous CSS to prevent conflicts.
         this.clearCSSAttributes().then(function () {
@@ -38118,6 +38128,7 @@ function (_React$PureComponent) {
           }
 
           _this2.setState({
+            activeTab: defaultAttributesTab,
             isSidebarVisible: isElementSelected
           });
         });
@@ -38276,8 +38287,11 @@ function (_React$PureComponent) {
           delete tempElementAttributes.styles['border-bottom'];
           delete tempElementAttributes.styles['border-left'];
           delete tempElementAttributes.styles['border-right'];
-          delete tempElementAttributes.styles['border-top'];
-          tempElementAttributes.styles.border = "".concat(borderTopStyle, " ").concat(borderTopWidth, " ").concat(borderTopColor);
+          delete tempElementAttributes.styles['border-top']; // Bug: Force Synchronous
+
+          setTimeout(function () {
+            tempElementAttributes.styles.border = "".concat(borderTopStyle, " ").concat(borderTopWidth, " ").concat(borderTopColor);
+          }, 0);
           tempElementAttributes.styles['border-color'] = borderTopColor;
           tempElementAttributes.styles['border-style'] = borderTopStyle;
           tempElementAttributes.styles['border-width'] = borderTopWidth;
@@ -38317,7 +38331,7 @@ function (_React$PureComponent) {
         delete tempElementAttributes.text;
       }
 
-      var blockProperties = '';
+      var blockProperties = [];
       Object.keys(tempElementAttributes).forEach(function (attributeFamily) {
         elementAttributes.push(react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", {
           key: attributeFamily
@@ -38330,7 +38344,7 @@ function (_React$PureComponent) {
             var cleanedValue = value.replace(/rgba\(\d+,\s\d+,\s\d+,\s0\)/, 'transparent'); // Concat all valid properties to use later for the CSS block.
 
             if (attribute !== ElementPropertiesSidebarModule.COPY_BLOCK_NAME) {
-              blockProperties += "".concat(attribute, ": ").concat(cleanedValue, ";\n");
+              blockProperties.push("".concat(attribute, ": ").concat(cleanedValue, ";"));
             }
 
             var attributeBlock = function attributeBlock() {
@@ -38353,7 +38367,7 @@ function (_React$PureComponent) {
       elementAttributes.push([react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", {
         key: 'css-block-attributes-header'
       }, "CSS BLOCK ATTRIBUTES"), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        inputValue: blockProperties,
+        inputValue: blockProperties.join('\n'),
         key: 'css-block-attributes-body',
         label: 'properties:'
       })]);
@@ -38364,9 +38378,11 @@ function (_React$PureComponent) {
     value: function renderPseudoClassTabs() {
       var _this4 = this;
 
+      var target = this.props.selectedElement.target;
       var _this$state = this.state,
           activeTab = _this$state.activeTab,
-          defaultCSSAttributes = _this$state.defaultCSSAttributes;
+          defaultCSSAttributes = _this$state.defaultCSSAttributes,
+          documentCSSAttributes = _this$state.documentCSSAttributes;
 
       var setActiveTab = function setActiveTab(activatedTab) {
         _this4.setState({
@@ -38390,13 +38406,67 @@ function (_React$PureComponent) {
         return tabs;
       };
 
+      var renderAttributeBody = function renderAttributeBody() {
+        var elementID = target.id;
+
+        var _ElementPropertiesSid2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(ElementPropertiesSidebarModule.pseudoClasses, 1),
+            defaultAttributes = _ElementPropertiesSid2[0];
+
+        var defaultAttributesTab = defaultAttributes.keyName;
+
+        var retrieveAxureName = function retrieveAxureName() {
+          var axureKeyName = '';
+          ElementPropertiesSidebarModule.pseudoClasses.forEach(function (pseudoClass) {
+            var axureName = pseudoClass.axureName,
+                keyName = pseudoClass.keyName;
+
+            if (keyName === activeTab) {
+              axureKeyName = axureName;
+            }
+          });
+          return axureKeyName;
+        };
+
+        var formatAttributes = function formatAttributes(attributeList) {
+          var tempElementAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
+          Object.keys(tempElementAttributes).forEach(function (attributeFamily) {
+            Object.keys(tempElementAttributes[attributeFamily]).forEach(function (attribute) {
+              if (attribute in attributeList) {
+                var extractedAttributeValue = attributeList[attribute];
+                tempElementAttributes[attributeFamily][attribute] = extractedAttributeValue;
+              }
+            });
+          });
+          return tempElementAttributes;
+        };
+
+        var attributesList = {};
+
+        if (activeTab === defaultAttributesTab) {
+          attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
+        } else {
+          try {
+            var pseudoAttributes = documentCSSAttributes["#".concat(elementID, ".").concat(retrieveAxureName())].default;
+            attributesList = formatAttributes(pseudoAttributes);
+          } catch (error) {
+            /**
+             * This gets called before we reset to default tab so
+             * if our element doesn't have pseudo attributes, it'll
+             * throw an error.
+             */
+          }
+        }
+
+        return _this4.renderAttributes(attributesList);
+      };
+
       return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs")
       }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--header")
       }, renderTabs()), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--body")
-      }, this.renderAttributes(defaultCSSAttributes)));
+      }, renderAttributeBody()));
     }
   }, {
     key: "render",

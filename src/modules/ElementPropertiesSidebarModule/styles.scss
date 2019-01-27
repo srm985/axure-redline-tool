@@ -74,6 +74,8 @@ $pseudo-tab-height: 25px;
             font-family: $font-stack;
             font-size: 12px;
 
+            z-index: 1;
+
             display: flex;
             align-items: center;
             flex-basis: 0;
