@@ -230,17 +230,20 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 'border-bottom-right-radius': borderBottomRightRadius = '',
                 'border-bottom-style': borderBottomStyle = '',
                 'border-bottom-width': borderBottomWidth = '',
+                'border-color': borderColor = '',
                 'border-left-color': borderLeftColor = '',
                 'border-left-style': borderLeftStyle = '',
                 'border-left-width': borderLeftWidth = '',
                 'border-right-color': borderRightColor = '',
                 'border-right-style': borderRightStyle = '',
                 'border-right-width': borderRightWidth = '',
+                'border-style': borderStyle = '',
                 'border-top-color': borderTopColor = '',
                 'border-top-left-radius': borderTopLeftRadius = '',
                 'border-top-right-radius': borderTopRightRadius = '',
                 'border-top-style': borderTopStyle = '',
-                'border-top-width': borderTopWidth = ''
+                'border-top-width': borderTopWidth = '',
+                'border-width': borderWidth = ''
             } = {},
             text: {
                 _content = '',
@@ -296,6 +299,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
             // Check if all borders are the same.
             if (borderTopStyle !== 'none'
+                && borderTopStyle
                 && borderBottom === borderLeft
                 && borderLeft === borderRight
                 && borderRight === borderTop) {
@@ -312,6 +316,8 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 tempElementAttributes.styles['border-color'] = borderTopColor;
                 tempElementAttributes.styles['border-style'] = borderTopStyle;
                 tempElementAttributes.styles['border-width'] = borderTopWidth;
+            } else if (borderStyle && borderWidth && borderColor) {
+                tempElementAttributes.styles.border = `${borderStyle} ${borderWidth} ${borderColor}`;
             } else {
                 delete tempElementAttributes.styles.border;
 

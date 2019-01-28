@@ -37384,17 +37384,19 @@ if(false) {}
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: ANNOTATION_ELEMENTS, NO_INTERACT_CLASS, TOOLTIP_VISIBLE_TIME */
+/*! exports provided: ANNOTATION_ELEMENTS, NO_INTERACT_ELEMENTS, NO_INTERACT_CLASS, TOOLTIP_VISIBLE_TIME */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ANNOTATION_ELEMENTS", function() { return ANNOTATION_ELEMENTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO_INTERACT_ELEMENTS", function() { return NO_INTERACT_ELEMENTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO_INTERACT_CLASS", function() { return NO_INTERACT_CLASS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOOLTIP_VISIBLE_TIME", function() { return TOOLTIP_VISIBLE_TIME; });
 var ANNOTATION_ELEMENTS = [// RP8 Syntax
 '.annnoteimage', '.annnoteline', '.annotation', '.ui-dialog', '.ui-dialog *', // RP9 Syntax
 '.annnote', '.annnote *'];
+var NO_INTERACT_ELEMENTS = ['DimensionLineComponent', 'DimensionMarkerComponent'];
 var NO_INTERACT_CLASS = 'no-interact';
 var TOOLTIP_VISIBLE_TIME = 750; // 750ms
 
@@ -38216,28 +38218,34 @@ function (_React$PureComponent) {
           borderBottomStyle = _attributeList$styles5 === void 0 ? '' : _attributeList$styles5,
           _attributeList$styles6 = _attributeList$styles['border-bottom-width'],
           borderBottomWidth = _attributeList$styles6 === void 0 ? '' : _attributeList$styles6,
-          _attributeList$styles7 = _attributeList$styles['border-left-color'],
-          borderLeftColor = _attributeList$styles7 === void 0 ? '' : _attributeList$styles7,
-          _attributeList$styles8 = _attributeList$styles['border-left-style'],
-          borderLeftStyle = _attributeList$styles8 === void 0 ? '' : _attributeList$styles8,
-          _attributeList$styles9 = _attributeList$styles['border-left-width'],
-          borderLeftWidth = _attributeList$styles9 === void 0 ? '' : _attributeList$styles9,
-          _attributeList$styles10 = _attributeList$styles['border-right-color'],
-          borderRightColor = _attributeList$styles10 === void 0 ? '' : _attributeList$styles10,
-          _attributeList$styles11 = _attributeList$styles['border-right-style'],
-          borderRightStyle = _attributeList$styles11 === void 0 ? '' : _attributeList$styles11,
-          _attributeList$styles12 = _attributeList$styles['border-right-width'],
-          borderRightWidth = _attributeList$styles12 === void 0 ? '' : _attributeList$styles12,
-          _attributeList$styles13 = _attributeList$styles['border-top-color'],
-          borderTopColor = _attributeList$styles13 === void 0 ? '' : _attributeList$styles13,
-          _attributeList$styles14 = _attributeList$styles['border-top-left-radius'],
-          borderTopLeftRadius = _attributeList$styles14 === void 0 ? '' : _attributeList$styles14,
-          _attributeList$styles15 = _attributeList$styles['border-top-right-radius'],
-          borderTopRightRadius = _attributeList$styles15 === void 0 ? '' : _attributeList$styles15,
-          _attributeList$styles16 = _attributeList$styles['border-top-style'],
-          borderTopStyle = _attributeList$styles16 === void 0 ? '' : _attributeList$styles16,
-          _attributeList$styles17 = _attributeList$styles['border-top-width'],
-          borderTopWidth = _attributeList$styles17 === void 0 ? '' : _attributeList$styles17,
+          _attributeList$styles7 = _attributeList$styles['border-color'],
+          borderColor = _attributeList$styles7 === void 0 ? '' : _attributeList$styles7,
+          _attributeList$styles8 = _attributeList$styles['border-left-color'],
+          borderLeftColor = _attributeList$styles8 === void 0 ? '' : _attributeList$styles8,
+          _attributeList$styles9 = _attributeList$styles['border-left-style'],
+          borderLeftStyle = _attributeList$styles9 === void 0 ? '' : _attributeList$styles9,
+          _attributeList$styles10 = _attributeList$styles['border-left-width'],
+          borderLeftWidth = _attributeList$styles10 === void 0 ? '' : _attributeList$styles10,
+          _attributeList$styles11 = _attributeList$styles['border-right-color'],
+          borderRightColor = _attributeList$styles11 === void 0 ? '' : _attributeList$styles11,
+          _attributeList$styles12 = _attributeList$styles['border-right-style'],
+          borderRightStyle = _attributeList$styles12 === void 0 ? '' : _attributeList$styles12,
+          _attributeList$styles13 = _attributeList$styles['border-right-width'],
+          borderRightWidth = _attributeList$styles13 === void 0 ? '' : _attributeList$styles13,
+          _attributeList$styles14 = _attributeList$styles['border-style'],
+          borderStyle = _attributeList$styles14 === void 0 ? '' : _attributeList$styles14,
+          _attributeList$styles15 = _attributeList$styles['border-top-color'],
+          borderTopColor = _attributeList$styles15 === void 0 ? '' : _attributeList$styles15,
+          _attributeList$styles16 = _attributeList$styles['border-top-left-radius'],
+          borderTopLeftRadius = _attributeList$styles16 === void 0 ? '' : _attributeList$styles16,
+          _attributeList$styles17 = _attributeList$styles['border-top-right-radius'],
+          borderTopRightRadius = _attributeList$styles17 === void 0 ? '' : _attributeList$styles17,
+          _attributeList$styles18 = _attributeList$styles['border-top-style'],
+          borderTopStyle = _attributeList$styles18 === void 0 ? '' : _attributeList$styles18,
+          _attributeList$styles19 = _attributeList$styles['border-top-width'],
+          borderTopWidth = _attributeList$styles19 === void 0 ? '' : _attributeList$styles19,
+          _attributeList$styles20 = _attributeList$styles['border-width'],
+          borderWidth = _attributeList$styles20 === void 0 ? '' : _attributeList$styles20,
           _attributeList$text = attributeList.text;
       _attributeList$text = _attributeList$text === void 0 ? {} : _attributeList$text;
 
@@ -38283,7 +38291,7 @@ function (_React$PureComponent) {
         var borderRight = tempElementAttributes.styles['border-right'];
         var borderTop = tempElementAttributes.styles['border-top']; // Check if all borders are the same.
 
-        if (borderTopStyle !== 'none' && borderBottom === borderLeft && borderLeft === borderRight && borderRight === borderTop) {
+        if (borderTopStyle !== 'none' && borderTopStyle && borderBottom === borderLeft && borderLeft === borderRight && borderRight === borderTop) {
           delete tempElementAttributes.styles['border-bottom'];
           delete tempElementAttributes.styles['border-left'];
           delete tempElementAttributes.styles['border-right'];
@@ -38295,6 +38303,8 @@ function (_React$PureComponent) {
           tempElementAttributes.styles['border-color'] = borderTopColor;
           tempElementAttributes.styles['border-style'] = borderTopStyle;
           tempElementAttributes.styles['border-width'] = borderTopWidth;
+        } else if (borderStyle && borderWidth && borderColor) {
+          tempElementAttributes.styles.border = "".concat(borderStyle, " ").concat(borderWidth, " ").concat(borderColor);
         } else {
           delete tempElementAttributes.styles.border;
           delete tempElementAttributes.styles['border-style'];
@@ -39802,9 +39812,23 @@ function (_React$Component) {
           clickedElementClassList = event.target.classList;
       var artboardModuleName = _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_9__["default"].name;
 
+      var isNoInteractElement = function isNoInteractElement() {
+        var isNoInteract = false;
+
+        if (clickedElementClassList.length) {
+          _globalConstants__WEBPACK_IMPORTED_MODULE_15__["NO_INTERACT_ELEMENTS"].forEach(function (noInteractElement) {
+            if (clickedElementClassList.contains(noInteractElement)) {
+              isNoInteract = true;
+            }
+          });
+        }
+
+        return isNoInteract;
+      };
+
       if (clickedElementClassList.contains(artboardModuleName)) {
         this.clearSelectedElement();
-      } else if (isToolEnabled && !isHotkeyDepressed) {
+      } else if (isToolEnabled && !isHotkeyDepressed && !isNoInteractElement()) {
         event.stopPropagation();
         event.preventDefault();
 

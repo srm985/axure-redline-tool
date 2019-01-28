@@ -15,7 +15,10 @@ import {
 import calculateGlobalOffset from '../../utils/calculateGlobalOffset';
 import calculateTrueArtboardOffset from '../../utils/calculateTrueArtboardOffset';
 
-import { NO_INTERACT_CLASS } from '../../globalConstants';
+import {
+    NO_INTERACT_ELEMENTS,
+    NO_INTERACT_CLASS
+} from '../../globalConstants';
 
 class InspectView extends React.Component {
     constructor(props) {
@@ -328,9 +331,24 @@ class InspectView extends React.Component {
             name: artboardModuleName
         } = ArtboardModule;
 
+        const isNoInteractElement = () => {
+            let isNoInteract = false;
+
+            if (clickedElementClassList.length) {
+                NO_INTERACT_ELEMENTS.forEach((noInteractElement) => {
+                    if (clickedElementClassList.contains(noInteractElement)) {
+                        isNoInteract = true;
+                    }
+                });
+            }
+            return isNoInteract;
+        }
+
         if (clickedElementClassList.contains(artboardModuleName)) {
             this.clearSelectedElement();
-        } else if (isToolEnabled && !isHotkeyDepressed) {
+        } else if (isToolEnabled
+            && !isHotkeyDepressed
+            && !isNoInteractElement()) {
             event.stopPropagation();
             event.preventDefault();
 
