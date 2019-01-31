@@ -38171,13 +38171,11 @@ function (_React$PureComponent) {
              * is actually set at the parent level. For example, if we click
              * on "u1_div", its opacity is actually set at the parent, "u1".
              */
-            var parentElement = target.parentElement,
-                _target$parentElement = target.parentElement;
-            _target$parentElement = _target$parentElement === void 0 ? {} : _target$parentElement;
-            var _target$parentElement2 = _target$parentElement.id,
-                parentID = _target$parentElement2 === void 0 ? '' : _target$parentElement2;
+            var _target$id = target.id,
+                childID = _target$id === void 0 ? '' : _target$id,
+                parentElement = target.parentElement;
             var isImmediateChildRegex = /u\d+_div/;
-            var isImmediateChild = isImmediateChildRegex.test(parentID);
+            var isImmediateChild = isImmediateChildRegex.test(childID);
 
             if (isImmediateChild) {
               defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(parentElement).getPropertyValue(attribute);
@@ -38226,26 +38224,28 @@ function (_React$PureComponent) {
           borderLeftStyle = _attributeList$styles9 === void 0 ? '' : _attributeList$styles9,
           _attributeList$styles10 = _attributeList$styles['border-left-width'],
           borderLeftWidth = _attributeList$styles10 === void 0 ? '' : _attributeList$styles10,
-          _attributeList$styles11 = _attributeList$styles['border-right-color'],
-          borderRightColor = _attributeList$styles11 === void 0 ? '' : _attributeList$styles11,
-          _attributeList$styles12 = _attributeList$styles['border-right-style'],
-          borderRightStyle = _attributeList$styles12 === void 0 ? '' : _attributeList$styles12,
-          _attributeList$styles13 = _attributeList$styles['border-right-width'],
-          borderRightWidth = _attributeList$styles13 === void 0 ? '' : _attributeList$styles13,
-          _attributeList$styles14 = _attributeList$styles['border-style'],
-          borderStyle = _attributeList$styles14 === void 0 ? '' : _attributeList$styles14,
-          _attributeList$styles15 = _attributeList$styles['border-top-color'],
-          borderTopColor = _attributeList$styles15 === void 0 ? '' : _attributeList$styles15,
-          _attributeList$styles16 = _attributeList$styles['border-top-left-radius'],
-          borderTopLeftRadius = _attributeList$styles16 === void 0 ? '' : _attributeList$styles16,
-          _attributeList$styles17 = _attributeList$styles['border-top-right-radius'],
-          borderTopRightRadius = _attributeList$styles17 === void 0 ? '' : _attributeList$styles17,
-          _attributeList$styles18 = _attributeList$styles['border-top-style'],
-          borderTopStyle = _attributeList$styles18 === void 0 ? '' : _attributeList$styles18,
-          _attributeList$styles19 = _attributeList$styles['border-top-width'],
-          borderTopWidth = _attributeList$styles19 === void 0 ? '' : _attributeList$styles19,
-          _attributeList$styles20 = _attributeList$styles['border-width'],
-          borderWidth = _attributeList$styles20 === void 0 ? '' : _attributeList$styles20,
+          _attributeList$styles11 = _attributeList$styles['border-radius'],
+          borderRadius = _attributeList$styles11 === void 0 ? '' : _attributeList$styles11,
+          _attributeList$styles12 = _attributeList$styles['border-right-color'],
+          borderRightColor = _attributeList$styles12 === void 0 ? '' : _attributeList$styles12,
+          _attributeList$styles13 = _attributeList$styles['border-right-style'],
+          borderRightStyle = _attributeList$styles13 === void 0 ? '' : _attributeList$styles13,
+          _attributeList$styles14 = _attributeList$styles['border-right-width'],
+          borderRightWidth = _attributeList$styles14 === void 0 ? '' : _attributeList$styles14,
+          _attributeList$styles15 = _attributeList$styles['border-style'],
+          borderStyle = _attributeList$styles15 === void 0 ? '' : _attributeList$styles15,
+          _attributeList$styles16 = _attributeList$styles['border-top-color'],
+          borderTopColor = _attributeList$styles16 === void 0 ? '' : _attributeList$styles16,
+          _attributeList$styles17 = _attributeList$styles['border-top-left-radius'],
+          borderTopLeftRadius = _attributeList$styles17 === void 0 ? '' : _attributeList$styles17,
+          _attributeList$styles18 = _attributeList$styles['border-top-right-radius'],
+          borderTopRightRadius = _attributeList$styles18 === void 0 ? '' : _attributeList$styles18,
+          _attributeList$styles19 = _attributeList$styles['border-top-style'],
+          borderTopStyle = _attributeList$styles19 === void 0 ? '' : _attributeList$styles19,
+          _attributeList$styles20 = _attributeList$styles['border-top-width'],
+          borderTopWidth = _attributeList$styles20 === void 0 ? '' : _attributeList$styles20,
+          _attributeList$styles21 = _attributeList$styles['border-width'],
+          borderWidth = _attributeList$styles21 === void 0 ? '' : _attributeList$styles21,
           _attributeList$text = attributeList.text;
       _attributeList$text = _attributeList$text === void 0 ? {} : _attributeList$text;
 
@@ -38257,10 +38257,11 @@ function (_React$PureComponent) {
       var tempElementAttributes = JSON.parse(JSON.stringify(attributeList));
       var elementAttributes = [];
 
-      var isValidAttribute = function isValidAttribute(attribute, value) {
+      var isValidAttribute = function isValidAttribute(attribute) {
+        var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
         var isValid = false;
 
-        if (value !== undefined && value.length && !value.includes('none') && value !== '0px' && value !== 'medium' && !value.includes('initial') && !(attribute === 'opacity' && Number(value) === 1)) {
+        if (value.trim().length && !value.includes('none') && value !== '0px' && value !== 'medium' && !value.includes('initial') && !(attribute === 'opacity' && Number(value) === 1)) {
           isValid = true;
         }
 
@@ -38295,15 +38296,12 @@ function (_React$PureComponent) {
           delete tempElementAttributes.styles['border-bottom'];
           delete tempElementAttributes.styles['border-left'];
           delete tempElementAttributes.styles['border-right'];
-          delete tempElementAttributes.styles['border-top']; // Bug: Force Synchronous
-
-          setTimeout(function () {
-            tempElementAttributes.styles.border = "".concat(borderTopStyle, " ").concat(borderTopWidth, " ").concat(borderTopColor);
-          }, 0);
+          delete tempElementAttributes.styles['border-top'];
+          tempElementAttributes.styles.border = "".concat(borderTopStyle, " ").concat(borderTopWidth, " ").concat(borderTopColor);
           tempElementAttributes.styles['border-color'] = borderTopColor;
           tempElementAttributes.styles['border-style'] = borderTopStyle;
           tempElementAttributes.styles['border-width'] = borderTopWidth;
-        } else if (borderStyle && borderWidth && borderColor) {
+        } else if (borderStyle !== 'none' && borderWidth && borderColor) {
           tempElementAttributes.styles.border = "".concat(borderStyle, " ").concat(borderWidth, " ").concat(borderColor);
         } else {
           delete tempElementAttributes.styles.border;
@@ -38313,14 +38311,16 @@ function (_React$PureComponent) {
         } // Create our border radius shorthand.
 
 
-        if (borderBottomLeftRadius === borderBottomRightRadius && borderBottomRightRadius === borderTopLeftRadius && borderTopLeftRadius === borderTopRightRadius) {
-          tempElementAttributes.styles['border-radius'] = borderTopLeftRadius;
-        } else if (borderTopLeftRadius === borderBottomRightRadius && borderTopRightRadius === borderBottomLeftRadius) {
-          tempElementAttributes.styles['border-radius'] = "".concat(borderTopLeftRadius, " ").concat(borderTopRightRadius);
-        } else if (borderTopRightRadius === borderBottomLeftRadius) {
-          tempElementAttributes.styles['border-radius'] = "".concat(borderTopLeftRadius, " ").concat(borderTopRightRadius, " ").concat(borderBottomLeftRadius);
-        } else {
-          tempElementAttributes.styles['border-radius'] = "".concat(borderTopLeftRadius, " ").concat(borderTopRightRadius, " ").concat(borderBottomRightRadius, " ").concat(borderBottomLeftRadius);
+        if (!borderRadius) {
+          if (borderBottomLeftRadius === borderBottomRightRadius && borderBottomRightRadius === borderTopLeftRadius && borderTopLeftRadius === borderTopRightRadius) {
+            tempElementAttributes.styles['border-radius'] = borderTopLeftRadius;
+          } else if (borderTopLeftRadius === borderBottomRightRadius && borderTopRightRadius === borderBottomLeftRadius) {
+            tempElementAttributes.styles['border-radius'] = "".concat(borderTopLeftRadius, " ").concat(borderTopRightRadius);
+          } else if (borderTopRightRadius === borderBottomLeftRadius) {
+            tempElementAttributes.styles['border-radius'] = "".concat(borderTopLeftRadius, " ").concat(borderTopRightRadius, " ").concat(borderBottomLeftRadius);
+          } else {
+            tempElementAttributes.styles['border-radius'] = "".concat(borderTopLeftRadius, " ").concat(borderTopRightRadius, " ").concat(borderBottomRightRadius, " ").concat(borderBottomLeftRadius);
+          }
         } // Remove granular border radii.
 
 
@@ -38452,18 +38452,13 @@ function (_React$PureComponent) {
 
         var attributesList = {};
 
-        if (activeTab === defaultAttributesTab) {
-          attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
-        } else {
-          try {
-            var pseudoAttributes = documentCSSAttributes["#".concat(elementID, ".").concat(retrieveAxureName())].default;
-            attributesList = formatAttributes(pseudoAttributes);
-          } catch (error) {
-            /**
-             * This gets called before we reset to default tab so
-             * if our element doesn't have pseudo attributes, it'll
-             * throw an error.
-             */
+        try {
+          var axureName = retrieveAxureName();
+          var pseudoAttributes = documentCSSAttributes["#".concat(elementID).concat(axureName ? ".".concat(axureName) : '')].default;
+          attributesList = formatAttributes(pseudoAttributes);
+        } catch (error) {
+          if (activeTab === defaultAttributesTab) {
+            attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
           }
         }
 

@@ -187,14 +187,14 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                      */
 
                     const {
-                        parentElement,
-                        parentElement: {
-                            id: parentID = ''
-                        } = {}
+                        id: childID = '',
+                        parentElement
                     } = target;
 
+
+
                     const isImmediateChildRegex = /u\d+_div/;
-                    const isImmediateChild = isImmediateChildRegex.test(parentID);
+                    const isImmediateChild = isImmediateChildRegex.test(childID);
 
                     if (isImmediateChild) {
                         defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(parentElement).getPropertyValue(attribute);
@@ -234,6 +234,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 'border-left-color': borderLeftColor = '',
                 'border-left-style': borderLeftStyle = '',
                 'border-left-width': borderLeftWidth = '',
+                'border-radius': borderRadius = '',
                 'border-right-color': borderRightColor = '',
                 'border-right-style': borderRightStyle = '',
                 'border-right-width': borderRightWidth = '',
@@ -254,11 +255,10 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         const tempElementAttributes = JSON.parse(JSON.stringify(attributeList));
         const elementAttributes = [];
 
-        const isValidAttribute = (attribute, value) => {
+        const isValidAttribute = (attribute, value = '') => {
             let isValid = false;
 
-            if (value !== undefined
-                && value.length
+            if (value.trim().length
                 && !value.includes('none')
                 && value !== '0px'
                 && value !== 'medium'
@@ -308,15 +308,12 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 delete tempElementAttributes.styles['border-right'];
                 delete tempElementAttributes.styles['border-top'];
 
-                // Bug: Force Synchronous
-                setTimeout(() => {
-                    tempElementAttributes.styles.border = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
-                }, 0);
+                tempElementAttributes.styles.border = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
 
                 tempElementAttributes.styles['border-color'] = borderTopColor;
                 tempElementAttributes.styles['border-style'] = borderTopStyle;
                 tempElementAttributes.styles['border-width'] = borderTopWidth;
-            } else if (borderStyle && borderWidth && borderColor) {
+            } else if (borderStyle !== 'none' && borderWidth && borderColor) {
                 tempElementAttributes.styles.border = `${borderStyle} ${borderWidth} ${borderColor}`;
             } else {
                 delete tempElementAttributes.styles.border;
@@ -327,17 +324,19 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             }
 
             // Create our border radius shorthand.
-            if (borderBottomLeftRadius === borderBottomRightRadius
-                && borderBottomRightRadius === borderTopLeftRadius
-                && borderTopLeftRadius === borderTopRightRadius) {
-                tempElementAttributes.styles['border-radius'] = borderTopLeftRadius;
-            } else if (borderTopLeftRadius === borderBottomRightRadius
-                && borderTopRightRadius === borderBottomLeftRadius) {
-                tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius}`;
-            } else if (borderTopRightRadius === borderBottomLeftRadius) {
-                tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius} ${borderBottomLeftRadius}`;
-            } else {
-                tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius} ${borderBottomRightRadius} ${borderBottomLeftRadius}`;
+            if (!borderRadius) {
+                if (borderBottomLeftRadius === borderBottomRightRadius
+                    && borderBottomRightRadius === borderTopLeftRadius
+                    && borderTopLeftRadius === borderTopRightRadius) {
+                    tempElementAttributes.styles['border-radius'] = borderTopLeftRadius;
+                } else if (borderTopLeftRadius === borderBottomRightRadius
+                    && borderTopRightRadius === borderBottomLeftRadius) {
+                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius}`;
+                } else if (borderTopRightRadius === borderBottomLeftRadius) {
+                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius} ${borderBottomLeftRadius}`;
+                } else {
+                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius} ${borderBottomRightRadius} ${borderBottomLeftRadius}`;
+                }
             }
 
             // Remove granular border radii.
@@ -505,23 +504,19 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
             let attributesList = {};
 
-            if (activeTab === defaultAttributesTab) {
-                attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
-            } else {
-                try {
-                    const {
-                        [`#${elementID}.${retrieveAxureName()}`]: {
-                            default: pseudoAttributes
-                        }
-                    } = documentCSSAttributes;
+            try {
+                const axureName = retrieveAxureName();
 
-                    attributesList = formatAttributes(pseudoAttributes);
-                } catch (error) {
-                    /**
-                     * This gets called before we reset to default tab so
-                     * if our element doesn't have pseudo attributes, it'll
-                     * throw an error.
-                     */
+                const {
+                    [`#${elementID}${axureName ? `.${axureName}` : ''}`]: {
+                        default: pseudoAttributes
+                    }
+                } = documentCSSAttributes;
+
+                attributesList = formatAttributes(pseudoAttributes);
+            } catch (error) {
+                if (activeTab === defaultAttributesTab) {
+                    attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
                 }
             }
 
