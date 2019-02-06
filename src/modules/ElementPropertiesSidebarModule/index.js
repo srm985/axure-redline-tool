@@ -191,8 +191,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                         parentElement
                     } = target;
 
-
-
                     const isImmediateChildRegex = /u\d+_div/;
                     const isImmediateChild = isImmediateChildRegex.test(childID);
 
@@ -220,6 +218,73 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
             return ({ isSidebarVisible: !isSidebarVisiblePrev });
         });
+    }
+
+    retrieveElementPageCSS(activeTab) {
+        const {
+            selectedElement: {
+                target: {
+                    id: elementID
+                }
+            }
+        } = this.props;
+
+        const {
+            documentCSSAttributes
+        } = this.state;
+
+        let elementCSS = {};
+
+        const formatAttributes = (attributeList) => {
+            const tempElementAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
+
+            Object.keys(tempElementAttributes).forEach((attributeFamily) => {
+                Object.keys(tempElementAttributes[attributeFamily]).forEach((attribute) => {
+                    if (attribute in attributeList) {
+                        const {
+                            [attribute]: extractedAttributeValue
+                        } = attributeList;
+
+                        tempElementAttributes[attributeFamily][attribute] = extractedAttributeValue;
+                    }
+                });
+            });
+
+            return tempElementAttributes;
+        };
+
+        const retrieveAxureName = () => {
+            let axureKeyName = '';
+
+            ElementPropertiesSidebarModule.pseudoClasses.forEach((pseudoClass) => {
+                const {
+                    axureName,
+                    keyName
+                } = pseudoClass;
+
+                if (keyName === activeTab) {
+                    axureKeyName = axureName;
+                }
+            });
+
+            return axureKeyName;
+        };
+
+        try {
+            const axureName = retrieveAxureName();
+
+            const {
+                [`#${elementID}${axureName ? `.${axureName}` : ''}`]: {
+                    default: pseudoAttributes
+                }
+            } = documentCSSAttributes;
+
+            elementCSS = formatAttributes(pseudoAttributes);
+        } catch (error) {
+            elementCSS = {};
+        }
+
+        return elementCSS;
     }
 
     renderAttributes(attributeList) {
@@ -413,15 +478,8 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
     renderPseudoClassTabs() {
         const {
-            selectedElement: {
-                target
-            }
-        } = this.props;
-
-        const {
             activeTab,
-            defaultCSSAttributes,
-            documentCSSAttributes
+            defaultCSSAttributes
         } = this.state;
 
         const setActiveTab = (activatedTab) => {
@@ -438,27 +496,27 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     keyName
                 } = pseudoClass;
 
-                const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-active` : '';
+                const hasPseudoClass = Object.keys(this.retrieveElementPageCSS(keyName)).length;
 
-                tabs.push(
-                    <div
-                        className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab ${tabActivate}`}
-                        key={keyName}
-                        onClick={() => setActiveTab(keyName)}
-                    >
-                        <span>{keyName}</span>
-                    </div>
-                );
+                if (hasPseudoClass || keyName === 'default') {
+                    const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-active` : '';
+
+                    tabs.push(
+                        <div
+                            className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab ${tabActivate}`}
+                            key={keyName}
+                            onClick={() => setActiveTab(keyName)}
+                        >
+                            <span>{keyName}</span>
+                        </div>
+                    );
+                }
             });
 
             return tabs;
         };
 
         const renderAttributeBody = () => {
-            const {
-                id: elementID
-            } = target;
-
             const [
                 defaultAttributes
             ] = ElementPropertiesSidebarModule.pseudoClasses;
@@ -467,57 +525,18 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 keyName: defaultAttributesTab
             } = defaultAttributes;
 
-            const retrieveAxureName = () => {
-                let axureKeyName = '';
-
-                ElementPropertiesSidebarModule.pseudoClasses.forEach((pseudoClass) => {
-                    const {
-                        axureName,
-                        keyName
-                    } = pseudoClass;
-
-                    if (keyName === activeTab) {
-                        axureKeyName = axureName;
-                    }
-                });
-
-                return axureKeyName;
-            };
-
-            const formatAttributes = (attributeList) => {
-                const tempElementAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
-
-                Object.keys(tempElementAttributes).forEach((attributeFamily) => {
-                    Object.keys(tempElementAttributes[attributeFamily]).forEach((attribute) => {
-                        if (attribute in attributeList) {
-                            const {
-                                [attribute]: extractedAttributeValue
-                            } = attributeList;
-
-                            tempElementAttributes[attributeFamily][attribute] = extractedAttributeValue;
-                        }
-                    });
-                });
-
-                return tempElementAttributes;
-            };
-
             let attributesList = {};
 
-            try {
-                const axureName = retrieveAxureName();
+            /**
+             * Check to see if we can get the element attributes from the page CSS
+             * otherwise we'll just directly extract them from the element CSS if it's
+             * the default tab. In AxShare, pseudo class CSS is applied via JavaScript
+             * so we can't just extract it from the element.
+             */
+            attributesList = this.retrieveElementPageCSS(activeTab);
 
-                const {
-                    [`#${elementID}${axureName ? `.${axureName}` : ''}`]: {
-                        default: pseudoAttributes
-                    }
-                } = documentCSSAttributes;
-
-                attributesList = formatAttributes(pseudoAttributes);
-            } catch (error) {
-                if (activeTab === defaultAttributesTab) {
-                    attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
-                }
+            if (!Object.keys(attributesList).length && activeTab === defaultAttributesTab) {
+                attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
             }
 
             return this.renderAttributes(attributesList);

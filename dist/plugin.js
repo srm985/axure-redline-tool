@@ -38202,6 +38202,49 @@ function (_React$PureComponent) {
       });
     }
   }, {
+    key: "retrieveElementPageCSS",
+    value: function retrieveElementPageCSS(activeTab) {
+      var elementID = this.props.selectedElement.target.id;
+      var documentCSSAttributes = this.state.documentCSSAttributes;
+      var elementCSS = {};
+
+      var formatAttributes = function formatAttributes(attributeList) {
+        var tempElementAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
+        Object.keys(tempElementAttributes).forEach(function (attributeFamily) {
+          Object.keys(tempElementAttributes[attributeFamily]).forEach(function (attribute) {
+            if (attribute in attributeList) {
+              var extractedAttributeValue = attributeList[attribute];
+              tempElementAttributes[attributeFamily][attribute] = extractedAttributeValue;
+            }
+          });
+        });
+        return tempElementAttributes;
+      };
+
+      var retrieveAxureName = function retrieveAxureName() {
+        var axureKeyName = '';
+        ElementPropertiesSidebarModule.pseudoClasses.forEach(function (pseudoClass) {
+          var axureName = pseudoClass.axureName,
+              keyName = pseudoClass.keyName;
+
+          if (keyName === activeTab) {
+            axureKeyName = axureName;
+          }
+        });
+        return axureKeyName;
+      };
+
+      try {
+        var axureName = retrieveAxureName();
+        var pseudoAttributes = documentCSSAttributes["#".concat(elementID).concat(axureName ? ".".concat(axureName) : '')].default;
+        elementCSS = formatAttributes(pseudoAttributes);
+      } catch (error) {
+        elementCSS = {};
+      }
+
+      return elementCSS;
+    }
+  }, {
     key: "renderAttributes",
     value: function renderAttributes(attributeList) {
       var _attributeList$styles = attributeList.styles;
@@ -38388,11 +38431,9 @@ function (_React$PureComponent) {
     value: function renderPseudoClassTabs() {
       var _this4 = this;
 
-      var target = this.props.selectedElement.target;
       var _this$state = this.state,
           activeTab = _this$state.activeTab,
-          defaultCSSAttributes = _this$state.defaultCSSAttributes,
-          documentCSSAttributes = _this$state.documentCSSAttributes;
+          defaultCSSAttributes = _this$state.defaultCSSAttributes;
 
       var setActiveTab = function setActiveTab(activatedTab) {
         _this4.setState({
@@ -38404,62 +38445,39 @@ function (_React$PureComponent) {
         var tabs = [];
         ElementPropertiesSidebarModule.pseudoClasses.forEach(function (pseudoClass) {
           var keyName = pseudoClass.keyName;
-          var tabActivate = keyName === activeTab ? "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--tab-active") : '';
-          tabs.push(react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
-            className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--tab ").concat(tabActivate),
-            key: keyName,
-            onClick: function onClick() {
-              return setActiveTab(keyName);
-            }
-          }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", null, keyName)));
+          var hasPseudoClass = Object.keys(_this4.retrieveElementPageCSS(keyName)).length;
+
+          if (hasPseudoClass || keyName === 'default') {
+            var tabActivate = keyName === activeTab ? "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--tab-active") : '';
+            tabs.push(react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
+              className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--tab ").concat(tabActivate),
+              key: keyName,
+              onClick: function onClick() {
+                return setActiveTab(keyName);
+              }
+            }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", null, keyName)));
+          }
         });
         return tabs;
       };
 
       var renderAttributeBody = function renderAttributeBody() {
-        var elementID = target.id;
-
         var _ElementPropertiesSid2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(ElementPropertiesSidebarModule.pseudoClasses, 1),
             defaultAttributes = _ElementPropertiesSid2[0];
 
         var defaultAttributesTab = defaultAttributes.keyName;
-
-        var retrieveAxureName = function retrieveAxureName() {
-          var axureKeyName = '';
-          ElementPropertiesSidebarModule.pseudoClasses.forEach(function (pseudoClass) {
-            var axureName = pseudoClass.axureName,
-                keyName = pseudoClass.keyName;
-
-            if (keyName === activeTab) {
-              axureKeyName = axureName;
-            }
-          });
-          return axureKeyName;
-        };
-
-        var formatAttributes = function formatAttributes(attributeList) {
-          var tempElementAttributes = JSON.parse(JSON.stringify(ElementPropertiesSidebarModule.cssAttributesList));
-          Object.keys(tempElementAttributes).forEach(function (attributeFamily) {
-            Object.keys(tempElementAttributes[attributeFamily]).forEach(function (attribute) {
-              if (attribute in attributeList) {
-                var extractedAttributeValue = attributeList[attribute];
-                tempElementAttributes[attributeFamily][attribute] = extractedAttributeValue;
-              }
-            });
-          });
-          return tempElementAttributes;
-        };
-
         var attributesList = {};
+        /**
+         * Check to see if we can get the element attributes from the page CSS
+         * otherwise we'll just directly extract them from the element CSS if it's
+         * the default tab. In AxShare, pseudo class CSS is applied via JavaScript
+         * so we can't just extract it from the element.
+         */
 
-        try {
-          var axureName = retrieveAxureName();
-          var pseudoAttributes = documentCSSAttributes["#".concat(elementID).concat(axureName ? ".".concat(axureName) : '')].default;
-          attributesList = formatAttributes(pseudoAttributes);
-        } catch (error) {
-          if (activeTab === defaultAttributesTab) {
-            attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
-          }
+        attributesList = _this4.retrieveElementPageCSS(activeTab);
+
+        if (!Object.keys(attributesList).length && activeTab === defaultAttributesTab) {
+          attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
         }
 
         return _this4.renderAttributes(attributesList);

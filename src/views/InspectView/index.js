@@ -341,6 +341,7 @@ class InspectView extends React.Component {
                     }
                 });
             }
+
             return isNoInteract;
         }
 
