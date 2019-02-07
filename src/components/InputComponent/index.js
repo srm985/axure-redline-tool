@@ -29,8 +29,18 @@ class InputComponent extends React.PureComponent {
         this.checkColorSwatchRequired();
     }
 
-    componentDidUpdate() {
-        this.checkColorSwatchRequired();
+    componentDidUpdate(prevProps) {
+        const {
+            inputValue
+        } = this.props;
+
+        const {
+            inputValue: prevInputValue
+        } = prevProps;
+
+        if (inputValue !== prevInputValue) {
+            this.checkColorSwatchRequired();
+        }
     }
 
     setSwatchValue() {

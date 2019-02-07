@@ -36944,8 +36944,13 @@ function (_React$PureComponent) {
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.checkColorSwatchRequired();
+    value: function componentDidUpdate(prevProps) {
+      var inputValue = this.props.inputValue;
+      var prevInputValue = prevProps.inputValue;
+
+      if (inputValue !== prevInputValue) {
+        this.checkColorSwatchRequired();
+      }
     }
   }, {
     key: "setSwatchValue",
