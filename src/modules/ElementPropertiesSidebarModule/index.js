@@ -166,6 +166,26 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         });
     }
 
+    /**
+     * Axure wraps all components in a parent div wrapper. The format is usually
+     * #u1 > #u1_div where interaction occurs on #u1_div. Some CSS attributes
+     * are set at the parent level though.
+     *
+     * @param {string} childID
+     */
+    isImmediateChild(childID) {
+        const isImmediateChildRegex = /u\d+_div/;
+        const isImmediateChild = isImmediateChildRegex.test(childID);
+
+        let parentClassName;
+
+        if (isImmediateChild) {
+            parentClassName = childID.replace(/_div$/, '');
+        }
+
+        return parentClassName;
+    }
+
     extractDefaultCSS() {
         const {
             selectedElement: {
@@ -191,8 +211,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                         parentElement
                     } = target;
 
-                    const isImmediateChildRegex = /u\d+_div/;
-                    const isImmediateChild = isImmediateChildRegex.test(childID);
+                    const isImmediateChild = this.isImmediateChild(childID);
 
                     if (isImmediateChild) {
                         defaultCSSAttributes[attributeFamily][attribute] = window.getComputedStyle(parentElement).getPropertyValue(attribute);
@@ -273,11 +292,28 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         try {
             const axureName = retrieveAxureName();
 
-            const {
+            let {
                 [`#${elementID}${axureName ? `.${axureName}` : ''}`]: {
                     default: pseudoAttributes
                 }
             } = documentCSSAttributes;
+
+            const isImmediateChild = this.isImmediateChild(elementID);
+
+            if (this.isImmediateChild(elementID)) {
+                const {
+                    [`#${isImmediateChild}${axureName ? `.${axureName}` : ''}`]: {
+                        default: {
+                            opacity
+                        }
+                    }
+                } = documentCSSAttributes;
+
+                pseudoAttributes = {
+                    opacity,
+                    ...pseudoAttributes
+                };
+            }
 
             elementCSS = formatAttributes(pseudoAttributes);
         } catch (error) {
@@ -288,22 +324,27 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
     }
 
     renderAttributes(attributeList) {
+        console.log('atts:', attributeList);
         const {
             styles: {
+                'border-bottom': borderBottom = '',
                 'border-bottom-color': borderBottomColor = '',
                 'border-bottom-left-radius': borderBottomLeftRadius = '',
                 'border-bottom-right-radius': borderBottomRightRadius = '',
                 'border-bottom-style': borderBottomStyle = '',
                 'border-bottom-width': borderBottomWidth = '',
                 'border-color': borderColor = '',
+                'border-left': borderLeft = '',
                 'border-left-color': borderLeftColor = '',
                 'border-left-style': borderLeftStyle = '',
                 'border-left-width': borderLeftWidth = '',
                 'border-radius': borderRadius = '',
+                'border-right': borderRight = '',
                 'border-right-color': borderRightColor = '',
                 'border-right-style': borderRightStyle = '',
                 'border-right-width': borderRightWidth = '',
                 'border-style': borderStyle = '',
+                'border-top': borderTop = '',
                 'border-top-color': borderTopColor = '',
                 'border-top-left-radius': borderTopLeftRadius = '',
                 'border-top-right-radius': borderTopRightRadius = '',
@@ -335,12 +376,27 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             return isValid;
         };
 
+        console.log(borderBottom)
+
+
         try {
-            // Concat granular border values to shorthand and clear.
-            tempElementAttributes.styles['border-bottom'] = `${borderBottomStyle} ${borderBottomWidth} ${borderBottomColor}`;
-            tempElementAttributes.styles['border-left'] = `${borderLeftStyle} ${borderLeftWidth} ${borderLeftColor}`;
-            tempElementAttributes.styles['border-right'] = `${borderRightStyle} ${borderRightWidth} ${borderRightColor}`;
-            tempElementAttributes.styles['border-top'] = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
+            // Concat granular border values to shorthand and clear, if needed.
+            if (!borderBottom.trim()) {
+                tempElementAttributes.styles['border-bottom'] = `${borderBottomStyle} ${borderBottomWidth} ${borderBottomColor}`;
+            }
+
+            if (!borderLeft.trim()) {
+                tempElementAttributes.styles['border-left'] = `${borderLeftStyle} ${borderLeftWidth} ${borderLeftColor}`;
+            }
+
+            if (!borderRight.trim()) {
+                tempElementAttributes.styles['border-right'] = `${borderRightStyle} ${borderRightWidth} ${borderRightColor}`;
+            }
+
+            if (!borderTop.trim()) {
+                tempElementAttributes.styles['border-top'] = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
+            }
+
 
             delete tempElementAttributes.styles['border-bottom-color'];
             delete tempElementAttributes.styles['border-bottom-style'];
@@ -357,17 +413,17 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
 
             // Check if we have matching border attributes and consolidate.
-            const borderBottom = tempElementAttributes.styles['border-bottom'];
-            const borderLeft = tempElementAttributes.styles['border-left'];
-            const borderRight = tempElementAttributes.styles['border-right'];
-            const borderTop = tempElementAttributes.styles['border-top'];
+            const borderBottomFinal = tempElementAttributes.styles['border-bottom'];
+            const borderLeftFinal = tempElementAttributes.styles['border-left'];
+            const borderRightFinal = tempElementAttributes.styles['border-right'];
+            const borderTopFinal = tempElementAttributes.styles['border-top'];
 
             // Check if all borders are the same.
             if (borderTopStyle !== 'none'
                 && borderTopStyle
-                && borderBottom === borderLeft
-                && borderLeft === borderRight
-                && borderRight === borderTop) {
+                && borderBottomFinal === borderLeftFinal
+                && borderLeftFinal === borderRightFinal
+                && borderRightFinal === borderTopFinal) {
                 delete tempElementAttributes.styles['border-bottom'];
                 delete tempElementAttributes.styles['border-left'];
                 delete tempElementAttributes.styles['border-right'];
@@ -534,6 +590,8 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
              * so we can't just extract it from the element.
              */
             attributesList = this.retrieveElementPageCSS(activeTab);
+
+            console.log('attributesList', attributesList);
 
             if (!Object.keys(attributesList).length && activeTab === defaultAttributesTab) {
                 attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));

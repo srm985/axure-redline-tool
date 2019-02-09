@@ -11,6 +11,9 @@
             "error",
             "always"
         ],
+        "class-methods-use-this": [
+            0
+        ],
         "comma-dangle": [
             "error",
             "never"
