@@ -4,6 +4,8 @@ import React from 'react';
 import ColorSwatchComponent from '../ColorSwatchComponent';
 import TooltipComponent from '../TooltipComponent';
 
+import CSS_COLORS from '../../utils/cssColors';
+
 import { TOOLTIP_VISIBLE_TIME } from '../../globalConstants';
 
 import './styles.scss';
@@ -161,6 +163,22 @@ class InputComponent extends React.PureComponent {
             } else {
                 [swatchColor] = inputValue.match(InputComponent.rgbaRegEx);
             }
+        } else {
+            const cleanedInputValue = inputValue.trim().toLowerCase();
+            const colorsList = Object.keys(CSS_COLORS);
+
+            // See if we have a CSS color name in our input value.
+            colorsList.forEach((color) => {
+                if (cleanedInputValue.includes(color.toLowerCase())) {
+                    const {
+                        [color]: {
+                            rgb: rgbColor
+                        }
+                    } = CSS_COLORS;
+
+                    swatchColor = rgbColor;
+                }
+            });
         }
 
         this.setState({
