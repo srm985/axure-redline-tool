@@ -3,6 +3,8 @@
 .InputComponent {
     position: relative;
 
+    height: 40px;
+
     &__label {
         font-family: $font-stack;
         font-size: 12px;

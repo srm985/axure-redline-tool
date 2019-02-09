@@ -324,7 +324,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
     }
 
     renderAttributes(attributeList) {
-        console.log('atts:', attributeList);
         const {
             styles: {
                 border = '',
@@ -469,7 +468,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             delete tempElementAttributes.styles['border-bottom-right-radius'];
             delete tempElementAttributes.styles['border-top-left-radius'];
             delete tempElementAttributes.styles['border-top-right-radius'];
-        } catch (error) { console.log(error) }
+        } catch (error) { }
 
         // If there is no text to display, remove other related attributes.
         if (_content) {
@@ -559,7 +558,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 const hasPseudoClass = Object.keys(this.retrieveElementPageCSS(keyName)).length;
 
                 if (hasPseudoClass || keyName === 'default') {
-                    const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-active` : '';
+                    const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-active` : `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-inactive`;
 
                     tabs.push(
                         <div
@@ -595,8 +594,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
              */
             attributesList = this.retrieveElementPageCSS(activeTab);
 
-            console.log('attributesList', attributesList);
-
             if (!Object.keys(attributesList).length && activeTab === defaultAttributesTab) {
                 attributesList = JSON.parse(JSON.stringify(defaultCSSAttributes));
             }
@@ -604,8 +601,55 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             return this.renderAttributes(attributesList);
         };
 
+        const elementDataLabel = () => {
+            let dataLabel = '';
+
+            let {
+                selectedElement: {
+                    target,
+                    target: {
+                        id: elementID = ''
+                    }
+                }
+            } = this.props;
+
+            while (elementID !== 'base'
+                && !dataLabel) {
+                const dataLabelValue = target.getAttribute('data-label');
+
+                if (dataLabelValue) {
+                    dataLabel = dataLabelValue;
+                } else {
+                    const {
+                        parentElement,
+                        parentElement: {
+                            id: parentID = ''
+                        }
+                    } = target;
+
+                    target = parentElement;
+                    elementID = parentID
+                }
+            }
+
+            return dataLabel;
+        }
+
+        const dataLabel = elementDataLabel();
+
         return (
             <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs`}>
+                {
+                    dataLabel
+                    && (
+                        <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--parent-component-name`}>
+                            <InputComponent
+                                inputValue={dataLabel}
+                                label={'parent component name:'}
+                            />
+                        </div>
+                    )
+                }
                 <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--header`}>
                     {
                         renderTabs()
@@ -650,7 +694,9 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     isElementSelected
                     && (
                         <React.Fragment>
-                            {this.renderPseudoClassTabs()}
+                            {
+                                this.renderPseudoClassTabs()
+                            }
                         </React.Fragment>
                     )
                 }
