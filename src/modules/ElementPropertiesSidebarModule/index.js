@@ -327,6 +327,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         console.log('atts:', attributeList);
         const {
             styles: {
+                border = '',
                 'border-bottom': borderBottom = '',
                 'border-bottom-color': borderBottomColor = '',
                 'border-bottom-left-radius': borderBottomLeftRadius = '',
@@ -376,9 +377,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             return isValid;
         };
 
-        console.log(borderBottom)
-
-
         try {
             // Concat granular border values to shorthand and clear, if needed.
             if (!borderBottom.trim()) {
@@ -418,8 +416,11 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             const borderRightFinal = tempElementAttributes.styles['border-right'];
             const borderTopFinal = tempElementAttributes.styles['border-top'];
 
-            // Check if all borders are the same.
-            if (borderTopStyle !== 'none'
+            const hasFullBorder = border.trim().length;
+
+            // Check if all borders are the same and borderattribute isn't already set.
+            if (!hasFullBorder
+                && borderTopStyle !== 'none'
                 && borderTopStyle
                 && borderBottomFinal === borderLeftFinal
                 && borderLeftFinal === borderRightFinal
@@ -434,9 +435,12 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 tempElementAttributes.styles['border-color'] = borderTopColor;
                 tempElementAttributes.styles['border-style'] = borderTopStyle;
                 tempElementAttributes.styles['border-width'] = borderTopWidth;
-            } else if (borderStyle !== 'none' && borderWidth && borderColor) {
+            } else if (!hasFullBorder
+                && borderStyle !== 'none'
+                && borderWidth
+                && borderColor) {
                 tempElementAttributes.styles.border = `${borderStyle} ${borderWidth} ${borderColor}`;
-            } else {
+            } else if (!hasFullBorder) {
                 delete tempElementAttributes.styles.border;
 
                 delete tempElementAttributes.styles['border-style'];
@@ -452,11 +456,11 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     tempElementAttributes.styles['border-radius'] = borderTopLeftRadius;
                 } else if (borderTopLeftRadius === borderBottomRightRadius
                     && borderTopRightRadius === borderBottomLeftRadius) {
-                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius}`;
+                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius || 0} ${borderTopRightRadius || 0}`;
                 } else if (borderTopRightRadius === borderBottomLeftRadius) {
-                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius} ${borderBottomLeftRadius}`;
+                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius || 0} ${borderTopRightRadius || 0} ${borderBottomLeftRadius || 0}`;
                 } else {
-                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius} ${borderTopRightRadius} ${borderBottomRightRadius} ${borderBottomLeftRadius}`;
+                    tempElementAttributes.styles['border-radius'] = `${borderTopLeftRadius || 0} ${borderTopRightRadius || 0} ${borderBottomRightRadius || 0} ${borderBottomLeftRadius || 0}`;
                 }
             }
 
@@ -465,7 +469,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             delete tempElementAttributes.styles['border-bottom-right-radius'];
             delete tempElementAttributes.styles['border-top-left-radius'];
             delete tempElementAttributes.styles['border-top-right-radius'];
-        } catch (error) { }
+        } catch (error) { console.log(error) }
 
         // If there is no text to display, remove other related attributes.
         if (_content) {
