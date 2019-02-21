@@ -29,13 +29,14 @@ class InspectView extends React.Component {
         this.clearToolStatus = this.clearToolStatus.bind(this);
         this.handleClickCallback = this.handleClickCallback.bind(this);
         this.handleHotkeyCallback = this.handleHotkeyCallback.bind(this);
-        this.handleMouseoverCallback = this.handleMouseoverCallback.bind(this);
         this.handleMouseToggleCallback = this.handleMouseToggleCallback.bind(this);
+        this.handleMouseoverCallback = this.handleMouseoverCallback.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
         this.handleZoomingCallback = this.handleZoomingCallback.bind(this);
         this.setArtboardDimensions = this.setArtboardDimensions.bind(this);
         this.setArtboardZoom = this.setArtboardZoom.bind(this);
         this.setAxureLoaded = this.setAxureLoaded.bind(this);
+        this.toggleToolEnable = this.toggleToolEnable.bind(this);
 
         this.state = {
             artboardHeight: 0,
@@ -70,46 +71,7 @@ class InspectView extends React.Component {
                 width: 0
             },
             zoomWrapperPadding: 1000
-            /*
-            dimensionMarkerHeight: 0,
-            dimensionMarkerWidth: 0,
-            documentCSSList: '',
-            elementCSS: '',
-            elementPosition: '',
-            elemMeas: {
-                height: 0,
-                offsetLeft: 0,
-                offsetTop: 0,
-                width: 0
-            },
-            elemSelectMeas: {
-                height: 0,
-                offsetLeft: 0,
-                offsetTop: 0,
-                width: 0
-            },
-            hoveredMeasurements: '',
-            interElemMeas: {
-                bottom: 0,
-                left: 0,
-                right: 0,
-                top: 0,
-                trueBottom: 0,
-                trueLeft: 0,
-                trueRight: 0,
-                trueTop: 0
-            },
-            labelSpacing: 5,
-            previousZoom: 100,
-            selectedMeasurements: '',
-            */
         };
-    }
-
-    componentDidMount() {
-        this.setState({
-            isToolEnabled: true
-        });
     }
 
     componentDidUpdate() {
@@ -156,6 +118,21 @@ class InspectView extends React.Component {
             artboardWidth,
             artboardWrapperHeight: artboardHeight * (documentZoom / 100) + zoomWrapperPadding * 2,
             artboardWrapperWidth: artboardWidth * (documentZoom / 100) + zoomWrapperPadding * 2
+        });
+    }
+
+    toggleToolEnable() {
+        this.setState((prevState) => {
+            const {
+                isToolEnabled: wasToolEnabled
+            } = prevState;
+
+            this.clearHoveredElement();
+            this.clearSelectedElement();
+
+            return ({
+                isToolEnabled: !wasToolEnabled
+            });
         });
     }
 
@@ -343,7 +320,7 @@ class InspectView extends React.Component {
             }
 
             return isNoInteract;
-        }
+        };
 
         if (clickedElementClassList.contains(artboardModuleName)) {
             this.clearSelectedElement();
@@ -477,33 +454,34 @@ class InspectView extends React.Component {
         } = this.state;
 
         return (
-            isToolEnabled
-            && (
-                <div
-                    className={InspectView.name}
-                    onScroll={this.handleScroll}
-                >
-                    <HeaderModule />
-                    <ElementPropertiesSidebarModule
-                        selectedElement={selectedElement}
-                    />
-                    <ArtboardModule
-                        artboardHeight={artboardHeight}
-                        artboardWidth={artboardWidth}
-                        artboardWrapperHeight={artboardWrapperHeight}
-                        artboardWrapperWidth={artboardWrapperWidth}
-                        documentZoom={documentZoom}
-                        elementMarkerThickness={elementMarkerThickness}
-                        handleClickCallback={this.handleClickCallback}
-                        hoveredElement={hoveredElement}
-                        isToolEnabled={isToolEnabled}
-                        selectedElement={selectedElement}
-                        setArtboardDimensions={this.setArtboardDimensions}
-                        setAxureLoaded={this.setAxureLoaded}
-                        zoomWrapperPadding={zoomWrapperPadding}
-                    />
-                </div>
-            )
+            <div
+                className={InspectView.name}
+                onScroll={this.handleScroll}
+            >
+                <HeaderModule
+                    isToolEnabled={isToolEnabled}
+                    toggleToolEnable={this.toggleToolEnable}
+                />
+                <ElementPropertiesSidebarModule
+                    isToolEnabled={isToolEnabled}
+                    selectedElement={selectedElement}
+                />
+                <ArtboardModule
+                    artboardHeight={artboardHeight}
+                    artboardWidth={artboardWidth}
+                    artboardWrapperHeight={artboardWrapperHeight}
+                    artboardWrapperWidth={artboardWrapperWidth}
+                    documentZoom={documentZoom}
+                    elementMarkerThickness={elementMarkerThickness}
+                    handleClickCallback={this.handleClickCallback}
+                    hoveredElement={hoveredElement}
+                    isToolEnabled={isToolEnabled}
+                    selectedElement={selectedElement}
+                    setArtboardDimensions={this.setArtboardDimensions}
+                    setAxureLoaded={this.setAxureLoaded}
+                    zoomWrapperPadding={zoomWrapperPadding}
+                />
+            </div>
         );
     }
 }

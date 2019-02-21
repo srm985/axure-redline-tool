@@ -108,12 +108,14 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
     componentDidUpdate(prevProps) {
         const {
+            isToolEnabled: wasToolEnabled,
             selectedElement: {
                 target: prevTarget
             }
         } = prevProps;
 
         const {
+            isToolEnabled,
             selectedElement: {
                 target
             }
@@ -140,6 +142,13 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     activeTab: defaultAttributesTab,
                     isSidebarVisible: isElementSelected
                 });
+            });
+        }
+
+        // Make sure we update sidebar visibility when tool disabled.
+        if (isToolEnabled !== wasToolEnabled && !isToolEnabled) {
+            this.setState({
+                isSidebarVisible: false
             });
         }
     }
@@ -230,13 +239,19 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
     }
 
     toggleSidebar() {
-        this.setState((prevState) => {
-            const {
-                isSidebarVisible: isSidebarVisiblePrev
-            } = prevState;
+        const {
+            isToolEnabled
+        } = this.props;
 
-            return ({ isSidebarVisible: !isSidebarVisiblePrev });
-        });
+        if (isToolEnabled) {
+            this.setState((prevState) => {
+                const {
+                    isSidebarVisible: isSidebarVisiblePrev
+                } = prevState;
+
+                return ({ isSidebarVisible: !isSidebarVisiblePrev });
+            });
+        }
     }
 
     retrieveElementPageCSS(activeTab) {
@@ -628,12 +643,12 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     } = target;
 
                     target = parentElement;
-                    elementID = parentID
+                    elementID = parentID;
                 }
             }
 
             return dataLabel;
-        }
+        };
 
         const dataLabel = elementDataLabel();
 
@@ -666,6 +681,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
     render() {
         const {
+            isToolEnabled,
             selectedElement: {
                 target
             } = {}
@@ -677,8 +693,10 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
         const isElementSelected = !!target;
 
+        const sidebarVisibleClass = isToolEnabled && isSidebarVisible && `${ElementPropertiesSidebarModule.name}--visible`;
+
         return (
-            <div className={`${ElementPropertiesSidebarModule.name} ${isSidebarVisible && `${ElementPropertiesSidebarModule.name}--visible`}`}>
+            <div className={`${ElementPropertiesSidebarModule.name} ${sidebarVisibleClass}`}>
                 <div
                     className={`${ElementPropertiesSidebarModule.name}__side-pull`}
                     onClick={this.toggleSidebar}
@@ -706,6 +724,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 }
 
 ElementPropertiesSidebarModule.propTypes = {
+    isToolEnabled: PropTypes.bool.isRequired,
     selectedElement: PropTypes.shape({})
 };
 

@@ -1,6 +1,8 @@
 @import '../../styles/constants';
 
 .HeaderModule {
+    font-family: $font-stack;
+
     position: fixed;
     z-index: $z-index-header;
     top: 0;
@@ -17,4 +19,10 @@
 
     opacity: $ui-opacity;
     background-color: $primary-color-background;
+
+    &__logo {
+        font-size: 18px;
+
+        color: $primary-color-white;
+    }
 }
