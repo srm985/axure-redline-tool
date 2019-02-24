@@ -2,6 +2,7 @@
 
 // Module Constants
 $switch-transition: all 0.15s ease-in-out;
+$color-disabled: #ddd;
 
 .EnableToolModule {
     display: flex;
@@ -51,7 +52,7 @@ $switch-transition: all 0.15s ease-in-out;
 
         border-radius: 28px;
         outline: none;
-        background-color: #ddd;
+        background-color: $color-disabled;
 
         &::before {
             position: absolute;
@@ -83,7 +84,7 @@ $switch-transition: all 0.15s ease-in-out;
             transition: $switch-transition;
 
             border-radius: 50%;
-            background-color: #ddd;
+            background-color: $color-disabled;
         }
     }
 }

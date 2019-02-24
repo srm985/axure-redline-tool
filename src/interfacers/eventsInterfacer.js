@@ -5,18 +5,20 @@ import {
     NO_INTERACT_CLASS
 } from '../globalConstants';
 
+export const initNoInteract = () => {
+    $(ANNOTATION_ELEMENTS.join(', ')).addClass(NO_INTERACT_CLASS);
+};
+
 /**
  * Here we handle element hovers. We're binding event listeners
  * to every component. This is inefficient but we have to do
  * it this way so that we can block Axure's event listeners
- * when they bubble up.
+ * before they bubble up.
  *
  * @param {function} callback
  */
 export const addGlobalMouseoverListener = (callback) => {
-    $(ANNOTATION_ELEMENTS.join(', ')).addClass(NO_INTERACT_CLASS);
-
-    $('#base, #base *').on('mouseover', (event) => {
+    $('#base, #base *').not(ANNOTATION_ELEMENTS.join(', ')).on('mouseover', (event) => {
         callback(event);
     });
 };
@@ -24,7 +26,7 @@ export const addGlobalMouseoverListener = (callback) => {
 /**
  * Here we handle element clicks. We're binding event listeners to every
  * component. This is inefficient but we have to do it this way so that
- * we can block Axure's event listeners when they bubble up.
+ * we can block Axure's event listeners before they bubble up.
  *
  * @param {function} callback
  */
@@ -42,6 +44,18 @@ export const addGlobalClickListener = (callback) => {
  */
 export const addGlobalMouseToggleListener = (callback) => {
     $('#base *').not(ANNOTATION_ELEMENTS.join(', ')).on('mousedown mouseup', (event) => {
+        callback(event);
+    });
+};
+
+/**
+ * Here we listen for any dialog open events. These occur when users click on
+ * the default Axure notes. For some reason, 'dialogopen' listener isn't firing.
+ *
+ * @param {function} callback
+ */
+export const addDialogOpenListener = (callback) => {
+    $(ANNOTATION_ELEMENTS.join(', ')).on('click', (event) => {
         callback(event);
     });
 };

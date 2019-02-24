@@ -5,12 +5,10 @@ $default-border-radius: 3px;
 body {
     position: static;
     left: auto;
-
     // sass-lint:disable property-units
     width: 100vw;
     height: 100vh;
     // sass-lint:enable property-units
-
     margin: 0;
 
     #base { // sass-lint:disable-line no-ids
@@ -20,7 +18,43 @@ body {
     }
 
     .annotation {
+        box-sizing: border-box;
+        width: 14px !important;
+        height: 14px !important;
+        margin: 0;
+        padding: 0;
+
         cursor: help !important;
+
+        & > div {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 3px 3px;
+
+            border: 0;
+            border-radius: $default-border-radius;
+            background-color: $primary-color-blue;
+
+            &:hover {
+                background-color: darken($primary-color-blue, 10%);
+            }
+
+            & > div {
+                width: 100%;
+                height: 1px;
+                margin: 0;
+                padding: 0;
+
+                border: none;
+                background-color: $primary-color-white;
+            }
+        }
 
         * {
             cursor: help !important;
@@ -46,6 +80,11 @@ body {
         button {
             border-radius: $default-border-radius !important;
             outline: none !important;
+        }
+
+        .ui-icon-closethick {
+            border-radius: $default-border-radius;
+            background-color: $primary-color-white;
         }
     }
 

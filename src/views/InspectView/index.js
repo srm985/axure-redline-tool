@@ -5,11 +5,13 @@ import HeaderModule from '../../modules/HeaderModule';
 import ElementPropertiesSidebarModule from '../../modules/ElementPropertiesSidebarModule';
 
 import {
+    addDialogOpenListener,
     addGlobalClickListener,
     addGlobalMouseoverListener,
     addGlobalMouseToggleListener,
     addGlobalZoomListener,
-    addHotkeyListener
+    addHotkeyListener,
+    initNoInteract
 } from '../../interfacers/eventsInterfacer';
 
 import calculateGlobalOffset from '../../utils/calculateGlobalOffset';
@@ -157,6 +159,9 @@ class InspectView extends React.Component {
     }
 
     initializerListeners() {
+        initNoInteract();
+
+        addDialogOpenListener(this.handleDialogOpenCallback);
         addGlobalClickListener(this.handleClickCallback);
         addGlobalMouseToggleListener(this.handleMouseToggleCallback);
         addGlobalMouseoverListener(this.handleMouseoverCallback);
@@ -382,6 +387,43 @@ class InspectView extends React.Component {
         if (isToolEnabled && !isHotkeyDepressed) {
             event.stopPropagation();
             event.preventDefault();
+        }
+    }
+
+    handleDialogOpenCallback(event) {
+        const {
+            target
+        } = event;
+
+        let annotationIcon = target;
+
+        // We're searching for the top-level of the icon.
+        while (!annotationIcon.classList.contains('annotation')) {
+            const {
+                parentElement
+            } = annotationIcon;
+
+            annotationIcon = parentElement;
+        }
+
+        const clickOrigination = calculateTrueArtboardOffset(annotationIcon);
+
+        const {
+            trueOffsetLeft: offsetLeft,
+            trueOffsetTop: offsetTop,
+            trueWidth: width
+        } = clickOrigination;
+
+        const uiDialogList = document.getElementsByClassName('ui-dialog');
+
+        // Last index is our latest-opened dialog.
+        const latestOpenedDialog = [...uiDialogList].pop();
+
+        const dialogOffsetPadding = 5; // 5px
+
+        if (latestOpenedDialog) {
+            latestOpenedDialog.style.left = `${offsetLeft}px`;
+            latestOpenedDialog.style.top = `${offsetTop + width + dialogOffsetPadding}px`;
         }
     }
 

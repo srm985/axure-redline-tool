@@ -11,7 +11,7 @@ const EnableToolModule = (props) => {
 
     return (
         <div className={EnableToolModule.name}>
-            <label>Tool Enable:</label>
+            <span>Tool Enable:</span>
             <div>
                 <input
                     id={EnableToolModule.name}

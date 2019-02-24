@@ -26,10 +26,10 @@
 
     &--enabled {
         .ArtboardModule__artboard {
-            cursor: pointer;
-
             * {
-                cursor: pointer;
+                &:not(.ui-dialog) {
+                    cursor: pointer;
+                }
             }
         }
     }
