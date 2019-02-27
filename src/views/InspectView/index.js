@@ -61,6 +61,7 @@ class InspectView extends React.Component {
             },
             isHotkeyDepressed: false,
             isToolEnabled: false,
+            lastOpenedDialog: '',
             selectedElement: {
                 height: 0,
                 offsetLeft: 0,
@@ -390,7 +391,11 @@ class InspectView extends React.Component {
         }
     }
 
-    handleDialogOpenCallback(event) {
+    handleDialogOpenCallback = (event) => {
+        const {
+            lastOpenedDialog
+        } = this.state;
+
         const {
             target
         } = event;
@@ -406,24 +411,29 @@ class InspectView extends React.Component {
             annotationIcon = parentElement;
         }
 
-        const clickOrigination = calculateTrueArtboardOffset(annotationIcon);
+        const clickOrigination = calculateGlobalOffset(annotationIcon);
 
         const {
-            trueOffsetLeft: offsetLeft,
-            trueOffsetTop: offsetTop,
-            trueWidth: width
+            scaledOffsetLeft: offsetLeft,
+            scaledOffsetTop: offsetTop,
+            scaledWidth: width
         } = clickOrigination;
 
         const uiDialogList = document.getElementsByClassName('ui-dialog');
 
         // Last index is our latest-opened dialog.
         const latestOpenedDialog = [...uiDialogList].pop();
+        console.log('latestOpenedDialog', latestOpenedDialog)
 
         const dialogOffsetPadding = 5; // 5px
 
-        if (latestOpenedDialog) {
+        if (latestOpenedDialog && latestOpenedDialog !== lastOpenedDialog) {
             latestOpenedDialog.style.left = `${offsetLeft}px`;
             latestOpenedDialog.style.top = `${offsetTop + width + dialogOffsetPadding}px`;
+
+            this.setState({
+                lastOpenedDialog: latestOpenedDialog
+            });
         }
     }
 

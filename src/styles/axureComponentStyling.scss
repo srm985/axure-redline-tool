@@ -1,17 +1,22 @@
 // sass-lint:disable no-important
 
+@import '../styles/constants';
+
+// Module Constants
 $default-border-radius: 3px;
 
 body {
     position: static;
     left: auto;
     // sass-lint:disable property-units
+
     width: 100vw;
     height: 100vh;
     // sass-lint:enable property-units
     margin: 0;
 
-    #base { // sass-lint:disable-line no-ids
+    #base {
+        // sass-lint:disable-line no-ids
         span {
             display: inline-block;
         }
@@ -62,6 +67,8 @@ body {
     }
 
     .ui-dialog {
+        z-index: $z-index-dialog !important;
+
         padding: 0 !important;
 
         opacity: $ui-opacity;
