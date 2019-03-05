@@ -1,4 +1,5 @@
 // sass-lint:disable no-important
+// sass-lint:disable no-ids
 
 @import '../styles/constants';
 
@@ -40,9 +41,9 @@ body {
             box-sizing: border-box;
             width: 100%;
             height: 100%;
-            padding: 3px 3px;
+            padding: 3px;
 
-            border: 0;
+            border: none;
             border-radius: $default-border-radius;
             background-color: $primary-color-blue;
 

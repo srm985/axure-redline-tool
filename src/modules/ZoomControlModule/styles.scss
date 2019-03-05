@@ -2,6 +2,7 @@
 
 // Module Variables
 $icon-thickness: 2px;
+$icon-diameter: 22px;
 
 .ZoomControlModule {
     position: fixed;
@@ -12,13 +13,24 @@ $icon-thickness: 2px;
     align-items: flex-start;
     justify-content: space-between;
 
-    width: 130px;
+    width: 110px;
+    padding: 10px;
+
+    opacity: $ui-opacity;
+    border-radius: #{$icon-diameter / 2};
+    background-color: rgba($primary-color-gray, 0.2);
 
     &__zoom-input {
-        width: 60px;
-        height: 25px;
+        font-family: $font-stack;
 
-        border-radius: 12px;
+        width: 50px;
+        height: $icon-diameter;
+
+        text-align: center;
+
+        border: none;
+        border-radius: #{$icon-diameter / 2};
+        outline: none;
     }
 
     &__zoom-control {
@@ -27,8 +39,8 @@ $icon-thickness: 2px;
         justify-content: center;
 
         box-sizing: border-box;
-        width: 25px;
-        height: 25px;
+        width: $icon-diameter;
+        height: $icon-diameter;
         padding: 6px;
 
         cursor: pointer;
