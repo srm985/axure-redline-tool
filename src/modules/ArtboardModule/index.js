@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ElementInteractionModule from '../ElementInteractionModule';
+import ZoomControlModule from '../ZoomControlModule';
 
 import {
     calculateScrollAfterZoom,
@@ -175,6 +176,9 @@ class ArtboardModule extends React.PureComponent {
                     hoveredElement={hoveredElement}
                     selectedElement={selectedElement}
                     zoomWrapperPadding={zoomWrapperPadding}
+                />
+                <ZoomControlModule
+                    documentZoom={documentZoom}
                 />
             </div>
         );

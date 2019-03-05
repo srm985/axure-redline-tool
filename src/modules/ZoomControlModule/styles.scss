@@ -1,0 +1,70 @@
+@import '../../styles/constants';
+
+// Module Variables
+$icon-thickness: 2px;
+
+.ZoomControlModule {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    width: 130px;
+
+    &__zoom-input {
+        width: 60px;
+        height: 25px;
+
+        border-radius: 12px;
+    }
+
+    &__zoom-control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-sizing: border-box;
+        width: 25px;
+        height: 25px;
+        padding: 6px;
+
+        cursor: pointer;
+
+        border-radius: 50%;
+        background-color: $primary-color-teal;
+
+        span {
+            position: relative;
+
+            display: inline-block;
+
+            width: 100%;
+            height: $icon-thickness;
+
+            background-color: $primary-color-white;
+        }
+
+        &--positive {
+            span {
+                &::before {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+
+                    display: inline-block;
+
+                    width: 100%;
+                    height: $icon-thickness;
+
+                    content: '';
+                    transform: rotate(90deg);
+
+                    background-color: inherit;
+                }
+            }
+        }
+    }
+}
