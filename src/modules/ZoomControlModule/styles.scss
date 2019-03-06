@@ -2,10 +2,12 @@
 
 // Module Variables
 $icon-thickness: 2px;
-$icon-diameter: 22px;
+$icon-diameter: 23px;
+$icon-border-radius: 5px;
 
 .ZoomControlModule {
     position: fixed;
+    z-index: $z-index-zoom-control;
     bottom: 20px;
     left: 20px;
 
@@ -13,12 +15,9 @@ $icon-diameter: 22px;
     align-items: flex-start;
     justify-content: space-between;
 
-    width: 110px;
-    padding: 10px;
-
     opacity: $ui-opacity;
-    border-radius: #{$icon-diameter / 2};
-    background-color: rgba($primary-color-gray, 0.2);
+    border-radius: $icon-border-radius;
+    box-shadow: 0 3px 5px $primary-color-gray;
 
     &__zoom-input {
         font-family: $font-stack;
@@ -29,7 +28,6 @@ $icon-diameter: 22px;
         text-align: center;
 
         border: none;
-        border-radius: #{$icon-diameter / 2};
         outline: none;
     }
 
@@ -44,9 +42,13 @@ $icon-diameter: 22px;
         padding: 6px;
 
         cursor: pointer;
+        transition: transform 0.01s ease-in-out;
 
-        border-radius: 50%;
         background-color: $primary-color-teal;
+
+        &:hover {
+            transform: scale(1.05);
+        }
 
         span {
             position: relative;
@@ -59,7 +61,15 @@ $icon-diameter: 22px;
             background-color: $primary-color-white;
         }
 
+        &--negative {
+            border-right: solid 1px $primary-color-gray;
+            border-radius: $icon-border-radius 0 0 $icon-border-radius;
+        }
+
         &--positive {
+            border-left: solid 1px $primary-color-gray;
+            border-radius: 0 $icon-border-radius $icon-border-radius 0;
+
             span {
                 &::before {
                     position: absolute;

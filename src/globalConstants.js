@@ -20,3 +20,9 @@ export const NO_INTERACT_ELEMENTS = [
 ];
 
 export const TOOLTIP_VISIBLE_TIME = 750; // 750ms
+
+// Mapped Keys
+export const ENTER_KEY = 13;
+export const ESCAPE_KEY = 27;
+export const MINUS_KEY = 189;
+export const PLUS_KEY = 187;

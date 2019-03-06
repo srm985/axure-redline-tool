@@ -133,6 +133,7 @@ class ArtboardModule extends React.PureComponent {
             hoveredElement,
             isToolEnabled,
             selectedElement,
+            setArtboardZoom,
             zoomWrapperPadding
         } = this.props;
 
@@ -179,6 +180,7 @@ class ArtboardModule extends React.PureComponent {
                 />
                 <ZoomControlModule
                     documentZoom={documentZoom}
+                    setArtboardZoom={setArtboardZoom}
                 />
             </div>
         );
@@ -197,6 +199,7 @@ ArtboardModule.propTypes = {
     isToolEnabled: PropTypes.bool.isRequired,
     selectedElement: PropTypes.shape({}).isRequired,
     setArtboardDimensions: PropTypes.func.isRequired,
+    setArtboardZoom: PropTypes.func.isRequired,
     setAxureLoaded: PropTypes.func.isRequired,
     zoomWrapperPadding: PropTypes.number.isRequired
 };

@@ -18,27 +18,18 @@ import calculateGlobalOffset from '../../utils/calculateGlobalOffset';
 import calculateTrueArtboardOffset from '../../utils/calculateTrueArtboardOffset';
 
 import {
+    ESCAPE_KEY,
+    MINUS_KEY,
+    NO_INTERACT_CLASS,
     NO_INTERACT_ELEMENTS,
-    NO_INTERACT_CLASS
+    PLUS_KEY
 } from '../../globalConstants';
 
 class InspectView extends React.Component {
+    static ZOOM_STEP = 10;
+
     constructor(props) {
         super(props);
-
-        this.clearHoveredElement = this.clearHoveredElement.bind(this);
-        this.clearSelectedElement = this.clearSelectedElement.bind(this);
-        this.clearToolStatus = this.clearToolStatus.bind(this);
-        this.handleClickCallback = this.handleClickCallback.bind(this);
-        this.handleHotkeyCallback = this.handleHotkeyCallback.bind(this);
-        this.handleMouseToggleCallback = this.handleMouseToggleCallback.bind(this);
-        this.handleMouseoverCallback = this.handleMouseoverCallback.bind(this);
-        this.handleScroll = this.handleScroll.bind(this);
-        this.handleZoomingCallback = this.handleZoomingCallback.bind(this);
-        this.setArtboardDimensions = this.setArtboardDimensions.bind(this);
-        this.setArtboardZoom = this.setArtboardZoom.bind(this);
-        this.setAxureLoaded = this.setAxureLoaded.bind(this);
-        this.toggleToolEnable = this.toggleToolEnable.bind(this);
 
         this.state = {
             artboardHeight: 0,
@@ -81,7 +72,7 @@ class InspectView extends React.Component {
         console.log('State:', this.state);
     }
 
-    setAxureLoaded() {
+    setAxureLoaded = () => {
         this.setState({
             axureLoaded: true
         }, () => {
@@ -95,15 +86,17 @@ class InspectView extends React.Component {
      *
      * @param {number} zoomLevel
      */
-    setArtboardZoom(zoomLevel) {
+    setArtboardZoom = (zoomLevel) => {
+        const roundedZoom = Math.round(zoomLevel / 10) * 10;
+
         this.setState({
-            documentZoom: zoomLevel <= 1 ? 1 : zoomLevel
+            documentZoom: roundedZoom <= 1 ? 1 : roundedZoom
         }, () => {
             this.setArtboardDimensions();
         });
     }
 
-    setArtboardDimensions(dimensions = {}) {
+    setArtboardDimensions = (dimensions = {}) => {
         const {
             zoomWrapperPadding,
             documentZoom,
@@ -124,7 +117,7 @@ class InspectView extends React.Component {
         });
     }
 
-    toggleToolEnable() {
+    toggleToolEnable = () => {
         this.setState((prevState) => {
             const {
                 isToolEnabled: wasToolEnabled
@@ -139,27 +132,7 @@ class InspectView extends React.Component {
         });
     }
 
-    toggleArtboardZoom() {
-        const {
-            documentZoom
-        } = this.state;
-
-        const restoreZoom = (originalDocumentZoom) => {
-            this.setState({
-                documentZoom: originalDocumentZoom
-            });
-        };
-
-        return new Promise((resolve) => {
-            this.setState({
-                documentZoom: 100
-            }, () => {
-                resolve(restoreZoom(documentZoom));
-            });
-        });
-    }
-
-    initializerListeners() {
+    initializerListeners = () => {
         initNoInteract();
 
         addDialogOpenListener(this.handleDialogOpenCallback);
@@ -170,7 +143,7 @@ class InspectView extends React.Component {
         addHotkeyListener(this.handleHotkeyCallback);
     }
 
-    async clearHoveredElement() {
+    clearHoveredElement = async () => {
         this.setState({
             hoveredElement: {
                 height: 0,
@@ -186,7 +159,7 @@ class InspectView extends React.Component {
         });
     }
 
-    async clearSelectedElement() {
+    clearSelectedElement = async () => {
         this.setState({
             selectedElement: {
                 height: 0,
@@ -207,7 +180,7 @@ class InspectView extends React.Component {
      * if we have a selected element and the redline specs panel is
      * open, we'll deselect the element and close the panel.
      */
-    clearToolStatus() {
+    clearToolStatus = () => {
         this.clearHoveredElement();
         this.clearSelectedElement();
     }
@@ -218,7 +191,7 @@ class InspectView extends React.Component {
      *
      * @param {event} event
      */
-    handleScroll(event) {
+    handleScroll = (event) => {
         const {
             target: {
                 classList
@@ -247,7 +220,7 @@ class InspectView extends React.Component {
         }
     }
 
-    handleMouseoverCallback(event) {
+    handleMouseoverCallback = (event) => {
         const {
             isToolEnabled,
             isHotkeyDepressed
@@ -297,7 +270,7 @@ class InspectView extends React.Component {
         }
     }
 
-    handleClickCallback(event) {
+    handleClickCallback = (event) => {
         const {
             isToolEnabled,
             isHotkeyDepressed
@@ -379,7 +352,7 @@ class InspectView extends React.Component {
         }
     }
 
-    handleMouseToggleCallback(event) {
+    handleMouseToggleCallback = (event) => {
         const {
             isToolEnabled,
             isHotkeyDepressed
@@ -423,7 +396,6 @@ class InspectView extends React.Component {
 
         // Last index is our latest-opened dialog.
         const latestOpenedDialog = [...uiDialogList].pop();
-        console.log('latestOpenedDialog', latestOpenedDialog)
 
         const dialogOffsetPadding = 5; // 5px
 
@@ -437,7 +409,7 @@ class InspectView extends React.Component {
         }
     }
 
-    handleHotkeyCallback(isHotkeyDepressed) {
+    handleHotkeyCallback = (isHotkeyDepressed) => {
         const {
             isHotkeyDepressed: isHotkeyDepressedPrevious
         } = this.state;
@@ -451,37 +423,29 @@ class InspectView extends React.Component {
         }
     }
 
-    handleZoomingCallback(event) {
+    handleZoomingCallback = (event) => {
         const {
             documentZoom
         } = this.state;
 
-        const ESCAPE = 27;
-        const PLUS = 187;
-        const MINUS = 189;
-
-        const ZOOM_STEP = 10;
-
-        const roundZoom = (zoom) => Math.round(zoom / 10) * 10;
-
         switch (event.keyCode) {
-            case ESCAPE:
+            case ESCAPE_KEY:
                 this.clearToolStatus();
                 break;
-            case PLUS:
+            case PLUS_KEY:
                 if (event.ctrlKey || event.metaKey) {
                     event.preventDefault();
 
-                    const newZoom = roundZoom(documentZoom + ZOOM_STEP);
+                    const newZoom = documentZoom + InspectView.ZOOM_STEP;
 
                     this.setArtboardZoom(newZoom);
                 }
                 break;
-            case MINUS:
+            case MINUS_KEY:
                 if (event.ctrlKey || event.metaKey) {
                     event.preventDefault();
 
-                    const newZoom = roundZoom(documentZoom - ZOOM_STEP);
+                    const newZoom = documentZoom - InspectView.ZOOM_STEP;
 
                     this.setArtboardZoom(newZoom);
                 }
@@ -530,6 +494,7 @@ class InspectView extends React.Component {
                     isToolEnabled={isToolEnabled}
                     selectedElement={selectedElement}
                     setArtboardDimensions={this.setArtboardDimensions}
+                    setArtboardZoom={this.setArtboardZoom}
                     setAxureLoaded={this.setAxureLoaded}
                     zoomWrapperPadding={zoomWrapperPadding}
                 />
