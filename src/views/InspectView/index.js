@@ -1,8 +1,9 @@
 import React from 'react';
 
 import ArtboardModule from '../../modules/ArtboardModule';
-import HeaderModule from '../../modules/HeaderModule';
 import ElementPropertiesSidebarModule from '../../modules/ElementPropertiesSidebarModule';
+import HeaderModule from '../../modules/HeaderModule';
+import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
 
 import {
     addDialogOpenListener,
@@ -16,6 +17,10 @@ import {
 
 import calculateGlobalOffset from '../../utils/calculateGlobalOffset';
 import calculateTrueArtboardOffset from '../../utils/calculateTrueArtboardOffset';
+import {
+    storageRead,
+    storageWrite
+} from '../../utils/storage';
 
 import {
     ESCAPE_KEY,
@@ -461,6 +466,7 @@ class InspectView extends React.Component {
             artboardWidth,
             artboardWrapperHeight,
             artboardWrapperWidth,
+            axureLoaded,
             documentZoom,
             elementMarkerThickness,
             hoveredElement,
@@ -470,35 +476,41 @@ class InspectView extends React.Component {
         } = this.state;
 
         return (
-            <div
-                className={InspectView.name}
-                onScroll={this.handleScroll}
-            >
-                <HeaderModule
-                    isToolEnabled={isToolEnabled}
-                    toggleToolEnable={this.toggleToolEnable}
-                />
-                <ElementPropertiesSidebarModule
-                    isToolEnabled={isToolEnabled}
-                    selectedElement={selectedElement}
-                />
-                <ArtboardModule
-                    artboardHeight={artboardHeight}
-                    artboardWidth={artboardWidth}
-                    artboardWrapperHeight={artboardWrapperHeight}
-                    artboardWrapperWidth={artboardWrapperWidth}
-                    documentZoom={documentZoom}
-                    elementMarkerThickness={elementMarkerThickness}
-                    handleClickCallback={this.handleClickCallback}
-                    hoveredElement={hoveredElement}
-                    isToolEnabled={isToolEnabled}
-                    selectedElement={selectedElement}
-                    setArtboardDimensions={this.setArtboardDimensions}
-                    setArtboardZoom={this.setArtboardZoom}
-                    setAxureLoaded={this.setAxureLoaded}
-                    zoomWrapperPadding={zoomWrapperPadding}
-                />
-            </div>
+            <React.Fragment>
+                {
+                    !axureLoaded
+                    && <LoadingIndicatorComponent />
+                }
+                <div
+                    className={InspectView.name}
+                    onScroll={this.handleScroll}
+                >
+                    <HeaderModule
+                        isToolEnabled={isToolEnabled}
+                        toggleToolEnable={this.toggleToolEnable}
+                    />
+                    <ElementPropertiesSidebarModule
+                        isToolEnabled={isToolEnabled}
+                        selectedElement={selectedElement}
+                    />
+                    <ArtboardModule
+                        artboardHeight={artboardHeight}
+                        artboardWidth={artboardWidth}
+                        artboardWrapperHeight={artboardWrapperHeight}
+                        artboardWrapperWidth={artboardWrapperWidth}
+                        documentZoom={documentZoom}
+                        elementMarkerThickness={elementMarkerThickness}
+                        handleClickCallback={this.handleClickCallback}
+                        hoveredElement={hoveredElement}
+                        isToolEnabled={isToolEnabled}
+                        selectedElement={selectedElement}
+                        setArtboardDimensions={this.setArtboardDimensions}
+                        setArtboardZoom={this.setArtboardZoom}
+                        setAxureLoaded={this.setAxureLoaded}
+                        zoomWrapperPadding={zoomWrapperPadding}
+                    />
+                </div>
+            </React.Fragment>
         );
     }
 }

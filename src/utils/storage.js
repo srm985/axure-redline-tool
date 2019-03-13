@@ -1,14 +1,32 @@
 const addDays = (dayCount) => {
-    const endDate = new Date(date);
+    const endDate = new Date();
 
     endDate.setDate(endDate.getDate() + dayCount);
+
     return endDate;
 };
 
-export const write = (keyName, value, expirationDays) => {
+export const storageWrite = (keyName, value, expirationDays) => {
     document.cookie = `${keyName}=${value}; expires=${addDays(expirationDays)};`;
 };
 
-export const read = () => {
+export const storageRead = (keyName) => {
+    const {
+        cookie: cookieListString = ''
+    } = document;
 
-}
+    const cookieList = cookieListString.split(';');
+
+    const cookieObject = {};
+
+    cookieList.forEach((cookie) => {
+        const [
+            cookieName,
+            cookieValue
+        ] = cookie.split('=');
+
+        cookieObject[cookieName.trim()] = cookieValue.trim();
+    });
+
+    return cookieObject[keyName];
+};
