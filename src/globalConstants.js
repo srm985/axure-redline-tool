@@ -26,3 +26,7 @@ export const ENTER_KEY = 13;
 export const ESCAPE_KEY = 27;
 export const MINUS_KEY = 189;
 export const PLUS_KEY = 187;
+
+// Cookies
+export const COOKIE_EXPIRATION_DEFAULT = 30; // 30 days
+export const COOKIE_TOOL_ENABLED = 'redline-tool-enabled';

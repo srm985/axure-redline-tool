@@ -3,6 +3,8 @@ import React from 'react';
 import ArtboardModule from '../../modules/ArtboardModule';
 import ElementPropertiesSidebarModule from '../../modules/ElementPropertiesSidebarModule';
 import HeaderModule from '../../modules/HeaderModule';
+import ZoomControlModule from '../../modules/ZoomControlModule';
+
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
 
 import {
@@ -23,6 +25,8 @@ import {
 } from '../../utils/storage';
 
 import {
+    COOKIE_EXPIRATION_DEFAULT,
+    COOKIE_TOOL_ENABLED,
     ESCAPE_KEY,
     MINUS_KEY,
     NO_INTERACT_CLASS,
@@ -56,7 +60,7 @@ class InspectView extends React.Component {
                 width: 0
             },
             isHotkeyDepressed: false,
-            isToolEnabled: false,
+            isToolEnabled: true,
             lastOpenedDialog: '',
             selectedElement: {
                 height: 0,
@@ -71,6 +75,12 @@ class InspectView extends React.Component {
             },
             zoomWrapperPadding: 1000
         };
+    }
+
+    componentDidMount() {
+        const isToolEnabled = storageRead(COOKIE_TOOL_ENABLED) === 'true';
+
+        this.setToolEnabledStatus(isToolEnabled);
     }
 
     componentDidUpdate() {
@@ -122,19 +132,24 @@ class InspectView extends React.Component {
         });
     }
 
-    toggleToolEnable = () => {
-        this.setState((prevState) => {
-            const {
-                isToolEnabled: wasToolEnabled
-            } = prevState;
-
-            this.clearHoveredElement();
-            this.clearSelectedElement();
-
-            return ({
-                isToolEnabled: !wasToolEnabled
-            });
+    setToolEnabledStatus = (isToolEnabled) => {
+        this.setState({
+            isToolEnabled
         });
+
+        // Track enable status for page reloads.
+        storageWrite(COOKIE_TOOL_ENABLED, isToolEnabled, COOKIE_EXPIRATION_DEFAULT);
+    }
+
+    toggleToolEnable = () => {
+        const {
+            isToolEnabled: wasToolEnabled
+        } = this.state;
+
+        this.clearHoveredElement();
+        this.clearSelectedElement();
+
+        this.setToolEnabledStatus(!wasToolEnabled);
     }
 
     initializerListeners = () => {
@@ -508,6 +523,10 @@ class InspectView extends React.Component {
                         setArtboardZoom={this.setArtboardZoom}
                         setAxureLoaded={this.setAxureLoaded}
                         zoomWrapperPadding={zoomWrapperPadding}
+                    />
+                    <ZoomControlModule
+                        documentZoom={documentZoom}
+                        setArtboardZoom={this.setArtboardZoom}
                     />
                 </div>
             </React.Fragment>

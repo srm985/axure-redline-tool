@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ElementInteractionModule from '../ElementInteractionModule';
-import ZoomControlModule from '../ZoomControlModule';
 
 import {
     calculateScrollAfterZoom,
@@ -133,7 +132,6 @@ class ArtboardModule extends React.PureComponent {
             hoveredElement,
             isToolEnabled,
             selectedElement,
-            setArtboardZoom,
             zoomWrapperPadding
         } = this.props;
 
@@ -178,10 +176,6 @@ class ArtboardModule extends React.PureComponent {
                     selectedElement={selectedElement}
                     zoomWrapperPadding={zoomWrapperPadding}
                 />
-                <ZoomControlModule
-                    documentZoom={documentZoom}
-                    setArtboardZoom={setArtboardZoom}
-                />
             </div>
         );
     }
@@ -199,7 +193,6 @@ ArtboardModule.propTypes = {
     isToolEnabled: PropTypes.bool.isRequired,
     selectedElement: PropTypes.shape({}).isRequired,
     setArtboardDimensions: PropTypes.func.isRequired,
-    setArtboardZoom: PropTypes.func.isRequired,
     setAxureLoaded: PropTypes.func.isRequired,
     zoomWrapperPadding: PropTypes.number.isRequired
 };
