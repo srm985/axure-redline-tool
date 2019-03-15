@@ -42075,23 +42075,97 @@ function (_React$Component) {
       });
     });
 
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "updateHoverSelect", function (hoveredElementTargetPassed, selectedElementTargetPassed) {
+      var _this$state = _this.state,
+          hoveredElementTargetState = _this$state.hoveredElement.target,
+          selectedElementTargetState = _this$state.selectedElement.target; // If passed, use. Otherwise, fetch from state.
+
+      var hoveredElementTarget = hoveredElementTargetPassed || hoveredElementTargetState;
+      var selectedElementTarget = selectedElementTargetPassed || selectedElementTargetState;
+
+      if (hoveredElementTarget) {
+        var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(hoveredElementTarget),
+            height = _calculateGlobalOffse.scaledHeight,
+            offsetLeft = _calculateGlobalOffse.scaledOffsetLeft,
+            offsetTop = _calculateGlobalOffse.scaledOffsetTop,
+            width = _calculateGlobalOffse.scaledWidth;
+
+        var _calculateTrueArtboar = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(hoveredElementTarget),
+            trueHeight = _calculateTrueArtboar.trueHeight,
+            trueOffsetLeft = _calculateTrueArtboar.trueOffsetLeft,
+            trueOffsetTop = _calculateTrueArtboar.trueOffsetTop,
+            trueWidth = _calculateTrueArtboar.trueWidth;
+
+        _this.setState({
+          hoveredElement: {
+            height: height,
+            offsetLeft: offsetLeft,
+            offsetTop: offsetTop,
+            target: hoveredElementTarget,
+            trueHeight: trueHeight,
+            trueOffsetLeft: trueOffsetLeft,
+            trueOffsetTop: trueOffsetTop,
+            trueWidth: trueWidth,
+            width: width
+          }
+        });
+      }
+
+      if (selectedElementTarget) {
+        var _calculateGlobalOffse2 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(selectedElementTarget),
+            _height = _calculateGlobalOffse2.scaledHeight,
+            _offsetLeft = _calculateGlobalOffse2.scaledOffsetLeft,
+            _offsetTop = _calculateGlobalOffse2.scaledOffsetTop,
+            _width = _calculateGlobalOffse2.scaledWidth;
+
+        var _calculateTrueArtboar2 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(selectedElementTarget),
+            _trueHeight = _calculateTrueArtboar2.trueHeight,
+            _trueOffsetLeft = _calculateTrueArtboar2.trueOffsetLeft,
+            _trueOffsetTop = _calculateTrueArtboar2.trueOffsetTop,
+            _trueWidth = _calculateTrueArtboar2.trueWidth;
+
+        _this.setState({
+          selectedElement: {
+            height: _height,
+            offsetLeft: _offsetLeft,
+            offsetTop: _offsetTop,
+            target: selectedElementTarget,
+            trueHeight: _trueHeight,
+            trueOffsetLeft: _trueOffsetLeft,
+            trueOffsetTop: _trueOffsetTop,
+            trueWidth: _trueWidth,
+            width: _width
+          }
+        });
+      }
+    });
+
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "setArtboardZoom", function (zoomLevel) {
-      var roundedZoom = Math.round(zoomLevel / 10) * 10;
+      var _this$state2 = _this.state,
+          hoveredElementTarget = _this$state2.hoveredElement.target,
+          selectedElementTarget = _this$state2.selectedElement.target;
+      var roundedZoom = Math.round(zoomLevel / 10) * 10; // Cleared hovered/selected elemets to prevent dimension jank.
+
+      _this.clearToolStatus();
 
       _this.setState({
         documentZoom: roundedZoom <= 1 ? 1 : roundedZoom
       }, function () {
         _this.setArtboardDimensions();
+
+        setTimeout(function () {
+          _this.updateHoverSelect(hoveredElementTarget, selectedElementTarget);
+        }, 0);
       });
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "setArtboardDimensions", function () {
       var dimensions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var _this$state = _this.state,
-          zoomWrapperPadding = _this$state.zoomWrapperPadding,
-          documentZoom = _this$state.documentZoom,
-          artboardHeightFromState = _this$state.artboardHeight,
-          artboardWidthFromState = _this$state.artboardWidth;
+      var _this$state3 = _this.state,
+          zoomWrapperPadding = _this$state3.zoomWrapperPadding,
+          documentZoom = _this$state3.documentZoom,
+          artboardHeightFromState = _this$state3.artboardHeight,
+          artboardWidthFromState = _this$state3.artboardWidth;
       var _dimensions$artboardH = dimensions.artboardHeight,
           artboardHeight = _dimensions$artboardH === void 0 ? artboardHeightFromState : _dimensions$artboardH,
           _dimensions$artboardW = dimensions.artboardWidth,
@@ -42222,9 +42296,9 @@ function (_React$Component) {
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "handleMouseoverCallback", function (event) {
-      var _this$state2 = _this.state,
-          isToolEnabled = _this$state2.isToolEnabled,
-          isHotkeyDepressed = _this$state2.isHotkeyDepressed;
+      var _this$state4 = _this.state,
+          isToolEnabled = _this$state4.isToolEnabled,
+          isHotkeyDepressed = _this$state4.isHotkeyDepressed;
       var target = event.target,
           selectedElementClassList = event.target.classList;
 
@@ -42235,17 +42309,17 @@ function (_React$Component) {
       if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
         event.stopPropagation();
 
-        var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(target),
-            height = _calculateGlobalOffse.scaledHeight,
-            offsetLeft = _calculateGlobalOffse.scaledOffsetLeft,
-            offsetTop = _calculateGlobalOffse.scaledOffsetTop,
-            width = _calculateGlobalOffse.scaledWidth;
+        var _calculateGlobalOffse3 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(target),
+            height = _calculateGlobalOffse3.scaledHeight,
+            offsetLeft = _calculateGlobalOffse3.scaledOffsetLeft,
+            offsetTop = _calculateGlobalOffse3.scaledOffsetTop,
+            width = _calculateGlobalOffse3.scaledWidth;
 
-        var _calculateTrueArtboar = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(target),
-            trueHeight = _calculateTrueArtboar.trueHeight,
-            trueOffsetLeft = _calculateTrueArtboar.trueOffsetLeft,
-            trueOffsetTop = _calculateTrueArtboar.trueOffsetTop,
-            trueWidth = _calculateTrueArtboar.trueWidth;
+        var _calculateTrueArtboar3 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(target),
+            trueHeight = _calculateTrueArtboar3.trueHeight,
+            trueOffsetLeft = _calculateTrueArtboar3.trueOffsetLeft,
+            trueOffsetTop = _calculateTrueArtboar3.trueOffsetTop,
+            trueWidth = _calculateTrueArtboar3.trueWidth;
 
         _this.setState({
           hoveredElement: {
@@ -42266,9 +42340,9 @@ function (_React$Component) {
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "handleClickCallback", function (event) {
-      var _this$state3 = _this.state,
-          isToolEnabled = _this$state3.isToolEnabled,
-          isHotkeyDepressed = _this$state3.isHotkeyDepressed;
+      var _this$state5 = _this.state,
+          isToolEnabled = _this$state5.isToolEnabled,
+          isHotkeyDepressed = _this$state5.isHotkeyDepressed;
       var target = event.target,
           clickedElementClassList = event.target.classList;
       var artboardModuleName = _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_11__["default"].name;
@@ -42293,17 +42367,17 @@ function (_React$Component) {
         event.stopPropagation();
         event.preventDefault();
 
-        var _calculateGlobalOffse2 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(target),
-            height = _calculateGlobalOffse2.scaledHeight,
-            offsetLeft = _calculateGlobalOffse2.scaledOffsetLeft,
-            offsetTop = _calculateGlobalOffse2.scaledOffsetTop,
-            width = _calculateGlobalOffse2.scaledWidth;
+        var _calculateGlobalOffse4 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(target),
+            height = _calculateGlobalOffse4.scaledHeight,
+            offsetLeft = _calculateGlobalOffse4.scaledOffsetLeft,
+            offsetTop = _calculateGlobalOffse4.scaledOffsetTop,
+            width = _calculateGlobalOffse4.scaledWidth;
 
-        var _calculateTrueArtboar2 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(target),
-            trueHeight = _calculateTrueArtboar2.trueHeight,
-            trueOffsetLeft = _calculateTrueArtboar2.trueOffsetLeft,
-            trueOffsetTop = _calculateTrueArtboar2.trueOffsetTop,
-            trueWidth = _calculateTrueArtboar2.trueWidth;
+        var _calculateTrueArtboar4 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(target),
+            trueHeight = _calculateTrueArtboar4.trueHeight,
+            trueOffsetLeft = _calculateTrueArtboar4.trueOffsetLeft,
+            trueOffsetTop = _calculateTrueArtboar4.trueOffsetTop,
+            trueWidth = _calculateTrueArtboar4.trueWidth;
 
         _this.setState({
           selectedElement: {
@@ -42336,9 +42410,9 @@ function (_React$Component) {
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "handleMouseToggleCallback", function (event) {
-      var _this$state4 = _this.state,
-          isToolEnabled = _this$state4.isToolEnabled,
-          isHotkeyDepressed = _this$state4.isHotkeyDepressed;
+      var _this$state6 = _this.state,
+          isToolEnabled = _this$state6.isToolEnabled,
+          isHotkeyDepressed = _this$state6.isHotkeyDepressed;
 
       if (isToolEnabled && !isHotkeyDepressed) {
         event.stopPropagation();
@@ -42476,18 +42550,18 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$state5 = this.state,
-          artboardHeight = _this$state5.artboardHeight,
-          artboardWidth = _this$state5.artboardWidth,
-          artboardWrapperHeight = _this$state5.artboardWrapperHeight,
-          artboardWrapperWidth = _this$state5.artboardWrapperWidth,
-          axureLoaded = _this$state5.axureLoaded,
-          documentZoom = _this$state5.documentZoom,
-          elementMarkerThickness = _this$state5.elementMarkerThickness,
-          hoveredElement = _this$state5.hoveredElement,
-          isToolEnabled = _this$state5.isToolEnabled,
-          selectedElement = _this$state5.selectedElement,
-          zoomWrapperPadding = _this$state5.zoomWrapperPadding;
+      var _this$state7 = this.state,
+          artboardHeight = _this$state7.artboardHeight,
+          artboardWidth = _this$state7.artboardWidth,
+          artboardWrapperHeight = _this$state7.artboardWrapperHeight,
+          artboardWrapperWidth = _this$state7.artboardWrapperWidth,
+          axureLoaded = _this$state7.axureLoaded,
+          documentZoom = _this$state7.documentZoom,
+          elementMarkerThickness = _this$state7.elementMarkerThickness,
+          hoveredElement = _this$state7.hoveredElement,
+          isToolEnabled = _this$state7.isToolEnabled,
+          selectedElement = _this$state7.selectedElement,
+          zoomWrapperPadding = _this$state7.zoomWrapperPadding;
       return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_10___default.a.Fragment, null, !axureLoaded && react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_LoadingIndicatorComponent__WEBPACK_IMPORTED_MODULE_15__["default"], null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
         className: InspectView.name,
         onScroll: this.handleScroll

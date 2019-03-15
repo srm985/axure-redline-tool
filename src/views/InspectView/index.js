@@ -96,18 +96,113 @@ class InspectView extends React.Component {
     }
 
     /**
+     * This function is called when we'd like to recalculate all of the
+     * measurements related to a hovered or selected element. This is
+     * useful after zooming or during interaction callbacks.
+     */
+    updateHoverSelect = (hoveredElementTargetPassed, selectedElementTargetPassed) => {
+        const {
+            hoveredElement: {
+                target: hoveredElementTargetState
+            },
+            selectedElement: {
+                target: selectedElementTargetState
+            }
+        } = this.state;
+
+        // If passed, use. Otherwise, fetch from state.
+        const hoveredElementTarget = hoveredElementTargetPassed || hoveredElementTargetState;
+        const selectedElementTarget = selectedElementTargetPassed || selectedElementTargetState;
+
+        if (hoveredElementTarget) {
+            const {
+                scaledHeight: height,
+                scaledOffsetLeft: offsetLeft,
+                scaledOffsetTop: offsetTop,
+                scaledWidth: width
+            } = calculateGlobalOffset(hoveredElementTarget);
+
+            const {
+                trueHeight,
+                trueOffsetLeft,
+                trueOffsetTop,
+                trueWidth
+            } = calculateTrueArtboardOffset(hoveredElementTarget);
+
+            this.setState({
+                hoveredElement: {
+                    height,
+                    offsetLeft,
+                    offsetTop,
+                    target: hoveredElementTarget,
+                    trueHeight,
+                    trueOffsetLeft,
+                    trueOffsetTop,
+                    trueWidth,
+                    width
+                }
+            });
+        }
+
+        if (selectedElementTarget) {
+            const {
+                scaledHeight: height,
+                scaledOffsetLeft: offsetLeft,
+                scaledOffsetTop: offsetTop,
+                scaledWidth: width
+            } = calculateGlobalOffset(selectedElementTarget);
+
+            const {
+                trueHeight,
+                trueOffsetLeft,
+                trueOffsetTop,
+                trueWidth
+            } = calculateTrueArtboardOffset(selectedElementTarget);
+
+            this.setState({
+                selectedElement: {
+                    height,
+                    offsetLeft,
+                    offsetTop,
+                    target: selectedElementTarget,
+                    trueHeight,
+                    trueOffsetLeft,
+                    trueOffsetTop,
+                    trueWidth,
+                    width
+                }
+            });
+        }
+    }
+
+    /**
      * We use this function to control the artboard zoom level by passing
      * in our desired new zoom level.
      *
      * @param {number} zoomLevel
      */
     setArtboardZoom = (zoomLevel) => {
+        const {
+            hoveredElement: {
+                target: hoveredElementTarget
+            },
+            selectedElement: {
+                target: selectedElementTarget
+            }
+        } = this.state;
+
         const roundedZoom = Math.round(zoomLevel / 10) * 10;
+
+        // Cleared hovered/selected elemets to prevent dimension jank.
+        this.clearToolStatus();
 
         this.setState({
             documentZoom: roundedZoom <= 1 ? 1 : roundedZoom
         }, () => {
             this.setArtboardDimensions();
+            setTimeout(() => {
+                this.updateHoverSelect(hoveredElementTarget, selectedElementTarget);
+            }, 0);
         });
     }
 
