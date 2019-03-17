@@ -353,33 +353,7 @@ class InspectView extends React.Component {
         if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
             event.stopPropagation();
 
-            const {
-                scaledHeight: height,
-                scaledOffsetLeft: offsetLeft,
-                scaledOffsetTop: offsetTop,
-                scaledWidth: width
-            } = calculateGlobalOffset(target);
-
-            const {
-                trueHeight,
-                trueOffsetLeft,
-                trueOffsetTop,
-                trueWidth
-            } = calculateTrueArtboardOffset(target);
-
-            this.setState({
-                hoveredElement: {
-                    height,
-                    offsetLeft,
-                    offsetTop,
-                    target,
-                    trueHeight,
-                    trueOffsetLeft,
-                    trueOffsetTop,
-                    trueWidth,
-                    width
-                }
-            });
+            this.updateHoverSelect(target, null);
         } else if (isToolEnabled && !isInteractableElement()) {
             this.clearHoveredElement();
         }
@@ -424,33 +398,7 @@ class InspectView extends React.Component {
             event.stopPropagation();
             event.preventDefault();
 
-            const {
-                scaledHeight: height,
-                scaledOffsetLeft: offsetLeft,
-                scaledOffsetTop: offsetTop,
-                scaledWidth: width
-            } = calculateGlobalOffset(target);
-
-            const {
-                trueHeight,
-                trueOffsetLeft,
-                trueOffsetTop,
-                trueWidth
-            } = calculateTrueArtboardOffset(target);
-
-            this.setState({
-                selectedElement: {
-                    height,
-                    offsetLeft,
-                    offsetTop,
-                    target,
-                    trueHeight,
-                    trueOffsetLeft,
-                    trueOffsetTop,
-                    trueWidth,
-                    width
-                }
-            });
+            this.updateHoverSelect(null, target);
         } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
             /**
              * There is a bug in chrome where key presses are lost

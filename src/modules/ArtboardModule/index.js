@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ElementInteractionModule from '../ElementInteractionModule';
+import GridOverlayModule from '../GridOverlayModule';
 
 import {
     calculateScrollAfterZoom,
@@ -165,7 +166,11 @@ class ArtboardModule extends React.PureComponent {
                     className={`${ArtboardModule.name}__artboard`}
                     ref={this.artboardRef}
                     style={artboardStyle}
-                />
+                >
+                    <GridOverlayModule
+                        artboardWidth={artboardWidth}
+                    />
+                </div>
                 <ElementInteractionModule
                     artboardOffsetLeft={artboardOffsetLeft}
                     artboardOffsetTop={artboardOffsetTop}

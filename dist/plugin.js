@@ -1472,6 +1472,21 @@ exports.push([module.i, ".EnableToolModule {\n  display: flex;\n  align-items: c
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/GridOverlayModule/styles.scss":
+/*!**********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/GridOverlayModule/styles.scss ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".GridOverlayModule {\n  position: absolute;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  pointer-events: none; }\n  .GridOverlayModule__container {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    width: 100%;\n    height: 100%;\n    opacity: 0.3;\n    background-color: green; }\n    .GridOverlayModule__container--column {\n      height: 100%;\n      opacity: 1;\n      background-color: red; }\n", ""]);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/HeaderModule/styles.scss":
 /*!*****************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/HeaderModule/styles.scss ***!
@@ -39248,10 +39263,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _ElementInteractionModule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ElementInteractionModule */ "./src/modules/ElementInteractionModule/index.js");
-/* harmony import */ var _interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../interfacers/artboardInterfacer */ "./src/interfacers/artboardInterfacer.js");
-/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ArtboardModule/styles.scss");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _GridOverlayModule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../GridOverlayModule */ "./src/modules/GridOverlayModule/index.js");
+/* harmony import */ var _interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../interfacers/artboardInterfacer */ "./src/interfacers/artboardInterfacer.js");
+/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ArtboardModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_12__);
+
 
 
 
@@ -39296,15 +39313,15 @@ function (_React$PureComponent) {
           setArtboardDimensions = _this$props.setArtboardDimensions,
           setAxureLoaded = _this$props.setAxureLoaded,
           zoomWrapperPadding = _this$props.zoomWrapperPadding;
-      Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_9__["injectArtboard"])("".concat(ArtboardModule.name, "__artboard")).then(function () {
-        Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_9__["sizeArtboard"])().then(function (dimensions) {
+      Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_10__["injectArtboard"])("".concat(ArtboardModule.name, "__artboard")).then(function () {
+        Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_10__["sizeArtboard"])().then(function (dimensions) {
           var artboardHeight = dimensions.artboardHeight,
               artboardWidth = dimensions.artboardWidth;
           setArtboardDimensions({
             artboardHeight: artboardHeight,
             artboardWidth: artboardWidth
           });
-          Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_9__["scrollCenterArtboard"])({
+          Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_10__["scrollCenterArtboard"])({
             artboardHeight: artboardHeight,
             artboardWidth: artboardWidth,
             zoomWrapperPadding: zoomWrapperPadding
@@ -39326,7 +39343,7 @@ function (_React$PureComponent) {
       this.updateArtboardMeasurements(); // Check if a zoom operation took place.
 
       if (documentZoom !== previousZoom) {
-        Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_9__["calculateScrollAfterZoom"])({
+        Object(_interfacers_artboardInterfacer__WEBPACK_IMPORTED_MODULE_10__["calculateScrollAfterZoom"])({
           artboardHeight: artboardHeight,
           artboardWidth: artboardWidth,
           documentZoom: documentZoom,
@@ -39339,7 +39356,7 @@ function (_React$PureComponent) {
     value: function updateArtboardMeasurements() {
       var artboardElement = this.artboardRef.current;
 
-      var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_10__["default"])(artboardElement),
+      var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_11__["default"])(artboardElement),
           artboardScaledHeight = _calculateGlobalOffse.scaledHeight,
           artboardOffsetLeft = _calculateGlobalOffse.scaledOffsetLeft,
           artboardOffsetTop = _calculateGlobalOffse.scaledOffsetTop,
@@ -39398,7 +39415,9 @@ function (_React$PureComponent) {
         className: "".concat(ArtboardModule.name, "__artboard"),
         ref: this.artboardRef,
         style: artboardStyle
-      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_ElementInteractionModule__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_GridOverlayModule__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        artboardWidth: artboardWidth
+      })), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_ElementInteractionModule__WEBPACK_IMPORTED_MODULE_8__["default"], {
         artboardOffsetLeft: artboardOffsetLeft,
         artboardOffsetTop: artboardOffsetTop,
         artboardScaledHeight: artboardScaledHeight,
@@ -40143,7 +40162,7 @@ function (_React$PureComponent) {
         onKeyUp: this.toggleSidebar,
         role: 'button',
         tabIndex: 0
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null)), isElementSelected && react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_10___default.a.Fragment, null, this.renderPseudoClassTabs()));
+      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null)), isElementSelected && this.renderPseudoClassTabs());
     }
   }]);
 
@@ -40320,6 +40339,149 @@ EnableToolModule.propTypes = {
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/EnableToolModule/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/modules/GridOverlayModule/config.js":
+/*!*************************************************!*\
+  !*** ./src/modules/GridOverlayModule/config.js ***!
+  \*************************************************/
+/*! exports provided: BOOTSTRAP4, gridLayouts */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BOOTSTRAP4", function() { return BOOTSTRAP4; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gridLayouts", function() { return gridLayouts; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+
+var BOOTSTRAP4 = 'BOOTSTRAP_4';
+var gridLayouts = _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, BOOTSTRAP4, {
+  breakpoints: [{
+    maxWidth: 540,
+    viewportWidth: 576
+  }, {
+    maxWidth: 720,
+    viewportWidth: 768
+  }, {
+    maxWidth: 960,
+    viewportWidth: 992
+  }, {
+    maxWidth: 1140,
+    viewportWidth: 1200
+  }],
+  columns: 12,
+  gutterWidth: 30
+});
+
+/***/ }),
+
+/***/ "./src/modules/GridOverlayModule/index.js":
+/*!************************************************!*\
+  !*** ./src/modules/GridOverlayModule/index.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config */ "./src/modules/GridOverlayModule/config.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/GridOverlayModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+var className = 'GridOverlayModule';
+
+var GridOverlayModule = function GridOverlayModule(props) {
+  var artboardWidth = props.artboardWidth;
+  var _gridLayouts$BOOTSTRA = _config__WEBPACK_IMPORTED_MODULE_2__["gridLayouts"].BOOTSTRAP_4,
+      breakpoints = _gridLayouts$BOOTSTRA.breakpoints,
+      columns = _gridLayouts$BOOTSTRA.columns,
+      gutterWidth = _gridLayouts$BOOTSTRA.gutterWidth;
+
+  var containerWidth = function containerWidth() {
+    var width = artboardWidth;
+    breakpoints.forEach(function (breakpoint) {
+      var _breakpoint$maxWidth = breakpoint.maxWidth,
+          maxWidth = _breakpoint$maxWidth === void 0 ? artboardWidth : _breakpoint$maxWidth,
+          viewportWidth = breakpoint.viewportWidth;
+
+      if (artboardWidth >= viewportWidth) {
+        width = maxWidth;
+      }
+    });
+    return width;
+  };
+
+  var renderColumns = function renderColumns() {
+    var markupBlock = [];
+    var columnWidth = (containerWidth() - gutterWidth * (columns - 1)) / 12;
+    console.log('column:', columnWidth);
+    var margin = gutterWidth / 2;
+
+    for (var i = 0; i < columns; i++) {
+      markupBlock.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(className, "__container--column"),
+        style: {
+          marginLeft: margin,
+          marginRight: margin,
+          width: columnWidth
+        }
+      }));
+    }
+
+    return markupBlock;
+  };
+
+  var containerStyles = {
+    maxWidth: containerWidth()
+  };
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: className
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "".concat(className, "__container"),
+    style: containerStyles
+  }, renderColumns()));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GridOverlayModule);
+
+/***/ }),
+
+/***/ "./src/modules/GridOverlayModule/styles.scss":
+/*!***************************************************!*\
+  !*** ./src/modules/GridOverlayModule/styles.scss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/GridOverlayModule/styles.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -42309,31 +42471,7 @@ function (_React$Component) {
       if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
         event.stopPropagation();
 
-        var _calculateGlobalOffse3 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(target),
-            height = _calculateGlobalOffse3.scaledHeight,
-            offsetLeft = _calculateGlobalOffse3.scaledOffsetLeft,
-            offsetTop = _calculateGlobalOffse3.scaledOffsetTop,
-            width = _calculateGlobalOffse3.scaledWidth;
-
-        var _calculateTrueArtboar3 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(target),
-            trueHeight = _calculateTrueArtboar3.trueHeight,
-            trueOffsetLeft = _calculateTrueArtboar3.trueOffsetLeft,
-            trueOffsetTop = _calculateTrueArtboar3.trueOffsetTop,
-            trueWidth = _calculateTrueArtboar3.trueWidth;
-
-        _this.setState({
-          hoveredElement: {
-            height: height,
-            offsetLeft: offsetLeft,
-            offsetTop: offsetTop,
-            target: target,
-            trueHeight: trueHeight,
-            trueOffsetLeft: trueOffsetLeft,
-            trueOffsetTop: trueOffsetTop,
-            trueWidth: trueWidth,
-            width: width
-          }
-        });
+        _this.updateHoverSelect(target, null);
       } else if (isToolEnabled && !isInteractableElement()) {
         _this.clearHoveredElement();
       }
@@ -42367,31 +42505,7 @@ function (_React$Component) {
         event.stopPropagation();
         event.preventDefault();
 
-        var _calculateGlobalOffse4 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(target),
-            height = _calculateGlobalOffse4.scaledHeight,
-            offsetLeft = _calculateGlobalOffse4.scaledOffsetLeft,
-            offsetTop = _calculateGlobalOffse4.scaledOffsetTop,
-            width = _calculateGlobalOffse4.scaledWidth;
-
-        var _calculateTrueArtboar4 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(target),
-            trueHeight = _calculateTrueArtboar4.trueHeight,
-            trueOffsetLeft = _calculateTrueArtboar4.trueOffsetLeft,
-            trueOffsetTop = _calculateTrueArtboar4.trueOffsetTop,
-            trueWidth = _calculateTrueArtboar4.trueWidth;
-
-        _this.setState({
-          selectedElement: {
-            height: height,
-            offsetLeft: offsetLeft,
-            offsetTop: offsetTop,
-            target: target,
-            trueHeight: trueHeight,
-            trueOffsetLeft: trueOffsetLeft,
-            trueOffsetTop: trueOffsetTop,
-            trueWidth: trueWidth,
-            width: width
-          }
-        });
+        _this.updateHoverSelect(null, target);
       } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
         /**
          * There is a bug in chrome where key presses are lost

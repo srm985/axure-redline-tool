@@ -710,13 +710,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 </div>
                 {
                     isElementSelected
-                    && (
-                        <React.Fragment>
-                            {
-                                this.renderPseudoClassTabs()
-                            }
-                        </React.Fragment>
-                    )
+                    && this.renderPseudoClassTabs()
                 }
             </div>
         );
