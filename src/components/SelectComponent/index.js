@@ -52,4 +52,21 @@ const SelectComponent = (props) => {
     );
 };
 
+SelectComponent.propTypes = {
+    changeCallback: PropTypes.func.isRequired,
+    isDisabled: PropTypes.bool,
+    label: PropTypes.string,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            value: PropTypes.string
+        })
+    ).isRequired
+};
+
+SelectComponent.defaultProps = {
+    isDisabled: false,
+    label: ''
+};
+
 export default SelectComponent;

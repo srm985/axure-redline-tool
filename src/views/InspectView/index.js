@@ -25,6 +25,7 @@ import {
 } from '../../utils/storage';
 
 import {
+    COOKIE_DOCUMENT_ZOOM,
     COOKIE_EXPIRATION_DEFAULT,
     COOKIE_TOOL_ENABLED,
     ESCAPE_KEY,
@@ -79,9 +80,11 @@ class InspectView extends React.Component {
     }
 
     componentDidMount() {
-        const isToolEnabled = storageRead(COOKIE_TOOL_ENABLED) === 'true';
+        const isToolEnabled = storageRead(COOKIE_TOOL_ENABLED);
 
-        this.setToolEnabledStatus(isToolEnabled);
+        if (isToolEnabled !== undefined) {
+            this.setToolEnabledStatus(isToolEnabled === 'true');
+        }
     }
 
     componentDidUpdate() {
@@ -89,10 +92,17 @@ class InspectView extends React.Component {
     }
 
     setAxureLoaded = () => {
+        const documentZoom = storageRead(COOKIE_DOCUMENT_ZOOM);
+
         this.setState({
             axureLoaded: true
         }, () => {
             this.initializerListeners();
+
+            // Re-initialize our saved zoom.
+            if (documentZoom !== undefined) {
+                this.setArtboardZoom(Number(documentZoom));
+            }
         });
     }
 
@@ -196,6 +206,8 @@ class InspectView extends React.Component {
 
         // Cleared hovered/selected elemets to prevent dimension jank.
         this.clearToolStatus();
+
+        storageWrite(COOKIE_DOCUMENT_ZOOM, zoomLevel, COOKIE_EXPIRATION_DEFAULT);
 
         this.setState({
             documentZoom: roundedZoom <= 1 ? 1 : roundedZoom

@@ -12,7 +12,7 @@ import compileCSSAttributes from '../../utils/compileCSSAttributes';
 import {
     GRID_OPTIONS,
     GRID_OPTION_VANITY
-} from '../../modules/GridOverlayModule/config';
+} from '../GridOverlayModule/config';
 
 import './styles.scss';
 
@@ -727,9 +727,9 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 }
             } = event;
 
-            const gridLayout = ReactDOM.findDOMNode(this.gridSelectorRef.current).querySelector('select').value;
+            const gridLayoutExtracted = ReactDOM.findDOMNode(this.gridSelectorRef.current).querySelector('select').value;
 
-            gridOverlaySet(isGridEnabled && gridLayout);
+            gridOverlaySet(isGridEnabled ? gridLayoutExtracted : '');
         };
 
         const handleSelectChange = (event) => {
@@ -739,13 +739,13 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
             const {
                 target: {
-                    value: gridLayout
+                    value: gridLayoutExtracted
                 }
             } = event;
 
             const isGridEnabled = ReactDOM.findDOMNode(this.gridSelectorRef.current).querySelector('input').checked;
 
-            gridOverlaySet(isGridEnabled && gridLayout);
+            gridOverlaySet(isGridEnabled ? gridLayoutExtracted : '');
         };
 
         return (
@@ -787,6 +787,8 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 }
 
 ElementPropertiesSidebarModule.propTypes = {
+    gridLayout: PropTypes.string.isRequired,
+    gridOverlaySet: PropTypes.func.isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
     selectedElement: PropTypes.shape({})
 };

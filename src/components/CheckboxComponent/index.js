@@ -29,4 +29,13 @@ const CheckboxComponent = (props) => {
     );
 };
 
+CheckboxComponent.propTypes = {
+    changeCallback: PropTypes.func.isRequired,
+    label: PropTypes.string
+};
+
+CheckboxComponent.defaultProps = {
+    label: ''
+};
+
 export default CheckboxComponent;

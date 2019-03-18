@@ -49,6 +49,7 @@ const GridOverlayModule = (props) => {
             markupBlock.push(
                 <div
                     className={`${className}__container--column`}
+                    key={i}
                     style={{
                         marginLeft: margin,
                         marginRight: margin,
@@ -82,6 +83,11 @@ const GridOverlayModule = (props) => {
             }
         </>
     );
-}
+};
+
+GridOverlayModule.propTypes = {
+    artboardWidth: PropTypes.number.isRequired,
+    gridLayout: PropTypes.string.isRequired
+};
 
 export default GridOverlayModule;

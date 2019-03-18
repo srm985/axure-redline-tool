@@ -1391,7 +1391,7 @@ exports.push([module.i, ".DimensionMarkerComponent {\n  font-size: 10px;\n  font
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".InputComponent {\n  position: relative;\n  height: 40px; }\n  .InputComponent__label {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    display: block;\n    color: #fff; }\n  .InputComponent__input {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    box-sizing: border-box;\n    width: 100%;\n    height: 25px;\n    margin-top: 0;\n    padding: 4px 5px;\n    cursor: text;\n    color: #333;\n    border: none;\n    border-radius: 3px;\n    outline: none; }\n  .InputComponent .TooltipComponent {\n    top: -11px;\n    left: 0; }\n", ""]);
+exports.push([module.i, ".InputComponent {\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  height: 40px; }\n  .InputComponent__label {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    display: block;\n    color: #fff; }\n  .InputComponent__input {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    box-sizing: border-box;\n    width: 100%;\n    height: 25px;\n    margin-top: 0;\n    padding: 4px 5px;\n    cursor: text;\n    color: #333;\n    border: none;\n    border-radius: 3px;\n    outline: none; }\n  .InputComponent .TooltipComponent {\n    top: -11px;\n    left: 0; }\n", ""]);
 
 
 
@@ -1451,7 +1451,7 @@ exports.push([module.i, ".TextAreaComponent {\n  position: relative; }\n  .TextA
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".TooltipComponent {\n  font-size: 12px;\n  position: absolute;\n  z-index: 1;\n  visibility: hidden;\n  box-sizing: border-box;\n  padding: 3px 5px;\n  cursor: default;\n  transition: all ease-in-out 0.5s;\n  opacity: 0;\n  color: #fff;\n  border-radius: 3px;\n  background-color: #e89a28; }\n  .TooltipComponent::after {\n    position: absolute;\n    top: 100%;\n    left: 50%;\n    margin-left: -5px;\n    content: '';\n    border-width: 5px;\n    border-style: solid;\n    border-color: #e89a28 transparent transparent; }\n  .TooltipComponent--active {\n    visibility: visible;\n    transition: all 0s;\n    opacity: 1; }\n", ""]);
+exports.push([module.i, ".TooltipComponent {\n  font-size: 12px;\n  position: absolute;\n  z-index: 1;\n  visibility: hidden;\n  box-sizing: border-box;\n  padding: 3px 5px;\n  cursor: default;\n  transition: opacity ease-in-out 0.5s, visibility ease-in-out 0.5s;\n  opacity: 0;\n  color: #fff;\n  border-radius: 3px;\n  background-color: #e89a28; }\n  .TooltipComponent::after {\n    position: absolute;\n    top: 100%;\n    left: 50%;\n    margin-left: -5px;\n    content: '';\n    border-width: 5px;\n    border-style: solid;\n    border-color: #e89a28 transparent transparent; }\n  .TooltipComponent--active {\n    visibility: visible;\n    transition: opacity 0s, visibility 0s;\n    opacity: 1; }\n", ""]);
 
 
 
@@ -1481,7 +1481,7 @@ exports.push([module.i, ".ArtboardModule {\n  position: absolute;\n  display: fl
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99999;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: calc(100% - 100px); }\n    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {\n      box-sizing: border-box;\n      width: 100%;\n      margin-bottom: 31px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: flex-end;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-inactive:hover {\n      height: 105%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n  .ElementPropertiesSidebarModule__grid-overlay {\n    box-sizing: border-box;\n    width: 100%;\n    height: 100px;\n    padding: 20px;\n    border-top: solid 1px #fff; }\n    .ElementPropertiesSidebarModule__grid-overlay--selector {\n      width: 100%; }\n      .ElementPropertiesSidebarModule__grid-overlay--selector .CheckboxComponent {\n        margin-bottom: 10px; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99999;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n    .ElementPropertiesSidebarModule--visible .ElementPropertiesSidebarModule__grid-overlay {\n      display: inline-block; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: calc(100% - 100px); }\n    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {\n      box-sizing: border-box;\n      width: 100%;\n      margin-bottom: 31px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: flex-end;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-inactive:hover {\n      height: 105%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n  .ElementPropertiesSidebarModule__grid-overlay {\n    display: none;\n    box-sizing: border-box;\n    width: 100%;\n    height: 100px;\n    padding: 20px;\n    border-top: solid 1px #fff; }\n    .ElementPropertiesSidebarModule__grid-overlay--selector {\n      width: 100%; }\n      .ElementPropertiesSidebarModule__grid-overlay--selector .CheckboxComponent {\n        margin-bottom: 10px; }\n", ""]);
 
 
 
@@ -37981,6 +37981,13 @@ var CheckboxComponent = function CheckboxComponent(props) {
   })));
 };
 
+CheckboxComponent.propTypes = {
+  changeCallback: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func.isRequired,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
+};
+CheckboxComponent.defaultProps = {
+  label: ''
+};
 /* harmony default export */ __webpack_exports__["default"] = (CheckboxComponent);
 
 /***/ }),
@@ -38812,6 +38819,19 @@ var SelectComponent = function SelectComponent(props) {
   }, selectOptions)));
 };
 
+SelectComponent.propTypes = {
+  changeCallback: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func.isRequired,
+  isDisabled: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.bool,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  options: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+    name: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+    value: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
+  })).isRequired
+};
+SelectComponent.defaultProps = {
+  isDisabled: false,
+  label: ''
+};
 /* harmony default export */ __webpack_exports__["default"] = (SelectComponent);
 
 /***/ }),
@@ -39083,7 +39103,7 @@ if(false) {}
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: ANNOTATION_ELEMENTS, NO_INTERACT_CLASS, NO_INTERACT_ELEMENTS, TOOLTIP_VISIBLE_TIME, ENTER_KEY, ESCAPE_KEY, MINUS_KEY, PLUS_KEY, COOKIE_EXPIRATION_DEFAULT, COOKIE_TOOL_ENABLED */
+/*! exports provided: ANNOTATION_ELEMENTS, NO_INTERACT_CLASS, NO_INTERACT_ELEMENTS, TOOLTIP_VISIBLE_TIME, ENTER_KEY, ESCAPE_KEY, MINUS_KEY, PLUS_KEY, COOKIE_EXPIRATION_DEFAULT, COOKIE_DOCUMENT_ZOOM, COOKIE_TOOL_ENABLED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39097,6 +39117,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MINUS_KEY", function() { return MINUS_KEY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUS_KEY", function() { return PLUS_KEY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_EXPIRATION_DEFAULT", function() { return COOKIE_EXPIRATION_DEFAULT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_DOCUMENT_ZOOM", function() { return COOKIE_DOCUMENT_ZOOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_TOOL_ENABLED", function() { return COOKIE_TOOL_ENABLED; });
 var ANNOTATION_ELEMENTS = [// RP8 Syntax
 '.annnoteimage', '.annnoteline', '.annotation', '.ui-dialog', '.ui-dialog *', // RP9 Syntax
@@ -39113,6 +39134,7 @@ var PLUS_KEY = 187; // Cookies
 
 var COOKIE_EXPIRATION_DEFAULT = 30; // 30 days
 
+var COOKIE_DOCUMENT_ZOOM = 'redline-tool-document-zoom';
 var COOKIE_TOOL_ENABLED = 'redline-tool-enabled';
 
 /***/ }),
@@ -39630,6 +39652,7 @@ ArtboardModule.propTypes = {
   artboardWrapperWidth: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.number.isRequired,
   documentZoom: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.number.isRequired,
   elementMarkerThickness: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.number.isRequired,
+  gridLayout: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string.isRequired,
   handleClickCallback: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired,
   hoveredElement: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.shape({}).isRequired,
   isToolEnabled: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.bool.isRequired,
@@ -39805,7 +39828,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SelectComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/SelectComponent */ "./src/components/SelectComponent/index.js");
 /* harmony import */ var _components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/TextAreaComponent */ "./src/components/TextAreaComponent/index.js");
 /* harmony import */ var _utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../utils/compileCSSAttributes */ "./src/utils/compileCSSAttributes.js");
-/* harmony import */ var _modules_GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../modules/GridOverlayModule/config */ "./src/modules/GridOverlayModule/config.js");
+/* harmony import */ var _GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../GridOverlayModule/config */ "./src/modules/GridOverlayModule/config.js");
 /* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ElementPropertiesSidebarModule/styles.scss");
 /* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_18__);
 
@@ -40358,8 +40381,8 @@ function (_React$PureComponent) {
       var isElementSelected = !!target;
       var sidebarVisibleClass = isToolEnabled && isSidebarVisible && "".concat(ElementPropertiesSidebarModule.name, "--visible"); // Generate a list of grid overlay options.
 
-      var gridOverlayOptions = _modules_GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__["GRID_OPTIONS"].map(function (gridOption) {
-        var name = _modules_GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__["GRID_OPTION_VANITY"][gridOption];
+      var gridOverlayOptions = _GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__["GRID_OPTIONS"].map(function (gridOption) {
+        var name = _GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__["GRID_OPTION_VANITY"][gridOption];
         return {
           name: name,
           value: gridOption
@@ -40369,15 +40392,15 @@ function (_React$PureComponent) {
       var handleCheckboxChange = function handleCheckboxChange(event) {
         var gridOverlaySet = _this6.props.gridOverlaySet;
         var isGridEnabled = event.target.checked;
-        var gridLayout = react_dom__WEBPACK_IMPORTED_MODULE_11___default.a.findDOMNode(_this6.gridSelectorRef.current).querySelector('select').value;
-        gridOverlaySet(isGridEnabled && gridLayout);
+        var gridLayoutExtracted = react_dom__WEBPACK_IMPORTED_MODULE_11___default.a.findDOMNode(_this6.gridSelectorRef.current).querySelector('select').value;
+        gridOverlaySet(isGridEnabled ? gridLayoutExtracted : '');
       };
 
       var handleSelectChange = function handleSelectChange(event) {
         var gridOverlaySet = _this6.props.gridOverlaySet;
-        var gridLayout = event.target.value;
+        var gridLayoutExtracted = event.target.value;
         var isGridEnabled = react_dom__WEBPACK_IMPORTED_MODULE_11___default.a.findDOMNode(_this6.gridSelectorRef.current).querySelector('input').checked;
-        gridOverlaySet(isGridEnabled && gridLayout);
+        gridOverlaySet(isGridEnabled ? gridLayoutExtracted : '');
       };
 
       return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
@@ -40478,6 +40501,8 @@ _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_8___default()(Ele
 _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_8___default()(ElementPropertiesSidebarModule, "COPY_BLOCK_NAME", '_content');
 
 ElementPropertiesSidebarModule.propTypes = {
+  gridLayout: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.string.isRequired,
+  gridOverlaySet: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.func.isRequired,
   isToolEnabled: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.bool.isRequired,
   selectedElement: prop_types__WEBPACK_IMPORTED_MODULE_9___default.a.shape({})
 };
@@ -40693,6 +40718,7 @@ var GridOverlayModule = function GridOverlayModule(props) {
     for (var i = 0; i < columns; i++) {
       markupBlock.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "".concat(className, "__container--column"),
+        key: i,
         style: {
           marginLeft: margin,
           marginRight: margin,
@@ -40715,6 +40741,10 @@ var GridOverlayModule = function GridOverlayModule(props) {
   }, renderColumns())));
 };
 
+GridOverlayModule.propTypes = {
+  artboardWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  gridLayout: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired
+};
 /* harmony default export */ __webpack_exports__["default"] = (GridOverlayModule);
 
 /***/ }),
@@ -42476,10 +42506,17 @@ function (_React$Component) {
     _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(InspectView).call(this, props));
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "setAxureLoaded", function () {
+      var documentZoom = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_DOCUMENT_ZOOM"]);
+
       _this.setState({
         axureLoaded: true
       }, function () {
-        _this.initializerListeners();
+        _this.initializerListeners(); // Re-initialize our saved zoom.
+
+
+        if (documentZoom !== undefined) {
+          _this.setArtboardZoom(Number(documentZoom));
+        }
       });
     });
 
@@ -42555,6 +42592,8 @@ function (_React$Component) {
       var roundedZoom = Math.round(zoomLevel / 10) * 10; // Cleared hovered/selected elemets to prevent dimension jank.
 
       _this.clearToolStatus();
+
+      Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageWrite"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_DOCUMENT_ZOOM"], zoomLevel, _globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_EXPIRATION_DEFAULT"]);
 
       _this.setState({
         documentZoom: roundedZoom <= 1 ? 1 : roundedZoom
@@ -42906,8 +42945,11 @@ function (_React$Component) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4___default()(InspectView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var isToolEnabled = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_TOOL_ENABLED"]) === 'true';
-      this.setToolEnabledStatus(isToolEnabled);
+      var isToolEnabled = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_TOOL_ENABLED"]);
+
+      if (isToolEnabled !== undefined) {
+        this.setToolEnabledStatus(isToolEnabled === 'true');
+      }
     }
   }, {
     key: "componentDidUpdate",

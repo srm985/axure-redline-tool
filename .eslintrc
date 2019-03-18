@@ -43,10 +43,7 @@
             0
         ],
         "jsx-a11y/label-has-associated-control": [
-            "error",
-            {
-                "assert": "either"
-            }
+            0
         ],
         "jsx-a11y/label-has-for": [
             0
@@ -104,6 +101,9 @@
             4
         ],
         "react/no-did-update-set-state": [
+            0
+        ],
+        "react/no-find-dom-node": [
             0
         ],
         "sort-keys": [

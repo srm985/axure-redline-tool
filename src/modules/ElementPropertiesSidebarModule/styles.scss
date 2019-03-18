@@ -24,6 +24,10 @@ $grid-overlay-height: 100px;
 
     &--visible {
         right: 0;
+
+        .ElementPropertiesSidebarModule__grid-overlay {
+            display: inline-block;
+        }
     }
 
     &__side-pull {
@@ -158,6 +162,8 @@ $grid-overlay-height: 100px;
     }
 
     &__grid-overlay {
+        display: none;
+
         box-sizing: border-box;
         width: 100%;
         height: #{$grid-overlay-height};

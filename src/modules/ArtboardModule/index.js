@@ -195,6 +195,7 @@ ArtboardModule.propTypes = {
     artboardWrapperWidth: PropTypes.number.isRequired,
     documentZoom: PropTypes.number.isRequired,
     elementMarkerThickness: PropTypes.number.isRequired,
+    gridLayout: PropTypes.string.isRequired,
     handleClickCallback: PropTypes.func.isRequired,
     hoveredElement: PropTypes.shape({}).isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
