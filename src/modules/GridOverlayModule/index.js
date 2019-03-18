@@ -9,15 +9,16 @@ const className = 'GridOverlayModule';
 
 const GridOverlayModule = (props) => {
     const {
-        artboardWidth
+        artboardWidth,
+        gridLayout
     } = props;
 
     const {
-        BOOTSTRAP_4: {
-            breakpoints,
+        [gridLayout]: {
+            breakpoints = [],
             columns,
             gutterWidth
-        }
+        } = {}
     } = gridLayouts;
 
     const containerWidth = () => {
@@ -42,9 +43,6 @@ const GridOverlayModule = (props) => {
         const markupBlock = [];
 
         const columnWidth = (containerWidth() - (gutterWidth * (columns - 1))) / 12;
-
-        console.log('column:', columnWidth)
-
         const margin = gutterWidth / 2;
 
         for (let i = 0; i < columns; i++) {
@@ -68,14 +66,21 @@ const GridOverlayModule = (props) => {
     };
 
     return (
-        <div className={className}>
-            <div
-                className={`${className}__container`}
-                style={containerStyles}
-            >
-                {renderColumns()}
-            </div>
-        </div>
+        <>
+            {
+                gridLayout
+                && (
+                    <div className={className}>
+                        <div
+                            className={`${className}__container`}
+                            style={containerStyles}
+                        >
+                            {renderColumns()}
+                        </div>
+                    </div>
+                )
+            }
+        </>
     );
 }
 

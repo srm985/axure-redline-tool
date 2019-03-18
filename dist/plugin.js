@@ -1322,6 +1322,21 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/CheckboxComponent/styles.scss":
+/*!*************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/CheckboxComponent/styles.scss ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".CheckboxComponent__label {\n  font-family: \"Lato\", sans-serif;\n  font-size: 12px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-start;\n  cursor: pointer;\n  color: #fff; }\n\n.CheckboxComponent__input {\n  margin: 0 0 0 10px;\n  cursor: pointer;\n  border-radius: 5px; }\n", ""]);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSwatchComponent/styles.scss":
 /*!****************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ColorSwatchComponent/styles.scss ***!
@@ -1397,6 +1412,21 @@ exports.push([module.i, ".LoadingIndicatorComponent {\n  position: fixed;\n  z-i
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/SelectComponent/styles.scss":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/SelectComponent/styles.scss ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".SelectComponent {\n  position: relative; }\n  .SelectComponent--disabled {\n    opacity: 0.5; }\n  .SelectComponent__label {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    display: block;\n    color: #fff; }\n  .SelectComponent__select {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    box-sizing: border-box;\n    width: 100%;\n    height: 25px;\n    margin-top: 0;\n    padding: 4px 5px;\n    cursor: pointer;\n    color: #333;\n    border: none;\n    border-radius: 3px;\n    outline: none; }\n    .SelectComponent__select--option {\n      cursor: pointer; }\n", ""]);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/TextAreaComponent/styles.scss":
 /*!*************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/TextAreaComponent/styles.scss ***!
@@ -1451,7 +1481,7 @@ exports.push([module.i, ".ArtboardModule {\n  position: absolute;\n  display: fl
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99999;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: 100%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {\n      box-sizing: border-box;\n      width: 100%;\n      margin-bottom: 31px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: flex-end;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-inactive:hover {\n      height: 105%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99999;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: calc(100% - 100px); }\n    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {\n      box-sizing: border-box;\n      width: 100%;\n      margin-bottom: 31px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: flex-end;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-inactive:hover {\n      height: 105%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n  .ElementPropertiesSidebarModule__grid-overlay {\n    box-sizing: border-box;\n    width: 100%;\n    height: 100px;\n    padding: 20px;\n    border-top: solid 1px #fff; }\n    .ElementPropertiesSidebarModule__grid-overlay--selector {\n      width: 100%; }\n      .ElementPropertiesSidebarModule__grid-overlay--selector .CheckboxComponent {\n        margin-bottom: 10px; }\n", ""]);
 
 
 
@@ -1481,7 +1511,7 @@ exports.push([module.i, ".EnableToolModule {\n  display: flex;\n  align-items: c
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".GridOverlayModule {\n  position: absolute;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  pointer-events: none; }\n  .GridOverlayModule__container {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    width: 100%;\n    height: 100%;\n    opacity: 0.3;\n    background-color: green; }\n    .GridOverlayModule__container--column {\n      height: 100%;\n      opacity: 1;\n      background-color: red; }\n", ""]);
+exports.push([module.i, ".GridOverlayModule {\n  position: absolute;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  pointer-events: none; }\n  .GridOverlayModule__container {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    width: 100%;\n    height: 100%;\n    opacity: 0.2; }\n    .GridOverlayModule__container--column {\n      height: 100%;\n      background-color: #ff5757; }\n", ""]);
 
 
 
@@ -37912,6 +37942,79 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/components/CheckboxComponent/index.js":
+/*!***************************************************!*\
+  !*** ./src/components/CheckboxComponent/index.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.scss */ "./src/components/CheckboxComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var className = 'CheckboxComponent';
+
+var CheckboxComponent = function CheckboxComponent(props) {
+  var changeCallback = props.changeCallback,
+      label = props.label;
+
+  var handleChange = function handleChange(event) {
+    changeCallback(event);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: className
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    className: "".concat(className, "__label")
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, label), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    className: "".concat(className, "__input"),
+    onChange: handleChange,
+    type: 'checkbox'
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CheckboxComponent);
+
+/***/ }),
+
+/***/ "./src/components/CheckboxComponent/styles.scss":
+/*!******************************************************!*\
+  !*** ./src/components/CheckboxComponent/styles.scss ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/CheckboxComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./src/components/ColorSwatchComponent/index.js":
 /*!******************************************************!*\
   !*** ./src/components/ColorSwatchComponent/index.js ***!
@@ -38637,6 +38740,91 @@ LoadingIndicatorComponent.className = 'LoadingIndicatorComponent';
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/LoadingIndicatorComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/SelectComponent/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/SelectComponent/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.scss */ "./src/components/SelectComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var className = 'SelectComponent';
+
+var SelectComponent = function SelectComponent(props) {
+  var changeCallback = props.changeCallback,
+      isDisabled = props.isDisabled,
+      label = props.label,
+      options = props.options;
+  var selectOptions = options.map(function (option) {
+    var name = option.name,
+        value = option.value;
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+      className: "".concat(className, "__select--option"),
+      key: value,
+      value: value
+    }, name);
+  });
+
+  var handleChange = function handleChange(event) {
+    changeCallback(event);
+  };
+
+  var isDisabledClass = isDisabled && "".concat(className, "--disabled");
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "".concat(className, " ").concat(isDisabledClass)
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    className: "".concat(className, "__label")
+  }, label, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
+    className: "".concat(className, "__select"),
+    disabled: isDisabled,
+    onChange: handleChange
+  }, selectOptions)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SelectComponent);
+
+/***/ }),
+
+/***/ "./src/components/SelectComponent/styles.scss":
+/*!****************************************************!*\
+  !*** ./src/components/SelectComponent/styles.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/SelectComponent/styles.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -39387,6 +39575,7 @@ function (_React$PureComponent) {
           artboardWrapperWidth = _this$props3.artboardWrapperWidth,
           documentZoom = _this$props3.documentZoom,
           elementMarkerThickness = _this$props3.elementMarkerThickness,
+          gridLayout = _this$props3.gridLayout,
           handleClickCallback = _this$props3.handleClickCallback,
           hoveredElement = _this$props3.hoveredElement,
           isToolEnabled = _this$props3.isToolEnabled,
@@ -39416,7 +39605,8 @@ function (_React$PureComponent) {
         ref: this.artboardRef,
         style: artboardStyle
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_GridOverlayModule__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        artboardWidth: artboardWidth
+        artboardWidth: artboardWidth,
+        gridLayout: gridLayout
       })), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_ElementInteractionModule__WEBPACK_IMPORTED_MODULE_8__["default"], {
         artboardOffsetLeft: artboardOffsetLeft,
         artboardOffsetTop: artboardOffsetTop,
@@ -39608,11 +39798,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _components_InputComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/InputComponent */ "./src/components/InputComponent/index.js");
-/* harmony import */ var _components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/TextAreaComponent */ "./src/components/TextAreaComponent/index.js");
-/* harmony import */ var _utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../utils/compileCSSAttributes */ "./src/utils/compileCSSAttributes.js");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ElementPropertiesSidebarModule/styles.scss");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _components_CheckboxComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/CheckboxComponent */ "./src/components/CheckboxComponent/index.js");
+/* harmony import */ var _components_InputComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/InputComponent */ "./src/components/InputComponent/index.js");
+/* harmony import */ var _components_SelectComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/SelectComponent */ "./src/components/SelectComponent/index.js");
+/* harmony import */ var _components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/TextAreaComponent */ "./src/components/TextAreaComponent/index.js");
+/* harmony import */ var _utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../utils/compileCSSAttributes */ "./src/utils/compileCSSAttributes.js");
+/* harmony import */ var _modules_GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../modules/GridOverlayModule/config */ "./src/modules/GridOverlayModule/config.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ElementPropertiesSidebarModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_18__);
+
+
+
+
 
 
 
@@ -39640,6 +39839,7 @@ function (_React$PureComponent) {
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, ElementPropertiesSidebarModule);
 
     _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5___default()(ElementPropertiesSidebarModule).call(this, props));
+    _this.gridSelectorRef = react__WEBPACK_IMPORTED_MODULE_10___default.a.createRef();
     _this.clearCSSAttributes = _this.clearCSSAttributes.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.extractDefaultCSS = _this.extractDefaultCSS.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
     _this.toggleSidebar = _this.toggleSidebar.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this)));
@@ -39655,7 +39855,7 @@ function (_React$PureComponent) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(ElementPropertiesSidebarModule, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var documentCSSAttributes = Object(_utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_13__["default"])(ElementPropertiesSidebarModule.pseudoClasses);
+      var documentCSSAttributes = Object(_utils_compileCSSAttributes__WEBPACK_IMPORTED_MODULE_16__["default"])(ElementPropertiesSidebarModule.pseudoClasses);
       this.setState({
         documentCSSAttributes: documentCSSAttributes
       });
@@ -40022,11 +40222,11 @@ function (_React$PureComponent) {
             }
 
             var attributeBlock = function attributeBlock() {
-              return attribute === ElementPropertiesSidebarModule.COPY_BLOCK_NAME ? react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
+              return attribute === ElementPropertiesSidebarModule.COPY_BLOCK_NAME ? react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_15__["default"], {
                 inputValue: cleanedValue,
                 key: attribute,
                 label: 'content:'
-              }) : react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              }) : react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_13__["default"], {
                 inputValue: cleanedValue,
                 key: attribute,
                 label: "".concat(attribute, ":")
@@ -40040,7 +40240,7 @@ function (_React$PureComponent) {
 
       elementAttributes.push([react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("p", {
         key: 'css-block-attributes-header'
-      }, "CSS BLOCK ATTRIBUTES"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      }, "CSS BLOCK ATTRIBUTES"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_TextAreaComponent__WEBPACK_IMPORTED_MODULE_15__["default"], {
         inputValue: blockProperties.join('\n'),
         key: 'css-block-attributes-body',
         label: 'properties:'
@@ -40134,7 +40334,7 @@ function (_React$PureComponent) {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs")
       }, dataLabel && react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, "__pseudo-tabs--parent-component-name")
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_13__["default"], {
         inputValue: dataLabel,
         label: 'parent component name:'
       })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
@@ -40146,14 +40346,40 @@ function (_React$PureComponent) {
   }, {
     key: "render",
     value: function render() {
+      var _this6 = this;
+
       var _this$props2 = this.props,
+          gridLayout = _this$props2.gridLayout,
           isToolEnabled = _this$props2.isToolEnabled,
           _this$props2$selected = _this$props2.selectedElement;
       _this$props2$selected = _this$props2$selected === void 0 ? {} : _this$props2$selected;
       var target = _this$props2$selected.target;
       var isSidebarVisible = this.state.isSidebarVisible;
       var isElementSelected = !!target;
-      var sidebarVisibleClass = isToolEnabled && isSidebarVisible && "".concat(ElementPropertiesSidebarModule.name, "--visible");
+      var sidebarVisibleClass = isToolEnabled && isSidebarVisible && "".concat(ElementPropertiesSidebarModule.name, "--visible"); // Generate a list of grid overlay options.
+
+      var gridOverlayOptions = _modules_GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__["GRID_OPTIONS"].map(function (gridOption) {
+        var name = _modules_GridOverlayModule_config__WEBPACK_IMPORTED_MODULE_17__["GRID_OPTION_VANITY"][gridOption];
+        return {
+          name: name,
+          value: gridOption
+        };
+      });
+
+      var handleCheckboxChange = function handleCheckboxChange(event) {
+        var gridOverlaySet = _this6.props.gridOverlaySet;
+        var isGridEnabled = event.target.checked;
+        var gridLayout = react_dom__WEBPACK_IMPORTED_MODULE_11___default.a.findDOMNode(_this6.gridSelectorRef.current).querySelector('select').value;
+        gridOverlaySet(isGridEnabled && gridLayout);
+      };
+
+      var handleSelectChange = function handleSelectChange(event) {
+        var gridOverlaySet = _this6.props.gridOverlaySet;
+        var gridLayout = event.target.value;
+        var isGridEnabled = react_dom__WEBPACK_IMPORTED_MODULE_11___default.a.findDOMNode(_this6.gridSelectorRef.current).querySelector('input').checked;
+        gridOverlaySet(isGridEnabled && gridLayout);
+      };
+
       return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
         className: "".concat(ElementPropertiesSidebarModule.name, " ").concat(sidebarVisibleClass)
       }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
@@ -40162,7 +40388,19 @@ function (_React$PureComponent) {
         onKeyUp: this.toggleSidebar,
         role: 'button',
         tabIndex: 0
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null)), isElementSelected && this.renderPseudoClassTabs());
+      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", null)), isElementSelected && this.renderPseudoClassTabs(), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+        className: "".concat(ElementPropertiesSidebarModule.name, "__grid-overlay")
+      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+        className: "".concat(ElementPropertiesSidebarModule.name, "__grid-overlay--selector"),
+        ref: this.gridSelectorRef
+      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_CheckboxComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        changeCallback: handleCheckboxChange,
+        label: 'GRID OVERLAY'
+      }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_SelectComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        changeCallback: handleSelectChange,
+        isDisabled: !gridLayout,
+        options: gridOverlayOptions
+      }))));
     }
   }]);
 
@@ -40364,17 +40602,23 @@ if(false) {}
 /*!*************************************************!*\
   !*** ./src/modules/GridOverlayModule/config.js ***!
   \*************************************************/
-/*! exports provided: BOOTSTRAP4, gridLayouts */
+/*! exports provided: GRID_OPTIONS, GRID_OPTION_VANITY, gridLayouts */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BOOTSTRAP4", function() { return BOOTSTRAP4; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GRID_OPTIONS", function() { return GRID_OPTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GRID_OPTION_VANITY", function() { return GRID_OPTION_VANITY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gridLayouts", function() { return gridLayouts; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 
-var BOOTSTRAP4 = 'BOOTSTRAP_4';
+// Add grid constants here.
+var BOOTSTRAP4 = 'BOOTSTRAP_4'; // Grid constants are added to this array for our dropdown menu.
+
+var GRID_OPTIONS = [BOOTSTRAP4]; // This object allows us to apply a vanity name to our object keys.
+
+var GRID_OPTION_VANITY = _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, BOOTSTRAP4, 'Bootstrap 4');
 var gridLayouts = _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, BOOTSTRAP4, {
   breakpoints: [{
     maxWidth: 540,
@@ -40418,11 +40662,14 @@ __webpack_require__.r(__webpack_exports__);
 var className = 'GridOverlayModule';
 
 var GridOverlayModule = function GridOverlayModule(props) {
-  var artboardWidth = props.artboardWidth;
-  var _gridLayouts$BOOTSTRA = _config__WEBPACK_IMPORTED_MODULE_2__["gridLayouts"].BOOTSTRAP_4,
-      breakpoints = _gridLayouts$BOOTSTRA.breakpoints,
-      columns = _gridLayouts$BOOTSTRA.columns,
-      gutterWidth = _gridLayouts$BOOTSTRA.gutterWidth;
+  var artboardWidth = props.artboardWidth,
+      gridLayout = props.gridLayout;
+  var _gridLayouts$gridLayo = _config__WEBPACK_IMPORTED_MODULE_2__["gridLayouts"][gridLayout];
+  _gridLayouts$gridLayo = _gridLayouts$gridLayo === void 0 ? {} : _gridLayouts$gridLayo;
+  var _gridLayouts$gridLayo2 = _gridLayouts$gridLayo.breakpoints,
+      breakpoints = _gridLayouts$gridLayo2 === void 0 ? [] : _gridLayouts$gridLayo2,
+      columns = _gridLayouts$gridLayo.columns,
+      gutterWidth = _gridLayouts$gridLayo.gutterWidth;
 
   var containerWidth = function containerWidth() {
     var width = artboardWidth;
@@ -40441,7 +40688,6 @@ var GridOverlayModule = function GridOverlayModule(props) {
   var renderColumns = function renderColumns() {
     var markupBlock = [];
     var columnWidth = (containerWidth() - gutterWidth * (columns - 1)) / 12;
-    console.log('column:', columnWidth);
     var margin = gutterWidth / 2;
 
     for (var i = 0; i < columns; i++) {
@@ -40461,12 +40707,12 @@ var GridOverlayModule = function GridOverlayModule(props) {
   var containerStyles = {
     maxWidth: containerWidth()
   };
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, gridLayout && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: className
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "".concat(className, "__container"),
     style: containerStyles
-  }, renderColumns()));
+  }, renderColumns())));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (GridOverlayModule);
@@ -42612,6 +42858,12 @@ function (_React$Component) {
       }
     });
 
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "gridOverlaySet", function (gridLayout) {
+      _this.setState({
+        gridLayout: gridLayout
+      });
+    });
+
     _this.state = {
       artboardHeight: 0,
       artboardWidth: 0,
@@ -42620,6 +42872,7 @@ function (_React$Component) {
       axureLoaded: false,
       documentZoom: 100,
       elementMarkerThickness: 1,
+      gridLayout: '',
       hoveredElement: {
         height: 0,
         offsetLeft: 0,
@@ -42672,6 +42925,7 @@ function (_React$Component) {
           axureLoaded = _this$state7.axureLoaded,
           documentZoom = _this$state7.documentZoom,
           elementMarkerThickness = _this$state7.elementMarkerThickness,
+          gridLayout = _this$state7.gridLayout,
           hoveredElement = _this$state7.hoveredElement,
           isToolEnabled = _this$state7.isToolEnabled,
           selectedElement = _this$state7.selectedElement,
@@ -42683,6 +42937,8 @@ function (_React$Component) {
         isToolEnabled: isToolEnabled,
         toggleToolEnable: this.toggleToolEnable
       }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_modules_ElementPropertiesSidebarModule__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        gridLayout: gridLayout,
+        gridOverlaySet: this.gridOverlaySet,
         isToolEnabled: isToolEnabled,
         selectedElement: selectedElement
       }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -42692,6 +42948,7 @@ function (_React$Component) {
         artboardWrapperWidth: artboardWrapperWidth,
         documentZoom: documentZoom,
         elementMarkerThickness: elementMarkerThickness,
+        gridLayout: gridLayout,
         handleClickCallback: this.handleClickCallback,
         hoveredElement: hoveredElement,
         isToolEnabled: isToolEnabled,

@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
+import CheckboxComponent from '../../components/CheckboxComponent';
 import InputComponent from '../../components/InputComponent';
+import SelectComponent from '../../components/SelectComponent';
 import TextAreaComponent from '../../components/TextAreaComponent';
 
 import compileCSSAttributes from '../../utils/compileCSSAttributes';
+
+import {
+    GRID_OPTIONS,
+    GRID_OPTION_VANITY
+} from '../../modules/GridOverlayModule/config';
 
 import './styles.scss';
 
@@ -85,6 +93,8 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
     constructor(props) {
         super(props);
+
+        this.gridSelectorRef = React.createRef();
 
         this.clearCSSAttributes = this.clearCSSAttributes.bind(this);
         this.extractDefaultCSS = this.extractDefaultCSS.bind(this);
@@ -681,6 +691,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
     render() {
         const {
+            gridLayout,
             isToolEnabled,
             selectedElement: {
                 target
@@ -694,6 +705,48 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         const isElementSelected = !!target;
 
         const sidebarVisibleClass = isToolEnabled && isSidebarVisible && `${ElementPropertiesSidebarModule.name}--visible`;
+
+        // Generate a list of grid overlay options.
+        const gridOverlayOptions = GRID_OPTIONS.map((gridOption) => {
+            const name = GRID_OPTION_VANITY[gridOption];
+
+            return ({
+                name,
+                value: gridOption
+            });
+        });
+
+        const handleCheckboxChange = (event) => {
+            const {
+                gridOverlaySet
+            } = this.props;
+
+            const {
+                target: {
+                    checked: isGridEnabled
+                }
+            } = event;
+
+            const gridLayout = ReactDOM.findDOMNode(this.gridSelectorRef.current).querySelector('select').value;
+
+            gridOverlaySet(isGridEnabled && gridLayout);
+        };
+
+        const handleSelectChange = (event) => {
+            const {
+                gridOverlaySet
+            } = this.props;
+
+            const {
+                target: {
+                    value: gridLayout
+                }
+            } = event;
+
+            const isGridEnabled = ReactDOM.findDOMNode(this.gridSelectorRef.current).querySelector('input').checked;
+
+            gridOverlaySet(isGridEnabled && gridLayout);
+        };
 
         return (
             <div className={`${ElementPropertiesSidebarModule.name} ${sidebarVisibleClass}`}>
@@ -712,6 +765,22 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     isElementSelected
                     && this.renderPseudoClassTabs()
                 }
+                <div className={`${ElementPropertiesSidebarModule.name}__grid-overlay`}>
+                    <div
+                        className={`${ElementPropertiesSidebarModule.name}__grid-overlay--selector`}
+                        ref={this.gridSelectorRef}
+                    >
+                        <CheckboxComponent
+                            changeCallback={handleCheckboxChange}
+                            label={'GRID OVERLAY'}
+                        />
+                        <SelectComponent
+                            changeCallback={handleSelectChange}
+                            isDisabled={!gridLayout}
+                            options={gridOverlayOptions}
+                        />
+                    </div>
+                </div>
             </div>
         );
     }

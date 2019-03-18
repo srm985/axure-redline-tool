@@ -129,6 +129,7 @@ class ArtboardModule extends React.PureComponent {
             artboardWrapperWidth,
             documentZoom,
             elementMarkerThickness,
+            gridLayout,
             handleClickCallback,
             hoveredElement,
             isToolEnabled,
@@ -169,6 +170,7 @@ class ArtboardModule extends React.PureComponent {
                 >
                     <GridOverlayModule
                         artboardWidth={artboardWidth}
+                        gridLayout={gridLayout}
                     />
                 </div>
                 <ElementInteractionModule

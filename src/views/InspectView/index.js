@@ -48,6 +48,7 @@ class InspectView extends React.Component {
             axureLoaded: false,
             documentZoom: 100,
             elementMarkerThickness: 1,
+            gridLayout: '',
             hoveredElement: {
                 height: 0,
                 offsetLeft: 0,
@@ -518,6 +519,12 @@ class InspectView extends React.Component {
         }
     }
 
+    gridOverlaySet = (gridLayout) => {
+        this.setState({
+            gridLayout
+        });
+    }
+
     render() {
         const {
             artboardHeight,
@@ -527,6 +534,7 @@ class InspectView extends React.Component {
             axureLoaded,
             documentZoom,
             elementMarkerThickness,
+            gridLayout,
             hoveredElement,
             isToolEnabled,
             selectedElement,
@@ -548,6 +556,8 @@ class InspectView extends React.Component {
                         toggleToolEnable={this.toggleToolEnable}
                     />
                     <ElementPropertiesSidebarModule
+                        gridLayout={gridLayout}
+                        gridOverlaySet={this.gridOverlaySet}
                         isToolEnabled={isToolEnabled}
                         selectedElement={selectedElement}
                     />
@@ -558,6 +568,7 @@ class InspectView extends React.Component {
                         artboardWrapperWidth={artboardWrapperWidth}
                         documentZoom={documentZoom}
                         elementMarkerThickness={elementMarkerThickness}
+                        gridLayout={gridLayout}
                         handleClickCallback={this.handleClickCallback}
                         hoveredElement={hoveredElement}
                         isToolEnabled={isToolEnabled}
