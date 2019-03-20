@@ -1412,6 +1412,21 @@ exports.push([module.i, ".LoadingIndicatorComponent {\n  position: fixed;\n  z-i
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ModalComponent/styles.scss":
+/*!**********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ModalComponent/styles.scss ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".modal-open {\n  overflow: hidden; }\n\n.ModalComponent {\n  position: fixed;\n  z-index: 9999999;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n  background-color: rgba(85, 85, 85, 0.6); }\n  .ModalComponent__modal {\n    position: relative;\n    width: 100%;\n    max-width: 500px;\n    min-height: 200px;\n    border-radius: 10px;\n    background-color: #fff;\n    box-shadow: 0 3px 5px #333; }\n  .ModalComponent__modal-close {\n    position: absolute;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 20px;\n    height: 20px;\n    cursor: pointer;\n    transition: background-color 0.05s ease-in-out; }\n    .ModalComponent__modal-close:hover div {\n      transition: background-color 0.2s ease-in-out;\n      background-color: #555; }\n    .ModalComponent__modal-close div {\n      width: 2px;\n      height: 100%;\n      transform: rotate(45deg);\n      background-color: #333; }\n      .ModalComponent__modal-close div::after {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 2px;\n        height: 100%;\n        content: '';\n        transform: rotate(-90deg);\n        background-color: inherit; }\n", ""]);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/SelectComponent/styles.scss":
 /*!***********************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/SelectComponent/styles.scss ***!
@@ -1481,22 +1496,7 @@ exports.push([module.i, ".ArtboardModule {\n  position: absolute;\n  display: fl
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99999;\n  top: 60px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 60px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n    .ElementPropertiesSidebarModule--visible .ElementPropertiesSidebarModule__grid-overlay {\n      display: inline-block; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: calc(100% - 100px); }\n    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {\n      box-sizing: border-box;\n      width: 100%;\n      margin-bottom: 31px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: flex-end;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-inactive:hover {\n      height: 105%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n  .ElementPropertiesSidebarModule__grid-overlay {\n    display: none;\n    box-sizing: border-box;\n    width: 100%;\n    height: 100px;\n    padding: 20px;\n    border-top: solid 1px #fff; }\n    .ElementPropertiesSidebarModule__grid-overlay--selector {\n      width: 100%; }\n      .ElementPropertiesSidebarModule__grid-overlay--selector .CheckboxComponent {\n        margin-bottom: 10px; }\n", ""]);
-
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/EnableToolModule/styles.scss":
-/*!*********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/EnableToolModule/styles.scss ***!
-  \*********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
-// Module
-exports.push([module.i, ".EnableToolModule {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 160px;\n  height: 100%; }\n  .EnableToolModule span {\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    color: #fff; }\n  .EnableToolModule input {\n    position: absolute;\n    visibility: hidden;\n    margin-left: -9999px; }\n    .EnableToolModule input:checked + label {\n      background-color: #4edec2; }\n      .EnableToolModule input:checked + label::after {\n        margin-left: 32px;\n        background-color: #4edec2; }\n  .EnableToolModule label {\n    position: relative;\n    display: block;\n    width: 60px;\n    height: 28px;\n    padding: 2px;\n    cursor: pointer;\n    user-select: none;\n    transition: all 0.15s ease-in-out;\n    border-radius: 28px;\n    outline: none;\n    background-color: #ddd; }\n    .EnableToolModule label::before {\n      position: absolute;\n      top: 2px;\n      right: 2px;\n      bottom: 2px;\n      left: 2px;\n      display: block;\n      content: '';\n      transition: all 0.15s ease-in-out;\n      border-radius: 28px;\n      background-color: #fff; }\n    .EnableToolModule label::after {\n      position: absolute;\n      top: 4px;\n      bottom: 4px;\n      left: 4px;\n      display: block;\n      width: 24px;\n      content: '';\n      transition: all 0.15s ease-in-out;\n      border-radius: 50%;\n      background-color: #ddd; }\n", ""]);
+exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99999;\n  top: 50px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 50px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n    .ElementPropertiesSidebarModule--visible .ElementPropertiesSidebarModule__grid-overlay {\n      display: inline-block; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: calc(100% - 100px); }\n    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {\n      box-sizing: border-box;\n      width: 100%;\n      margin-bottom: 31px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: flex-end;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-inactive:hover {\n      height: 105%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n  .ElementPropertiesSidebarModule__grid-overlay {\n    display: none;\n    box-sizing: border-box;\n    width: 100%;\n    height: 100px;\n    padding: 20px;\n    border-top: solid 1px #fff; }\n    .ElementPropertiesSidebarModule__grid-overlay--selector {\n      width: 100%; }\n      .ElementPropertiesSidebarModule__grid-overlay--selector .CheckboxComponent {\n        margin-bottom: 10px; }\n", ""]);
 
 
 
@@ -1526,7 +1526,22 @@ exports.push([module.i, ".GridOverlayModule {\n  position: absolute;\n  z-index:
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".HeaderModule {\n  font-family: \"Lato\", sans-serif;\n  position: fixed;\n  z-index: 99998;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  width: 100%;\n  height: 60px;\n  padding: 0 30px;\n  opacity: 0.9;\n  background-color: #111111; }\n  .HeaderModule__logo {\n    font-size: 18px;\n    color: #fff; }\n", ""]);
+exports.push([module.i, ".HeaderModule {\n  font-family: \"Lato\", sans-serif;\n  position: fixed;\n  z-index: 99998;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  width: 100%;\n  height: 50px;\n  padding: 0 30px;\n  opacity: 0.9;\n  background-color: #111111; }\n  .HeaderModule__logo {\n    font-size: 18px;\n    color: #fff; }\n", ""]);
+
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/PrimaryControlsModule/styles.scss":
+/*!**************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/PrimaryControlsModule/styles.scss ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".PrimaryControlsModule {\n  display: flex;\n  align-items: center;\n  height: 100%; }\n  .PrimaryControlsModule__control {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 50px;\n    height: 100%;\n    cursor: pointer;\n    transition: background-color 0.2s ease-in-out;\n    color: #fff;\n    border-radius: 5px; }\n    .PrimaryControlsModule__control:hover {\n      transition: background-color 0.05s ease-in-out;\n      background-color: #555; }\n    .PrimaryControlsModule__control--enabled {\n      color: #4edec2; }\n", ""]);
 
 
 
@@ -38407,6 +38422,56 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./src/components/IconComponent/index.js":
+/*!***********************************************!*\
+  !*** ./src/components/IconComponent/index.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var SVG_SCALE = 250;
+var VIEWBOX = "0 0 ".concat(SVG_SCALE, " ").concat(SVG_SCALE);
+var displayName = 'IconComponent';
+
+var IconComponent = function IconComponent(props) {
+  var _props$fill = props.fill,
+      fill = _props$fill === void 0 ? 'currentColor' : _props$fill,
+      height = props.height,
+      path = props.path,
+      width = props.width;
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("svg", {
+    className: displayName,
+    dangerouslySetInnerHTML: {
+      __html: path
+    },
+    fill: fill,
+    height: height,
+    viewBox: VIEWBOX,
+    width: width
+  });
+};
+
+IconComponent.propTypes = {
+  fill: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired,
+  path: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired,
+  width: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number.isRequired
+};
+IconComponent.defaultProps = {
+  fill: 'currentColor'
+};
+/* harmony default export */ __webpack_exports__["default"] = (IconComponent);
+
+/***/ }),
+
 /***/ "./src/components/InputComponent/index.js":
 /*!************************************************!*\
   !*** ./src/components/InputComponent/index.js ***!
@@ -38747,6 +38812,123 @@ LoadingIndicatorComponent.className = 'LoadingIndicatorComponent';
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/LoadingIndicatorComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/components/ModalComponent/index.js":
+/*!************************************************!*\
+  !*** ./src/components/ModalComponent/index.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles.scss */ "./src/components/ModalComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+
+var ModalComponent =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(ModalComponent, _React$PureComponent);
+
+  function ModalComponent() {
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, ModalComponent);
+
+    return _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(ModalComponent).apply(this, arguments));
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ModalComponent, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      console.log('updating...');
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var modalOpenClassName = 'modal-open';
+      document.body.classList.add(modalOpenClassName);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        className: ModalComponent.displayName
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        className: "".concat(ModalComponent.displayName, "__modal")
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        className: "".concat(ModalComponent.displayName, "__modal-close"),
+        role: 'button',
+        tabIndex: 0
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", null))));
+    }
+  }]);
+
+  return ModalComponent;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.PureComponent);
+
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5___default()(ModalComponent, "displayName", 'ModalComponent');
+
+var PortalModalComponent = function PortalModalComponent() {
+  return react_dom__WEBPACK_IMPORTED_MODULE_7___default.a.createPortal(react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(ModalComponent, null), document.body);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PortalModalComponent);
+
+/***/ }),
+
+/***/ "./src/components/ModalComponent/styles.scss":
+/*!***************************************************!*\
+  !*** ./src/components/ModalComponent/styles.scss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ModalComponent/styles.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -39136,6 +39318,34 @@ var COOKIE_EXPIRATION_DEFAULT = 30; // 30 days
 
 var COOKIE_DOCUMENT_ZOOM = 'redline-tool-document-zoom';
 var COOKIE_TOOL_ENABLED = 'redline-tool-enabled';
+
+/***/ }),
+
+/***/ "./src/icons/codeInspect.svg":
+/*!***********************************!*\
+  !*** ./src/icons/codeInspect.svg ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<path d=\"M139.5,174.9031c1.69-3.243,3.3756-6.2953,4.847-9.4476a2.8877,2.8877,0,0,0-.2882-2.55c-3.8411-4.448-7.8138-8.7823-11.7019-13.102-24.3349,16.2226-49.418,20.4838-76.178,11.8031-18.6609-6.0535-33.2319-17.7213-43.5373-34.42C-8.9349,92.2232-2.3069,46.8826,28.06,20.6493,59.1834-6.2376,104.518-6.8758,135.778,18.7809A82.9192,82.9192,0,0,1,150.76,130.5447l14.8487,14.7693c2.2563-1.3993,4.9505-2.9907,7.5537-4.7188,1.2568-.8343,2.0555-.8855,3.2319.294q36.16,36.2568,72.3681,72.466a4.7051,4.7051,0,0,1,1.2275,3.2958c-1.6045,18.6907-13.18,30.71-31.7956,33.2545a5.952,5.952,0,0,1-5.636-1.83q-35.7642-35.9285-71.6845-71.7021C140.4569,175.9568,140.0676,175.5124,139.5,174.9031ZM82.7819,18.9962c-35.9369.3774-64.31,29.0155-63.9591,64.5568A63.9338,63.9338,0,0,0,83.5513,147.1c35.8172-.3148,63.894-29.1288,63.521-65.1889C146.7117,47.0541,117.6662,18.63,82.7819,18.9962Z\"></path><path d=\"M98.1394,59.4683c9.7925,4.1864,19.0858,8.1565,28.3765,12.1326,4.2212,1.8066,8.4155,3.6785,12.6686,5.4062a2.3241,2.3241,0,0,1,1.76,2.62c-.1513,2.7115.7748,5.98-.4438,7.99-1.1266,1.8576-4.4469,2.4328-6.8476,3.4647q-16.4037,7.0508-32.8357,14.0359c-.7546.322-1.5278.6-2.6729,1.0474,0-3.7578-.1086-7.218.0973-10.66.0383-.6417,1.2459-1.4381,2.0722-1.7735,8.2716-3.3572,16.5768-6.6319,24.8713-9.9331.705-.2806,1.4009-.5842,2.656-1.1093-1.1568-.5016-1.866-.84-2.5974-1.1214-8.2527-3.1729-16.4849-6.4015-24.7821-9.4537-1.8555-.6826-2.4724-1.599-2.3641-3.5147C98.2593,65.7331,98.1394,62.8514,98.1394,59.4683Z\"></path><path d=\"M65.749,106.2457c-4.1908-1.81-8.0711-3.4854-11.9517-5.1606C44.2734,96.9737,34.76,92.837,25.2129,88.7806c-1.3485-.5729-1.9919-1.2265-1.8865-2.7782.1838-2.7061-.7588-5.9926.4756-7.9769,1.1533-1.8541,4.5063-2.3666,6.9166-3.4107q16.152-6.9963,32.32-13.9559c.7657-.33,1.5444-.63,2.5409-1.0356V71.22l-29.27,11.44c6.3267,2.56,11.9671,4.8428,17.6085,7.1235,3.31,1.3383,6.5962,2.7433,9.9459,3.9749a2.4192,2.4192,0,0,1,1.923,2.74C65.66,99.6191,65.749,102.75,65.749,106.2457Z\"></path><path d=\"M70.0469,114.4243c.683-2.9335,1.2724-5.55,1.9023-8.1568,4.2885-17.747,8.6194-35.4838,12.8336-53.2484.4845-2.0422,1.2915-2.8181,3.3994-2.5954a61.02,61.02,0,0,0,6.1468.0433c-1.6244,6.5943-3.1874,12.9892-4.7759,19.3777-3.5038,14.0914-7.0468,28.1732-10.4967,42.2777-.4054,1.6574-.9543,2.5165-2.836,2.3415C74.2968,114.2851,72.3437,114.4243,70.0469,114.4243Z\"></path>"
+
+/***/ }),
+
+/***/ "./src/icons/index.js":
+/*!****************************!*\
+  !*** ./src/icons/index.js ***!
+  \****************************/
+/*! exports provided: codeInspect */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _codeInspect_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./codeInspect.svg */ "./src/icons/codeInspect.svg");
+/* harmony import */ var _codeInspect_svg__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_codeInspect_svg__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "codeInspect", function() { return _codeInspect_svg__WEBPACK_IMPORTED_MODULE_0___default.a; });
+
+
 
 /***/ }),
 
@@ -40549,80 +40759,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./src/modules/EnableToolModule/index.js":
-/*!***********************************************!*\
-  !*** ./src/modules/EnableToolModule/index.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/EnableToolModule/styles.scss");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-var EnableToolModule = function EnableToolModule(props) {
-  var isToolEnabled = props.isToolEnabled,
-      toggleToolEnable = props.toggleToolEnable;
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: EnableToolModule.name
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Tool Enable:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    id: EnableToolModule.name,
-    type: 'checkbox',
-    checked: isToolEnabled,
-    onChange: function onChange() {
-      return toggleToolEnable();
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-    htmlFor: EnableToolModule.name
-  })));
-};
-
-EnableToolModule.propTypes = {
-  isToolEnabled: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.bool.isRequired,
-  toggleToolEnable: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (EnableToolModule);
-
-/***/ }),
-
-/***/ "./src/modules/EnableToolModule/styles.scss":
-/*!**************************************************!*\
-  !*** ./src/modules/EnableToolModule/styles.scss ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/EnableToolModule/styles.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./src/modules/GridOverlayModule/config.js":
 /*!*************************************************!*\
   !*** ./src/modules/GridOverlayModule/config.js ***!
@@ -40802,9 +40938,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _EnableToolModule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../EnableToolModule */ "./src/modules/EnableToolModule/index.js");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/HeaderModule/styles.scss");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _PrimaryControlsModule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../PrimaryControlsModule */ "./src/modules/PrimaryControlsModule/index.js");
+/* harmony import */ var _components_ModalComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/ModalComponent */ "./src/components/ModalComponent/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/HeaderModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_10__);
+
+
 
 
 
@@ -40836,10 +40976,15 @@ function (_React$PureComponent) {
         className: HeaderModule.name
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
         className: "".concat(HeaderModule.name, "__logo")
-      }, "RedlineTool"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_EnableToolModule__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        isToolEnabled: isToolEnabled,
-        toggleToolEnable: toggleToolEnable
-      }));
+      }, "RedlineTool"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_PrimaryControlsModule__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        controlList: [{
+          callback: toggleToolEnable,
+          isEnabled: isToolEnabled,
+          path: _icons__WEBPACK_IMPORTED_MODULE_9__["codeInspect"]
+        }, {
+          path: _icons__WEBPACK_IMPORTED_MODULE_9__["codeInspect"]
+        }]
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_ModalComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null));
     }
   }]);
 
@@ -41293,6 +41438,124 @@ InterElementDimensionsModule.propTypes = {
   }).isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (InterElementDimensionsModule);
+
+/***/ }),
+
+/***/ "./src/modules/PrimaryControlsModule/index.js":
+/*!****************************************************!*\
+  !*** ./src/modules/PrimaryControlsModule/index.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/inherits */ "./node_modules/@babel/runtime/helpers/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_IconComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/IconComponent */ "./src/components/IconComponent/index.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/PrimaryControlsModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+
+var PrimaryControlsModule =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(PrimaryControlsModule, _React$PureComponent);
+
+  function PrimaryControlsModule() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, PrimaryControlsModule);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_1___default()(this, (_getPrototypeOf2 = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_2___default()(PrimaryControlsModule)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4___default()(_this)), "render", function () {
+      var _this$props$controlLi = _this.props.controlList,
+          controlList = _this$props$controlLi === void 0 ? [] : _this$props$controlLi;
+      var controls = controlList.map(function (control) {
+        var callback = control.callback,
+            isEnabled = control.isEnabled,
+            path = control.path;
+        var enabledClass = isEnabled ? "".concat(PrimaryControlsModule.displayName, "__control--enabled") : '';
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+          className: "".concat(PrimaryControlsModule.displayName, "__control ").concat(enabledClass),
+          onClick: callback
+        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_IconComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          height: 25,
+          path: path,
+          width: 25
+        }));
+      });
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        className: PrimaryControlsModule.displayName
+      }, controls);
+    });
+
+    return _this;
+  }
+
+  return PrimaryControlsModule;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.PureComponent);
+
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5___default()(PrimaryControlsModule, "displayName", 'PrimaryControlsModule');
+
+/* harmony default export */ __webpack_exports__["default"] = (PrimaryControlsModule);
+
+/***/ }),
+
+/***/ "./src/modules/PrimaryControlsModule/styles.scss":
+/*!*******************************************************!*\
+  !*** ./src/modules/PrimaryControlsModule/styles.scss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/PrimaryControlsModule/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 

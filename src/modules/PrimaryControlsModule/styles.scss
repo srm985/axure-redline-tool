@@ -1,0 +1,33 @@
+@import '../../styles/constants';
+
+.PrimaryControlsModule {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+
+    &__control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: $header-height;
+        height: 100%;
+
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+
+        color: $primary-color-white;
+        border-radius: 5px;
+
+        &:hover {
+            transition: background-color 0.05s ease-in-out;
+
+            background-color: $primary-color-gray;
+        }
+
+        &--enabled {
+            color: $primary-color-teal;
+        }
+    }
+}

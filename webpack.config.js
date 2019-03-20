@@ -54,6 +54,10 @@ module.exports = () => {
                             loader: 'sass-loader'
                         }
                     ]
+                },
+                {
+                    test: /\.svg$/,
+                    loader: 'svg-inline-loader'
                 }
             ]
         },

@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import EnableToolModule from '../EnableToolModule';
+import PrimaryControlsModule from '../PrimaryControlsModule';
+import ModalComponent from '../../components/ModalComponent';
+
+import { codeInspect } from '../../icons';
 
 import './styles.scss';
 
@@ -15,10 +18,19 @@ class HeaderModule extends React.PureComponent {
         return (
             <div className={HeaderModule.name}>
                 <span className={`${HeaderModule.name}__logo`}>RedlineTool</span>
-                <EnableToolModule
-                    isToolEnabled={isToolEnabled}
-                    toggleToolEnable={toggleToolEnable}
+                <PrimaryControlsModule
+                    controlList={[
+                        {
+                            callback: toggleToolEnable,
+                            isEnabled: isToolEnabled,
+                            path: codeInspect
+                        },
+                        {
+                            path: codeInspect
+                        }
+                    ]}
                 />
+                <ModalComponent />
             </div>
         );
     }

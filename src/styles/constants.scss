@@ -19,9 +19,10 @@ sans-serif;
 $ui-opacity: 0.9;
 
 // Header Height
-$header-height: 60px;
+$header-height: 50px;
 
 // Z-Index Ranking
+$z-index-modal: 9999999;
 $z-index-loading-indicator: 999999;
 $z-index-sidebar: 99999;
 $z-index-header: 99998;
