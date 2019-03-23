@@ -9,11 +9,35 @@ import { codeInspect } from '../../icons';
 import './styles.scss';
 
 class HeaderModule extends React.PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isSharingModalShown: true
+        };
+    }
+
+    toggleSharingModal = () => {
+        this.setState((prevState) => {
+            const {
+                isSharingModalShown: wasSharingModalShown
+            } = prevState;
+
+            return ({
+                isSharingModalShown: !wasSharingModalShown
+            });
+        });
+    }
+
     render() {
         const {
             isToolEnabled,
             toggleToolEnable
         } = this.props;
+
+        const {
+            isSharingModalShown
+        } = this.state;
 
         return (
             <div className={HeaderModule.name}>
@@ -26,11 +50,17 @@ class HeaderModule extends React.PureComponent {
                             path: codeInspect
                         },
                         {
+                            callback: this.toggleSharingModal,
                             path: codeInspect
                         }
                     ]}
                 />
-                <ModalComponent />
+                <ModalComponent
+                    closeModal={this.toggleSharingModal}
+                    isShown={isSharingModalShown}
+                >
+                    <p>test</p>
+                </ModalComponent>
             </div>
         );
     }

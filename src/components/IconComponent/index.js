@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const SVG_SCALE = 250;
+const SVG_SCALE = 50;
 const VIEWBOX = `0 0 ${SVG_SCALE} ${SVG_SCALE}`;
 
 const displayName = 'IconComponent';

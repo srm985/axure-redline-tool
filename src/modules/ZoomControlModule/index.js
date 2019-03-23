@@ -125,6 +125,8 @@ class ZoomControlModule extends React.PureComponent {
                 <div
                     className={`${moduleClassName}__zoom-control ${moduleClassName}__zoom-control--negative`}
                     onClick={() => this.onZoomClickChangeHandler(zoomDecrease)}
+                    role={'button'}
+                    tabIndex={0}
                 >
                     <span />
                 </div>
@@ -139,6 +141,8 @@ class ZoomControlModule extends React.PureComponent {
                 <div
                     className={`${moduleClassName}__zoom-control ${moduleClassName}__zoom-control--positive`}
                     onClick={() => this.onZoomClickChangeHandler(zoomIncrease)}
+                    role={'button'}
+                    tabIndex={0}
                 >
                     <span />
                 </div>
