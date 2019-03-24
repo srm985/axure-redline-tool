@@ -11,6 +11,7 @@
     left: 0;
 
     display: flex;
+    visibility: hidden;
     align-items: center;
     justify-content: center;
 
@@ -27,7 +28,7 @@
         width: 100%;
         height: 100%;
 
-        background-color: rgba($primary-color-gray, 0.6);
+        background-color: rgba($primary-color-gray, 0.7);
     }
 
     &__modal {
@@ -36,9 +37,13 @@
         width: 100%;
         max-width: 500px;
         min-height: 200px;
+        margin-top: 50px;
         padding: 20px;
 
-        border-radius: 10px;
+        transition: margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+        opacity: 0;
+        border-radius: 5px;
         background-color: $primary-color-white;
         box-shadow: 0 3px 5px $secondary-color-gray;
 
@@ -92,6 +97,16 @@
 
                 background-color: inherit;
             }
+        }
+    }
+
+    &--visible {
+        visibility: visible;
+
+        .ModalComponent__modal {
+            margin-top: 0;
+
+            opacity: 1;
         }
     }
 }

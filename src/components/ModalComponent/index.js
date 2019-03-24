@@ -11,8 +11,13 @@ class ModalComponent extends React.PureComponent {
     static modalOpenClassName = 'modal-open';
 
     componentDidMount() {
-        // Add modal class to body to block scrolling.
-        document.body.classList.add(ModalComponent.modalOpenClassName);
+        const {
+            isShown
+        } = this.props;
+
+        if (isShown) {
+            this.handleOpenModal();
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -25,10 +30,14 @@ class ModalComponent extends React.PureComponent {
         } = prevProps;
 
         if (!wasShown && isShown) {
-            document.addEventListener('keydown', this.handleKeyPress);
-        } else if (wasShown && !isShown) {
-            document.removeEventListener('keydown', this.handleKeyPress);
+            this.handleOpenModal();
         }
+    }
+
+    handleOpenModal = () => {
+        // Add modal class to body to block scrolling.
+        document.body.classList.add(ModalComponent.modalOpenClassName);
+        document.addEventListener('keydown', this.handleKeyPress);
     }
 
     handleCloseModal = () => {
@@ -38,6 +47,7 @@ class ModalComponent extends React.PureComponent {
 
         closeModal();
 
+        document.removeEventListener('keydown', this.handleKeyPress);
         document.body.classList.remove(ModalComponent.modalOpenClassName);
     }
 
@@ -59,33 +69,28 @@ class ModalComponent extends React.PureComponent {
             children
         } = this.props;
 
+        const modalVisibleClass = isShown ? `${ModalComponent.displayName}--visible` : '';
+
         return (
-            <>
-                {
-                    isShown
-                    && (
-                        <div className={ModalComponent.displayName}>
-                            <div
-                                className={`${ModalComponent.displayName}__overlay`}
-                                onClick={this.handleCloseModal}
-                            />
-                            <div className={`${ModalComponent.displayName}__modal`}>
-                                <div
-                                    className={`${ModalComponent.displayName}__modal-close`}
-                                    onClick={this.handleCloseModal}
-                                    role={'button'}
-                                    tabIndex={0}
-                                >
-                                    <div />
-                                </div>
-                                <div className={`${ModalComponent.displayName}__modal--body`}>
-                                    {children}
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
-            </>
+            <div className={`${ModalComponent.displayName} ${modalVisibleClass}`}>
+                <div
+                    className={`${ModalComponent.displayName}__overlay`}
+                    onClick={this.handleCloseModal}
+                />
+                <div className={`${ModalComponent.displayName}__modal`}>
+                    <div
+                        className={`${ModalComponent.displayName}__modal-close`}
+                        onClick={this.handleCloseModal}
+                        role={'button'}
+                        tabIndex={0}
+                    >
+                        <div />
+                    </div>
+                    <div className={`${ModalComponent.displayName}__modal--body`}>
+                        {children}
+                    </div>
+                </div>
+            </div>
         );
     }
 }

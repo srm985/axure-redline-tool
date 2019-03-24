@@ -4,7 +4,10 @@ import React from 'react';
 import PrimaryControlsModule from '../PrimaryControlsModule';
 import ModalComponent from '../../components/ModalComponent';
 
-import { codeInspect } from '../../icons';
+import {
+    codeInspect,
+    share
+} from '../../icons';
 
 import './styles.scss';
 
@@ -51,7 +54,7 @@ class HeaderModule extends React.PureComponent {
                         },
                         {
                             callback: this.toggleSharingModal,
-                            path: codeInspect
+                            path: share
                         }
                     ]}
                 />

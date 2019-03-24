@@ -1421,7 +1421,7 @@ exports.push([module.i, ".LoadingIndicatorComponent {\n  position: fixed;\n  z-i
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".modal-open {\n  overflow: hidden; }\n\n.ModalComponent {\n  position: fixed;\n  z-index: 9999999;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 20px; }\n  .ModalComponent__overlay {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(85, 85, 85, 0.6); }\n  .ModalComponent__modal {\n    position: relative;\n    width: 100%;\n    max-width: 500px;\n    min-height: 200px;\n    padding: 20px;\n    border-radius: 10px;\n    background-color: #fff;\n    box-shadow: 0 3px 5px #333; }\n    .ModalComponent__modal--body {\n      width: 100%;\n      height: 100%; }\n  .ModalComponent__modal-close {\n    position: absolute;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 20px;\n    height: 20px;\n    cursor: pointer;\n    transition: background-color 0.05s ease-in-out; }\n    .ModalComponent__modal-close:hover div {\n      transition: background-color 0.2s ease-in-out;\n      background-color: #555; }\n    .ModalComponent__modal-close div {\n      width: 1px;\n      height: 100%;\n      transform: rotate(45deg);\n      background-color: #333; }\n      .ModalComponent__modal-close div::after {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 1px;\n        height: 100%;\n        content: '';\n        transform: rotate(-90deg);\n        background-color: inherit; }\n", ""]);
+exports.push([module.i, ".modal-open {\n  overflow: hidden; }\n\n.ModalComponent {\n  position: fixed;\n  z-index: 9999999;\n  top: 0;\n  left: 0;\n  display: flex;\n  visibility: hidden;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 20px; }\n  .ModalComponent__overlay {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(85, 85, 85, 0.7); }\n  .ModalComponent__modal {\n    position: relative;\n    width: 100%;\n    max-width: 500px;\n    min-height: 200px;\n    margin-top: 50px;\n    padding: 20px;\n    transition: margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out;\n    opacity: 0;\n    border-radius: 5px;\n    background-color: #fff;\n    box-shadow: 0 3px 5px #333; }\n    .ModalComponent__modal--body {\n      width: 100%;\n      height: 100%; }\n  .ModalComponent__modal-close {\n    position: absolute;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 20px;\n    height: 20px;\n    cursor: pointer;\n    transition: background-color 0.05s ease-in-out; }\n    .ModalComponent__modal-close:hover div {\n      transition: background-color 0.2s ease-in-out;\n      background-color: #555; }\n    .ModalComponent__modal-close div {\n      width: 1px;\n      height: 100%;\n      transform: rotate(45deg);\n      background-color: #333; }\n      .ModalComponent__modal-close div::after {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 1px;\n        height: 100%;\n        content: '';\n        transform: rotate(-90deg);\n        background-color: inherit; }\n  .ModalComponent--visible {\n    visibility: visible; }\n    .ModalComponent--visible .ModalComponent__modal {\n      margin-top: 0;\n      opacity: 1; }\n", ""]);
 
 
 
@@ -1541,7 +1541,7 @@ exports.push([module.i, ".HeaderModule {\n  font-family: \"Lato\", sans-serif;\n
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".PrimaryControlsModule {\n  display: flex;\n  align-items: center;\n  height: 100%; }\n  .PrimaryControlsModule__control {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 50px;\n    height: 100%;\n    cursor: pointer;\n    transition: background-color 0.2s ease-in-out;\n    color: #fff;\n    border-radius: 5px; }\n    .PrimaryControlsModule__control:hover {\n      transition: background-color 0.05s ease-in-out;\n      background-color: #555; }\n    .PrimaryControlsModule__control--enabled {\n      color: #4edec2; }\n", ""]);
+exports.push([module.i, ".PrimaryControlsModule {\n  display: flex;\n  align-items: center;\n  height: 100%; }\n  .PrimaryControlsModule__control {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 50px;\n    height: 100%;\n    cursor: pointer;\n    transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;\n    color: #fff;\n    border-radius: 5px; }\n    .PrimaryControlsModule__control:hover {\n      transition: background-color 0.05s ease-in-out, color 0.1s ease-in-out;\n      background-color: #555; }\n    .PrimaryControlsModule__control--enabled {\n      color: #4edec2; }\n", ""]);
 
 
 
@@ -38896,9 +38896,16 @@ function (_React$PureComponent) {
 
     _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, (_getPrototypeOf2 = _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(ModalComponent)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)), "handleOpenModal", function () {
+      // Add modal class to body to block scrolling.
+      document.body.classList.add(ModalComponent.modalOpenClassName);
+      document.addEventListener('keydown', _this.handleKeyPress);
+    });
+
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)), "handleCloseModal", function () {
       var closeModal = _this.props.closeModal;
       closeModal();
+      document.removeEventListener('keydown', _this.handleKeyPress);
       document.body.classList.remove(ModalComponent.modalOpenClassName);
     });
 
@@ -38918,8 +38925,11 @@ function (_React$PureComponent) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(ModalComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // Add modal class to body to block scrolling.
-      document.body.classList.add(ModalComponent.modalOpenClassName);
+      var isShown = this.props.isShown;
+
+      if (isShown) {
+        this.handleOpenModal();
+      }
     }
   }, {
     key: "componentDidUpdate",
@@ -38928,9 +38938,7 @@ function (_React$PureComponent) {
       var wasShown = prevProps.isShown;
 
       if (!wasShown && isShown) {
-        document.addEventListener('keydown', this.handleKeyPress);
-      } else if (wasShown && !isShown) {
-        document.removeEventListener('keydown', this.handleKeyPress);
+        this.handleOpenModal();
       }
     }
   }, {
@@ -38939,8 +38947,9 @@ function (_React$PureComponent) {
       var _this$props = this.props,
           isShown = _this$props.isShown,
           children = _this$props.children;
-      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_7___default.a.Fragment, null, isShown && react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-        className: ModalComponent.displayName
+      var modalVisibleClass = isShown ? "".concat(ModalComponent.displayName, "--visible") : '';
+      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "".concat(ModalComponent.displayName, " ").concat(modalVisibleClass)
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "".concat(ModalComponent.displayName, "__overlay"),
         onClick: this.handleCloseModal
@@ -38953,7 +38962,7 @@ function (_React$PureComponent) {
         tabIndex: 0
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "".concat(ModalComponent.displayName, "__modal--body")
-      }, children))));
+      }, children)));
     }
   }]);
 
@@ -39394,7 +39403,7 @@ module.exports = "<path d=\"M38.111,38.1592a3.7884,3.7884,0,0,0-2.964,1.4223h0a3
 /*!****************************!*\
   !*** ./src/icons/index.js ***!
   \****************************/
-/*! exports provided: codeInspect */
+/*! exports provided: codeInspect, share */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39402,8 +39411,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _codeInspect_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./codeInspect.svg */ "./src/icons/codeInspect.svg");
 /* harmony import */ var _codeInspect_svg__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_codeInspect_svg__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "codeInspect", function() { return _codeInspect_svg__WEBPACK_IMPORTED_MODULE_0___default.a; });
+/* harmony import */ var _share_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./share.svg */ "./src/icons/share.svg");
+/* harmony import */ var _share_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_share_svg__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "share", function() { return _share_svg__WEBPACK_IMPORTED_MODULE_1___default.a; });
 
 
+
+
+/***/ }),
+
+/***/ "./src/icons/share.svg":
+/*!*****************************!*\
+  !*** ./src/icons/share.svg ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<path d=\"M41,32a8.976,8.976,0,0,0-7.1165,3.5046L21.312,28.8a10.8363,10.8363,0,0,0,0-7.5993l12.5717-6.7048A9.004,9.004,0,1,0,32.4682,11.85L19.9,18.5532a11,11,0,1,0,0,12.8932L32.4683,38.15A8.9971,8.9971,0,1,0,41,32ZM41,3a6,6,0,1,1-6,6A6,6,0,0,1,41,3ZM11,33a8,8,0,1,1,8-8A8,8,0,0,1,11,33ZM41,47a6,6,0,1,1,6-6A6,6,0,0,1,41,47Z\"></path>"
 
 /***/ }),
 
@@ -41064,7 +41088,7 @@ function (_React$PureComponent) {
           path: _icons__WEBPACK_IMPORTED_MODULE_11__["codeInspect"]
         }, {
           callback: this.toggleSharingModal,
-          path: _icons__WEBPACK_IMPORTED_MODULE_11__["codeInspect"]
+          path: _icons__WEBPACK_IMPORTED_MODULE_11__["share"]
         }]
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_ModalComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
         closeModal: this.toggleSharingModal,
