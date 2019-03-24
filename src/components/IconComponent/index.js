@@ -17,7 +17,7 @@ const IconComponent = (props) => {
     return (
         <svg
             className={displayName}
-            dangerouslySetInnerHTML={{ __html: path }}
+            dangerouslySetInnerHTML={{ __html: path }} // eslint-disable-line react/no-danger
             fill={fill}
             height={height}
             viewBox={VIEWBOX}

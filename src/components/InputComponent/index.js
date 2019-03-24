@@ -28,19 +28,35 @@ class InputComponent extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.checkColorSwatchRequired();
+        const {
+            inputValue,
+            noFormat
+        } = this.props;
+
+        if (noFormat) {
+            this.setState({
+                inputValue
+            });
+        } else {
+            this.checkColorSwatchRequired();
+        }
     }
 
     componentDidUpdate(prevProps) {
         const {
-            inputValue
+            inputValue,
+            noFormat
         } = this.props;
 
         const {
             inputValue: prevInputValue
         } = prevProps;
 
-        if (inputValue !== prevInputValue) {
+        if (noFormat && inputValue !== prevInputValue) {
+            this.setState({
+                inputValue
+            });
+        } else if (inputValue !== prevInputValue) {
             this.checkColorSwatchRequired();
         }
     }
@@ -200,25 +216,27 @@ class InputComponent extends React.PureComponent {
 
         return (
             <div className={InputComponent.name}>
-                <label className={`${InputComponent.name}__label`}>
+                <label
+                    className={`${InputComponent.name}__label`}
+                >
                     {label}
-                    <input
-                        className={`${InputComponent.name}__input`}
-                        readOnly
-                        value={inputValue}
-                        onMouseUp={this.handleCopy}
-                    />
-                    {
-                        swatchColor
-                        && (
-                            <ColorSwatchComponent
-                                className={`${InputComponent.name}__color-swatch`}
-                                setSwatchValue={this.setSwatchValue}
-                                swatchColor={swatchColor}
-                            />
-                        )
-                    }
                 </label>
+                <input
+                    className={`${InputComponent.name}__input`}
+                    readOnly
+                    value={inputValue}
+                    onMouseUp={this.handleCopy}
+                />
+                {
+                    swatchColor
+                    && (
+                        <ColorSwatchComponent
+                            className={`${InputComponent.name}__color-swatch`}
+                            setSwatchValue={this.setSwatchValue}
+                            swatchColor={swatchColor}
+                        />
+                    )
+                }
                 <TooltipComponent isVisible={isCopiedTooltipActive} />
             </div>
         );
@@ -227,7 +245,12 @@ class InputComponent extends React.PureComponent {
 
 InputComponent.propTypes = {
     inputValue: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    noFormat: PropTypes.bool
+};
+
+InputComponent.defaultProps = {
+    noFormat: false
 };
 
 export default InputComponent;

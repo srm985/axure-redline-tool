@@ -33,3 +33,24 @@ $z-index-selected-solid-line: 99994;
 $z-index-hover-dashed-line: 99993;
 $z-index-hover-solid-line: 99992;
 $z-index-inter-dimension-line: 99991;
+
+// Borders
+$border-default: solid 1px $secondary-color-gray;
+
+// Border Radii
+$border-radius-small: 3px;
+$border-radius-large: 5px;
+
+// Exported constants can be imported into JavaScript.
+:export {
+    // sass-lint:disable no-misspelled-properties
+    primaryColorBackground: $primary-color-background;
+    primaryColorBlue: $primary-color-blue;
+    primaryColorGray: $primary-color-gray;
+    primaryColorOrange: $primary-color-orange;
+    primaryColorRed: $primary-color-red;
+    primaryColorTeal: $primary-color-teal;
+    primaryColorWhite: $primary-color-white;
+    secondaryColorGray: $secondary-color-gray;
+    // sass-lint:enable no-misspelled-properties
+}

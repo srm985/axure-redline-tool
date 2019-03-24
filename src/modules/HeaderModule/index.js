@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import PrimaryControlsModule from '../PrimaryControlsModule';
-import ModalComponent from '../../components/ModalComponent';
+import SharingLinksModule from '../SharingLinksModule';
 
 import {
     codeInspect,
@@ -16,18 +16,18 @@ class HeaderModule extends React.PureComponent {
         super(props);
 
         this.state = {
-            isSharingModalShown: true
+            isSharingLinksShown: true
         };
     }
 
-    toggleSharingModal = () => {
+    toggleSharingLinks = () => {
         this.setState((prevState) => {
             const {
-                isSharingModalShown: wasSharingModalShown
+                isSharingLinksShown: wasSharingLinksShown
             } = prevState;
 
             return ({
-                isSharingModalShown: !wasSharingModalShown
+                isSharingLinksShown: !wasSharingLinksShown
             });
         });
     }
@@ -39,7 +39,7 @@ class HeaderModule extends React.PureComponent {
         } = this.props;
 
         const {
-            isSharingModalShown
+            isSharingLinksShown
         } = this.state;
 
         return (
@@ -49,21 +49,20 @@ class HeaderModule extends React.PureComponent {
                     controlList={[
                         {
                             callback: toggleToolEnable,
-                            isEnabled: isToolEnabled,
-                            path: codeInspect
+                            iconPath: codeInspect,
+                            isEnabled: isToolEnabled
                         },
                         {
-                            callback: this.toggleSharingModal,
-                            path: share
+                            callback: this.toggleSharingLinks,
+                            iconPath: share,
+                            isEnabled: isSharingLinksShown
                         }
                     ]}
                 />
-                <ModalComponent
-                    closeModal={this.toggleSharingModal}
-                    isShown={isSharingModalShown}
-                >
-                    <p>test</p>
-                </ModalComponent>
+                <SharingLinksModule
+                    isShown={isSharingLinksShown}
+                    moduleCloseCallback={this.toggleSharingLinks}
+                />
             </div>
         );
     }

@@ -3,7 +3,10 @@
 .InputComponent {
     position: relative;
 
-    display: inline-block;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
 
     width: 100%;
     height: 40px;
@@ -11,10 +14,6 @@
     &__label {
         font-family: $font-stack;
         font-size: 12px;
-
-        position: relative;
-
-        display: block;
 
         color: $primary-color-white;
     }

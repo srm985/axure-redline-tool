@@ -1322,6 +1322,31 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ButtonComponent/styles.scss":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ButtonComponent/styles.scss ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".ButtonComponent {\n  font-size: 16px;\n  height: 35px;\n  padding: 0 30px;\n  cursor: pointer;\n  transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;\n  text-transform: uppercase;\n  border: none;\n  border-radius: 5px;\n  outline: none; }\n  .ButtonComponent--primary {\n    color: #fff;\n    background-color: #4edec2; }\n    .ButtonComponent--primary:hover {\n      background-color: #27d2b1; }\n  .ButtonComponent--secondary {\n    color: #4edec2;\n    border: solid 1px #4edec2;\n    background-color: #fff; }\n    .ButtonComponent--secondary:hover {\n      color: #fff;\n      background-color: #4edec2; }\n", ""]);
+
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/CheckboxComponent/styles.scss":
 /*!*************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/CheckboxComponent/styles.scss ***!
@@ -1333,7 +1358,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".CheckboxComponent__label {\n  font-family: \"Lato\", sans-serif;\n  font-size: 12px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-start;\n  cursor: pointer;\n  color: #fff; }\n\n.CheckboxComponent__input {\n  margin: 0 0 0 10px;\n  cursor: pointer;\n  border-radius: 5px; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1348,7 +1383,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".ColorSwatchComponent {\n  position: absolute;\n  z-index: 1;\n  right: 0;\n  bottom: 0;\n  width: 25px;\n  height: 25px;\n  cursor: pointer;\n  border-left: solid 1px #111111;\n  border-radius: 0 3px 3px 0;\n  outline: none; }\n  .ColorSwatchComponent__swatch {\n    position: absolute;\n    z-index: 2;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border-radius: inherit; }\n  .ColorSwatchComponent__checkerboard {\n    position: absolute;\n    z-index: 1;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border-radius: inherit;\n    background-image: linear-gradient(45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(-45deg, rgba(85, 85, 85, 0.5) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%), linear-gradient(-45deg, transparent 75%, rgba(85, 85, 85, 0.5) 75%);\n    background-position: 0 0, 0 5px, 5px -5px, -5px 0;\n    background-size: 10px 10px; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1363,7 +1408,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".DimensionLineComponent {\n  position: absolute; }\n  .DimensionLineComponent--hovered-solid {\n    z-index: 99992;\n    border-width: 0;\n    border-style: solid;\n    border-color: #4860ff; }\n  .DimensionLineComponent--hovered-dashed {\n    z-index: 99993;\n    border-width: 0;\n    border-style: dashed;\n    border-color: #4860ff; }\n  .DimensionLineComponent--selected-solid {\n    z-index: 99994;\n    border-width: 0;\n    border-style: solid;\n    border-color: #e89a28; }\n  .DimensionLineComponent--inter-element-dimension {\n    z-index: 99991;\n    border-width: 0;\n    border-style: solid;\n    border-color: #e89a28; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1378,7 +1433,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".DimensionMarkerComponent {\n  font-size: 10px;\n  font-weight: bold;\n  position: absolute;\n  z-index: 99995;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  letter-spacing: 1px;\n  opacity: 0.9;\n  color: #fff;\n  border-radius: 5px;\n  background-color: #e89a28; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1391,9 +1456,19 @@ exports.push([module.i, ".DimensionMarkerComponent {\n  font-size: 10px;\n  font
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".InputComponent {\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  height: 40px; }\n  .InputComponent__label {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    display: block;\n    color: #fff; }\n  .InputComponent__input {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    box-sizing: border-box;\n    width: 100%;\n    height: 25px;\n    margin-top: 0;\n    padding: 4px 5px;\n    cursor: text;\n    color: #333;\n    border: none;\n    border-radius: 3px;\n    outline: none; }\n  .InputComponent .TooltipComponent {\n    top: -11px;\n    left: 0; }\n", ""]);
+exports.push([module.i, ".InputComponent {\n  position: relative;\n  display: flex;\n  align-items: flex-start;\n  flex-direction: column;\n  justify-content: space-between;\n  width: 100%;\n  height: 40px; }\n  .InputComponent__label {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    color: #fff; }\n  .InputComponent__input {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    box-sizing: border-box;\n    width: 100%;\n    height: 25px;\n    margin-top: 0;\n    padding: 4px 5px;\n    cursor: text;\n    color: #333;\n    border: none;\n    border-radius: 3px;\n    outline: none; }\n  .InputComponent .TooltipComponent {\n    top: -11px;\n    left: 0; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1408,7 +1483,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".LoadingIndicatorComponent {\n  position: fixed;\n  z-index: 999999;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  background-color: #333; }\n  .LoadingIndicatorComponent__spinner {\n    position: relative;\n    width: 40px;\n    height: 40px; }\n    .LoadingIndicatorComponent__spinner--animation {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      animation: sk-bounce 2s infinite ease-in-out;\n      opacity: 0.6;\n      border-radius: 50%;\n      background-color: #fff; }\n      .LoadingIndicatorComponent__spinner--animation:last-of-type {\n        animation-delay: -1s; }\n\n@keyframes sk-bounce {\n  0%,\n  100% {\n    transform: scale(0); }\n  50% {\n    transform: scale(1); } }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1423,7 +1508,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".modal-open {\n  overflow: hidden; }\n\n.ModalComponent {\n  position: fixed;\n  z-index: 9999999;\n  top: 0;\n  left: 0;\n  display: flex;\n  visibility: hidden;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 20px; }\n  .ModalComponent__overlay {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(85, 85, 85, 0.7); }\n  .ModalComponent__modal {\n    position: relative;\n    width: 100%;\n    max-width: 500px;\n    min-height: 200px;\n    margin-top: 50px;\n    padding: 20px;\n    transition: margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out;\n    opacity: 0;\n    border-radius: 5px;\n    background-color: #fff;\n    box-shadow: 0 3px 5px #333; }\n    .ModalComponent__modal--body {\n      width: 100%;\n      height: 100%; }\n  .ModalComponent__modal-close {\n    position: absolute;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 20px;\n    height: 20px;\n    cursor: pointer;\n    transition: background-color 0.05s ease-in-out; }\n    .ModalComponent__modal-close:hover div {\n      transition: background-color 0.2s ease-in-out;\n      background-color: #555; }\n    .ModalComponent__modal-close div {\n      width: 1px;\n      height: 100%;\n      transform: rotate(45deg);\n      background-color: #333; }\n      .ModalComponent__modal-close div::after {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 1px;\n        height: 100%;\n        content: '';\n        transform: rotate(-90deg);\n        background-color: inherit; }\n  .ModalComponent--visible {\n    visibility: visible; }\n    .ModalComponent--visible .ModalComponent__modal {\n      margin-top: 0;\n      opacity: 1; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1438,7 +1533,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".SelectComponent {\n  position: relative; }\n  .SelectComponent--disabled {\n    opacity: 0.5; }\n  .SelectComponent__label {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    display: block;\n    color: #fff; }\n  .SelectComponent__select {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    box-sizing: border-box;\n    width: 100%;\n    height: 25px;\n    margin-top: 0;\n    padding: 4px 5px;\n    cursor: pointer;\n    color: #333;\n    border: none;\n    border-radius: 3px;\n    outline: none; }\n    .SelectComponent__select--option {\n      cursor: pointer; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1453,7 +1558,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".TextAreaComponent {\n  position: relative; }\n  .TextAreaComponent__label {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    display: block;\n    color: #fff; }\n  .TextAreaComponent__textarea {\n    font-family: \"Lato\", sans-serif;\n    font-size: 12px;\n    position: relative;\n    box-sizing: border-box;\n    width: 100%;\n    height: 50px;\n    margin-top: 0;\n    padding: 4px 5px;\n    resize: none;\n    cursor: text;\n    color: #333;\n    border: none;\n    border-radius: 3px;\n    outline: none; }\n  .TextAreaComponent .TooltipComponent {\n    top: -11px;\n    left: 0; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1468,7 +1583,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".TooltipComponent {\n  font-size: 12px;\n  position: absolute;\n  z-index: 1;\n  visibility: hidden;\n  box-sizing: border-box;\n  padding: 3px 5px;\n  cursor: default;\n  transition: opacity ease-in-out 0.5s, visibility ease-in-out 0.5s;\n  opacity: 0;\n  color: #fff;\n  border-radius: 3px;\n  background-color: #e89a28; }\n  .TooltipComponent::after {\n    position: absolute;\n    top: 100%;\n    left: 50%;\n    margin-left: -5px;\n    content: '';\n    border-width: 5px;\n    border-style: solid;\n    border-color: #e89a28 transparent transparent; }\n  .TooltipComponent--active {\n    visibility: visible;\n    transition: opacity 0s, visibility 0s;\n    opacity: 1; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1483,7 +1608,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".ArtboardModule {\n  position: absolute;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #333;\n  background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);\n  background-size: 10px 10px; }\n  .ArtboardModule__artboard {\n    position: absolute; }\n  .ArtboardModule #base {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    transform-origin: center; }\n  .ArtboardModule--enabled .ArtboardModule__artboard *:not(.ui-dialog) {\n    cursor: pointer; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1498,7 +1633,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".ElementPropertiesSidebarModule {\n  position: fixed;\n  z-index: 99999;\n  top: 50px;\n  right: -265px;\n  box-sizing: border-box;\n  width: 270px;\n  height: calc(100% - 50px);\n  transition: right 0.1s ease-in-out;\n  opacity: 0.9;\n  background-color: #111111; }\n  .ElementPropertiesSidebarModule--visible {\n    right: 0; }\n    .ElementPropertiesSidebarModule--visible .ElementPropertiesSidebarModule__grid-overlay {\n      display: inline-block; }\n  .ElementPropertiesSidebarModule__side-pull {\n    position: absolute;\n    top: 65px;\n    left: -20px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    box-sizing: border-box;\n    width: 20px;\n    height: 40px;\n    padding: 13px 0 13px 7px;\n    cursor: pointer;\n    border-radius: 20px 0 0 20px;\n    outline: none;\n    background-color: inherit; }\n    .ElementPropertiesSidebarModule__side-pull > span {\n      width: 100%;\n      height: 2px;\n      border-radius: 1px;\n      background-color: #fff; }\n  .ElementPropertiesSidebarModule__pseudo-tabs {\n    width: 100%;\n    height: calc(100% - 100px); }\n    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {\n      box-sizing: border-box;\n      width: 100%;\n      margin-bottom: 31px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--header {\n      display: flex;\n      align-items: flex-end;\n      flex-direction: row;\n      box-sizing: border-box;\n      width: 100%;\n      height: 25px;\n      padding: 0 20px; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab {\n      font-family: \"Lato\", sans-serif;\n      font-size: 12px;\n      z-index: 1;\n      display: flex;\n      align-items: center;\n      flex-basis: 0;\n      flex-grow: 1;\n      justify-content: center;\n      box-sizing: border-box;\n      max-width: 50%;\n      height: 100%;\n      margin: 0 1px;\n      padding: 0 5px;\n      cursor: pointer;\n      color: #555;\n      border-radius: 3px 3px 0 0;\n      background-color: #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--tab span {\n        overflow: hidden;\n        width: 100%;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-active {\n      color: #fff;\n      border-width: 1px 1px 0;\n      border-style: solid;\n      border-color: #fff;\n      background-color: #111111; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--tab-inactive:hover {\n      height: 105%; }\n    .ElementPropertiesSidebarModule__pseudo-tabs--body {\n      overflow-y: auto;\n      box-sizing: border-box;\n      width: 100%;\n      height: calc(100% - 25px);\n      margin-top: -1px;\n      padding: 0 20px 20px;\n      border-top: solid 1px #fff; }\n      .ElementPropertiesSidebarModule__pseudo-tabs--body p {\n        font-size: 12px;\n        font-weight: bold;\n        margin-top: 20px;\n        text-transform: uppercase;\n        color: #fff; }\n  .ElementPropertiesSidebarModule .InputComponent,\n  .ElementPropertiesSidebarModule .TextAreaComponent {\n    margin-top: 10px; }\n  .ElementPropertiesSidebarModule__grid-overlay {\n    display: none;\n    box-sizing: border-box;\n    width: 100%;\n    height: 100px;\n    padding: 20px;\n    border-top: solid 1px #fff; }\n    .ElementPropertiesSidebarModule__grid-overlay--selector {\n      width: 100%; }\n      .ElementPropertiesSidebarModule__grid-overlay--selector .CheckboxComponent {\n        margin-bottom: 10px; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1513,7 +1658,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".GridOverlayModule {\n  position: absolute;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  pointer-events: none; }\n  .GridOverlayModule__container {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    width: 100%;\n    height: 100%;\n    opacity: 0.2; }\n    .GridOverlayModule__container--column {\n      height: 100%;\n      background-color: #ff5757; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1528,7 +1683,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".HeaderModule {\n  font-family: \"Lato\", sans-serif;\n  position: fixed;\n  z-index: 99998;\n  top: 0;\n  left: 0;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  width: 100%;\n  height: 50px;\n  padding: 0 30px;\n  opacity: 0.9;\n  background-color: #111111; }\n  .HeaderModule__logo {\n    font-size: 18px;\n    color: #fff; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1543,7 +1708,42 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".PrimaryControlsModule {\n  display: flex;\n  align-items: center;\n  height: 100%; }\n  .PrimaryControlsModule__control {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 50px;\n    height: 100%;\n    cursor: pointer;\n    transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;\n    color: #fff;\n    border-radius: 5px; }\n    .PrimaryControlsModule__control:hover {\n      transition: background-color 0.05s ease-in-out, color 0.1s ease-in-out;\n      background-color: #555; }\n    .PrimaryControlsModule__control--enabled {\n      color: #4edec2; }\n", ""]);
 
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/SharingLinksModule/styles.scss":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/SharingLinksModule/styles.scss ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".SharingLinksModule {\n  display: none; }\n  .SharingLinksModule__modal-block h1 {\n    margin: 0;\n    color: #333; }\n  .SharingLinksModule__modal-block .InputComponent {\n    height: 50px;\n    margin-top: 20px; }\n    .SharingLinksModule__modal-block .InputComponent__label {\n      font-size: 16px;\n      color: #333; }\n    .SharingLinksModule__modal-block .InputComponent__input {\n      border: solid 1px #333;\n      border-radius: 5px; }\n    .SharingLinksModule__modal-block .InputComponent .TooltipComponent {\n      top: 0; }\n  .SharingLinksModule__modal-block .ButtonComponent {\n    float: right;\n    margin-top: 30px; }\n", ""]);
+
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1558,7 +1758,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 // Module
 exports.push([module.i, ".ZoomControlModule {\n  position: fixed;\n  z-index: 99997;\n  bottom: 20px;\n  left: 20px;\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  opacity: 0.9;\n  border-radius: 5px;\n  box-shadow: 0 3px 5px #555; }\n  .ZoomControlModule__zoom-input {\n    font-family: \"Lato\", sans-serif;\n    width: 50px;\n    height: 23px;\n    text-align: center;\n    border: none;\n    outline: none; }\n  .ZoomControlModule__zoom-control {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-sizing: border-box;\n    width: 23px;\n    height: 23px;\n    padding: 6px;\n    cursor: pointer;\n    transition: transform 0.01s ease-in-out;\n    background-color: #4edec2; }\n    .ZoomControlModule__zoom-control:hover {\n      transform: scale(1.05); }\n    .ZoomControlModule__zoom-control span {\n      position: relative;\n      display: inline-block;\n      width: 100%;\n      height: 2px;\n      background-color: #fff; }\n    .ZoomControlModule__zoom-control--negative {\n      border-right: solid 1px #555;\n      border-radius: 5px 0 0 5px; }\n    .ZoomControlModule__zoom-control--positive {\n      border-left: solid 1px #555;\n      border-radius: 0 5px 5px 0; }\n      .ZoomControlModule__zoom-control--positive span::before {\n        position: absolute;\n        top: 0;\n        right: 0;\n        display: inline-block;\n        width: 100%;\n        height: 2px;\n        content: '';\n        transform: rotate(90deg);\n        background-color: inherit; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -1576,7 +1786,17 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lat
 // Module
 exports.push([module.i, "body {\n  position: static;\n  left: auto;\n  width: 100vw;\n  height: 100vh;\n  margin: 0; }\n  body #base span {\n    display: inline-block; }\n  body .annotation {\n    box-sizing: border-box;\n    width: 14px !important;\n    height: 14px !important;\n    margin: 0;\n    padding: 0;\n    cursor: help !important; }\n    body .annotation > div {\n      display: flex;\n      align-items: center;\n      flex-direction: column;\n      justify-content: space-around;\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      padding: 3px;\n      border: none;\n      border-radius: 3px;\n      background-color: #4860ff; }\n      body .annotation > div:hover {\n        background-color: #1534ff; }\n      body .annotation > div > div {\n        width: 100%;\n        height: 1px;\n        margin: 0;\n        padding: 0;\n        border: none;\n        background-color: #fff; }\n    body .annotation * {\n      cursor: help !important; }\n  body .ui-dialog {\n    z-index: 99996 !important;\n    padding: 0 !important;\n    opacity: 0.9;\n    border: solid 1px #555 !important;\n    border-radius: 3px !important; }\n    body .ui-dialog * {\n      color: #555; }\n  body .ui-dialog-titlebar {\n    border: none !important;\n    background-color: #555 !important; }\n    body .ui-dialog-titlebar button {\n      border-radius: 3px !important;\n      outline: none !important; }\n    body .ui-dialog-titlebar .ui-icon-closethick {\n      border-radius: 3px;\n      background-color: #fff; }\n  body .ui-dialog-content {\n    padding: 10px !important;\n    border-radius: 3px; }\n  body .ui-button-icon-only .ui-icon {\n    top: 0 !important;\n    left: 0 !important; }\n  body .ui-corner-all {\n    border-radius: 0; }\n\nbody {\n  font-family: \"Lato\", sans-serif; }\n", ""]);
 
-
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
 
 /***/ }),
 
@@ -37957,6 +38177,114 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/components/ButtonComponent/buttonOptions.js":
+/*!*********************************************************!*\
+  !*** ./src/components/ButtonComponent/buttonOptions.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var buttonLevels = {
+  primary: 'primary',
+  secondary: 'secondary'
+};
+/* harmony default export */ __webpack_exports__["default"] = (buttonLevels);
+
+/***/ }),
+
+/***/ "./src/components/ButtonComponent/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/ButtonComponent/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _buttonOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonOptions */ "./src/components/ButtonComponent/buttonOptions.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.scss */ "./src/components/ButtonComponent/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+var displayName = 'ButtonComponent';
+var primaryButton = _buttonOptions__WEBPACK_IMPORTED_MODULE_2__["default"].primary;
+
+var ButtonComponent = function ButtonComponent(props) {
+  var label = props.label,
+      level = props.level,
+      onClickCallback = props.onClickCallback,
+      _props$type = props.type,
+      type = _props$type === void 0 ? 'button' : _props$type;
+  var buttonLevelProp = _buttonOptions__WEBPACK_IMPORTED_MODULE_2__["default"][level];
+  var buttonLevelClass = "".concat(displayName, "--").concat(buttonLevelProp || primaryButton);
+
+  var handleClick = function handleClick() {
+    if (typeof onClickCallback === 'function') {
+      onClickCallback();
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "".concat(displayName, " ").concat(buttonLevelClass),
+    onClick: handleClick,
+    type: type
+  }, label);
+};
+
+ButtonComponent.propTypes = {
+  label: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  level: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  onClickCallback: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func,
+  type: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
+};
+ButtonComponent.defaultProps = {
+  label: '',
+  level: primaryButton,
+  onClickCallback: function onClickCallback() {},
+  type: 'button'
+};
+/* harmony default export */ __webpack_exports__["default"] = (ButtonComponent);
+
+/***/ }),
+
+/***/ "./src/components/ButtonComponent/styles.scss":
+/*!****************************************************!*\
+  !*** ./src/components/ButtonComponent/styles.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/components/ButtonComponent/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./src/components/CheckboxComponent/index.js":
 /*!***************************************************!*\
   !*** ./src/components/CheckboxComponent/index.js ***!
@@ -38451,7 +38779,8 @@ var IconComponent = function IconComponent(props) {
     className: displayName,
     dangerouslySetInnerHTML: {
       __html: path
-    },
+    } // eslint-disable-line react/no-danger
+    ,
     fill: fill,
     height: height,
     viewBox: VIEWBOX,
@@ -38548,15 +38877,31 @@ function (_React$PureComponent) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(InputComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.checkColorSwatchRequired();
+      var _this$props = this.props,
+          inputValue = _this$props.inputValue,
+          noFormat = _this$props.noFormat;
+
+      if (noFormat) {
+        this.setState({
+          inputValue: inputValue
+        });
+      } else {
+        this.checkColorSwatchRequired();
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var inputValue = this.props.inputValue;
+      var _this$props2 = this.props,
+          inputValue = _this$props2.inputValue,
+          noFormat = _this$props2.noFormat;
       var prevInputValue = prevProps.inputValue;
 
-      if (inputValue !== prevInputValue) {
+      if (noFormat && inputValue !== prevInputValue) {
+        this.setState({
+          inputValue: inputValue
+        });
+      } else if (inputValue !== prevInputValue) {
         this.checkColorSwatchRequired();
       }
     }
@@ -38710,7 +39055,7 @@ function (_React$PureComponent) {
         className: InputComponent.name
       }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("label", {
         className: "".concat(InputComponent.name, "__label")
-      }, label, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("input", {
+      }, label), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("input", {
         className: "".concat(InputComponent.name, "__input"),
         readOnly: true,
         value: inputValue,
@@ -38719,7 +39064,7 @@ function (_React$PureComponent) {
         className: "".concat(InputComponent.name, "__color-swatch"),
         setSwatchValue: this.setSwatchValue,
         swatchColor: swatchColor
-      })), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TooltipComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_TooltipComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
         isVisible: isCopiedTooltipActive
       }));
     }
@@ -38734,7 +39079,11 @@ _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_7___default()(Inp
 
 InputComponent.propTypes = {
   inputValue: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
-  label: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired
+  label: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.string.isRequired,
+  noFormat: prop_types__WEBPACK_IMPORTED_MODULE_8___default.a.bool
+};
+InputComponent.defaultProps = {
+  noFormat: false
 };
 /* harmony default export */ __webpack_exports__["default"] = (InputComponent);
 
@@ -41025,7 +41374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _PrimaryControlsModule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../PrimaryControlsModule */ "./src/modules/PrimaryControlsModule/index.js");
-/* harmony import */ var _components_ModalComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/ModalComponent */ "./src/components/ModalComponent/index.js");
+/* harmony import */ var _SharingLinksModule__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../SharingLinksModule */ "./src/modules/SharingLinksModule/index.js");
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
 /* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/HeaderModule/styles.scss");
 /* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_12__);
@@ -41055,17 +41404,17 @@ function (_React$PureComponent) {
 
     _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3___default()(HeaderModule).call(this, props));
 
-    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)), "toggleSharingModal", function () {
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5___default()(_this)), "toggleSharingLinks", function () {
       _this.setState(function (prevState) {
-        var wasSharingModalShown = prevState.isSharingModalShown;
+        var wasSharingLinksShown = prevState.isSharingLinksShown;
         return {
-          isSharingModalShown: !wasSharingModalShown
+          isSharingLinksShown: !wasSharingLinksShown
         };
       });
     });
 
     _this.state = {
-      isSharingModalShown: true
+      isSharingLinksShown: true
     };
     return _this;
   }
@@ -41076,7 +41425,7 @@ function (_React$PureComponent) {
       var _this$props = this.props,
           isToolEnabled = _this$props.isToolEnabled,
           toggleToolEnable = _this$props.toggleToolEnable;
-      var isSharingModalShown = this.state.isSharingModalShown;
+      var isSharingLinksShown = this.state.isSharingLinksShown;
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: HeaderModule.name
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("span", {
@@ -41084,16 +41433,17 @@ function (_React$PureComponent) {
       }, "RedlineTool"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_PrimaryControlsModule__WEBPACK_IMPORTED_MODULE_9__["default"], {
         controlList: [{
           callback: toggleToolEnable,
-          isEnabled: isToolEnabled,
-          path: _icons__WEBPACK_IMPORTED_MODULE_11__["codeInspect"]
+          iconPath: _icons__WEBPACK_IMPORTED_MODULE_11__["codeInspect"],
+          isEnabled: isToolEnabled
         }, {
-          callback: this.toggleSharingModal,
-          path: _icons__WEBPACK_IMPORTED_MODULE_11__["share"]
+          callback: this.toggleSharingLinks,
+          iconPath: _icons__WEBPACK_IMPORTED_MODULE_11__["share"],
+          isEnabled: isSharingLinksShown
         }]
-      }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_ModalComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        closeModal: this.toggleSharingModal,
-        isShown: isSharingModalShown
-      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", null, "test")));
+      }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_SharingLinksModule__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        isShown: isSharingLinksShown,
+        moduleCloseCallback: this.toggleSharingLinks
+      }));
     }
   }]);
 
@@ -41612,15 +41962,15 @@ function (_React$PureComponent) {
           controlList = _this$props$controlLi === void 0 ? [] : _this$props$controlLi;
       var controls = controlList.map(function (control) {
         var callback = control.callback,
-            isEnabled = control.isEnabled,
-            path = control.path;
+            iconPath = control.iconPath,
+            isEnabled = control.isEnabled;
         var enabledClass = isEnabled ? "".concat(PrimaryControlsModule.displayName, "__control--enabled") : '';
         return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           className: "".concat(PrimaryControlsModule.displayName, "__control ").concat(enabledClass),
           onClick: callback
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_IconComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
           height: 25,
-          path: path,
+          path: iconPath,
           width: 25
         }));
       });
@@ -41640,8 +41990,8 @@ _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_5___default()(Pri
 PrimaryControlsModule.propTypes = {
   controlList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.shape({
     callback: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func,
-    isEnabled: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool,
-    path: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string.isRequired
+    iconPath: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string.isRequired,
+    isEnabled: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool
   }))
 };
 PrimaryControlsModule.defaultProps = {
@@ -41785,6 +42135,144 @@ SelectedElementModule.propTypes = {
   }).isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (SelectedElementModule);
+
+/***/ }),
+
+/***/ "./src/modules/SharingLinksModule/index.js":
+/*!*************************************************!*\
+  !*** ./src/modules/SharingLinksModule/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_InputComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/InputComponent */ "./src/components/InputComponent/index.js");
+/* harmony import */ var _components_ModalComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ModalComponent */ "./src/components/ModalComponent/index.js");
+/* harmony import */ var _components_ButtonComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ButtonComponent */ "./src/components/ButtonComponent/index.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/SharingLinksModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+var displayName = 'SharingLinksModule';
+
+var SharingLinksModule = function SharingLinksModule(props) {
+  var isShown = props.isShown,
+      moduleCloseCallback = props.moduleCloseCallback;
+
+  var generateSharingLinks = function generateSharingLinks() {
+    var disableAnnotations = 'fn=0';
+    var pageBaseURL = window.parent.location.href;
+    var regexBaseURL = /^.*(\/|\.html)/;
+    var businessURL = '';
+    var devURL = ''; // Ensure we always select the PAGES tab.
+
+    var selectHomePage = function selectHomePage(pageURL) {
+      return pageURL.replace(/g=\d&/, 'g=1&');
+    }; // Extract our base URL up until last forward slash found or .html extension.
+
+
+    var extractedBaseURL = function extractedBaseURL() {
+      var extractedURL = '';
+
+      try {
+        var _pageBaseURL$match = pageBaseURL.match(regexBaseURL);
+
+        var _pageBaseURL$match2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_pageBaseURL$match, 1);
+
+        extractedURL = _pageBaseURL$match2[0];
+      } catch (err) {
+        extractedURL = '';
+      }
+
+      return extractedURL;
+    };
+
+    businessURL = pageBaseURL.replace(extractedBaseURL(), "".concat(extractedBaseURL(), "?redline=business"));
+    businessURL = "".concat(businessURL, "&").concat(disableAnnotations);
+    businessURL = selectHomePage(businessURL);
+    devURL = pageBaseURL.replace(extractedBaseURL(), "".concat(extractedBaseURL(), "?redline=dev"));
+    devURL = selectHomePage(devURL);
+    return {
+      businessURL: businessURL,
+      devURL: devURL
+    };
+  };
+
+  var _generateSharingLinks = generateSharingLinks(),
+      businessURL = _generateSharingLinks.businessURL,
+      devURL = _generateSharingLinks.devURL;
+
+  var renderModalBody = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "".concat(displayName, "__modal-block")
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, "Sharing Links"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    hasBorder: true,
+    inputValue: devURL,
+    label: 'Share With Developers',
+    noFormat: true
+  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_InputComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    hasBorder: true,
+    inputValue: businessURL,
+    label: 'Share With Business',
+    noFormat: true
+  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_ButtonComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: 'Done',
+    onClickCallback: moduleCloseCallback
+  }));
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: displayName
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_ModalComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    closeModal: moduleCloseCallback,
+    isShown: isShown
+  }, renderModalBody));
+};
+
+SharingLinksModule.propTypes = {
+  isShown: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
+  moduleCloseCallback: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (SharingLinksModule);
+
+/***/ }),
+
+/***/ "./src/modules/SharingLinksModule/styles.scss":
+/*!****************************************************!*\
+  !*** ./src/modules/SharingLinksModule/styles.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/SharingLinksModule/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 

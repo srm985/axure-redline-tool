@@ -1,0 +1,39 @@
+@import '../../styles/constants';
+
+.SharingLinksModule {
+    display: none;
+
+    &__modal-block {
+        h1 {
+            margin: 0;
+
+            color: $secondary-color-gray;
+        }
+
+        .InputComponent {
+            height: 50px;
+            margin-top: 20px;
+
+            &__label {
+                font-size: 16px;
+
+                color: $secondary-color-gray;
+            }
+
+            &__input {
+                border: $border-default;
+                border-radius: $border-radius-large;
+            }
+
+            .TooltipComponent {
+                top: 0;
+            }
+        }
+
+        .ButtonComponent {
+            float: right;
+
+            margin-top: 30px;
+        }
+    }
+}
