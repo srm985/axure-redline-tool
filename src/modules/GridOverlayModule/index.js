@@ -5,7 +5,7 @@ import { gridLayouts } from './config';
 
 import './styles.scss';
 
-const className = 'GridOverlayModule';
+const displayName = 'GridOverlayModule';
 
 const GridOverlayModule = (props) => {
     const {
@@ -48,7 +48,7 @@ const GridOverlayModule = (props) => {
         for (let i = 0; i < columns; i++) {
             markupBlock.push(
                 <div
-                    className={`${className}__container--column`}
+                    className={`${displayName}__container--column`}
                     key={i}
                     style={{
                         marginLeft: margin,
@@ -71,9 +71,9 @@ const GridOverlayModule = (props) => {
             {
                 gridLayout
                 && (
-                    <div className={className}>
+                    <div className={displayName}>
                         <div
-                            className={`${className}__container`}
+                            className={`${displayName}__container`}
                             style={containerStyles}
                         >
                             {renderColumns()}

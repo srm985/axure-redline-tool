@@ -7,6 +7,8 @@ export const VERTICAL_DIMENSION = 'VERTICAL';
 export const HORIZONTAL_DIMENSION = 'HORIZONTAL';
 
 export class DimensionMarkerComponent extends React.PureComponent {
+    static displayName = 'DimensionMarkerComponent';
+
     static height = 20;
     static padding = 5;
     static width = 30;
@@ -41,7 +43,7 @@ export class DimensionMarkerComponent extends React.PureComponent {
 
         return (
             <div
-                className={DimensionMarkerComponent.name}
+                className={DimensionMarkerComponent.displayName}
                 style={componentStyle}
             >
                 <span>{cleanedMeasurement}</span>

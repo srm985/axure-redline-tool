@@ -1,3 +1,5 @@
+export const SPLASH_SCREEN_VERSION = 1;
+
 export const ANNOTATION_ELEMENTS = [
     // RP8 Syntax
     '.annnoteimage',
@@ -30,4 +32,5 @@ export const PLUS_KEY = 187;
 // Cookies
 export const COOKIE_EXPIRATION_DEFAULT = 30; // 30 days
 export const COOKIE_DOCUMENT_ZOOM = 'redline-tool-document-zoom';
+export const COOKIE_SPLASH_SCREEN = 'redline-tool-splash-screen';
 export const COOKIE_TOOL_ENABLED = 'redline-tool-enabled';

@@ -8,6 +8,8 @@ import { TOOLTIP_VISIBLE_TIME } from '../../globalConstants';
 import './styles.scss';
 
 class TextAreaComponent extends React.PureComponent {
+    static displayName = 'TextAreaComponent';
+
     constructor(props) {
         super(props);
         this.handleCopy = this.handleCopy.bind(this);
@@ -74,11 +76,11 @@ class TextAreaComponent extends React.PureComponent {
         } = this.state;
 
         return (
-            <div className={TextAreaComponent.name}>
-                <label className={`${TextAreaComponent.name}__label`}>
+            <div className={TextAreaComponent.displayName}>
+                <label className={`${TextAreaComponent.displayName}__label`}>
                     {label}
                     <textarea
-                        className={`${TextAreaComponent.name}__textarea`}
+                        className={`${TextAreaComponent.displayName}__textarea`}
                         readOnly
                         onMouseUp={this.handleCopy}
                         onScroll={this.handleScroll}

@@ -4,6 +4,8 @@ import React from 'react';
 import './styles.scss';
 
 class DimensionLineComponent extends React.PureComponent {
+    static displayName = 'DimensionLineComponent';
+
     render() {
         const {
             elementMarkerThickness = 0,
@@ -23,11 +25,11 @@ class DimensionLineComponent extends React.PureComponent {
             width
         };
 
-        const lineTypeClass = lineType ? `${DimensionLineComponent.name}--${lineType}` : '';
+        const lineTypeClass = lineType ? `${DimensionLineComponent.displayName}--${lineType}` : '';
 
         return (
             <div
-                className={`${DimensionLineComponent.name} ${lineTypeClass}`}
+                className={`${DimensionLineComponent.displayName} ${lineTypeClass}`}
                 style={componentStyle}
             />
         );

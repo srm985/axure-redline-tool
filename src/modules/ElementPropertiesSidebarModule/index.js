@@ -17,6 +17,8 @@ import {
 import './styles.scss';
 
 class ElementPropertiesSidebarModule extends React.PureComponent {
+    static displayName = 'ElementPropertiesSidebarModule';
+
     static cssAttributesList = {
         /* eslint-disable quote-props, sort-keys */
         properties: {
@@ -583,11 +585,11 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 const hasPseudoClass = Object.keys(this.retrieveElementPageCSS(keyName)).length;
 
                 if (hasPseudoClass || keyName === 'default') {
-                    const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-active` : `${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab-inactive`;
+                    const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--tab-active` : `${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--tab-inactive`;
 
                     tabs.push(
                         <div
-                            className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--tab ${tabActivate}`}
+                            className={`${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--tab ${tabActivate}`}
                             key={keyName}
                             onClick={() => setActiveTab(keyName)}
                         >
@@ -663,11 +665,11 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         const dataLabel = elementDataLabel();
 
         return (
-            <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs`}>
+            <div className={`${ElementPropertiesSidebarModule.displayName}__pseudo-tabs`}>
                 {
                     dataLabel
                     && (
-                        <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--parent-component-name`}>
+                        <div className={`${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--parent-component-name`}>
                             <InputComponent
                                 inputValue={dataLabel}
                                 label={'parent component name:'}
@@ -675,12 +677,12 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                         </div>
                     )
                 }
-                <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--header`}>
+                <div className={`${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--header`}>
                     {
                         renderTabs()
                     }
                 </div>
-                <div className={`${ElementPropertiesSidebarModule.name}__pseudo-tabs--body`}>
+                <div className={`${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--body`}>
                     {
                         renderAttributeBody()
                     }
@@ -704,7 +706,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
         const isElementSelected = !!target;
 
-        const sidebarVisibleClass = isToolEnabled && isSidebarVisible && `${ElementPropertiesSidebarModule.name}--visible`;
+        const sidebarVisibleClass = isToolEnabled && isSidebarVisible && `${ElementPropertiesSidebarModule.displayName}--visible`;
 
         // Generate a list of grid overlay options.
         const gridOverlayOptions = GRID_OPTIONS.map((gridOption) => {
@@ -749,9 +751,9 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         };
 
         return (
-            <div className={`${ElementPropertiesSidebarModule.name} ${sidebarVisibleClass}`}>
+            <div className={`${ElementPropertiesSidebarModule.displayName} ${sidebarVisibleClass}`}>
                 <div
-                    className={`${ElementPropertiesSidebarModule.name}__side-pull`}
+                    className={`${ElementPropertiesSidebarModule.displayName}__side-pull`}
                     onClick={this.toggleSidebar}
                     onKeyUp={this.toggleSidebar}
                     role={'button'}
@@ -765,9 +767,9 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     isElementSelected
                     && this.renderPseudoClassTabs()
                 }
-                <div className={`${ElementPropertiesSidebarModule.name}__grid-overlay`}>
+                <div className={`${ElementPropertiesSidebarModule.displayName}__grid-overlay`}>
                     <div
-                        className={`${ElementPropertiesSidebarModule.name}__grid-overlay--selector`}
+                        className={`${ElementPropertiesSidebarModule.displayName}__grid-overlay--selector`}
                         ref={this.gridSelectorRef}
                     >
                         <CheckboxComponent

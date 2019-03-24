@@ -8,6 +8,7 @@ import './styles.scss';
 
 class ModalComponent extends React.PureComponent {
     static displayName = 'ModalComponent';
+
     static modalOpenClassName = 'modal-open';
 
     componentDidMount() {
@@ -31,6 +32,8 @@ class ModalComponent extends React.PureComponent {
 
         if (!wasShown && isShown) {
             this.handleOpenModal();
+        } else if (wasShown && !isShown) {
+            this.handleCloseModal();
         }
     }
 
@@ -41,14 +44,18 @@ class ModalComponent extends React.PureComponent {
     }
 
     handleCloseModal = () => {
+        document.removeEventListener('keydown', this.handleKeyPress);
+        document.body.classList.remove(ModalComponent.modalOpenClassName);
+    }
+
+    handleClick = () => {
         const {
             closeModal
         } = this.props;
 
         closeModal();
 
-        document.removeEventListener('keydown', this.handleKeyPress);
-        document.body.classList.remove(ModalComponent.modalOpenClassName);
+        this.handleCloseModal();
     }
 
     handleKeyPress = (event) => {
@@ -75,12 +82,12 @@ class ModalComponent extends React.PureComponent {
             <div className={`${ModalComponent.displayName} ${modalVisibleClass}`}>
                 <div
                     className={`${ModalComponent.displayName}__overlay`}
-                    onClick={this.handleCloseModal}
+                    onClick={this.handleClick}
                 />
                 <div className={`${ModalComponent.displayName}__modal`}>
                     <div
                         className={`${ModalComponent.displayName}__modal-close`}
-                        onClick={this.handleCloseModal}
+                        onClick={this.handleClick}
                         role={'button'}
                         tabIndex={0}
                     >

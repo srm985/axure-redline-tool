@@ -16,6 +16,8 @@ import calculateGlobalOffset from '../../utils/calculateGlobalOffset';
 import './styles.scss';
 
 class ArtboardModule extends React.PureComponent {
+    static displayName = 'ArtboardModule';
+
     constructor(props) {
         super(props);
 
@@ -38,7 +40,7 @@ class ArtboardModule extends React.PureComponent {
             zoomWrapperPadding
         } = this.props;
 
-        injectArtboard(`${ArtboardModule.name}__artboard`).then(() => {
+        injectArtboard(`${ArtboardModule.displayName}__artboard`).then(() => {
             sizeArtboard().then((dimensions) => {
                 const {
                     artboardHeight,
@@ -155,16 +157,16 @@ class ArtboardModule extends React.PureComponent {
             width: artboardWidth
         };
 
-        const toolEnabledClass = isToolEnabled ? `${ArtboardModule.name}--enabled` : '';
+        const toolEnabledClass = isToolEnabled ? `${ArtboardModule.displayName}--enabled` : '';
 
         return (
             <div
-                className={`${ArtboardModule.name} ${toolEnabledClass}`}
+                className={`${ArtboardModule.displayName} ${toolEnabledClass}`}
                 onClick={handleClickCallback}
                 style={artboardWrapperStyle}
             >
                 <div
-                    className={`${ArtboardModule.name}__artboard`}
+                    className={`${ArtboardModule.displayName}__artboard`}
                     ref={this.artboardRef}
                     style={artboardStyle}
                 >

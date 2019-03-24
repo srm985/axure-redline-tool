@@ -3,7 +3,7 @@ import React from 'react';
 
 import './styles.scss';
 
-const className = 'SelectComponent';
+const displayName = 'SelectComponent';
 
 const SelectComponent = (props) => {
     const {
@@ -21,7 +21,7 @@ const SelectComponent = (props) => {
 
         return (
             <option
-                className={`${className}__select--option`}
+                className={`${displayName}__select--option`}
                 key={value}
                 value={value}
             >
@@ -34,14 +34,14 @@ const SelectComponent = (props) => {
         changeCallback(event);
     };
 
-    const isDisabledClass = isDisabled && `${className}--disabled`;
+    const isDisabledClass = isDisabled && `${displayName}--disabled`;
 
     return (
-        <div className={`${className} ${isDisabledClass}`}>
-            <label className={`${className}__label`}>
+        <div className={`${displayName} ${isDisabledClass}`}>
+            <label className={`${displayName}__label`}>
                 {label}
                 <select
-                    className={`${className}__select`}
+                    className={`${displayName}__select`}
                     disabled={isDisabled}
                     onChange={handleChange}
                 >

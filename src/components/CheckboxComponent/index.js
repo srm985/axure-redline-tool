@@ -3,7 +3,7 @@ import React from 'react';
 
 import './styles.scss';
 
-const className = 'CheckboxComponent';
+const displayName = 'CheckboxComponent';
 
 const CheckboxComponent = (props) => {
     const {
@@ -16,11 +16,11 @@ const CheckboxComponent = (props) => {
     };
 
     return (
-        <div className={className}>
-            <label className={`${className}__label`}>
+        <div className={displayName}>
+            <label className={`${displayName}__label`}>
                 <span>{label}</span>
                 <input
-                    className={`${className}__input`}
+                    className={`${displayName}__input`}
                     onChange={handleChange}
                     type={'checkbox'}
                 />

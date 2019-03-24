@@ -22,9 +22,12 @@ class PrimaryControlsModule extends React.PureComponent {
 
             const enabledClass = isEnabled ? `${PrimaryControlsModule.displayName}__control--enabled` : '';
 
+            const key = Math.random();
+
             return (
                 <div
                     className={`${PrimaryControlsModule.displayName}__control ${enabledClass}`}
+                    key={key}
                     onClick={callback}
                 >
                     <Icon

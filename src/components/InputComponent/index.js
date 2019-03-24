@@ -11,6 +11,7 @@ import { TOOLTIP_VISIBLE_TIME } from '../../globalConstants';
 import './styles.scss';
 
 class InputComponent extends React.PureComponent {
+    static displayName = 'InputComponent';
     static rgbaRegEx = /rgb(a)?\(\d+,(\s+)?\d+,(\s+)?\d+(,(\s+)?\d(\.\d+)?)?\)/;
     static hexRegEx = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
@@ -215,14 +216,14 @@ class InputComponent extends React.PureComponent {
         } = this.state;
 
         return (
-            <div className={InputComponent.name}>
+            <div className={InputComponent.displayName}>
                 <label
-                    className={`${InputComponent.name}__label`}
+                    className={`${InputComponent.displayName}__label`}
                 >
                     {label}
                 </label>
                 <input
-                    className={`${InputComponent.name}__input`}
+                    className={`${InputComponent.displayName}__input`}
                     readOnly
                     value={inputValue}
                     onMouseUp={this.handleCopy}
@@ -231,7 +232,7 @@ class InputComponent extends React.PureComponent {
                     swatchColor
                     && (
                         <ColorSwatchComponent
-                            className={`${InputComponent.name}__color-swatch`}
+                            className={`${InputComponent.displayName}__color-swatch`}
                             setSwatchValue={this.setSwatchValue}
                             swatchColor={swatchColor}
                         />

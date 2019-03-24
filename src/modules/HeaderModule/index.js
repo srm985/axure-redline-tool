@@ -12,11 +12,13 @@ import {
 import './styles.scss';
 
 class HeaderModule extends React.PureComponent {
+    static displayName = 'HeaderModule';
+
     constructor(props) {
         super(props);
 
         this.state = {
-            isSharingLinksShown: true
+            isSharingLinksShown: false
         };
     }
 
@@ -43,8 +45,8 @@ class HeaderModule extends React.PureComponent {
         } = this.state;
 
         return (
-            <div className={HeaderModule.name}>
-                <span className={`${HeaderModule.name}__logo`}>RedlineTool</span>
+            <div className={HeaderModule.displayName}>
+                <span className={`${HeaderModule.displayName}__logo`}>RedlineTool</span>
                 <PrimaryControlsModule
                     controlList={[
                         {

@@ -4,6 +4,8 @@ import React from 'react';
 import './styles.scss';
 
 class ColorSwatchComponent extends React.PureComponent {
+    static displayName = 'ColorSwatchComponent';
+
     render() {
         const {
             setSwatchValue,
@@ -16,17 +18,17 @@ class ColorSwatchComponent extends React.PureComponent {
 
         return (
             <div
-                className={ColorSwatchComponent.name}
+                className={ColorSwatchComponent.displayName}
                 onClick={setSwatchValue}
                 onKeyUp={setSwatchValue}
                 role={'button'}
                 tabIndex={0}
             >
                 <div
-                    className={`${ColorSwatchComponent.name}__swatch`}
+                    className={`${ColorSwatchComponent.displayName}__swatch`}
                     style={componentStyle}
                 />
-                <div className={`${ColorSwatchComponent.name}__checkerboard`} />
+                <div className={`${ColorSwatchComponent.displayName}__checkerboard`} />
             </div>
         );
     }

@@ -3,6 +3,8 @@ import React from 'react';
 
 import './styles.scss';
 
+const displayName = 'EnableToolModule';
+
 const EnableToolModule = (props) => {
     const {
         isToolEnabled,
@@ -10,16 +12,16 @@ const EnableToolModule = (props) => {
     } = props;
 
     return (
-        <div className={EnableToolModule.name}>
+        <div className={displayName}>
             <span>Tool Enable:</span>
             <div>
                 <input
-                    id={EnableToolModule.name}
+                    id={displayName}
                     type={'checkbox'}
                     checked={isToolEnabled}
                     onChange={() => toggleToolEnable()}
                 />
-                <label htmlFor={EnableToolModule.name} />
+                <label htmlFor={displayName} />
             </div>
         </div>
     );

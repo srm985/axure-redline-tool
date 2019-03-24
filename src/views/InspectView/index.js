@@ -36,6 +36,8 @@ import {
 } from '../../globalConstants';
 
 class InspectView extends React.Component {
+    static displayName = 'InspectView';
+
     static ZOOM_STEP = 10;
 
     constructor(props) {
@@ -560,7 +562,7 @@ class InspectView extends React.Component {
                     && <LoadingIndicatorComponent />
                 }
                 <div
-                    className={InspectView.name}
+                    className={InspectView.displayName}
                     onScroll={this.handleScroll}
                 >
                     <HeaderModule

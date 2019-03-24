@@ -92,7 +92,7 @@
     "dev-live": "gulp dev-live",
     "lint": "gulp lint",
     "sandbox": "gulp sandbox",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "version": "3.0.0"
 }
