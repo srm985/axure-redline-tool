@@ -74,6 +74,46 @@ const styleArtboardBase = () => {
     }
 };
 
+const removeInspectTool = () => {
+    console.log('here');
+    const setiFrameAttributes = () => {
+        const iFrame = parent.document.querySelector('#mainFrame');
+        const clipFrameScroll = parent.document.querySelector('#clipFrameScroll');
+        const artboardWrapper = document.querySelector('.ArtboardModule');
+        const artboard = document.querySelector('.ArtboardModule__artboard');
+        const html = document.documentElement;
+
+        iFrame.style.width = '100vw';
+        iFrame.style.minWidth = '100vw';
+        iFrame.style.height = '100vh';
+
+        clipFrameScroll.style.overflow = 'hidden';
+        console.log('width:', artboardWrapper.offsetWidth, artboard.getBoundingClientRect().width, 'height:', artboardWrapper.offsetHeight, artboard.getBoundingClientRect().height);
+
+        html.scrollTo((artboardWrapper.offsetWidth - artboard.getBoundingClientRect().width) / 2, (artboardWrapper.offsetHeight - artboard.getBoundingClientRect().height) / 2);
+    };
+
+    setiFrameAttributes();
+
+    window.addEventListener('resize', (event) => {
+        console.log('fired!!!');
+        event.preventDefault();
+
+        setTimeout(() => {
+            setiFrameAttributes();
+        }, 0);
+    });
+
+    const sidebar = parent.document.querySelector('#handoffHost');
+    sidebar.parentNode.removeChild(sidebar);
+
+    const rsplitbar = parent.document.querySelector('#rsplitbar');
+    rsplitbar.parentNode.removeChild(rsplitbar);
+
+    const handoffMarkupContainer = parent.document.querySelector('#handoffMarkupContainer');
+    handoffMarkupContainer.parentNode.removeChild(handoffMarkupContainer);
+};
+
 export const injectArtboard = (className) => new Promise((resolve) => {
     const artboard = document.getElementsByClassName(className)[0];
 
@@ -87,6 +127,8 @@ export const injectArtboard = (className) => new Promise((resolve) => {
         loadingTime += 50;
 
         if (base) {
+            removeInspectTool();
+
             clearInterval(waitBaseRenderInterval);
             artboard.appendChild(base);
             resolve(loadingTime);
