@@ -68,8 +68,12 @@ $grid-overlay-height: 100px;
             box-sizing: border-box;
             width: 100%;
             // Weird margin to nicely align pseudo tabs with pull tab.
-            margin-bottom: 31px;
+            margin-bottom: 41px;
             padding: 0 $sidebar-padding;
+
+            .InputComponent {
+                margin-top: 0 !important; // sass-lint:disable-line no-important
+            }
         }
 
         &--header {
@@ -178,5 +182,9 @@ $grid-overlay-height: 100px;
                 margin-bottom: 10px;
             }
         }
+    }
+
+    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name ~ .ElementPropertiesSidebarModule__pseudo-tabs--body {
+        height: calc(100% - 105px);
     }
 }

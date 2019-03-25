@@ -69,6 +69,7 @@ class InspectView extends React.Component {
             },
             isHotkeyDepressed: false,
             isToolEnabled: true,
+            isToolPermitted: false,
             lastOpenedDialog: '',
             selectedElement: {
                 height: 0,
@@ -90,6 +91,9 @@ class InspectView extends React.Component {
         const isToolEnabled = storageRead(COOKIE_TOOL_ENABLED);
         const lastSeenSplashScreen = storageRead(COOKIE_SPLASH_SCREEN) || 0;
 
+        const pageURL = window.parent.location.href;
+        const isToolPermitted = !(/redline=business/).test(pageURL);
+
         const shouldShowSplashScreen = Number(lastSeenSplashScreen) < SPLASH_SCREEN_VERSION;
 
         if (isToolEnabled !== undefined) {
@@ -97,6 +101,7 @@ class InspectView extends React.Component {
         }
 
         this.setState({
+            isToolPermitted,
             shouldShowSplashScreen
         });
     }
@@ -466,7 +471,7 @@ class InspectView extends React.Component {
         let annotationIcon = target;
 
         // We're searching for the top-level of the icon.
-        while (!annotationIcon.classList.contains('annotation')) {
+        while (!annotationIcon.classList.contains('annotation') && !annotationIcon.classList.contains('annnote')) {
             const {
                 parentElement
             } = annotationIcon;
@@ -482,7 +487,10 @@ class InspectView extends React.Component {
             scaledWidth: width
         } = clickOrigination;
 
-        const uiDialogList = document.getElementsByClassName('ui-dialog');
+        const uiDialogListRP8 = document.getElementsByClassName('ui-dialog');
+        const uiDialogListRP9 = document.getElementsByClassName('notesDialog');
+
+        const uiDialogList = uiDialogListRP8 || uiDialogListRP9;
 
         // Last index is our latest-opened dialog.
         const latestOpenedDialog = [...uiDialogList].pop();
@@ -572,6 +580,7 @@ class InspectView extends React.Component {
             gridLayout,
             hoveredElement,
             isToolEnabled,
+            isToolPermitted,
             selectedElement,
             shouldShowSplashScreen,
             zoomWrapperPadding
@@ -580,49 +589,56 @@ class InspectView extends React.Component {
         return (
             <React.Fragment>
                 {
-                    !axureLoaded
-                    && <LoadingIndicatorComponent />
+                    isToolPermitted
+                    && (
+                        <React.Fragment>
+                            {
+                                !axureLoaded
+                                && <LoadingIndicatorComponent />
+                            }
+                            {
+                                shouldShowSplashScreen
+                                && <SplashScreenModule closeCallback={this.handleSplashScreenClose} />
+                            }
+                            <div
+                                className={InspectView.displayName}
+                                onScroll={this.handleScroll}
+                            >
+                                <HeaderModule
+                                    isToolEnabled={isToolEnabled}
+                                    toggleToolEnable={this.toggleToolEnable}
+                                />
+                                <ElementPropertiesSidebarModule
+                                    gridLayout={gridLayout}
+                                    gridOverlaySet={this.gridOverlaySet}
+                                    isToolEnabled={isToolEnabled}
+                                    selectedElement={selectedElement}
+                                />
+                                <ArtboardModule
+                                    artboardHeight={artboardHeight}
+                                    artboardWidth={artboardWidth}
+                                    artboardWrapperHeight={artboardWrapperHeight}
+                                    artboardWrapperWidth={artboardWrapperWidth}
+                                    documentZoom={documentZoom}
+                                    elementMarkerThickness={elementMarkerThickness}
+                                    gridLayout={gridLayout}
+                                    handleClickCallback={this.handleClickCallback}
+                                    hoveredElement={hoveredElement}
+                                    isToolEnabled={isToolEnabled}
+                                    selectedElement={selectedElement}
+                                    setArtboardDimensions={this.setArtboardDimensions}
+                                    setArtboardZoom={this.setArtboardZoom}
+                                    setAxureLoaded={this.setAxureLoaded}
+                                    zoomWrapperPadding={zoomWrapperPadding}
+                                />
+                                <ZoomControlModule
+                                    documentZoom={documentZoom}
+                                    setArtboardZoom={this.setArtboardZoom}
+                                />
+                            </div>
+                        </React.Fragment>
+                    )
                 }
-                {
-                    shouldShowSplashScreen
-                    && <SplashScreenModule closeCallback={this.handleSplashScreenClose} />
-                }
-                <div
-                    className={InspectView.displayName}
-                    onScroll={this.handleScroll}
-                >
-                    <HeaderModule
-                        isToolEnabled={isToolEnabled}
-                        toggleToolEnable={this.toggleToolEnable}
-                    />
-                    <ElementPropertiesSidebarModule
-                        gridLayout={gridLayout}
-                        gridOverlaySet={this.gridOverlaySet}
-                        isToolEnabled={isToolEnabled}
-                        selectedElement={selectedElement}
-                    />
-                    <ArtboardModule
-                        artboardHeight={artboardHeight}
-                        artboardWidth={artboardWidth}
-                        artboardWrapperHeight={artboardWrapperHeight}
-                        artboardWrapperWidth={artboardWrapperWidth}
-                        documentZoom={documentZoom}
-                        elementMarkerThickness={elementMarkerThickness}
-                        gridLayout={gridLayout}
-                        handleClickCallback={this.handleClickCallback}
-                        hoveredElement={hoveredElement}
-                        isToolEnabled={isToolEnabled}
-                        selectedElement={selectedElement}
-                        setArtboardDimensions={this.setArtboardDimensions}
-                        setArtboardZoom={this.setArtboardZoom}
-                        setAxureLoaded={this.setAxureLoaded}
-                        zoomWrapperPadding={zoomWrapperPadding}
-                    />
-                    <ZoomControlModule
-                        documentZoom={documentZoom}
-                        setArtboardZoom={this.setArtboardZoom}
-                    />
-                </div>
             </React.Fragment>
         );
     }

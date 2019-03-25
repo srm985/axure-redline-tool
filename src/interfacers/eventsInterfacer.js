@@ -57,6 +57,7 @@ export const addGlobalMouseToggleListener = (callback) => {
 export const addDialogOpenListener = (callback) => {
     $(ANNOTATION_ELEMENTS.join(', ')).on('click', (event) => {
         $('#base .ui-dialog').appendTo('.ArtboardModule');
+        $('.notesDialog').appendTo('.ArtboardModule');
         initNoInteract();
 
         callback(event);

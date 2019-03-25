@@ -582,9 +582,42 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                     keyName
                 } = pseudoClass;
 
-                const hasPseudoClass = Object.keys(this.retrieveElementPageCSS(keyName)).length;
+                // Sometimes we have an attribute list but all the key values are blank.
+                const checkHasPseudoAttributes = () => {
+                    const elementPageCSS = this.retrieveElementPageCSS(keyName);
 
-                if (hasPseudoClass || keyName === 'default') {
+                    let hasAttribute = false;
+
+                    if (Object.keys(elementPageCSS).length) {
+                        const {
+                            properties,
+                            styles,
+                            text
+                        } = this.retrieveElementPageCSS(keyName);
+
+                        Object.values(properties).forEach((value = '') => {
+                            if (value.trim()) {
+                                hasAttribute = true;
+                            }
+                        });
+
+                        Object.values(styles).forEach((value = '') => {
+                            if (value.trim()) {
+                                hasAttribute = true;
+                            }
+                        });
+
+                        Object.values(text).forEach((value = '') => {
+                            if (value.trim()) {
+                                hasAttribute = true;
+                            }
+                        });
+                    }
+
+                    return hasAttribute;
+                };
+
+                if (checkHasPseudoAttributes() || keyName === 'default') {
                     const tabActivate = keyName === activeTab ? `${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--tab-active` : `${ElementPropertiesSidebarModule.displayName}__pseudo-tabs--tab-inactive`;
 
                     tabs.push(

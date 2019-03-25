@@ -20,12 +20,14 @@ export const storageRead = (keyName) => {
     const cookieObject = {};
 
     cookieList.forEach((cookie) => {
-        const [
-            cookieName,
-            cookieValue
-        ] = cookie.split('=');
+        if (cookie) {
+            const [
+                cookieName,
+                cookieValue
+            ] = cookie.split('=');
 
-        cookieObject[cookieName.trim()] = cookieValue.trim();
+            cookieObject[cookieName.trim()] = cookieValue.trim();
+        }
     });
 
     return cookieObject[keyName];

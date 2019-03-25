@@ -23,6 +23,7 @@ body {
         }
     }
 
+    // RP8
     .annotation {
         box-sizing: border-box;
         width: 14px !important;
@@ -64,6 +65,25 @@ body {
 
         * {
             cursor: help !important;
+        }
+    }
+
+    // RP9
+    .annnote {
+        cursor: help !important;
+
+        .annnotelabel {
+            margin: 0;
+
+            cursor: help !important;
+
+            color: $primary-color-white;
+            border-radius: $default-border-radius;
+            background-color: $primary-color-blue;
+
+            &:hover {
+                background-color: darken($primary-color-blue, 10%);
+            }
         }
     }
 
