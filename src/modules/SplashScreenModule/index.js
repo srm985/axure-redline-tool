@@ -34,7 +34,9 @@ const SplashScreenModule = (props) => {
                 <li>
                     We now support grid system column overlays. In the sidebar, you'll now see an option to enable and select these overlays.
                     <br />
-                    <span className={`${displayName}--disclosure`}>* Currently just supporting Bootstrap V4 but will implementing more.</span>
+                    <span className={`${displayName}--disclosure`}>
+                        * Currently just supporting Bootstrap V4 but will implementing more.
+                    </span>
                 </li>
                 <li>Better edge case support. The way markup is rendered from Axure creates some difficult edge cases. We've tried to better anticipate these along with the general interaction of the tool with the existing AxShare UI.</li>
             </ul>

@@ -80,7 +80,7 @@
   ],
   "license": "MIT",
   "main": "gulpfile.js",
-  "name": "new-axure",
+  "name": "axure-redline-tool",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/srm985/axure-redline-tool.git"
@@ -94,5 +94,5 @@
     "sandbox": "gulp sandbox",
     "test": "jest --passWithNoTests"
   },
-  "version": "3.0.0"
+  "version": "3.0.1"
 }
