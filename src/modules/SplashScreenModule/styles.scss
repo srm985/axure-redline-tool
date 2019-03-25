@@ -1,0 +1,51 @@
+@import '../../styles/constants';
+
+.SplashScreenModule {
+    color: $secondary-color-gray;
+
+    &__header {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        margin-bottom: 10px;
+
+        .IconComponent {
+            margin-right: 10px;
+
+            color: $primary-color-teal;
+        }
+    }
+
+    &--disclosure {
+        font-size: 14px;
+        font-style: italic;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    h2 {
+        margin: 40px 0 0;
+    }
+
+    ul {
+        margin: 10px 0 0;
+        padding: 0 40px;
+    }
+
+    li {
+        margin-bottom: 10px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    .ButtonComponent {
+        float: right;
+
+        margin-top: 30px;
+    }
+}

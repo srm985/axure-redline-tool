@@ -1,0 +1,37 @@
+@import '../../styles/constants';
+
+.ButtonComponent {
+    font-size: 16px;
+    font-weight: bold;
+
+    height: 40px;
+    padding: 0 30px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;
+    text-transform: uppercase;
+
+    border: none;
+    border-radius: $border-radius-large;
+    outline: none;
+
+    &--primary {
+        color: $primary-color-white;
+        background-color: $primary-color-teal;
+
+        &:hover {
+            background-color: darken($color: $primary-color-teal, $amount: 10%);
+        }
+    }
+
+    &--secondary {
+        color: $primary-color-teal;
+        border: solid 1px $primary-color-teal;
+        background-color: $primary-color-white;
+
+        &:hover {
+            color: $primary-color-white;
+            background-color: $primary-color-teal;
+        }
+    }
+}

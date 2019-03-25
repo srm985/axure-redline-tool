@@ -1,0 +1,90 @@
+@import '../../styles/constants';
+
+// Module Constants
+$switch-transition: all 0.15s ease-in-out;
+$color-disabled: #ddd;
+
+.EnableToolModule {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 160px;
+    height: 100%;
+
+    span {
+        font-family: $font-stack;
+        font-size: 16px;
+
+        color: $primary-color-white;
+    }
+
+    input {
+        position: absolute;
+
+        visibility: hidden;
+
+        margin-left: -9999px;
+
+        &:checked + label {
+            background-color: $primary-color-teal;
+
+            &::after {
+                margin-left: 32px;
+
+                background-color: $primary-color-teal;
+            }
+        }
+    }
+
+    label {
+        position: relative;
+
+        display: block;
+
+        width: 60px;
+        height: 28px;
+        padding: 2px;
+
+        cursor: pointer;
+        user-select: none;
+        transition: $switch-transition;
+
+        border-radius: 28px;
+        outline: none;
+        background-color: $color-disabled;
+
+        &::before {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            bottom: 2px;
+            left: 2px;
+
+            display: block;
+
+            content: '';
+            transition: $switch-transition;
+
+            border-radius: 28px;
+            background-color: $primary-color-white;
+        }
+
+        &::after {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+
+            display: block;
+
+            width: 24px;
+
+            content: '';
+            transition: $switch-transition;
+
+            border-radius: 50%;
+            background-color: $color-disabled;
+        }
+    }
+}

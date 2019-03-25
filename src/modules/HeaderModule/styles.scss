@@ -1,0 +1,28 @@
+@import '../../styles/constants';
+
+.HeaderModule {
+    font-family: $font-stack;
+
+    position: fixed;
+    z-index: $z-index-header;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: $header-height;
+    padding: 0 30px;
+
+    opacity: $ui-opacity;
+    background-color: $primary-color-background;
+
+    &__logo {
+        font-size: 18px;
+
+        color: $primary-color-white;
+    }
+}

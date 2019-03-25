@@ -1,0 +1,20 @@
+@import '../../styles/constants';
+
+.DimensionMarkerComponent {
+    font-size: 10px;
+    font-weight: bold;
+
+    position: absolute;
+    z-index: $z-index-dimension-marker;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    letter-spacing: 1px;
+
+    opacity: $ui-opacity;
+    color: $primary-color-white;
+    border-radius: 5px;
+    background-color: $primary-color-orange;
+}

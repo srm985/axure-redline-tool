@@ -1,0 +1,135 @@
+// sass-lint:disable no-important
+// sass-lint:disable no-ids
+
+@import '../styles/constants';
+
+// Module Constants
+$default-border-radius: 3px;
+
+body {
+    position: static;
+    left: auto;
+    // sass-lint:disable property-units
+
+    width: 100vw;
+    height: 100vh;
+    // sass-lint:enable property-units
+    margin: 0;
+
+    #base {
+        // sass-lint:disable-line no-ids
+        span {
+            display: inline-block;
+        }
+    }
+
+    // RP8
+    .annotation {
+        box-sizing: border-box;
+        width: 14px !important;
+        height: 14px !important;
+        margin: 0;
+        padding: 0;
+
+        cursor: help !important;
+
+        & > div {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 3px;
+
+            border: none;
+            border-radius: $default-border-radius;
+            background-color: $primary-color-blue;
+
+            &:hover {
+                background-color: darken($primary-color-blue, 10%);
+            }
+
+            & > div {
+                width: 100%;
+                height: 1px;
+                margin: 0;
+                padding: 0;
+
+                border: none;
+                background-color: $primary-color-white;
+            }
+        }
+
+        * {
+            cursor: help !important;
+        }
+    }
+
+    // RP9
+    .annnote {
+        cursor: help !important;
+
+        .annnotelabel {
+            margin: 0;
+
+            cursor: help !important;
+
+            color: $primary-color-white;
+            border-radius: $default-border-radius;
+            background-color: $primary-color-blue;
+
+            &:hover {
+                background-color: darken($primary-color-blue, 10%);
+            }
+        }
+    }
+
+    .ui-dialog {
+        z-index: $z-index-dialog !important;
+
+        padding: 0 !important;
+
+        opacity: $ui-opacity;
+        border: solid 1px $primary-color-gray !important;
+        border-radius: $default-border-radius !important;
+
+        * {
+            color: $primary-color-gray;
+        }
+    }
+
+    .ui-dialog-titlebar {
+        border: none !important;
+        background-color: $primary-color-gray !important;
+
+        button {
+            border-radius: $default-border-radius !important;
+            outline: none !important;
+        }
+
+        .ui-icon-closethick {
+            border-radius: $default-border-radius;
+            background-color: $primary-color-white;
+        }
+    }
+
+    .ui-dialog-content {
+        padding: 10px !important;
+
+        border-radius: $default-border-radius;
+    }
+
+    .ui-button-icon-only {
+        .ui-icon {
+            top: 0 !important;
+            left: 0 !important;
+        }
+    }
+
+    .ui-corner-all {
+        border-radius: 0;
+    }
+}

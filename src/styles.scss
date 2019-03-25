@@ -1,0 +1,12 @@
+// Web Font
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+// Global Constants
+@import './styles/constants';
+
+// AxShare Override Styling
+@import './styles/axureComponentStyling';
+
+body {
+    font-family: $font-stack;
+}

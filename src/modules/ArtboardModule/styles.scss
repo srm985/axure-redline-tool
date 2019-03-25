@@ -1,0 +1,36 @@
+@import '../../styles/constants';
+
+.ArtboardModule {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $secondary-color-gray;
+    background-image: radial-gradient($background-color 1px, transparent 0);
+    background-size: 10px 10px;
+
+    &__artboard {
+        position: absolute;
+    }
+
+    #base { // sass-lint:disable-line no-ids
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+
+        transform-origin: center;
+    }
+
+    &--enabled {
+        .ArtboardModule__artboard {
+            * {
+                &:not(.ui-dialog) {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

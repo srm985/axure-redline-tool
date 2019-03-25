@@ -1,7 +1,3 @@
-/.sass-cache/
 /node_modules/
-/web/temp/
-/web/demo*
-/src/.sass-cache/
-/src/css/*.css.map
-/src/.sass-cache/
+/dist/**/*.map
+/dist/**.*.html

@@ -1,0 +1,92 @@
+@import '../../styles/constants';
+
+// Module Variables
+$icon-thickness: 2px;
+$icon-diameter: 23px;
+$icon-border-radius: 5px;
+
+.ZoomControlModule {
+    position: fixed;
+    z-index: $z-index-zoom-control;
+    bottom: 20px;
+    left: 20px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    opacity: $ui-opacity;
+    border-radius: $icon-border-radius;
+    box-shadow: 0 3px 5px $primary-color-gray;
+
+    &__zoom-input {
+        font-family: $font-stack;
+
+        width: 50px;
+        height: $icon-diameter;
+
+        text-align: center;
+
+        border: none;
+        outline: none;
+    }
+
+    &__zoom-control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-sizing: border-box;
+        width: $icon-diameter;
+        height: $icon-diameter;
+        padding: 6px;
+
+        cursor: pointer;
+        transition: transform 0.01s ease-in-out;
+
+        background-color: $primary-color-teal;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        span {
+            position: relative;
+
+            display: inline-block;
+
+            width: 100%;
+            height: $icon-thickness;
+
+            background-color: $primary-color-white;
+        }
+
+        &--negative {
+            border-right: solid 1px $primary-color-gray;
+            border-radius: $icon-border-radius 0 0 $icon-border-radius;
+        }
+
+        &--positive {
+            border-left: solid 1px $primary-color-gray;
+            border-radius: 0 $icon-border-radius $icon-border-radius 0;
+
+            span {
+                &::before {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+
+                    display: inline-block;
+
+                    width: 100%;
+                    height: $icon-thickness;
+
+                    content: '';
+                    transform: rotate(90deg);
+
+                    background-color: inherit;
+                }
+            }
+        }
+    }
+}

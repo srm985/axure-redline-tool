@@ -13,7 +13,7 @@ Latest Version
 
 Current Version
 ```sh
-<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@2.0.7/web/axure-redline-plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@3.0.0/web/axure-redline-plugin.js"></script>
 ```
 
 There are several ways to use this "install" this plugin. The easiest option is to copy the script link above into your AxShare project as a plugin. Copy the script of the version you'd like to use, or simply use the script marked "latest" to ensure you're always subscribed to the latest application updates. The code in the scripts above is served from a CDN to ensure a fast response, no matter your location.
@@ -51,7 +51,7 @@ This project was built and tested on jQuery 3.2 and Axure RP.
 
 ## Building Modified Plugin
 
-If you've made changes and would like to build an updated version of the plugin, run the following commands to generate ```plugin.txt``` and ```axure-redline-plugin.js```. Copy the contents of ```plugin.txt``` into your AxShare project as shown above.
+If you've made changes and would like to build an updated version of the plugin, run the following commands to generate ```plugin.txt``` and ```plugin.js```. Copy the contents of ```plugin.txt``` into your AxShare project as shown above.
 
 If you would like to modify the plugin, two build scripts are available to aid in this.
 
@@ -171,3 +171,9 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 * Corrected page loading of HTML, CSS, and Google fonts. Loading of fonts was causing incorrect jQuery measurements of elements.
 * Updated CSS to support RP9 artboard generation.
 * Updated to support RP9 annotations.
+
+#### Version 3.0.0
+
+* Ported application to React.
+* Slight UI modifications.
+* Grid overlay support.
