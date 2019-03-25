@@ -3,6 +3,7 @@ import React from 'react';
 import ArtboardModule from '../../modules/ArtboardModule';
 import ElementPropertiesSidebarModule from '../../modules/ElementPropertiesSidebarModule';
 import HeaderModule from '../../modules/HeaderModule';
+import SplashScreenModule from '../../modules/SplashScreenModule';
 import ZoomControlModule from '../../modules/ZoomControlModule';
 
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
@@ -27,12 +28,15 @@ import {
 import {
     COOKIE_DOCUMENT_ZOOM,
     COOKIE_EXPIRATION_DEFAULT,
+    COOKIE_EXPIRATION_INDEFINITE,
+    COOKIE_SPLASH_SCREEN,
     COOKIE_TOOL_ENABLED,
     ESCAPE_KEY,
     MINUS_KEY,
     NO_INTERACT_CLASS,
     NO_INTERACT_ELEMENTS,
-    PLUS_KEY
+    PLUS_KEY,
+    SPLASH_SCREEN_VERSION
 } from '../../globalConstants';
 
 class InspectView extends React.Component {
@@ -77,16 +81,24 @@ class InspectView extends React.Component {
                 trueWidth: 0,
                 width: 0
             },
+            shouldShowSplashScreen: false,
             zoomWrapperPadding: 1000
         };
     }
 
     componentDidMount() {
         const isToolEnabled = storageRead(COOKIE_TOOL_ENABLED);
+        const lastSeenSplashScreen = storageRead(COOKIE_SPLASH_SCREEN) || 0;
+
+        const shouldShowSplashScreen = Number(lastSeenSplashScreen) < SPLASH_SCREEN_VERSION;
 
         if (isToolEnabled !== undefined) {
             this.setToolEnabledStatus(isToolEnabled === 'true');
         }
+
+        this.setState({
+            shouldShowSplashScreen
+        });
     }
 
     componentDidUpdate() {
@@ -533,6 +545,15 @@ class InspectView extends React.Component {
         }
     }
 
+    handleSplashScreenClose = () => {
+        // User has seen the current version splash screen now.
+        storageWrite(COOKIE_SPLASH_SCREEN, SPLASH_SCREEN_VERSION, COOKIE_EXPIRATION_INDEFINITE);
+
+        this.setState({
+            shouldShowSplashScreen: false
+        });
+    }
+
     gridOverlaySet = (gridLayout) => {
         this.setState({
             gridLayout
@@ -552,6 +573,7 @@ class InspectView extends React.Component {
             hoveredElement,
             isToolEnabled,
             selectedElement,
+            shouldShowSplashScreen,
             zoomWrapperPadding
         } = this.state;
 
@@ -560,6 +582,10 @@ class InspectView extends React.Component {
                 {
                     !axureLoaded
                     && <LoadingIndicatorComponent />
+                }
+                {
+                    shouldShowSplashScreen
+                    && <SplashScreenModule closeCallback={this.handleSplashScreenClose} />
                 }
                 <div
                     className={InspectView.displayName}

@@ -31,6 +31,7 @@ export const PLUS_KEY = 187;
 
 // Cookies
 export const COOKIE_EXPIRATION_DEFAULT = 30; // 30 days
+export const COOKIE_EXPIRATION_INDEFINITE = 9999; // ~27 years
 export const COOKIE_DOCUMENT_ZOOM = 'redline-tool-document-zoom';
 export const COOKIE_SPLASH_SCREEN = 'redline-tool-splash-screen';
 export const COOKIE_TOOL_ENABLED = 'redline-tool-enabled';

@@ -1331,7 +1331,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".ButtonComponent {\n  font-size: 16px;\n  height: 35px;\n  padding: 0 30px;\n  cursor: pointer;\n  transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;\n  text-transform: uppercase;\n  border: none;\n  border-radius: 5px;\n  outline: none; }\n  .ButtonComponent--primary {\n    color: #fff;\n    background-color: #4edec2; }\n    .ButtonComponent--primary:hover {\n      background-color: #27d2b1; }\n  .ButtonComponent--secondary {\n    color: #4edec2;\n    border: solid 1px #4edec2;\n    background-color: #fff; }\n    .ButtonComponent--secondary:hover {\n      color: #fff;\n      background-color: #4edec2; }\n", ""]);
+exports.push([module.i, ".ButtonComponent {\n  font-size: 16px;\n  font-weight: bold;\n  height: 40px;\n  padding: 0 30px;\n  cursor: pointer;\n  transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;\n  text-transform: uppercase;\n  border: none;\n  border-radius: 5px;\n  outline: none; }\n  .ButtonComponent--primary {\n    color: #fff;\n    background-color: #4edec2; }\n    .ButtonComponent--primary:hover {\n      background-color: #27d2b1; }\n  .ButtonComponent--secondary {\n    color: #4edec2;\n    border: solid 1px #4edec2;\n    background-color: #fff; }\n    .ButtonComponent--secondary:hover {\n      color: #fff;\n      background-color: #4edec2; }\n", ""]);
 
 // Exports
 exports.locals = {
@@ -1506,7 +1506,7 @@ exports.locals = {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".modal-open {\n  overflow: hidden; }\n\n.ModalComponent {\n  position: fixed;\n  z-index: 9999999;\n  top: 0;\n  left: 0;\n  display: flex;\n  visibility: hidden;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 20px; }\n  .ModalComponent__overlay {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(85, 85, 85, 0.7); }\n  .ModalComponent__modal {\n    position: relative;\n    width: 100%;\n    max-width: 500px;\n    min-height: 200px;\n    margin-top: 50px;\n    padding: 20px;\n    transition: margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out;\n    opacity: 0;\n    border-radius: 5px;\n    background-color: #fff;\n    box-shadow: 0 3px 5px #333; }\n    .ModalComponent__modal--body {\n      width: 100%;\n      height: 100%; }\n  .ModalComponent__modal-close {\n    position: absolute;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 20px;\n    height: 20px;\n    cursor: pointer;\n    transition: background-color 0.05s ease-in-out; }\n    .ModalComponent__modal-close:hover div {\n      transition: background-color 0.2s ease-in-out;\n      background-color: #555; }\n    .ModalComponent__modal-close div {\n      width: 1px;\n      height: 100%;\n      transform: rotate(45deg);\n      background-color: #333; }\n      .ModalComponent__modal-close div::after {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 1px;\n        height: 100%;\n        content: '';\n        transform: rotate(-90deg);\n        background-color: inherit; }\n  .ModalComponent--visible {\n    visibility: visible; }\n    .ModalComponent--visible .ModalComponent__modal {\n      margin-top: 0;\n      opacity: 1; }\n", ""]);
+exports.push([module.i, ".modal-open {\n  overflow: hidden; }\n\n.ModalComponent {\n  position: fixed;\n  z-index: 9999999;\n  top: 0;\n  left: 0;\n  display: flex;\n  visibility: hidden;\n  align-items: center;\n  justify-content: center;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  padding: 20px; }\n  .ModalComponent__overlay {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(85, 85, 85, 0.7); }\n  .ModalComponent__modal {\n    position: relative;\n    width: 100%;\n    max-width: 500px;\n    min-height: 200px;\n    margin-top: 50px;\n    padding: 30px;\n    transition: margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out;\n    opacity: 0;\n    border-radius: 5px;\n    background-color: #fff;\n    box-shadow: 0 3px 5px #333; }\n    .ModalComponent__modal--body {\n      width: 100%;\n      height: 100%; }\n  .ModalComponent__modal-close {\n    position: absolute;\n    top: 10px;\n    right: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 20px;\n    height: 20px;\n    cursor: pointer;\n    transition: background-color 0.05s ease-in-out; }\n    .ModalComponent__modal-close:hover div {\n      transition: background-color 0.2s ease-in-out;\n      background-color: #555; }\n    .ModalComponent__modal-close div {\n      width: 1px;\n      height: 100%;\n      transform: rotate(45deg);\n      background-color: #333; }\n      .ModalComponent__modal-close div::after {\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 1px;\n        height: 100%;\n        content: '';\n        transform: rotate(-90deg);\n        background-color: inherit; }\n  .ModalComponent--visible {\n    visibility: visible; }\n    .ModalComponent--visible .ModalComponent__modal {\n      margin-top: 0;\n      opacity: 1; }\n", ""]);
 
 // Exports
 exports.locals = {
@@ -1732,6 +1732,31 @@ exports.locals = {
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
 exports.push([module.i, ".SharingLinksModule {\n  display: none; }\n  .SharingLinksModule__modal-block h1 {\n    margin: 0;\n    color: #333; }\n  .SharingLinksModule__modal-block .InputComponent {\n    height: 50px;\n    margin-top: 20px; }\n    .SharingLinksModule__modal-block .InputComponent__label {\n      font-size: 16px;\n      color: #333; }\n    .SharingLinksModule__modal-block .InputComponent__input {\n      border: solid 1px #333;\n      border-radius: 5px; }\n    .SharingLinksModule__modal-block .InputComponent .TooltipComponent {\n      top: 0; }\n  .SharingLinksModule__modal-block .ButtonComponent {\n    float: right;\n    margin-top: 30px; }\n", ""]);
+
+// Exports
+exports.locals = {
+	"primaryColorBackground": "#111111",
+	"primaryColorBlue": "#4860ff",
+	"primaryColorGray": "#555",
+	"primaryColorOrange": "#e89a28",
+	"primaryColorRed": "#ff5757",
+	"primaryColorTeal": "#4edec2",
+	"primaryColorWhite": "#fff",
+	"secondaryColorGray": "#333"
+};
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/SplashScreenModule/styles.scss":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/SplashScreenModule/styles.scss ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".SplashScreenModule {\n  color: #333; }\n  .SplashScreenModule__header {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    margin-bottom: 10px; }\n    .SplashScreenModule__header .IconComponent {\n      margin-right: 10px;\n      color: #4edec2; }\n  .SplashScreenModule--disclosure {\n    font-size: 14px;\n    font-style: italic; }\n  .SplashScreenModule h1 {\n    margin: 0; }\n  .SplashScreenModule h2 {\n    margin: 40px 0 0; }\n  .SplashScreenModule ul {\n    margin: 10px 0 0;\n    padding: 0 40px; }\n  .SplashScreenModule li {\n    margin-bottom: 10px; }\n    .SplashScreenModule li:last-of-type {\n      margin-bottom: 0; }\n  .SplashScreenModule .ButtonComponent {\n    float: right;\n    margin-top: 30px; }\n", ""]);
 
 // Exports
 exports.locals = {
@@ -39283,7 +39308,7 @@ function (_React$PureComponent) {
       if (keyCode === _globalConstants__WEBPACK_IMPORTED_MODULE_10__["ESCAPE_KEY"]) {
         event.preventDefault();
 
-        _this.handleCloseModal();
+        _this.handleClick();
       }
     });
 
@@ -39727,7 +39752,7 @@ if(false) {}
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: SPLASH_SCREEN_VERSION, ANNOTATION_ELEMENTS, NO_INTERACT_CLASS, NO_INTERACT_ELEMENTS, TOOLTIP_VISIBLE_TIME, ENTER_KEY, ESCAPE_KEY, MINUS_KEY, PLUS_KEY, COOKIE_EXPIRATION_DEFAULT, COOKIE_DOCUMENT_ZOOM, COOKIE_SPLASH_SCREEN, COOKIE_TOOL_ENABLED */
+/*! exports provided: SPLASH_SCREEN_VERSION, ANNOTATION_ELEMENTS, NO_INTERACT_CLASS, NO_INTERACT_ELEMENTS, TOOLTIP_VISIBLE_TIME, ENTER_KEY, ESCAPE_KEY, MINUS_KEY, PLUS_KEY, COOKIE_EXPIRATION_DEFAULT, COOKIE_EXPIRATION_INDEFINITE, COOKIE_DOCUMENT_ZOOM, COOKIE_SPLASH_SCREEN, COOKIE_TOOL_ENABLED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39742,6 +39767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MINUS_KEY", function() { return MINUS_KEY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUS_KEY", function() { return PLUS_KEY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_EXPIRATION_DEFAULT", function() { return COOKIE_EXPIRATION_DEFAULT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_EXPIRATION_INDEFINITE", function() { return COOKIE_EXPIRATION_INDEFINITE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_DOCUMENT_ZOOM", function() { return COOKIE_DOCUMENT_ZOOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_SPLASH_SCREEN", function() { return COOKIE_SPLASH_SCREEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COOKIE_TOOL_ENABLED", function() { return COOKIE_TOOL_ENABLED; });
@@ -39760,6 +39786,8 @@ var MINUS_KEY = 189;
 var PLUS_KEY = 187; // Cookies
 
 var COOKIE_EXPIRATION_DEFAULT = 30; // 30 days
+
+var COOKIE_EXPIRATION_INDEFINITE = 9999; // ~27 years
 
 var COOKIE_DOCUMENT_ZOOM = 'redline-tool-document-zoom';
 var COOKIE_SPLASH_SCREEN = 'redline-tool-splash-screen';
@@ -42364,6 +42392,97 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./src/modules/SplashScreenModule/index.js":
+/*!*************************************************!*\
+  !*** ./src/modules/SplashScreenModule/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_ButtonComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ButtonComponent */ "./src/components/ButtonComponent/index.js");
+/* harmony import */ var _components_IconComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/IconComponent */ "./src/components/IconComponent/index.js");
+/* harmony import */ var _components_ModalComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ModalComponent */ "./src/components/ModalComponent/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/SplashScreenModule/styles.scss");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_scss__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+var displayName = 'SplashScreenModule';
+
+var SplashScreenModule = function SplashScreenModule(props) {
+  var closeCallback = props.closeCallback;
+
+  var renderSplashScreenContent = function renderSplashScreenContent() {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: displayName
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "".concat(displayName, "__header")
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_IconComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      height: 28,
+      path: _icons__WEBPACK_IMPORTED_MODULE_5__["codeInspect"],
+      width: 28
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Welcome to Redline Tool V3!")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Things may look similar in this new version, but a lot has changed under the hood. Find out what's new below and thanks for using the tool!"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "What's New?"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, "The tool has been ported to React. This means, development work is much easier and you'll see features faster."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, "Revised UI - Things have been adjusted in the hopes of making your experience a little more pleasant."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, "We now support grid system column overlays. In the sidebar, you'll now see an option to enable and select these overlays.", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "".concat(displayName, "--disclosure")
+    }, "* Currently just supporting Bootstrap V4 but will implementing more.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, "Better edge case support. The way markup is rendered from Axure creates some difficult edge cases. We've tried to better anticipate these along with the general interaction of the tool with the exisiting AxShare UI.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_ButtonComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      label: 'Get Started!',
+      onClickCallback: closeCallback
+    }));
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_ModalComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    closeModal: closeCallback,
+    isShown: true
+  }, renderSplashScreenContent());
+};
+
+SplashScreenModule.propTypes = {
+  closeCallback: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (SplashScreenModule);
+
+/***/ }),
+
+/***/ "./src/modules/SplashScreenModule/styles.scss":
+/*!****************************************************!*\
+  !*** ./src/modules/SplashScreenModule/styles.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/lib/loader.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/lib/loader.js!./src/modules/SplashScreenModule/styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./src/modules/ZoomControlModule/index.js":
 /*!************************************************!*\
   !*** ./src/modules/ZoomControlModule/index.js ***!
@@ -43432,13 +43551,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../modules/ArtboardModule */ "./src/modules/ArtboardModule/index.js");
 /* harmony import */ var _modules_ElementPropertiesSidebarModule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../modules/ElementPropertiesSidebarModule */ "./src/modules/ElementPropertiesSidebarModule/index.js");
 /* harmony import */ var _modules_HeaderModule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../modules/HeaderModule */ "./src/modules/HeaderModule/index.js");
-/* harmony import */ var _modules_ZoomControlModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../modules/ZoomControlModule */ "./src/modules/ZoomControlModule/index.js");
-/* harmony import */ var _components_LoadingIndicatorComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/LoadingIndicatorComponent */ "./src/components/LoadingIndicatorComponent/index.js");
-/* harmony import */ var _interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../interfacers/eventsInterfacer */ "./src/interfacers/eventsInterfacer.js");
-/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
-/* harmony import */ var _utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../utils/calculateTrueArtboardOffset */ "./src/utils/calculateTrueArtboardOffset.js");
-/* harmony import */ var _utils_storage__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../utils/storage */ "./src/utils/storage.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _modules_SplashScreenModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../modules/SplashScreenModule */ "./src/modules/SplashScreenModule/index.js");
+/* harmony import */ var _modules_ZoomControlModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../modules/ZoomControlModule */ "./src/modules/ZoomControlModule/index.js");
+/* harmony import */ var _components_LoadingIndicatorComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/LoadingIndicatorComponent */ "./src/components/LoadingIndicatorComponent/index.js");
+/* harmony import */ var _interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../interfacers/eventsInterfacer */ "./src/interfacers/eventsInterfacer.js");
+/* harmony import */ var _utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../utils/calculateGlobalOffset */ "./src/utils/calculateGlobalOffset.js");
+/* harmony import */ var _utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../utils/calculateTrueArtboardOffset */ "./src/utils/calculateTrueArtboardOffset.js");
+/* harmony import */ var _utils_storage__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../utils/storage */ "./src/utils/storage.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../globalConstants */ "./src/globalConstants.js");
+
 
 
 
@@ -43474,7 +43595,7 @@ function (_React$Component) {
     _this = _babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5___default()(this, _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6___default()(InspectView).call(this, props));
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "setAxureLoaded", function () {
-      var documentZoom = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_DOCUMENT_ZOOM"]);
+      var documentZoom = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_20__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_DOCUMENT_ZOOM"]);
 
       _this.setState({
         axureLoaded: true
@@ -43497,13 +43618,13 @@ function (_React$Component) {
       var selectedElementTarget = selectedElementTargetPassed || selectedElementTargetState;
 
       if (hoveredElementTarget) {
-        var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(hoveredElementTarget),
+        var _calculateGlobalOffse = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(hoveredElementTarget),
             height = _calculateGlobalOffse.scaledHeight,
             offsetLeft = _calculateGlobalOffse.scaledOffsetLeft,
             offsetTop = _calculateGlobalOffse.scaledOffsetTop,
             width = _calculateGlobalOffse.scaledWidth;
 
-        var _calculateTrueArtboar = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(hoveredElementTarget),
+        var _calculateTrueArtboar = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_19__["default"])(hoveredElementTarget),
             trueHeight = _calculateTrueArtboar.trueHeight,
             trueOffsetLeft = _calculateTrueArtboar.trueOffsetLeft,
             trueOffsetTop = _calculateTrueArtboar.trueOffsetTop,
@@ -43525,13 +43646,13 @@ function (_React$Component) {
       }
 
       if (selectedElementTarget) {
-        var _calculateGlobalOffse2 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(selectedElementTarget),
+        var _calculateGlobalOffse2 = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(selectedElementTarget),
             _height = _calculateGlobalOffse2.scaledHeight,
             _offsetLeft = _calculateGlobalOffse2.scaledOffsetLeft,
             _offsetTop = _calculateGlobalOffse2.scaledOffsetTop,
             _width = _calculateGlobalOffse2.scaledWidth;
 
-        var _calculateTrueArtboar2 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(selectedElementTarget),
+        var _calculateTrueArtboar2 = Object(_utils_calculateTrueArtboardOffset__WEBPACK_IMPORTED_MODULE_19__["default"])(selectedElementTarget),
             _trueHeight = _calculateTrueArtboar2.trueHeight,
             _trueOffsetLeft = _calculateTrueArtboar2.trueOffsetLeft,
             _trueOffsetTop = _calculateTrueArtboar2.trueOffsetTop,
@@ -43561,7 +43682,7 @@ function (_React$Component) {
 
       _this.clearToolStatus();
 
-      Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageWrite"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_DOCUMENT_ZOOM"], zoomLevel, _globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_EXPIRATION_DEFAULT"]);
+      Object(_utils_storage__WEBPACK_IMPORTED_MODULE_20__["storageWrite"])(_globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_DOCUMENT_ZOOM"], zoomLevel, _globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_EXPIRATION_DEFAULT"]);
 
       _this.setState({
         documentZoom: roundedZoom <= 1 ? 1 : roundedZoom
@@ -43600,7 +43721,7 @@ function (_React$Component) {
       }); // Track enable status for page reloads.
 
 
-      Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageWrite"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_TOOL_ENABLED"], isToolEnabled, _globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_EXPIRATION_DEFAULT"]);
+      Object(_utils_storage__WEBPACK_IMPORTED_MODULE_20__["storageWrite"])(_globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_TOOL_ENABLED"], isToolEnabled, _globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_EXPIRATION_DEFAULT"]);
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "toggleToolEnable", function () {
@@ -43614,13 +43735,13 @@ function (_React$Component) {
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "initializerListeners", function () {
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__["initNoInteract"])();
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__["addDialogOpenListener"])(_this.handleDialogOpenCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__["addGlobalClickListener"])(_this.handleClickCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__["addGlobalMouseToggleListener"])(_this.handleMouseToggleCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__["addGlobalMouseoverListener"])(_this.handleMouseoverCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__["addGlobalZoomListener"])(_this.handleZoomingCallback);
-      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_16__["addHotkeyListener"])(_this.handleHotkeyCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__["initNoInteract"])();
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__["addDialogOpenListener"])(_this.handleDialogOpenCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__["addGlobalClickListener"])(_this.handleClickCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__["addGlobalMouseToggleListener"])(_this.handleMouseToggleCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__["addGlobalMouseoverListener"])(_this.handleMouseoverCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__["addGlobalZoomListener"])(_this.handleZoomingCallback);
+      Object(_interfacers_eventsInterfacer__WEBPACK_IMPORTED_MODULE_17__["addHotkeyListener"])(_this.handleHotkeyCallback);
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "clearHoveredElement",
@@ -43718,7 +43839,7 @@ function (_React$Component) {
           selectedElementClassList = event.target.classList;
 
       var isInteractableElement = function isInteractableElement() {
-        return !selectedElementClassList.contains(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["NO_INTERACT_CLASS"]);
+        return !selectedElementClassList.contains(_globalConstants__WEBPACK_IMPORTED_MODULE_21__["NO_INTERACT_CLASS"]);
       };
 
       if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
@@ -43742,7 +43863,7 @@ function (_React$Component) {
         var isNoInteract = false;
 
         if (clickedElementClassList.length) {
-          _globalConstants__WEBPACK_IMPORTED_MODULE_20__["NO_INTERACT_ELEMENTS"].forEach(function (noInteractElement) {
+          _globalConstants__WEBPACK_IMPORTED_MODULE_21__["NO_INTERACT_ELEMENTS"].forEach(function (noInteractElement) {
             if (clickedElementClassList.contains(noInteractElement)) {
               isNoInteract = true;
             }
@@ -43798,7 +43919,7 @@ function (_React$Component) {
         annotationIcon = parentElement;
       }
 
-      var clickOrigination = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_17__["default"])(annotationIcon);
+      var clickOrigination = Object(_utils_calculateGlobalOffset__WEBPACK_IMPORTED_MODULE_18__["default"])(annotationIcon);
       var offsetLeft = clickOrigination.scaledOffsetLeft,
           offsetTop = clickOrigination.scaledOffsetTop,
           width = clickOrigination.scaledWidth;
@@ -43834,12 +43955,12 @@ function (_React$Component) {
       var documentZoom = _this.state.documentZoom;
 
       switch (event.keyCode) {
-        case _globalConstants__WEBPACK_IMPORTED_MODULE_20__["ESCAPE_KEY"]:
+        case _globalConstants__WEBPACK_IMPORTED_MODULE_21__["ESCAPE_KEY"]:
           _this.clearToolStatus();
 
           break;
 
-        case _globalConstants__WEBPACK_IMPORTED_MODULE_20__["PLUS_KEY"]:
+        case _globalConstants__WEBPACK_IMPORTED_MODULE_21__["PLUS_KEY"]:
           if (event.ctrlKey || event.metaKey) {
             event.preventDefault();
             var newZoom = documentZoom + InspectView.ZOOM_STEP;
@@ -43849,7 +43970,7 @@ function (_React$Component) {
 
           break;
 
-        case _globalConstants__WEBPACK_IMPORTED_MODULE_20__["MINUS_KEY"]:
+        case _globalConstants__WEBPACK_IMPORTED_MODULE_21__["MINUS_KEY"]:
           if (event.ctrlKey || event.metaKey) {
             event.preventDefault();
 
@@ -43863,6 +43984,15 @@ function (_React$Component) {
         default:
           break;
       }
+    });
+
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "handleSplashScreenClose", function () {
+      // User has seen the current version splash screen now.
+      Object(_utils_storage__WEBPACK_IMPORTED_MODULE_20__["storageWrite"])(_globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_SPLASH_SCREEN"], _globalConstants__WEBPACK_IMPORTED_MODULE_21__["SPLASH_SCREEN_VERSION"], _globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_EXPIRATION_INDEFINITE"]);
+
+      _this.setState({
+        shouldShowSplashScreen: false
+      });
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_8___default()(_this)), "gridOverlaySet", function (gridLayout) {
@@ -43905,6 +44035,7 @@ function (_React$Component) {
         trueWidth: 0,
         width: 0
       },
+      shouldShowSplashScreen: false,
       zoomWrapperPadding: 1000
     };
     return _this;
@@ -43913,11 +44044,17 @@ function (_React$Component) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4___default()(InspectView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var isToolEnabled = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_19__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_20__["COOKIE_TOOL_ENABLED"]);
+      var isToolEnabled = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_20__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_TOOL_ENABLED"]);
+      var lastSeenSplashScreen = Object(_utils_storage__WEBPACK_IMPORTED_MODULE_20__["storageRead"])(_globalConstants__WEBPACK_IMPORTED_MODULE_21__["COOKIE_SPLASH_SCREEN"]) || 0;
+      var shouldShowSplashScreen = Number(lastSeenSplashScreen) < _globalConstants__WEBPACK_IMPORTED_MODULE_21__["SPLASH_SCREEN_VERSION"];
 
       if (isToolEnabled !== undefined) {
         this.setToolEnabledStatus(isToolEnabled === 'true');
       }
+
+      this.setState({
+        shouldShowSplashScreen: shouldShowSplashScreen
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -43939,8 +44076,11 @@ function (_React$Component) {
           hoveredElement = _this$state7.hoveredElement,
           isToolEnabled = _this$state7.isToolEnabled,
           selectedElement = _this$state7.selectedElement,
+          shouldShowSplashScreen = _this$state7.shouldShowSplashScreen,
           zoomWrapperPadding = _this$state7.zoomWrapperPadding;
-      return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_10___default.a.Fragment, null, !axureLoaded && react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_LoadingIndicatorComponent__WEBPACK_IMPORTED_MODULE_15__["default"], null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_10___default.a.Fragment, null, !axureLoaded && react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_LoadingIndicatorComponent__WEBPACK_IMPORTED_MODULE_16__["default"], null), shouldShowSplashScreen && react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_modules_SplashScreenModule__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        closeCallback: this.handleSplashScreenClose
+      }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
         className: InspectView.displayName,
         onScroll: this.handleScroll
       }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_modules_HeaderModule__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -43967,7 +44107,7 @@ function (_React$Component) {
         setArtboardZoom: this.setArtboardZoom,
         setAxureLoaded: this.setAxureLoaded,
         zoomWrapperPadding: zoomWrapperPadding
-      }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_modules_ZoomControlModule__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_modules_ZoomControlModule__WEBPACK_IMPORTED_MODULE_15__["default"], {
         documentZoom: documentZoom,
         setArtboardZoom: this.setArtboardZoom
       })));

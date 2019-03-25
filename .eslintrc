@@ -109,6 +109,9 @@
         "react/no-find-dom-node": [
             0
         ],
+        "react/no-unescaped-entities": [
+            0
+        ],
         "sort-keys": [
             "error",
             "asc",

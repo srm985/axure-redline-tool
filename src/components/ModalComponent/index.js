@@ -66,7 +66,7 @@ class ModalComponent extends React.PureComponent {
         if (keyCode === ESCAPE_KEY) {
             event.preventDefault();
 
-            this.handleCloseModal();
+            this.handleClick();
         }
     }
 
