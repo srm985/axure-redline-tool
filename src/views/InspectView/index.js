@@ -396,8 +396,9 @@ class InspectView extends React.Component {
         const {
             target,
             target: {
-                classList: clickedElementClassList
-            }
+                classList: clickedElementClassList,
+                id: clickedElementID
+            } = {}
         } = event;
 
         const {
@@ -418,7 +419,7 @@ class InspectView extends React.Component {
             return isNoInteract;
         };
 
-        if (clickedElementClassList.contains(artboardModuleName)) {
+        if (clickedElementClassList.contains(artboardModuleName) || clickedElementID === 'base') {
             this.clearSelectedElement();
         } else if (isToolEnabled
             && !isHotkeyDepressed

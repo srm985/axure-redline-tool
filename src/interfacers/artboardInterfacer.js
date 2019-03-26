@@ -70,7 +70,7 @@ export const calculateScrollAfterZoom = (dimensions) => {
  */
 const styleArtboardBase = () => {
     if ($('#base').css('background-color') === 'transparent' || $('#base').css('background-color').search(/rgba\(\d+,\s\d+,\s\d+,\s0\)/) >= 0) {
-        $('#base').css('background-color', '#FFFFFF');
+        $('#base').css('background-color', 'rgba(255, 255, 255, 0.2)');
     }
 };
 
