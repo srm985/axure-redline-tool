@@ -86,8 +86,15 @@ const removeInspectTool = () => {
         const htmlDocument = document.documentElement;
         const iFrame = window.parent.document.querySelector('#mainFrame');
 
+        // Native Inspect Tool Elements
+        const handoffMarkupContainer = window.parent.document.querySelector('#handoffMarkupContainer');
+        const rsplitbar = window.parent.document.querySelector('#rsplitbar');
+        const sidebar = window.parent.document.querySelector('#handoffHost');
+
+        const hasNativeInspectTool = !!handoffMarkupContainer;
+
         // Only proceed if we're actually dealing with the inspect tool.
-        if (clipFrameScroll) {
+        if (hasNativeInspectTool) {
             const setiFrameAttributes = () => {
                 const {
                     clientHeight,
@@ -96,18 +103,28 @@ const removeInspectTool = () => {
                     scrollWidth
                 } = htmlDocument;
 
+                // The native inspect tool keeps changing these on resize or tab toggle.
                 clipFrameScroll.style.overflow = 'hidden';
-                iFrame.style.height = '100vh';
-                iFrame.style.minWidth = '100vw';
-                iFrame.style.width = '100vw';
+                document.body.style.overflow = 'auto';
+                iFrame.style.height = '100%';
+                iFrame.style.minWidth = '100%';
+                iFrame.style.width = '100%';
 
                 // Recenter the artboard after resizing or switching tabs - caused by AxShare Inspect.
-                htmlDocument.scrollTo((scrollWidth - clientWidth) / 2, (scrollHeight - clientHeight) / 2);
+                scrollDocument({
+                    left: (scrollWidth - clientWidth) / 2,
+                    top: (scrollHeight - clientHeight) / 2
+                });
             };
 
             const extractCurrentURL = () => window.parent.location.href;
 
             setiFrameAttributes();
+
+            // We're deleting all of the elements related to the native inspect tool.
+            handoffMarkupContainer.parentNode.removeChild(handoffMarkupContainer);
+            rsplitbar.parentNode.removeChild(rsplitbar);
+            sidebar.parentNode.removeChild(sidebar);
 
             // Get URL of parent iFrame.
             let lastCheckedURL = extractCurrentURL();
@@ -139,16 +156,6 @@ const removeInspectTool = () => {
                     setiFrameAttributes();
                 }, 0);
             });
-
-            // We're deleting all of the elements related to the native inspect tool.
-            const sidebar = window.parent.document.querySelector('#handoffHost');
-            sidebar.parentNode.removeChild(sidebar);
-
-            const rsplitbar = window.parent.document.querySelector('#rsplitbar');
-            rsplitbar.parentNode.removeChild(rsplitbar);
-
-            const handoffMarkupContainer = window.parent.document.querySelector('#handoffMarkupContainer');
-            handoffMarkupContainer.parentNode.removeChild(handoffMarkupContainer);
         }
     } catch (error) {
         // Just in case these elements aren't on the page.
