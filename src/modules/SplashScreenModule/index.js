@@ -9,16 +9,33 @@ import { codeInspect } from '../../icons';
 
 import './styles.scss';
 
-const displayName = 'SplashScreenModule';
 
-const SplashScreenModule = (props) => {
-    const {
-        closeCallback
-    } = props;
+class SplashScreenModule extends React.PureComponent {
+    static displayName = 'SplashScreenModule';
 
-    const renderSplashScreenContent = () => (
-        <div className={displayName}>
-            <div className={`${displayName}__header`}>
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isModalShown: true
+        };
+    }
+
+    handleCloseModal = () => {
+        const {
+            closeCallback
+        } = this.props;
+
+        this.setState({
+            isModalShown: false
+        }, () => {
+            closeCallback();
+        });
+    }
+
+    renderSplashScreenContent = () => (
+        <div className={SplashScreenModule.displayName}>
+            <div className={`${SplashScreenModule.displayName}__header`}>
                 <Icon
                     height={28}
                     path={codeInspect}
@@ -34,7 +51,7 @@ const SplashScreenModule = (props) => {
                 <li>
                     We now support grid system column overlays. In the sidebar, you'll now see an option to enable and select these overlays.
                     <br />
-                    <span className={`${displayName}--disclosure`}>
+                    <span className={`${SplashScreenModule.displayName}--disclosure`}>
                         * Currently just supporting Bootstrap V4 but will implementing more.
                     </span>
                 </li>
@@ -42,20 +59,26 @@ const SplashScreenModule = (props) => {
             </ul>
             <ButtonComponent
                 label={'Get Started!'}
-                onClickCallback={closeCallback}
+                onClickCallback={this.handleCloseModal}
             />
         </div>
     );
 
-    return (
-        <ModalComponent
-            closeModal={closeCallback}
-            isShown
-        >
-            {renderSplashScreenContent()}
-        </ModalComponent>
-    );
-};
+    render() {
+        const {
+            isModalShown
+        } = this.state;
+
+        return (
+            <ModalComponent
+                closeModal={this.handleCloseModal}
+                isShown={isModalShown}
+            >
+                {this.renderSplashScreenContent()}
+            </ModalComponent>
+        );
+    }
+}
 
 SplashScreenModule.propTypes = {
     closeCallback: PropTypes.func.isRequired
