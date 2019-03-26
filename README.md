@@ -13,7 +13,7 @@ Latest Version
 
 Current Version
 ```sh
-<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@3.0.2/web/axure-redline-plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@3.0.3/web/axure-redline-plugin.js"></script>
 ```
 
 There are several ways to use this "install" this plugin. The easiest option is to copy the script link above into your AxShare project as a plugin. Copy the script of the version you'd like to use, or simply use the script marked "latest" to ensure you're always subscribed to the latest application updates. The code in the scripts above is served from a CDN to ensure a fast response, no matter your location.
@@ -185,3 +185,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 #### Version 3.0.2
 
 * Added support for native inspect tool and Axure Cloud.
+
+#### Version 3.0.3
+
+* Corrected splash screen modal body issue.
