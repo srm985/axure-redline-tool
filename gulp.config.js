@@ -34,6 +34,7 @@ module.exports = () => ({
     },
     directories: {
         distDirectory: './dist',
+        legacyWebDirectory: './web',
         rootDirectory: './',
         srcDirectory: './src',
         tasksDirectory: './tasks'
@@ -42,12 +43,14 @@ module.exports = () => ({
         buildEnvironment: 'BUILD_ENVIRONMENT',
         injectedEnvironment: 'INJECTED_ENVIRONMENT'
     },
+    legacyBundleName: 'axure-redline-plugin',
     packageJSON: './package.json',
     tasks: {
         bumpVersion: 'bump-version',
         bundle: 'bundle',
         cleanDist: 'clean',
         generatePlugin: 'generate-plugin',
+        legacySupport: 'legacy-support',
         lintCSS: 'lint-css',
         lintJS: 'lint-js',
         serveInject: 'serve-inject',
