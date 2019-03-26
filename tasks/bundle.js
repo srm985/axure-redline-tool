@@ -13,7 +13,8 @@ const {
     },
     tasks: {
         bundle,
-        generatePlugin
+        generatePlugin,
+        legacySupport
     },
     webpackConfig
 } = require('../gulp.config.js')();
@@ -34,6 +35,9 @@ gulp.task(bundle, (callback) => {
             browserSync.reload();
         } else {
             gulp.start(generatePlugin);
+
+            // Because our jsDelivr scripts using @latest still point to /web/axure-redline-plugin.js
+            gulp.start(legacySupport);
         }
 
         if (environment === production) {

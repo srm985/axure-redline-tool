@@ -3,7 +3,8 @@ const gulp = require('gulp');
 
 const {
     directories: {
-        distDirectory
+        distDirectory,
+        legacyWebDirectory
     },
     tasks: {
         cleanDist
@@ -12,4 +13,5 @@ const {
 
 gulp.task(cleanDist, () => {
     del.sync([`${distDirectory}/**`, `!${distDirectory}`]);
+    del.sync([`${legacyWebDirectory}/**`, `!${legacyWebDirectory}`]);
 });

@@ -106,10 +106,6 @@ class InspectView extends React.Component {
         });
     }
 
-    componentDidUpdate() {
-        console.log('State:', this.state);
-    }
-
     setAxureLoaded = () => {
         const documentZoom = storageRead(COOKIE_DOCUMENT_ZOOM);
 
@@ -405,7 +401,7 @@ class InspectView extends React.Component {
         } = event;
 
         const {
-            name: artboardModuleName
+            displayName: artboardModuleName
         } = ArtboardModule;
 
         const isNoInteractElement = () => {
