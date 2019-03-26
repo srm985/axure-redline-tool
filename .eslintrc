@@ -7,9 +7,6 @@
     "extends": "airbnb",
     "parser": "babel-eslint",
     "rules": {
-        "react/jsx-one-expression-per-line": [
-            0
-        ],
         "arrow-parens": [
             "error",
             "always"
@@ -105,6 +102,9 @@
         "react/jsx-indent-props": [
             "error",
             4
+        ],
+        "react/jsx-one-expression-per-line": [
+            0
         ],
         "react/no-did-update-set-state": [
             0

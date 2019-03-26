@@ -74,6 +74,87 @@ const styleArtboardBase = () => {
     }
 };
 
+/**
+ * This function attempts to strip out the native inspect tool
+ * and to intercept any events fired by the tool, especially
+ * when switching from preview/inspect tabs. It's some weird
+ * logic, I know...
+ */
+const removeInspectTool = () => {
+    try {
+        const clipFrameScroll = window.parent.document.querySelector('#clipFrameScroll');
+        const htmlDocument = document.documentElement;
+        const iFrame = window.parent.document.querySelector('#mainFrame');
+
+        // Only proceed if we're actually dealing with the inspect tool.
+        if (clipFrameScroll) {
+            const setiFrameAttributes = () => {
+                const {
+                    clientHeight,
+                    clientWidth,
+                    scrollHeight,
+                    scrollWidth
+                } = htmlDocument;
+
+                clipFrameScroll.style.overflow = 'hidden';
+                iFrame.style.height = '100vh';
+                iFrame.style.minWidth = '100vw';
+                iFrame.style.width = '100vw';
+
+                // Recenter the artboard after resizing or switching tabs - caused by AxShare Inspect.
+                htmlDocument.scrollTo((scrollWidth - clientWidth) / 2, (scrollHeight - clientHeight) / 2);
+            };
+
+            const extractCurrentURL = () => window.parent.location.href;
+
+            setiFrameAttributes();
+
+            // Get URL of parent iFrame.
+            let lastCheckedURL = extractCurrentURL();
+
+            setInterval(() => {
+                const currentURL = extractCurrentURL();
+
+                // When switching from inspect to preview tab, the URL changes and we need to catch that.
+                if (currentURL !== lastCheckedURL) {
+                    setiFrameAttributes();
+
+                    lastCheckedURL = currentURL;
+
+                    /**
+                     * We have to call this a second time because something is firing
+                     * in AxShare. Need to track down what they're up to.
+                     */
+                    setTimeout(() => {
+                        setiFrameAttributes();
+                    }, 250);
+                }
+            }, 100);
+
+            // On resize events, we need to correct some things AxShare does.
+            window.addEventListener('resize', (event) => {
+                event.preventDefault();
+
+                setTimeout(() => {
+                    setiFrameAttributes();
+                }, 0);
+            });
+
+            // We're deleting all of the elements related to the native inspect tool.
+            const sidebar = window.parent.document.querySelector('#handoffHost');
+            sidebar.parentNode.removeChild(sidebar);
+
+            const rsplitbar = window.parent.document.querySelector('#rsplitbar');
+            rsplitbar.parentNode.removeChild(rsplitbar);
+
+            const handoffMarkupContainer = window.parent.document.querySelector('#handoffMarkupContainer');
+            handoffMarkupContainer.parentNode.removeChild(handoffMarkupContainer);
+        }
+    } catch (error) {
+        // Just in case these elements aren't on the page.
+    }
+};
+
 export const injectArtboard = (className) => new Promise((resolve) => {
     const artboard = document.getElementsByClassName(className)[0];
 
@@ -87,6 +168,9 @@ export const injectArtboard = (className) => new Promise((resolve) => {
         loadingTime += 50;
 
         if (base) {
+            // Remove traces of native inspect tool.
+            removeInspectTool();
+
             clearInterval(waitBaseRenderInterval);
             artboard.appendChild(base);
             resolve(loadingTime);
