@@ -93,9 +93,16 @@ const removeInspectTool = () => {
 
         const hasNativeInspectTool = !!handoffMarkupContainer;
 
-        // Only proceed if we're actually dealing with the inspect tool.
-        if (hasNativeInspectTool) {
-            const setiFrameAttributes = () => {
+        let lastScrollPosition = {};
+
+        const initScrollPosition = () => new Promise((resolve) => {
+            /**
+             * In some RP9 projects without the native inspect tool, we
+             * sometimes measure scroll values before the whole artboard
+             * is rendered correctly and we'll get 0. We have to wait
+             * until it's loaded before proceeding.
+             */
+            const waitScrollEstablished = setInterval(() => {
                 const {
                     clientHeight,
                     clientWidth,
@@ -103,6 +110,78 @@ const removeInspectTool = () => {
                     scrollWidth
                 } = htmlDocument;
 
+                // Default Scroll Positions - Artboard Centered
+                const scrollLeft = (scrollWidth - clientWidth) / 2;
+                const scrollTop = (scrollHeight - clientHeight) / 2;
+
+                // Once we have a correctly rendered artboard, proceed.
+                if (scrollLeft && scrollTop) {
+                    clearInterval(waitScrollEstablished);
+
+                    lastScrollPosition = {
+                        scrollLeft,
+                        scrollTop
+                    };
+
+                    scrollDocument({
+                        left: scrollLeft,
+                        top: scrollTop
+                    });
+
+                    resolve();
+                }
+            }, 10);
+        });
+
+        initScrollPosition().then(() => {
+            window.addEventListener('scroll', () => {
+                const {
+                    scrollLeft,
+                    scrollTop
+                } = htmlDocument;
+
+                const SCROLL_DEVIATION = 50;
+
+                const {
+                    scrollLeft: scrollLeftPrevious,
+                    scrollTop: scrollTopPrevious
+                } = lastScrollPosition;
+
+                /**
+                 * Here we're checking to see if it's a natural scroll
+                 * performed by the user or if AxShare is causing the
+                 * document to scroll to the top left. If it's natural,
+                 * we record it.
+                 */
+                if ((scrollLeft === 0 && scrollLeftPrevious - scrollLeft < SCROLL_DEVIATION) || scrollLeft !== 0) {
+                    lastScrollPosition.scrollLeft = scrollLeft;
+                }
+                if ((scrollTop === 0 && scrollTopPrevious - scrollTop < SCROLL_DEVIATION) || scrollTop !== 0) {
+                    lastScrollPosition.scrollTop = scrollTop;
+                }
+            });
+
+            /**
+             * Listen for resize event and scroll back to last known position
+             * otherwise we'll end up jumping to the top left corner because
+             * of something in AxShare RP9 projects.
+             */
+            window.addEventListener('resize', () => {
+                const {
+                    scrollLeft,
+                    scrollTop
+                } = lastScrollPosition;
+
+                scrollDocument({
+                    left: scrollLeft,
+                    top: scrollTop
+                });
+            });
+        });
+
+        // Only proceed if we're actually dealing with the inspect tool.
+        if (hasNativeInspectTool) {
+            const setiFrameAttributes = () => {
                 // The native inspect tool keeps changing these on resize or tab toggle.
                 clipFrameScroll.style.overflow = 'hidden';
                 document.body.style.overflow = 'auto';
@@ -110,10 +189,15 @@ const removeInspectTool = () => {
                 iFrame.style.minWidth = '100%';
                 iFrame.style.width = '100%';
 
+                const {
+                    scrollLeft,
+                    scrollTop
+                } = lastScrollPosition;
+
                 // Recenter the artboard after resizing or switching tabs - caused by AxShare Inspect.
                 scrollDocument({
-                    left: (scrollWidth - clientWidth) / 2,
-                    top: (scrollHeight - clientHeight) / 2
+                    left: scrollLeft,
+                    top: scrollTop
                 });
             };
 
@@ -147,15 +231,6 @@ const removeInspectTool = () => {
                     }, 250);
                 }
             }, 100);
-
-            // On resize events, we need to correct some things AxShare does.
-            window.addEventListener('resize', (event) => {
-                event.preventDefault();
-
-                setTimeout(() => {
-                    setiFrameAttributes();
-                }, 0);
-            });
         }
     } catch (error) {
         // Just in case these elements aren't on the page.

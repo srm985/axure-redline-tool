@@ -9,7 +9,7 @@ module.exports = () => ({
         port: 3100,
         proxyRP8: 'https://tqap6c.axshare.com',
         proxyRP9: 'https://98t4tt.axshare.com',
-        proxyRP9Inspect: 'https://app.axure.cloud/app/project/t11olj/inspect/6c7ijt',
+        proxyRP9Inspect: 'https://tlslxj.axshare.com/#id=dnhnlp&p=page_1',
         reloadDebounce: 250,
         reloadDelay: 50,
         reloadOnRestart: true,
