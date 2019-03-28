@@ -13,7 +13,7 @@ Latest Version
 
 Current Version
 ```sh
-<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@3.0.5/web/axure-redline-plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@3.0.6/web/axure-redline-plugin.js"></script>
 ```
 
 There are several ways to use this "install" this plugin. The easiest option is to copy the script link above into your AxShare project as a plugin. Copy the script of the version you'd like to use, or simply use the script marked "latest" to ensure you're always subscribed to the latest application updates. The code in the scripts above is served from a CDN to ensure a fast response, no matter your location.
@@ -200,3 +200,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 * Removed click functionality from #base which is essentially the artboard and shouldn't be interacted with.
 * Added opacity to #base artboard to style it more like a non-interactive element.
+
+#### Version 3.0.6
+
+* Added additional functionality to support jumping artboard in RP9 projects and projects using native inspect tool.
