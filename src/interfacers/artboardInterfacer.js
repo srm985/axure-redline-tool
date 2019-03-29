@@ -69,8 +69,13 @@ export const calculateScrollAfterZoom = (dimensions) => {
  * we'll go ahead and set it as white.
  */
 const styleArtboardBase = () => {
-    if ($('#base').css('background-color') === 'transparent' || $('#base').css('background-color').search(/rgba\(\d+,\s\d+,\s\d+,\s0\)/) >= 0) {
+    const backgroundColor = window.getComputedStyle(document.querySelector('body')).getPropertyValue('background-color');
+    const baseArtboard = document.querySelector('#base');
+
+    // If the user set a specific background color, use it.
+    if (!(backgroundColor === 'transparent' || backgroundColor.match(/rgba\(\d+,\s\d+,\s\d+,\s0\)/))) {
         $('#base').css('background-color', 'rgba(255, 255, 255, 0.2)');
+        baseArtboard.style.backgroundColor = backgroundColor;
     }
 };
 
