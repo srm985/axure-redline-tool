@@ -18,6 +18,8 @@ body {
 
     #base {
         // sass-lint:disable-line no-ids
+        background-color: $artboard-background-color;
+
         span {
             display: inline-block;
         }

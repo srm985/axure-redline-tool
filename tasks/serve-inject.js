@@ -10,29 +10,42 @@ const {
 } = require('../gulp.config.js')();
 
 const rpVersionChoices = {
+    promptInput: 'Serve Custom URL',
     rp8: 'Serve RP8',
-    rp9: 'Serve RP9',
-    rp9Inspect: 'Serve RP9 With Inspect Tool'
+    rp9: 'Serve RP9'
 };
 
 gulp.task(serveInject, (done) => {
     const {
         rp8,
         rp9,
-        rp9Inspect
+        promptInput
     } = rpVersionChoices;
 
     const {
         proxyRP8,
-        proxyRP9,
-        proxyRP9Inspect
+        proxyRP9
     } = browserSyncConfig;
+
+    const handlePromptInput = () => new Promise((resolve) => {
+        inquirer.prompt({
+            message: 'Please enter custom AxShare URL.',
+            name: 'proxyInput',
+            type: 'input'
+        }).then((inputValue) => {
+            const {
+                proxyInput
+            } = inputValue;
+
+            resolve(proxyInput);
+        });
+    });
 
     inquirer.prompt({
         choices: [
             rp8,
             rp9,
-            rp9Inspect
+            promptInput
         ],
         message: 'Which version of Axure do you want to serve?',
         name: 'rpVersion',
@@ -42,27 +55,27 @@ gulp.task(serveInject, (done) => {
             rpVersion
         } = selection;
 
-        let proxy;
+        const [
+            promptSelection
+        ] = rpVersion;
 
-        switch (rpVersion[0]) {
-            case rp8:
-                proxy = proxyRP8;
-                break;
-            case rp9:
-                proxy = proxyRP9;
-                break;
-            case rp9Inspect:
-                proxy = proxyRP9Inspect;
-                break;
-            default:
-                proxy = proxyRP8;
-        }
+        new Promise((resolve) => {
+            if (promptSelection === rp8) {
+                resolve(proxyRP8);
+            } else if (promptSelection === rp9) {
+                resolve(proxyRP9);
+            } else if (promptSelection === promptInput) {
+                handlePromptInput().then((proxyInput) => {
+                    resolve(proxyInput);
+                });
+            }
+        }).then((proxy) => {
+            browserSync.init({
+                ...browserSyncConfig,
+                proxy
+            });
 
-        browserSync.init({
-            ...browserSyncConfig,
-            proxy
+            done();
         });
-
-        done();
     });
 });
