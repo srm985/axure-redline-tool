@@ -36,7 +36,9 @@ class HeaderModule extends React.PureComponent {
 
     render() {
         const {
+            isArtboardWrapperShown,
             isToolEnabled,
+            toggleArtboardWrapperShown,
             toggleToolEnable
         } = this.props;
 
@@ -55,6 +57,11 @@ class HeaderModule extends React.PureComponent {
                             isEnabled: isToolEnabled
                         },
                         {
+                            callback: toggleArtboardWrapperShown,
+                            iconPath: codeInspect,
+                            isEnabled: isArtboardWrapperShown
+                        },
+                        {
                             callback: this.toggleSharingLinks,
                             iconPath: share,
                             isEnabled: isSharingLinksShown
@@ -71,7 +78,9 @@ class HeaderModule extends React.PureComponent {
 }
 
 HeaderModule.propTypes = {
+    isArtboardWrapperShown: PropTypes.bool.isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
+    toggleArtboardWrapperShown: PropTypes.func.isRequired,
     toggleToolEnable: PropTypes.func.isRequired
 };
 

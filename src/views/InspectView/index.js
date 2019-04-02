@@ -9,6 +9,10 @@ import ZoomControlModule from '../../modules/ZoomControlModule';
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
 
 import {
+    scrollCenterArtboard,
+    scrollDocument
+} from '../../interfacers/artboardInterfacer';
+import {
     addDialogOpenListener,
     addGlobalClickListener,
     addGlobalMouseoverListener,
@@ -67,6 +71,7 @@ class InspectView extends React.Component {
                 trueWidth: 0,
                 width: 0
             },
+            isArtboardWrapperShown: true,
             isHotkeyDepressed: false,
             isToolEnabled: true,
             isToolPermitted: false,
@@ -273,6 +278,36 @@ class InspectView extends React.Component {
         this.clearSelectedElement();
 
         this.setToolEnabledStatus(!wasToolEnabled);
+    }
+
+    toggleArtboardWrapperShown = () => {
+        const {
+            isArtboardWrapperShown: wasArtboardWrapperShown,
+            artboardHeight,
+            artboardWidth,
+            documentZoom,
+            zoomWrapperPadding
+        } = this.state;
+
+        this.clearToolStatus();
+
+        this.setState({
+            isArtboardWrapperShown: !wasArtboardWrapperShown
+        }, () => {
+            if (wasArtboardWrapperShown) {
+                scrollDocument({
+                    left: 0,
+                    top: 0
+                });
+            } else {
+                scrollCenterArtboard({
+                    artboardHeight,
+                    artboardWidth,
+                    documentZoom,
+                    zoomWrapperPadding
+                });
+            }
+        });
     }
 
     initializerListeners = () => {
@@ -576,6 +611,7 @@ class InspectView extends React.Component {
             elementMarkerThickness,
             gridLayout,
             hoveredElement,
+            isArtboardWrapperShown,
             isToolEnabled,
             isToolPermitted,
             selectedElement,
@@ -602,7 +638,9 @@ class InspectView extends React.Component {
                                 onScroll={this.handleScroll}
                             >
                                 <HeaderModule
+                                    isArtboardWrapperShown={isArtboardWrapperShown}
                                     isToolEnabled={isToolEnabled}
+                                    toggleArtboardWrapperShown={this.toggleArtboardWrapperShown}
                                     toggleToolEnable={this.toggleToolEnable}
                                 />
                                 <ElementPropertiesSidebarModule
@@ -621,6 +659,7 @@ class InspectView extends React.Component {
                                     gridLayout={gridLayout}
                                     handleClickCallback={this.handleClickCallback}
                                     hoveredElement={hoveredElement}
+                                    isArtboardWrapperShown={isArtboardWrapperShown}
                                     isToolEnabled={isToolEnabled}
                                     selectedElement={selectedElement}
                                     setArtboardDimensions={this.setArtboardDimensions}

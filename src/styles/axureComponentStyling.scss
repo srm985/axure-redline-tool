@@ -6,6 +6,10 @@
 // Module Constants
 $default-border-radius: 3px;
 
+html {
+    @extend %background;
+}
+
 body {
     position: static;
     left: auto;

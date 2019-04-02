@@ -134,6 +134,7 @@ class ArtboardModule extends React.PureComponent {
             gridLayout,
             handleClickCallback,
             hoveredElement,
+            isArtboardWrapperShown,
             isToolEnabled,
             selectedElement,
             zoomWrapperPadding
@@ -146,10 +147,17 @@ class ArtboardModule extends React.PureComponent {
             artboardScaledWidth
         } = this.state;
 
-        const artboardWrapperStyle = {
-            height: artboardWrapperHeight,
-            width: artboardWrapperWidth
-        };
+        let artboardWrapperStyle = {};
+        let artboardShownClass = '';
+
+        if (isArtboardWrapperShown) {
+            artboardWrapperStyle = {
+                height: artboardWrapperHeight,
+                width: artboardWrapperWidth
+            };
+        } else {
+            artboardShownClass = `${ArtboardModule.displayName}--shown`;
+        }
 
         const artboardStyle = {
             height: artboardHeight,
@@ -161,7 +169,7 @@ class ArtboardModule extends React.PureComponent {
 
         return (
             <div
-                className={`${ArtboardModule.displayName} ${toolEnabledClass}`}
+                className={`${ArtboardModule.displayName} ${toolEnabledClass} ${artboardShownClass}`}
                 onClick={handleClickCallback}
                 style={artboardWrapperStyle}
             >
@@ -200,6 +208,7 @@ ArtboardModule.propTypes = {
     gridLayout: PropTypes.string.isRequired,
     handleClickCallback: PropTypes.func.isRequired,
     hoveredElement: PropTypes.shape({}).isRequired,
+    isArtboardWrapperShown: PropTypes.bool.isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
     selectedElement: PropTypes.shape({}).isRequired,
     setArtboardDimensions: PropTypes.func.isRequired,

@@ -44,6 +44,13 @@ $border-default: solid 1px $secondary-color-gray;
 $border-radius-small: 3px;
 $border-radius-large: 5px;
 
+// Custom Classes
+%background {
+    background-color: $secondary-color-gray;
+    background-image: radial-gradient($background-color 1px, transparent 0);
+    background-size: 10px 10px;
+}
+
 // Exported constants can be imported into JavaScript.
 :export {
     // sass-lint:disable no-misspelled-properties
