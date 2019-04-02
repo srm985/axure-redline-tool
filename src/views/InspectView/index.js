@@ -30,11 +30,10 @@ import {
 } from '../../utils/storage';
 
 import {
-    COOKIE_DOCUMENT_ZOOM,
-    COOKIE_EXPIRATION_DEFAULT,
-    COOKIE_EXPIRATION_INDEFINITE,
-    COOKIE_SPLASH_SCREEN,
-    COOKIE_TOOL_ENABLED,
+    STORE_ARTBOARD_WRAPPER_SHOWN,
+    STORE_DOCUMENT_ZOOM,
+    STORE_SPLASH_SCREEN,
+    STORE_TOOL_ENABLED,
     ESCAPE_KEY,
     MINUS_KEY,
     NO_INTERACT_CLASS,
@@ -93,8 +92,8 @@ class InspectView extends React.Component {
     }
 
     componentDidMount() {
-        const isToolEnabled = storageRead(COOKIE_TOOL_ENABLED);
-        const lastSeenSplashScreen = storageRead(COOKIE_SPLASH_SCREEN) || 0;
+        const lastSeenSplashScreen = storageRead(STORE_SPLASH_SCREEN) || 0;
+        const isToolEnabled = storageRead(STORE_TOOL_ENABLED);
 
         const pageURL = window.parent.location.href;
         const isToolPermitted = !(/redline=business/).test(pageURL);
@@ -102,7 +101,7 @@ class InspectView extends React.Component {
         const shouldShowSplashScreen = Number(lastSeenSplashScreen) < SPLASH_SCREEN_VERSION;
 
         if (isToolEnabled !== undefined) {
-            this.setToolEnabledStatus(isToolEnabled === 'true');
+            this.setToolEnabledStatus(isToolEnabled);
         }
 
         this.setState({
@@ -112,16 +111,29 @@ class InspectView extends React.Component {
     }
 
     setAxureLoaded = () => {
-        const documentZoom = storageRead(COOKIE_DOCUMENT_ZOOM);
+        const documentZoom = storageRead(STORE_DOCUMENT_ZOOM);
+        const isArtboardWrapperShown = storageRead(STORE_ARTBOARD_WRAPPER_SHOWN);
+
+        const showArtboardWrapper = isArtboardWrapperShown === undefined ? true : isArtboardWrapperShown;
 
         this.setState({
-            axureLoaded: true
+            axureLoaded: true,
+            isArtboardWrapperShown: showArtboardWrapper
         }, () => {
             this.initializerListeners();
 
             // Re-initialize our saved zoom.
             if (documentZoom !== undefined) {
                 this.setArtboardZoom(Number(documentZoom));
+            }
+
+            if (!showArtboardWrapper) {
+                setTimeout(() => {
+                    scrollDocument({
+                        left: 0,
+                        top: 0
+                    });
+                }, 0);
             }
         });
     }
@@ -227,7 +239,7 @@ class InspectView extends React.Component {
         // Cleared hovered/selected elemets to prevent dimension jank.
         this.clearToolStatus();
 
-        storageWrite(COOKIE_DOCUMENT_ZOOM, zoomLevel, COOKIE_EXPIRATION_DEFAULT);
+        storageWrite(STORE_DOCUMENT_ZOOM, zoomLevel);
 
         this.setState({
             documentZoom: roundedZoom <= 1 ? 1 : roundedZoom
@@ -266,7 +278,7 @@ class InspectView extends React.Component {
         });
 
         // Track enable status for page reloads.
-        storageWrite(COOKIE_TOOL_ENABLED, isToolEnabled, COOKIE_EXPIRATION_DEFAULT);
+        storageWrite(STORE_TOOL_ENABLED, isToolEnabled);
     }
 
     toggleToolEnable = () => {
@@ -289,10 +301,14 @@ class InspectView extends React.Component {
             zoomWrapperPadding
         } = this.state;
 
+        const isArtboardWrapperShown = !wasArtboardWrapperShown;
+
         this.clearToolStatus();
 
+        storageWrite(STORE_ARTBOARD_WRAPPER_SHOWN, isArtboardWrapperShown);
+
         this.setState({
-            isArtboardWrapperShown: !wasArtboardWrapperShown
+            isArtboardWrapperShown
         }, () => {
             if (wasArtboardWrapperShown) {
                 scrollDocument({
@@ -587,7 +603,7 @@ class InspectView extends React.Component {
 
     handleSplashScreenClose = () => {
         // User has seen the current version splash screen now.
-        storageWrite(COOKIE_SPLASH_SCREEN, SPLASH_SCREEN_VERSION, COOKIE_EXPIRATION_INDEFINITE);
+        storageWrite(STORE_SPLASH_SCREEN, SPLASH_SCREEN_VERSION);
 
         this.setState({
             shouldShowSplashScreen: false
