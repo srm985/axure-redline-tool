@@ -36,11 +36,7 @@ class SplashScreenModule extends React.PureComponent {
     renderSplashScreenContent = () => (
         <div className={SplashScreenModule.displayName}>
             <div className={`${SplashScreenModule.displayName}__header`}>
-                <Icon
-                    height={28}
-                    path={codeInspect}
-                    width={28}
-                />
+                <Icon icon={codeInspect} />
                 <h1>Welcome to Redline Tool V3!</h1>
             </div>
             <p>Things may look similar in this new version, but a lot has changed under the hood. Find out what's new below and thanks for using the tool!</p>

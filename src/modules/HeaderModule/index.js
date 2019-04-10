@@ -53,17 +53,17 @@ class HeaderModule extends React.PureComponent {
                     controlList={[
                         {
                             callback: toggleToolEnable,
-                            iconPath: codeInspect,
+                            icon: codeInspect,
                             isEnabled: isToolEnabled
                         },
                         {
                             callback: toggleArtboardWrapperShown,
-                            iconPath: codeInspect,
+                            icon: codeInspect,
                             isEnabled: isArtboardWrapperShown
                         },
                         {
                             callback: this.toggleSharingLinks,
-                            iconPath: share,
+                            icon: share,
                             isEnabled: isSharingLinksShown
                         }
                     ]}
