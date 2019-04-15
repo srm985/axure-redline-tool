@@ -5,6 +5,7 @@ import PrimaryControlsModule from '../PrimaryControlsModule';
 import SharingLinksModule from '../SharingLinksModule';
 
 import {
+    artboard,
     codeInspect,
     share
 } from '../../icons';
@@ -58,7 +59,7 @@ class HeaderModule extends React.PureComponent {
                         },
                         {
                             callback: toggleArtboardWrapperShown,
-                            icon: codeInspect,
+                            icon: artboard,
                             isEnabled: isArtboardWrapperShown
                         },
                         {

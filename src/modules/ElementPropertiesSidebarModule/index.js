@@ -63,6 +63,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             'line-height': '',
             'text-align': '',
             'color': '',
+            'text-shadow': '',
             '_content': ''
         }
         /* eslint-enable quote-props, sort-keys */
