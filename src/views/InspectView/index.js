@@ -414,6 +414,34 @@ class InspectView extends React.Component {
         }
     }
 
+    /**
+     * This function checks if there are any adjacent siblings with the display attribute
+     * set to inline. If there are not, we'll iterate up on level and return. Otherwise
+     * we'll return the original element.
+     */
+    checkSiblingsAreSpans = (target) => {
+        const INLINE_ELEMENT = 'inline';
+
+        const isDisplayInline = (element) => window.getComputedStyle(element).getPropertyValue('display') === INLINE_ELEMENT;
+
+        if (isDisplayInline(target)) {
+            const {
+                nextElementSibling: nextElement,
+                parentElement,
+                previousElementSibling: previousElement
+            } = target;
+
+            if ((previousElement && isDisplayInline(previousElement))
+                || (nextElement && isDisplayInline(nextElement))) {
+                return target;
+            } else if (parentElement) {
+                return parentElement;
+            }
+        }
+
+        return target;
+    }
+
     handleMouseoverCallback = (event) => {
         const {
             isToolEnabled,
@@ -432,7 +460,9 @@ class InspectView extends React.Component {
         if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
             event.stopPropagation();
 
-            this.updateHoverSelect(target, null);
+            const resolvedElement = this.checkSiblingsAreSpans(target);
+
+            this.updateHoverSelect(resolvedElement, null);
         } else if (isToolEnabled && !isInteractableElement()) {
             this.clearHoveredElement();
         }
@@ -478,7 +508,9 @@ class InspectView extends React.Component {
             event.stopPropagation();
             event.preventDefault();
 
-            this.updateHoverSelect(null, target);
+            const resolvedElement = this.checkSiblingsAreSpans(target);
+
+            this.updateHoverSelect(null, resolvedElement);
         } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
             /**
              * There is a bug in chrome where key presses are lost

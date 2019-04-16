@@ -1781,7 +1781,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/di
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:400,700);", ""]);
 
 // Module
-exports.push([module.i, "html {\n  background-color: #333;\n  background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);\n  background-size: 10px 10px; }\n\nhtml {\n  background-color: #333;\n  background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);\n  background-size: 10px 10px; }\n\nbody {\n  position: static;\n  left: auto;\n  width: 100vw;\n  height: 100vh;\n  margin: 0; }\n  body #base {\n    background-color: rgba(255, 255, 255, 0.2); }\n    body #base span {\n      display: inline-block; }\n  body .annotation {\n    box-sizing: border-box;\n    width: 14px !important;\n    height: 14px !important;\n    margin: 0;\n    padding: 0;\n    cursor: help !important; }\n    body .annotation > div {\n      display: flex;\n      align-items: center;\n      flex-direction: column;\n      justify-content: space-around;\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      padding: 3px;\n      border: none;\n      border-radius: 3px;\n      background-color: #4860ff; }\n      body .annotation > div:hover {\n        background-color: #1534ff; }\n      body .annotation > div > div {\n        width: 100%;\n        height: 1px;\n        margin: 0;\n        padding: 0;\n        border: none;\n        background-color: #fff; }\n    body .annotation * {\n      cursor: help !important; }\n  body .annnote {\n    cursor: help !important; }\n    body .annnote .annnotelabel {\n      margin: 0;\n      cursor: help !important;\n      color: #fff;\n      border-radius: 3px;\n      background-color: #4860ff; }\n      body .annnote .annnotelabel:hover {\n        background-color: #1534ff; }\n  body .ui-dialog {\n    z-index: 99996 !important;\n    padding: 0 !important;\n    opacity: 0.9;\n    border: solid 1px #555 !important;\n    border-radius: 3px !important; }\n    body .ui-dialog * {\n      color: #555; }\n  body .ui-dialog-titlebar {\n    border: none !important;\n    background-color: #555 !important; }\n    body .ui-dialog-titlebar button {\n      border-radius: 3px !important;\n      outline: none !important; }\n    body .ui-dialog-titlebar .ui-icon-closethick {\n      border-radius: 3px;\n      background-color: #fff; }\n  body .ui-dialog-content {\n    padding: 10px !important;\n    border-radius: 3px; }\n  body .ui-button-icon-only .ui-icon {\n    top: 0 !important;\n    left: 0 !important; }\n  body .ui-corner-all {\n    border-radius: 0; }\n\nbody {\n  font-family: \"Lato\", sans-serif; }\n", ""]);
+exports.push([module.i, "html {\n  background-color: #333;\n  background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);\n  background-size: 10px 10px; }\n\nhtml {\n  background-color: #333;\n  background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 0);\n  background-size: 10px 10px; }\n\nbody {\n  position: static;\n  left: auto;\n  width: 100vw;\n  height: 100vh;\n  margin: 0; }\n  body #base {\n    background-color: rgba(255, 255, 255, 0.2); }\n  body .annotation {\n    box-sizing: border-box;\n    width: 14px !important;\n    height: 14px !important;\n    margin: 0;\n    padding: 0;\n    cursor: help !important; }\n    body .annotation > div {\n      display: flex;\n      align-items: center;\n      flex-direction: column;\n      justify-content: space-around;\n      box-sizing: border-box;\n      width: 100%;\n      height: 100%;\n      padding: 3px;\n      border: none;\n      border-radius: 3px;\n      background-color: #4860ff; }\n      body .annotation > div:hover {\n        background-color: #1534ff; }\n      body .annotation > div > div {\n        width: 100%;\n        height: 1px;\n        margin: 0;\n        padding: 0;\n        border: none;\n        background-color: #fff; }\n    body .annotation * {\n      cursor: help !important; }\n  body .annnote {\n    cursor: help !important; }\n    body .annnote .annnotelabel {\n      margin: 0;\n      cursor: help !important;\n      color: #fff;\n      border-radius: 3px;\n      background-color: #4860ff; }\n      body .annnote .annnotelabel:hover {\n        background-color: #1534ff; }\n  body .ui-dialog {\n    z-index: 99996 !important;\n    padding: 0 !important;\n    opacity: 0.9;\n    border: solid 1px #555 !important;\n    border-radius: 3px !important; }\n    body .ui-dialog * {\n      color: #555; }\n  body .ui-dialog-titlebar {\n    border: none !important;\n    background-color: #555 !important; }\n    body .ui-dialog-titlebar button {\n      border-radius: 3px !important;\n      outline: none !important; }\n    body .ui-dialog-titlebar .ui-icon-closethick {\n      border-radius: 3px;\n      background-color: #fff; }\n  body .ui-dialog-content {\n    padding: 10px !important;\n    border-radius: 3px; }\n  body .ui-button-icon-only .ui-icon {\n    top: 0 !important;\n    left: 0 !important; }\n  body .ui-corner-all {\n    border-radius: 0; }\n\nbody {\n  font-family: \"Lato\", sans-serif; }\n", ""]);
 
 // Exports
 exports.locals = {
@@ -43602,7 +43602,10 @@ function (_React$PureComponent) {
           selectedElementTrueOffsetLeft = _this$props$selectedE.trueOffsetLeft,
           selectedElementTrueOffsetTop = _this$props$selectedE.trueOffsetTop,
           selectedElementTrueWidth = _this$props$selectedE.trueWidth,
-          selectedElementWidth = _this$props$selectedE.width; // Scaled element measurements.
+          selectedElementWidth = _this$props$selectedE.width;
+      var INLINE_ELEMENT = 'inline'; // If one of the elements is inline, none of our dimensions will be correct.
+
+      var isDisplayInlineElement = window.getComputedStyle(hoveredElementTarget).getPropertyValue('display') === INLINE_ELEMENT || window.getComputedStyle(selectedElementTarget).getPropertyValue('display') === INLINE_ELEMENT; // Scaled element measurements.
 
       var diffSelectedLeftHoveredRight = selectedElementOffsetLeft - (hoveredElementOffsetLeft + hoveredElementWidth);
       var diffSelectedLeftHoveredLeft = selectedElementOffsetLeft - hoveredElementOffsetLeft;
@@ -43718,7 +43721,7 @@ function (_React$PureComponent) {
       }
 
       var isHoveredSelectedElement = selectedElementTarget === hoveredElementTarget;
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null, isHoveredSelectedElement ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_9__["DimensionMarkerComponent"], {
+      return !isDisplayInlineElement && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null, isHoveredSelectedElement ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_9__["DimensionMarkerComponent"], {
         dimensionType: _components_DimensionMarkerComponent__WEBPACK_IMPORTED_MODULE_9__["HORIZONTAL_DIMENSION"],
         measurement: selectedElementTrueWidth,
         offsetLeft: selectedElementOffsetLeft + selectedElementWidth / 2,
@@ -45755,6 +45758,28 @@ function (_React$Component) {
       }
     });
 
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this), "checkSiblingsAreSpans", function (target) {
+      var INLINE_ELEMENT = 'inline';
+
+      var isDisplayInline = function isDisplayInline(element) {
+        return window.getComputedStyle(element).getPropertyValue('display') === INLINE_ELEMENT;
+      };
+
+      if (isDisplayInline(target)) {
+        var nextElement = target.nextElementSibling,
+            parentElement = target.parentElement,
+            previousElement = target.previousElementSibling;
+
+        if (previousElement && isDisplayInline(previousElement) || nextElement && isDisplayInline(nextElement)) {
+          return target;
+        } else if (parentElement) {
+          return parentElement;
+        }
+      }
+
+      return target;
+    });
+
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this), "handleMouseoverCallback", function (event) {
       var _this$state5 = _this.state,
           isToolEnabled = _this$state5.isToolEnabled,
@@ -45769,7 +45794,9 @@ function (_React$Component) {
       if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
         event.stopPropagation();
 
-        _this.updateHoverSelect(target, null);
+        var resolvedElement = _this.checkSiblingsAreSpans(target);
+
+        _this.updateHoverSelect(resolvedElement, null);
       } else if (isToolEnabled && !isInteractableElement()) {
         _this.clearHoveredElement();
       }
@@ -45806,7 +45833,9 @@ function (_React$Component) {
         event.stopPropagation();
         event.preventDefault();
 
-        _this.updateHoverSelect(null, target);
+        var resolvedElement = _this.checkSiblingsAreSpans(target);
+
+        _this.updateHoverSelect(null, resolvedElement);
       } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
         /**
          * There is a bug in chrome where key presses are lost
