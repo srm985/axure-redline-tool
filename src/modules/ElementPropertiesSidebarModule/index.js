@@ -475,6 +475,11 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 delete tempElementAttributes.styles['border-color'];
             }
 
+            // For some reason <p> tags have a border color but no actual border.
+            if (borderStyle === 'none' && borderColor) {
+                delete tempElementAttributes.styles['border-color'];
+            }
+
             // Create our border radius shorthand.
             if (!borderRadius) {
                 if (borderBottomLeftRadius === borderBottomRightRadius

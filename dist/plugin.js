@@ -41356,7 +41356,7 @@ var STORE_TOOL_ENABLED = 'redline-tool-enabled';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<svg fill=\"currentColor\" viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\"><title>Artboard 1</title><rect x=\"41\" y=\"6\" width=\"9\" height=\"3\"></rect><rect x=\"41\" width=\"3\" height=\"9\"></rect><rect x=\"6\" width=\"3\" height=\"9\"></rect><rect y=\"6\" width=\"9\" height=\"3\"></rect><rect x=\"41\" y=\"41\" width=\"3\" height=\"9\"></rect><rect x=\"41\" y=\"41\" width=\"9\" height=\"3\"></rect><rect y=\"41\" width=\"9\" height=\"3\"></rect><rect x=\"6\" y=\"41\" width=\"3\" height=\"9\"></rect><circle cx=\"30.5\" cy=\"18.5\" r=\"2\"></circle><polygon points=\"40 40 10 40 10 33 21 22 40 40\"></polygon><path d=\"M10,10V40H40V10ZM37,37H13V13H37Z\"></path><polygon points=\"34 25 29.671 28.82 39.663 38.302 38.974 39.027 28.918 29.484 17 40 40 40 40 30 34 25\"></polygon></svg>"
+module.exports = "<svg fill=\"currentColor\" viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"41\" y=\"6\" width=\"9\" height=\"3\"></rect><rect x=\"41\" width=\"3\" height=\"9\"></rect><rect x=\"6\" width=\"3\" height=\"9\"></rect><rect y=\"6\" width=\"9\" height=\"3\"></rect><rect x=\"41\" y=\"41\" width=\"3\" height=\"9\"></rect><rect x=\"41\" y=\"41\" width=\"9\" height=\"3\"></rect><rect y=\"41\" width=\"9\" height=\"3\"></rect><rect x=\"6\" y=\"41\" width=\"3\" height=\"9\"></rect><circle cx=\"30.5\" cy=\"18.5\" r=\"2\"></circle><polygon points=\"40 40 10 40 10 33 21 22 40 40\"></polygon><path d=\"M10,10V40H40V10ZM37,37H13V13H37Z\"></path><polygon points=\"34 25 29.671 28.82 39.663 38.302 38.974 39.027 28.918 29.484 17 40 40 40 40 30 34 25\"></polygon></svg>"
 
 /***/ }),
 
@@ -42686,6 +42686,11 @@ function (_React$PureComponent) {
           delete tempElementAttributes.styles.border;
           delete tempElementAttributes.styles['border-style'];
           delete tempElementAttributes.styles['border-width'];
+          delete tempElementAttributes.styles['border-color'];
+        } // For some reason <p> tags have a border color but no actual border.
+
+
+        if (borderStyle === 'none' && borderColor) {
           delete tempElementAttributes.styles['border-color'];
         } // Create our border radius shorthand.
 
