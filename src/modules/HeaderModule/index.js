@@ -55,17 +55,20 @@ class HeaderModule extends React.PureComponent {
                         {
                             callback: toggleToolEnable,
                             icon: codeInspect,
-                            isEnabled: isToolEnabled
+                            isEnabled: isToolEnabled,
+                            title: 'Enable Redline Tool'
                         },
                         {
                             callback: toggleArtboardWrapperShown,
                             icon: artboard,
-                            isEnabled: isArtboardWrapperShown
+                            isEnabled: isArtboardWrapperShown,
+                            title: 'Enable Artboard'
                         },
                         {
                             callback: this.toggleSharingLinks,
                             icon: share,
-                            isEnabled: isSharingLinksShown
+                            isEnabled: isSharingLinksShown,
+                            title: 'Share Project'
                         }
                     ]}
                 />

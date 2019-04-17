@@ -17,7 +17,8 @@ class PrimaryControlsModule extends React.PureComponent {
             const {
                 callback,
                 icon,
-                isEnabled
+                isEnabled,
+                title
             } = control;
 
             const enabledClass = isEnabled ? `${PrimaryControlsModule.displayName}__control--enabled` : '';
@@ -29,6 +30,7 @@ class PrimaryControlsModule extends React.PureComponent {
                     className={`${PrimaryControlsModule.displayName}__control ${enabledClass}`}
                     key={key}
                     onClick={callback}
+                    title={title}
                 >
                     <Icon icon={icon} />
                 </div>
@@ -47,7 +49,8 @@ PrimaryControlsModule.propTypes = {
     controlList: PropTypes.arrayOf(PropTypes.shape({
         callback: PropTypes.func,
         icon: PropTypes.string.isRequired,
-        isEnabled: PropTypes.bool
+        isEnabled: PropTypes.bool,
+        title: PropTypes.string.isRequired
     }))
 };
 

@@ -43333,15 +43333,18 @@ function (_React$PureComponent) {
         controlList: [{
           callback: toggleToolEnable,
           icon: _icons__WEBPACK_IMPORTED_MODULE_11__["codeInspect"],
-          isEnabled: isToolEnabled
+          isEnabled: isToolEnabled,
+          title: 'Enable Redline Tool'
         }, {
           callback: toggleArtboardWrapperShown,
           icon: _icons__WEBPACK_IMPORTED_MODULE_11__["artboard"],
-          isEnabled: isArtboardWrapperShown
+          isEnabled: isArtboardWrapperShown,
+          title: 'Enable Artboard'
         }, {
           callback: this.toggleSharingLinks,
           icon: _icons__WEBPACK_IMPORTED_MODULE_11__["share"],
-          isEnabled: isSharingLinksShown
+          isEnabled: isSharingLinksShown,
+          title: 'Share Project'
         }]
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_SharingLinksModule__WEBPACK_IMPORTED_MODULE_10__["default"], {
         isShown: isSharingLinksShown,
@@ -43873,13 +43876,15 @@ function (_React$PureComponent) {
       var controls = controlList.map(function (control) {
         var callback = control.callback,
             icon = control.icon,
-            isEnabled = control.isEnabled;
+            isEnabled = control.isEnabled,
+            title = control.title;
         var enabledClass = isEnabled ? "".concat(PrimaryControlsModule.displayName, "__control--enabled") : '';
         var key = Math.random();
         return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           className: "".concat(PrimaryControlsModule.displayName, "__control ").concat(enabledClass),
           key: key,
-          onClick: callback
+          onClick: callback,
+          title: title
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_IconComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
           icon: icon
         }));
@@ -43901,7 +43906,8 @@ PrimaryControlsModule.propTypes = {
   controlList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.shape({
     callback: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func,
     icon: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string.isRequired,
-    isEnabled: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool
+    isEnabled: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool,
+    title: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string.isRequired
   }))
 };
 PrimaryControlsModule.defaultProps = {
