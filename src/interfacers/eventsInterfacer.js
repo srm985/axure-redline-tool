@@ -31,7 +31,7 @@ export const addGlobalMouseoverListener = (callback) => {
  * @param {function} callback
  */
 export const addGlobalClickListener = (callback) => {
-    $('#base *').not(ANNOTATION_ELEMENTS.join(', ')).on('click', (event) => {
+    $('body, #base *').not(ANNOTATION_ELEMENTS.join(', ')).on('click', (event) => {
         callback(event);
     });
 };

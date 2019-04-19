@@ -41850,7 +41850,7 @@ var addGlobalMouseoverListener = function addGlobalMouseoverListener(callback) {
  */
 
 var addGlobalClickListener = function addGlobalClickListener(callback) {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#base *').not(_globalConstants__WEBPACK_IMPORTED_MODULE_1__["ANNOTATION_ELEMENTS"].join(', ')).on('click', function (event) {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('body, #base *').not(_globalConstants__WEBPACK_IMPORTED_MODULE_1__["ANNOTATION_ELEMENTS"].join(', ')).on('click', function (event) {
     callback(event);
   });
 };
@@ -45776,19 +45776,21 @@ function (_React$Component) {
         return window.getComputedStyle(element).getPropertyValue('display') === INLINE_ELEMENT;
       };
 
+      var selectedElement = target;
+
       if (isDisplayInline(target)) {
         var nextElement = target.nextElementSibling,
             parentElement = target.parentElement,
             previousElement = target.previousElementSibling;
 
         if (previousElement && isDisplayInline(previousElement) || nextElement && isDisplayInline(nextElement)) {
-          return target;
+          selectedElement = target;
         } else if (parentElement) {
-          return parentElement;
+          selectedElement = parentElement;
         }
       }
 
-      return target;
+      return selectedElement;
     });
 
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_9___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7___default()(_this), "handleMouseoverCallback", function (event) {
@@ -45817,11 +45819,13 @@ function (_React$Component) {
       var _this$state6 = _this.state,
           isToolEnabled = _this$state6.isToolEnabled,
           isHotkeyDepressed = _this$state6.isHotkeyDepressed;
-      var target = event.target,
+      var currentTargetTagName = event.currentTarget.tagName,
+          target = event.target,
           _event$target = event.target;
       _event$target = _event$target === void 0 ? {} : _event$target;
       var clickedElementClassList = _event$target.classList,
-          clickedElementID = _event$target.id;
+          clickedElementID = _event$target.id,
+          targetTagName = _event$target.tagName;
       var artboardModuleName = _modules_ArtboardModule__WEBPACK_IMPORTED_MODULE_11__["default"].displayName;
 
       var isNoInteractElement = function isNoInteractElement() {
@@ -45838,29 +45842,31 @@ function (_React$Component) {
         return isNoInteract;
       };
 
-      if (clickedElementClassList.contains(artboardModuleName) || clickedElementID === 'base') {
-        _this.clearSelectedElement();
-      } else if (isToolEnabled && !isHotkeyDepressed && !isNoInteractElement()) {
+      var isCloseArtboardClick = clickedElementClassList.contains(artboardModuleName) || clickedElementID === 'base' || targetTagName === 'BODY' && currentTargetTagName === 'BODY'; // We don't care about events that bubble up to body, other than body clicks.
+
+      var wasPertinentClick = currentTargetTagName !== 'BODY';
+
+      if (isCloseArtboardClick) {
+        _this.clearToolStatus();
+      } else if (wasPertinentClick && isToolEnabled && !isHotkeyDepressed && !isNoInteractElement()) {
         event.stopPropagation();
         event.preventDefault();
 
         var resolvedElement = _this.checkSiblingsAreSpans(target);
 
         _this.updateHoverSelect(null, resolvedElement);
-      } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
+      } else if (wasPertinentClick && isHotkeyDepressed && targetTagName === 'SELECT') {
         /**
          * There is a bug in chrome where key presses are lost
          * when clicking on a select. To prevent the isHotkeyDepressed
          * flag from sticking, we just trigger a reset. I think it's
          * better than sticking.
          */
-        _this.setState({
-          isHotkeyDepressed: false
-        });
-        /* setTimeout(() => {
-            isHotkeyDepressed = false;
-        }, 0); */
-
+        setTimeout(function () {
+          _this.setState({
+            isHotkeyDepressed: false
+          });
+        }, 0);
       }
     });
 

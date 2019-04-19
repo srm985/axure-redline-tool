@@ -424,6 +424,8 @@ class InspectView extends React.Component {
 
         const isDisplayInline = (element) => window.getComputedStyle(element).getPropertyValue('display') === INLINE_ELEMENT;
 
+        let selectedElement = target;
+
         if (isDisplayInline(target)) {
             const {
                 nextElementSibling: nextElement,
@@ -433,13 +435,13 @@ class InspectView extends React.Component {
 
             if ((previousElement && isDisplayInline(previousElement))
                 || (nextElement && isDisplayInline(nextElement))) {
-                return target;
+                selectedElement = target;
             } else if (parentElement) {
-                return parentElement;
+                selectedElement = parentElement;
             }
         }
 
-        return target;
+        return selectedElement;
     }
 
     handleMouseoverCallback = (event) => {
@@ -475,10 +477,14 @@ class InspectView extends React.Component {
         } = this.state;
 
         const {
+            currentTarget: {
+                tagName: currentTargetTagName
+            },
             target,
             target: {
                 classList: clickedElementClassList,
-                id: clickedElementID
+                id: clickedElementID,
+                tagName: targetTagName
             } = {}
         } = event;
 
@@ -500,9 +506,17 @@ class InspectView extends React.Component {
             return isNoInteract;
         };
 
-        if (clickedElementClassList.contains(artboardModuleName) || clickedElementID === 'base') {
-            this.clearSelectedElement();
-        } else if (isToolEnabled
+        const isCloseArtboardClick = clickedElementClassList.contains(artboardModuleName)
+            || clickedElementID === 'base'
+            || (targetTagName === 'BODY' && currentTargetTagName === 'BODY');
+
+        // We don't care about events that bubble up to body, other than body clicks.
+        const wasPertinentClick = currentTargetTagName !== 'BODY';
+
+        if (isCloseArtboardClick) {
+            this.clearToolStatus();
+        } else if (wasPertinentClick
+            && isToolEnabled
             && !isHotkeyDepressed
             && !isNoInteractElement()) {
             event.stopPropagation();
@@ -511,19 +525,20 @@ class InspectView extends React.Component {
             const resolvedElement = this.checkSiblingsAreSpans(target);
 
             this.updateHoverSelect(null, resolvedElement);
-        } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
+        } else if (wasPertinentClick
+            && isHotkeyDepressed
+            && targetTagName === 'SELECT') {
             /**
              * There is a bug in chrome where key presses are lost
              * when clicking on a select. To prevent the isHotkeyDepressed
              * flag from sticking, we just trigger a reset. I think it's
              * better than sticking.
              */
-            this.setState({
-                isHotkeyDepressed: false
-            });
-            /* setTimeout(() => {
-                isHotkeyDepressed = false;
-            }, 0); */
+            setTimeout(() => {
+                this.setState({
+                    isHotkeyDepressed: false
+                });
+            }, 0);
         }
     }
 
