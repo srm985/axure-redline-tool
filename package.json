@@ -95,5 +95,5 @@
     "sandbox": "gulp sandbox",
     "test": "jest --passWithNoTests"
   },
-  "version": "3.0.7"
+  "version": "3.1.0"
 }
