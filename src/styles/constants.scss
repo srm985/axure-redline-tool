@@ -7,6 +7,7 @@ $primary-color-red: #ff5757;
 $primary-color-teal: #4edec2;
 $primary-color-white: #fff;
 $secondary-color-gray: #333;
+$tertiary-color-gray: #eee;
 
 // Loading Spinner Background
 $background-color: rgba(0, 0, 0, 0.2);
@@ -17,6 +18,7 @@ $artboard-background-color: rgba($primary-color-white, 0.2);
 // Fonts
 $font-stack: 'Lato',
 sans-serif;
+$font-mono: 'Oxygen Mono', monospace;
 
 // GUI Opacity
 $ui-opacity: 0.9;
@@ -62,5 +64,6 @@ $border-radius-large: 5px;
     primaryColorTeal: $primary-color-teal;
     primaryColorWhite: $primary-color-white;
     secondaryColorGray: $secondary-color-gray;
+    tertiaryColorGray: $tertiary-color-gray;
     // sass-lint:enable no-misspelled-properties
 }

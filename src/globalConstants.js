@@ -1,4 +1,4 @@
-export const SPLASH_SCREEN_VERSION = 1;
+export const SPLASH_SCREEN_VERSION = 2;
 
 export const ANNOTATION_ELEMENTS = [
     // RP8 Syntax
