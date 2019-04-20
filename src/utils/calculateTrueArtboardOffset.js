@@ -8,7 +8,7 @@ const calculateTrueArtboardOffset = (element) => {
     let trueOffsetLeft = 0;
     let trueOffsetTop = 0;
 
-    while (currentElement.id !== 'base') {
+    while (currentElement && currentElement.id !== 'base') {
         const {
             offsetLeft,
             offsetParent,
