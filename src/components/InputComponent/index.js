@@ -186,7 +186,9 @@ class InputComponent extends React.PureComponent {
 
             // See if we have a CSS color name in our input value.
             colorsList.forEach((color) => {
-                if (cleanedInputValue.includes(color.toLowerCase())) {
+                const colorMatchRegex = new RegExp(`\\b${color.toLowerCase()}\\b`);
+
+                if (colorMatchRegex.test(cleanedInputValue)) {
                     const {
                         [color]: {
                             rgb: rgbColor
