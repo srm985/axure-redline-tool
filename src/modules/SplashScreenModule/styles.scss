@@ -11,10 +11,19 @@
         margin-bottom: 10px;
 
         .IconComponent {
+            width: 28px;
+            height: 28px;
             margin-right: 10px;
 
             color: $primary-color-teal;
         }
+    }
+
+    &__scrolling-body {
+        overflow-y: auto;
+
+        max-height: 50vh;
+        margin-top: 20px;
     }
 
     &--disclosure {
@@ -22,12 +31,18 @@
         font-style: italic;
     }
 
+    &--highlight {
+        font-weight: bold;
+
+        color: $primary-color-teal;
+    }
+
     h1 {
         margin: 0;
     }
 
     h2 {
-        margin: 40px 0 0;
+        margin: 0;
     }
 
     ul {
@@ -36,10 +51,16 @@
     }
 
     li {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
 
         &:last-of-type {
             margin-bottom: 0;
+        }
+
+        .IconComponent {
+            width: 28px;
+            height: 28px;
+            margin-top: 10px;
         }
     }
 

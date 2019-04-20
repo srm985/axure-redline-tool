@@ -1,0 +1,11 @@
+@import '../../styles/constants';
+
+.CodeBadgeComponent {
+    font-family: $font-mono;
+    font-size: small;
+
+    padding: 1px 4px;
+
+    border-radius: $border-radius-small;
+    background-color: $tertiary-color-gray;
+}

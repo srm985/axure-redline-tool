@@ -16,8 +16,9 @@ class PrimaryControlsModule extends React.PureComponent {
         const controls = controlList.map((control) => {
             const {
                 callback,
-                iconPath,
-                isEnabled
+                icon,
+                isEnabled,
+                title
             } = control;
 
             const enabledClass = isEnabled ? `${PrimaryControlsModule.displayName}__control--enabled` : '';
@@ -29,12 +30,9 @@ class PrimaryControlsModule extends React.PureComponent {
                     className={`${PrimaryControlsModule.displayName}__control ${enabledClass}`}
                     key={key}
                     onClick={callback}
+                    title={title}
                 >
-                    <Icon
-                        height={25}
-                        path={iconPath}
-                        width={25}
-                    />
+                    <Icon icon={icon} />
                 </div>
             );
         });
@@ -50,8 +48,9 @@ class PrimaryControlsModule extends React.PureComponent {
 PrimaryControlsModule.propTypes = {
     controlList: PropTypes.arrayOf(PropTypes.shape({
         callback: PropTypes.func,
-        iconPath: PropTypes.string.isRequired,
-        isEnabled: PropTypes.bool
+        icon: PropTypes.string.isRequired,
+        isEnabled: PropTypes.bool,
+        title: PropTypes.string.isRequired
     }))
 };
 

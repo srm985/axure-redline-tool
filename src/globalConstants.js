@@ -1,4 +1,4 @@
-export const SPLASH_SCREEN_VERSION = 1;
+export const SPLASH_SCREEN_VERSION = 2;
 
 export const ANNOTATION_ELEMENTS = [
     // RP8 Syntax
@@ -29,9 +29,10 @@ export const ESCAPE_KEY = 27;
 export const MINUS_KEY = 189;
 export const PLUS_KEY = 187;
 
-// Cookies
-export const COOKIE_EXPIRATION_DEFAULT = 30; // 30 days
-export const COOKIE_EXPIRATION_INDEFINITE = 9999; // ~27 years
-export const COOKIE_DOCUMENT_ZOOM = 'redline-tool-document-zoom';
-export const COOKIE_SPLASH_SCREEN = 'redline-tool-splash-screen';
-export const COOKIE_TOOL_ENABLED = 'redline-tool-enabled';
+// Storage Keys
+export const STORE_NAME = 'redlineTool';
+
+export const STORE_ARTBOARD_WRAPPER_SHOWN = 'artboardWrapperShown';
+export const STORE_DOCUMENT_ZOOM = 'redline-tool-document-zoom';
+export const STORE_SPLASH_SCREEN = 'redline-tool-splash-screen';
+export const STORE_TOOL_ENABLED = 'redline-tool-enabled';

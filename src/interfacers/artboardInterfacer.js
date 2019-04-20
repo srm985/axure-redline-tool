@@ -6,7 +6,7 @@ import $ from 'jquery';
  *
  * @param {object} scrollValues
  */
-const scrollDocument = (scrollValues) => {
+export const scrollDocument = (scrollValues) => {
     const {
         left,
         top
@@ -26,11 +26,14 @@ export const scrollCenterArtboard = (dimensions) => {
     const {
         artboardHeight,
         artboardWidth,
+        documentZoom = 100,
         zoomWrapperPadding
     } = dimensions;
 
-    const left = zoomWrapperPadding - (($(window).innerWidth() - artboardWidth) / 2);
-    const top = zoomWrapperPadding - (($(window).innerHeight() - artboardHeight) / 2);
+    const zoomMultiplier = documentZoom / 100;
+
+    const left = zoomWrapperPadding - (($(window).innerWidth() - (artboardWidth * zoomMultiplier)) / 2);
+    const top = zoomWrapperPadding - (($(window).innerHeight() - (artboardHeight * zoomMultiplier)) / 2);
 
     scrollDocument({
         left,

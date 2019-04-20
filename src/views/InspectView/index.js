@@ -9,6 +9,10 @@ import ZoomControlModule from '../../modules/ZoomControlModule';
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
 
 import {
+    scrollCenterArtboard,
+    scrollDocument
+} from '../../interfacers/artboardInterfacer';
+import {
     addDialogOpenListener,
     addGlobalClickListener,
     addGlobalMouseoverListener,
@@ -26,11 +30,10 @@ import {
 } from '../../utils/storage';
 
 import {
-    COOKIE_DOCUMENT_ZOOM,
-    COOKIE_EXPIRATION_DEFAULT,
-    COOKIE_EXPIRATION_INDEFINITE,
-    COOKIE_SPLASH_SCREEN,
-    COOKIE_TOOL_ENABLED,
+    STORE_ARTBOARD_WRAPPER_SHOWN,
+    STORE_DOCUMENT_ZOOM,
+    STORE_SPLASH_SCREEN,
+    STORE_TOOL_ENABLED,
     ESCAPE_KEY,
     MINUS_KEY,
     NO_INTERACT_CLASS,
@@ -67,6 +70,7 @@ class InspectView extends React.Component {
                 trueWidth: 0,
                 width: 0
             },
+            isArtboardWrapperShown: true,
             isHotkeyDepressed: false,
             isToolEnabled: true,
             isToolPermitted: false,
@@ -88,8 +92,8 @@ class InspectView extends React.Component {
     }
 
     componentDidMount() {
-        const isToolEnabled = storageRead(COOKIE_TOOL_ENABLED);
-        const lastSeenSplashScreen = storageRead(COOKIE_SPLASH_SCREEN) || 0;
+        const lastSeenSplashScreen = storageRead(STORE_SPLASH_SCREEN) || 0;
+        const isToolEnabled = storageRead(STORE_TOOL_ENABLED);
 
         const pageURL = window.parent.location.href;
         const isToolPermitted = !(/redline=business/).test(pageURL);
@@ -97,7 +101,7 @@ class InspectView extends React.Component {
         const shouldShowSplashScreen = Number(lastSeenSplashScreen) < SPLASH_SCREEN_VERSION;
 
         if (isToolEnabled !== undefined) {
-            this.setToolEnabledStatus(isToolEnabled === 'true');
+            this.setToolEnabledStatus(isToolEnabled);
         }
 
         this.setState({
@@ -107,16 +111,29 @@ class InspectView extends React.Component {
     }
 
     setAxureLoaded = () => {
-        const documentZoom = storageRead(COOKIE_DOCUMENT_ZOOM);
+        const documentZoom = storageRead(STORE_DOCUMENT_ZOOM);
+        const isArtboardWrapperShown = storageRead(STORE_ARTBOARD_WRAPPER_SHOWN);
+
+        const showArtboardWrapper = isArtboardWrapperShown === undefined ? true : isArtboardWrapperShown;
 
         this.setState({
-            axureLoaded: true
+            axureLoaded: true,
+            isArtboardWrapperShown: showArtboardWrapper
         }, () => {
             this.initializerListeners();
 
             // Re-initialize our saved zoom.
             if (documentZoom !== undefined) {
                 this.setArtboardZoom(Number(documentZoom));
+            }
+
+            if (!showArtboardWrapper) {
+                setTimeout(() => {
+                    scrollDocument({
+                        left: 0,
+                        top: 0
+                    });
+                }, 0);
             }
         });
     }
@@ -222,7 +239,7 @@ class InspectView extends React.Component {
         // Cleared hovered/selected elemets to prevent dimension jank.
         this.clearToolStatus();
 
-        storageWrite(COOKIE_DOCUMENT_ZOOM, zoomLevel, COOKIE_EXPIRATION_DEFAULT);
+        storageWrite(STORE_DOCUMENT_ZOOM, zoomLevel);
 
         this.setState({
             documentZoom: roundedZoom <= 1 ? 1 : roundedZoom
@@ -261,7 +278,7 @@ class InspectView extends React.Component {
         });
 
         // Track enable status for page reloads.
-        storageWrite(COOKIE_TOOL_ENABLED, isToolEnabled, COOKIE_EXPIRATION_DEFAULT);
+        storageWrite(STORE_TOOL_ENABLED, isToolEnabled);
     }
 
     toggleToolEnable = () => {
@@ -273,6 +290,40 @@ class InspectView extends React.Component {
         this.clearSelectedElement();
 
         this.setToolEnabledStatus(!wasToolEnabled);
+    }
+
+    toggleArtboardWrapperShown = () => {
+        const {
+            isArtboardWrapperShown: wasArtboardWrapperShown,
+            artboardHeight,
+            artboardWidth,
+            documentZoom,
+            zoomWrapperPadding
+        } = this.state;
+
+        const isArtboardWrapperShown = !wasArtboardWrapperShown;
+
+        this.clearToolStatus();
+
+        storageWrite(STORE_ARTBOARD_WRAPPER_SHOWN, isArtboardWrapperShown);
+
+        this.setState({
+            isArtboardWrapperShown
+        }, () => {
+            if (wasArtboardWrapperShown) {
+                scrollDocument({
+                    left: 0,
+                    top: 0
+                });
+            } else {
+                scrollCenterArtboard({
+                    artboardHeight,
+                    artboardWidth,
+                    documentZoom,
+                    zoomWrapperPadding
+                });
+            }
+        });
     }
 
     initializerListeners = () => {
@@ -363,6 +414,36 @@ class InspectView extends React.Component {
         }
     }
 
+    /**
+     * This function checks if there are any adjacent siblings with the display attribute
+     * set to inline. If there are not, we'll iterate up on level and return. Otherwise
+     * we'll return the original element.
+     */
+    checkSiblingsAreSpans = (target) => {
+        const INLINE_ELEMENT = 'inline';
+
+        const isDisplayInline = (element) => window.getComputedStyle(element).getPropertyValue('display') === INLINE_ELEMENT;
+
+        let selectedElement = target;
+
+        if (isDisplayInline(target)) {
+            const {
+                nextElementSibling: nextElement,
+                parentElement,
+                previousElementSibling: previousElement
+            } = target;
+
+            if ((previousElement && isDisplayInline(previousElement))
+                || (nextElement && isDisplayInline(nextElement))) {
+                selectedElement = target;
+            } else if (parentElement) {
+                selectedElement = parentElement;
+            }
+        }
+
+        return selectedElement;
+    }
+
     handleMouseoverCallback = (event) => {
         const {
             isToolEnabled,
@@ -381,7 +462,9 @@ class InspectView extends React.Component {
         if (isToolEnabled && !isHotkeyDepressed && isInteractableElement()) {
             event.stopPropagation();
 
-            this.updateHoverSelect(target, null);
+            const resolvedElement = this.checkSiblingsAreSpans(target);
+
+            this.updateHoverSelect(resolvedElement, null);
         } else if (isToolEnabled && !isInteractableElement()) {
             this.clearHoveredElement();
         }
@@ -394,10 +477,14 @@ class InspectView extends React.Component {
         } = this.state;
 
         const {
+            currentTarget: {
+                tagName: currentTargetTagName
+            },
             target,
             target: {
                 classList: clickedElementClassList,
-                id: clickedElementID
+                id: clickedElementID,
+                tagName: targetTagName
             } = {}
         } = event;
 
@@ -419,28 +506,39 @@ class InspectView extends React.Component {
             return isNoInteract;
         };
 
-        if (clickedElementClassList.contains(artboardModuleName) || clickedElementID === 'base') {
-            this.clearSelectedElement();
-        } else if (isToolEnabled
+        const isCloseArtboardClick = clickedElementClassList.contains(artboardModuleName)
+            || clickedElementID === 'base'
+            || (targetTagName === 'BODY' && currentTargetTagName === 'BODY');
+
+        // We don't care about events that bubble up to body, other than body clicks.
+        const wasPertinentClick = currentTargetTagName !== 'BODY';
+
+        if (isCloseArtboardClick) {
+            this.clearToolStatus();
+        } else if (wasPertinentClick
+            && isToolEnabled
             && !isHotkeyDepressed
             && !isNoInteractElement()) {
             event.stopPropagation();
             event.preventDefault();
 
-            this.updateHoverSelect(null, target);
-        } else if (isHotkeyDepressed && event.target.nodeName.toLowerCase() === 'select') {
+            const resolvedElement = this.checkSiblingsAreSpans(target);
+
+            this.updateHoverSelect(null, resolvedElement);
+        } else if (wasPertinentClick
+            && isHotkeyDepressed
+            && targetTagName === 'SELECT') {
             /**
              * There is a bug in chrome where key presses are lost
              * when clicking on a select. To prevent the isHotkeyDepressed
              * flag from sticking, we just trigger a reset. I think it's
              * better than sticking.
              */
-            this.setState({
-                isHotkeyDepressed: false
-            });
-            /* setTimeout(() => {
-                isHotkeyDepressed = false;
-            }, 0); */
+            setTimeout(() => {
+                this.setState({
+                    isHotkeyDepressed: false
+                });
+            }, 0);
         }
     }
 
@@ -552,7 +650,7 @@ class InspectView extends React.Component {
 
     handleSplashScreenClose = () => {
         // User has seen the current version splash screen now.
-        storageWrite(COOKIE_SPLASH_SCREEN, SPLASH_SCREEN_VERSION, COOKIE_EXPIRATION_INDEFINITE);
+        storageWrite(STORE_SPLASH_SCREEN, SPLASH_SCREEN_VERSION);
 
         this.setState({
             shouldShowSplashScreen: false
@@ -576,6 +674,7 @@ class InspectView extends React.Component {
             elementMarkerThickness,
             gridLayout,
             hoveredElement,
+            isArtboardWrapperShown,
             isToolEnabled,
             isToolPermitted,
             selectedElement,
@@ -602,7 +701,9 @@ class InspectView extends React.Component {
                                 onScroll={this.handleScroll}
                             >
                                 <HeaderModule
+                                    isArtboardWrapperShown={isArtboardWrapperShown}
                                     isToolEnabled={isToolEnabled}
+                                    toggleArtboardWrapperShown={this.toggleArtboardWrapperShown}
                                     toggleToolEnable={this.toggleToolEnable}
                                 />
                                 <ElementPropertiesSidebarModule
@@ -621,6 +722,7 @@ class InspectView extends React.Component {
                                     gridLayout={gridLayout}
                                     handleClickCallback={this.handleClickCallback}
                                     hoveredElement={hoveredElement}
+                                    isArtboardWrapperShown={isArtboardWrapperShown}
                                     isToolEnabled={isToolEnabled}
                                     selectedElement={selectedElement}
                                     setArtboardDimensions={this.setArtboardDimensions}

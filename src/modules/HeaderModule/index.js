@@ -5,6 +5,7 @@ import PrimaryControlsModule from '../PrimaryControlsModule';
 import SharingLinksModule from '../SharingLinksModule';
 
 import {
+    artboard,
     codeInspect,
     share
 } from '../../icons';
@@ -36,7 +37,9 @@ class HeaderModule extends React.PureComponent {
 
     render() {
         const {
+            isArtboardWrapperShown,
             isToolEnabled,
+            toggleArtboardWrapperShown,
             toggleToolEnable
         } = this.props;
 
@@ -51,13 +54,21 @@ class HeaderModule extends React.PureComponent {
                     controlList={[
                         {
                             callback: toggleToolEnable,
-                            iconPath: codeInspect,
-                            isEnabled: isToolEnabled
+                            icon: codeInspect,
+                            isEnabled: isToolEnabled,
+                            title: 'Enable Redline Tool'
+                        },
+                        {
+                            callback: toggleArtboardWrapperShown,
+                            icon: artboard,
+                            isEnabled: isArtboardWrapperShown,
+                            title: 'Enable Artboard'
                         },
                         {
                             callback: this.toggleSharingLinks,
-                            iconPath: share,
-                            isEnabled: isSharingLinksShown
+                            icon: share,
+                            isEnabled: isSharingLinksShown,
+                            title: 'Share Project'
                         }
                     ]}
                 />
@@ -71,7 +82,9 @@ class HeaderModule extends React.PureComponent {
 }
 
 HeaderModule.propTypes = {
+    isArtboardWrapperShown: PropTypes.bool.isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
+    toggleArtboardWrapperShown: PropTypes.func.isRequired,
     toggleToolEnable: PropTypes.func.isRequired
 };
 

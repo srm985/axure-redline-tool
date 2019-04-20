@@ -7,8 +7,9 @@
     "@babel/runtime": "^7.4.2",
     "jquery": "^3.3.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "store": "^2.0.12"
   },
   "description": "An interactive redline tool plugin for Axure remotely-hosted projects.",
   "devDependencies": {
@@ -19,13 +20,13 @@
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.5.0",
+    "babel-jest": "^24.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-es2017-object-entries": "0.0.5",
     "browser-sync": "^2.26.3",
     "concurrently": "^4.0.1",
     "css-loader": "^2.1.1",
-    "del": "^3.0.0",
+    "del": "^4.1.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
@@ -44,7 +45,7 @@
     "inquirer": "^6.2.2",
     "jest": "^24.5.0",
     "node-sass": "^4.9.4",
-    "opn": "^5.5.0",
+    "opn": "^6.0.0",
     "regenerator-runtime": "^0.13.2",
     "require-dir": "^1.1.0",
     "sass-loader": "^7.1.0",
@@ -94,5 +95,5 @@
     "sandbox": "gulp sandbox",
     "test": "jest --passWithNoTests"
   },
-  "version": "3.0.7"
+  "version": "3.1.0"
 }

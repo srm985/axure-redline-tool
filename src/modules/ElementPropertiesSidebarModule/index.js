@@ -63,6 +63,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             'line-height': '',
             'text-align': '',
             'color': '',
+            'text-shadow': '',
             '_content': ''
         }
         /* eslint-enable quote-props, sort-keys */
@@ -471,6 +472,11 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
                 delete tempElementAttributes.styles['border-style'];
                 delete tempElementAttributes.styles['border-width'];
+                delete tempElementAttributes.styles['border-color'];
+            }
+
+            // For some reason <p> tags have a border color but no actual border.
+            if (borderStyle === 'none' && borderColor) {
                 delete tempElementAttributes.styles['border-color'];
             }
 

@@ -6,23 +6,23 @@
 // Module Constants
 $default-border-radius: 3px;
 
+html {
+    @extend %background;
+}
+
 body {
     position: static;
     left: auto;
-    // sass-lint:disable property-units
 
+    // sass-lint:disable property-units
     width: 100vw;
     height: 100vh;
     // sass-lint:enable property-units
+
     margin: 0;
 
-    #base {
-        // sass-lint:disable-line no-ids
+    #base { // sass-lint:disable-line no-ids
         background-color: $artboard-background-color;
-
-        span {
-            display: inline-block;
-        }
     }
 
     // RP8

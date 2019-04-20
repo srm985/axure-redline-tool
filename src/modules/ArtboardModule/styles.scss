@@ -1,15 +1,13 @@
 @import '../../styles/constants';
 
 .ArtboardModule {
+    @extend %background;
+
     position: absolute;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: $secondary-color-gray;
-    background-image: radial-gradient($background-color 1px, transparent 0);
-    background-size: 10px 10px;
 
     &__artboard {
         position: absolute;
@@ -31,6 +29,18 @@
                     cursor: pointer;
                 }
             }
+        }
+    }
+
+    &--shown {
+        position: relative;
+
+        display: inline-block;
+
+        padding-top: $header-height;
+
+        .ArtboardModule__artboard {
+            transform-origin: top left;
         }
     }
 }
