@@ -42,11 +42,9 @@ import {
     SPLASH_SCREEN_VERSION
 } from '../../globalConstants';
 
+export const ZOOM_STEP = 10;
+
 class InspectView extends React.Component {
-    static displayName = 'InspectView';
-
-    static ZOOM_STEP = 10;
-
     constructor(props) {
         super(props);
 
@@ -629,7 +627,7 @@ class InspectView extends React.Component {
                 if (event.ctrlKey || event.metaKey) {
                     event.preventDefault();
 
-                    const newZoom = documentZoom + InspectView.ZOOM_STEP;
+                    const newZoom = documentZoom + ZOOM_STEP;
 
                     this.setArtboardZoom(newZoom);
                 }
@@ -638,7 +636,7 @@ class InspectView extends React.Component {
                 if (event.ctrlKey || event.metaKey) {
                     event.preventDefault();
 
-                    const newZoom = documentZoom - InspectView.ZOOM_STEP;
+                    const newZoom = documentZoom - ZOOM_STEP;
 
                     this.setArtboardZoom(newZoom);
                 }
@@ -683,11 +681,11 @@ class InspectView extends React.Component {
         } = this.state;
 
         return (
-            <React.Fragment>
+            <>
                 {
                     isToolPermitted
                     && (
-                        <React.Fragment>
+                        <>
                             {
                                 !axureLoaded
                                 && <LoadingIndicatorComponent />
@@ -735,12 +733,14 @@ class InspectView extends React.Component {
                                     setArtboardZoom={this.setArtboardZoom}
                                 />
                             </div>
-                        </React.Fragment>
+                        </>
                     )
                 }
-            </React.Fragment>
+            </>
         );
     }
 }
+
+InspectView.displayName = 'InspectView';
 
 export default InspectView;

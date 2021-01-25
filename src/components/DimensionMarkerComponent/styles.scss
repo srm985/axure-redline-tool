@@ -1,8 +1,6 @@
 @import '../../styles/constants';
 
 .DimensionMarkerComponent {
-    font-size: 10px;
-    font-weight: bold;
 
     position: absolute;
     z-index: $z-index-dimension-marker;
@@ -11,10 +9,14 @@
     align-items: center;
     justify-content: center;
 
+    color: $primary-color-white;
+    font-weight: bold;
+    font-size: 10px;
+
     letter-spacing: 1px;
 
-    opacity: $ui-opacity;
-    color: $primary-color-white;
-    border-radius: 5px;
     background-color: $primary-color-orange;
+    border-radius: 5px;
+
+    opacity: $ui-opacity;
 }

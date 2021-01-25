@@ -1,4 +1,6 @@
-// Colors
+/* stylelint-disable */
+
+/* Colors */
 $primary-color-background: rgba(17, 17, 17, 1);
 $primary-color-blue: #4860ff;
 $primary-color-gray: #555;
@@ -8,25 +10,26 @@ $primary-color-teal: #4edec2;
 $primary-color-white: #fff;
 $secondary-color-gray: #333;
 $tertiary-color-gray: #eee;
+$color-gray: #ddd;
 
-// Loading Spinner Background
+/* Loading Spinner Background */
 $background-color: rgba(0, 0, 0, 0.2);
 
-// Artboard Background
+/* Artboard Background */
 $artboard-background-color: rgba($primary-color-white, 0.2);
 
-// Fonts
+/* Fonts */
 $font-stack: 'Lato',
 sans-serif;
 $font-mono: 'Oxygen Mono', monospace;
 
-// GUI Opacity
+/* GUI Opacity */
 $ui-opacity: 0.9;
 
-// Header Height
+/* Header Height */
 $header-height: 50px;
 
-// Z-Index Ranking
+/* Z-Index Ranking */
 $z-index-modal: 9999999;
 $z-index-loading-indicator: 999999;
 $z-index-sidebar: 99999;
@@ -39,23 +42,23 @@ $z-index-hover-dashed-line: 99993;
 $z-index-hover-solid-line: 99992;
 $z-index-inter-dimension-line: 99991;
 
-// Borders
+/* Borders */
 $border-default: solid 1px $secondary-color-gray;
 
-// Border Radii
+/* Border Radii */
 $border-radius-small: 3px;
 $border-radius-large: 5px;
 
-// Custom Classes
+/* Custom Classes */
 %background {
     background-color: $secondary-color-gray;
     background-image: radial-gradient($background-color 1px, transparent 0);
     background-size: 10px 10px;
 }
 
-// Exported constants can be imported into JavaScript.
+/* Exported constants can be imported into JavaScript. */
 :export {
-    // sass-lint:disable no-misspelled-properties
+    /* sass-lint:disable no-misspelled-properties */
     primaryColorBackground: $primary-color-background;
     primaryColorBlue: $primary-color-blue;
     primaryColorGray: $primary-color-gray;
@@ -65,5 +68,5 @@ $border-radius-large: 5px;
     primaryColorWhite: $primary-color-white;
     secondaryColorGray: $secondary-color-gray;
     tertiaryColorGray: $tertiary-color-gray;
-    // sass-lint:enable no-misspelled-properties
+    /* sass-lint:enable no-misspelled-properties */
 }

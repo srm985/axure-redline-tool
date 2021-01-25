@@ -4,8 +4,6 @@ import React from 'react';
 import './styles.scss';
 
 class DimensionLineComponent extends React.PureComponent {
-    static displayName = 'DimensionLineComponent';
-
     render() {
         const {
             elementMarkerThickness = 0,
@@ -35,6 +33,8 @@ class DimensionLineComponent extends React.PureComponent {
         );
     }
 }
+
+DimensionLineComponent.displayName = 'DimensionLineComponent';
 
 DimensionLineComponent.propTypes = {
     elementMarkerThickness: PropTypes.number.isRequired,

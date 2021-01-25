@@ -1,12 +1,11 @@
 @import '../../styles/constants';
 
 .HeaderModule {
-    font-family: $font-stack;
 
     position: fixed;
-    z-index: $z-index-header;
     top: 0;
     left: 0;
+    z-index: $z-index-header;
 
     display: flex;
     align-items: center;
@@ -17,12 +16,15 @@
     height: $header-height;
     padding: 0 30px;
 
-    opacity: $ui-opacity;
+    font-family: $font-stack;
+
     background-color: $primary-color-background;
 
+    opacity: $ui-opacity;
+
     &__logo {
-        font-size: 18px;
 
         color: $primary-color-white;
+        font-size: 18px;
     }
 }

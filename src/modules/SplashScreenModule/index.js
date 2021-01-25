@@ -13,10 +13,7 @@ import {
 
 import './styles.scss';
 
-
 class SplashScreenModule extends React.PureComponent {
-    static displayName = 'SplashScreenModule';
-
     constructor(props) {
         super(props);
 
@@ -77,6 +74,8 @@ class SplashScreenModule extends React.PureComponent {
         );
     }
 }
+
+SplashScreenModule.displayName = 'SplashScreenModule';
 
 SplashScreenModule.propTypes = {
     closeCallback: PropTypes.func.isRequired

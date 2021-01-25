@@ -11,7 +11,7 @@ const {
     }
 } = require('../gulp.config.js')();
 
-gulp.task(watch, () => {
-    gulp.watch(`${srcDirectory}/**/*.js`, [lintJS]);
-    gulp.watch(`${srcDirectory}/**/*.scss`, [lintCSS]);
+gulp.task(watch, async () => {
+    gulp.watch(`${srcDirectory}/**/*.js`, gulp.series(lintJS));
+    gulp.watch(`${srcDirectory}/**/*.scss`, gulp.series(lintCSS));
 });

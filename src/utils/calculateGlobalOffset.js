@@ -14,7 +14,6 @@ const calculateGlobalOffset = (element) => {
     const scaledOffsetLeft = scaledLeft + pageXOffset;
     const scaledOffsetTop = scaledTop + pageYOffset;
 
-
     return ({
         scaledHeight,
         scaledOffsetLeft,

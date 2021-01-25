@@ -22,7 +22,9 @@
             "error",
             "all"
         ],
-        "import/no-dynamic-require": false,
+        "import/no-dynamic-require": [
+            0
+        ],
         "import/no-extraneous-dependencies": [
             "error",
             {
@@ -104,6 +106,9 @@
             4
         ],
         "react/jsx-one-expression-per-line": [
+            0
+        ],
+        "react/jsx-props-no-spreading": [
             0
         ],
         "react/no-did-update-set-state": [

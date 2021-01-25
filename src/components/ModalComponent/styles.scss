@@ -1,6 +1,5 @@
 @import '../../styles/constants';
 
-// Component Constants
 $modal-overlay-background: rgba($primary-color-gray, 0.7);
 
 .modal-open {
@@ -9,19 +8,19 @@ $modal-overlay-background: rgba($primary-color-gray, 0.7);
 
 .ModalComponent {
     position: fixed;
-    z-index: $z-index-modal;
     top: 0;
     left: 0;
+    z-index: $z-index-modal;
 
     display: flex;
-    visibility: hidden;
     align-items: center;
     justify-content: center;
-
     box-sizing: border-box;
     width: 100%;
     height: 100%;
     padding: 20px;
+
+    visibility: hidden;
 
     &__overlay {
         position: fixed;
@@ -45,12 +44,12 @@ $modal-overlay-background: rgba($primary-color-gray, 0.7);
         margin-top: 50px;
         padding: 30px;
 
-        transition: margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out;
-
-        opacity: 0;
-        border-radius: 5px;
         background-color: $primary-color-white;
+        border-radius: 5px;
         box-shadow: 0 3px 5px $secondary-color-gray;
+        opacity: 0;
+
+        transition: margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out;
 
         &--body {
             width: 100%;
@@ -66,18 +65,18 @@ $modal-overlay-background: rgba($primary-color-gray, 0.7);
         display: flex;
         align-items: center;
         justify-content: center;
-
         width: 20px;
         height: 20px;
 
         cursor: pointer;
+
         transition: background-color 0.05s ease-in-out;
 
         &:hover {
             div {
-                transition: background-color 0.2s ease-in-out;
-
                 background-color: $primary-color-gray;
+
+                transition: background-color 0.2s ease-in-out;
             }
         }
 
@@ -85,9 +84,8 @@ $modal-overlay-background: rgba($primary-color-gray, 0.7);
             width: 1px;
             height: 100%;
 
-            transform: rotate(45deg);
-
             background-color: $secondary-color-gray;
+            transform: rotate(45deg);
 
             &::after {
                 position: absolute;
@@ -97,10 +95,10 @@ $modal-overlay-background: rgba($primary-color-gray, 0.7);
                 width: 1px;
                 height: 100%;
 
-                content: '';
+                background-color: inherit;
                 transform: rotate(-90deg);
 
-                background-color: inherit;
+                content: '';
             }
         }
     }

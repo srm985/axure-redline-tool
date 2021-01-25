@@ -8,19 +8,17 @@
     }
 
     &__label {
-        font-family: $font-stack;
-        font-size: 12px;
 
         position: relative;
 
         display: block;
 
         color: $primary-color-white;
+        font-size: 12px;
+        font-family: $font-stack;
     }
 
     &__select {
-        font-family: $font-stack;
-        font-size: 12px;
 
         position: relative;
 
@@ -30,12 +28,15 @@
         margin-top: 0;
         padding: 4px 5px;
 
-        cursor: pointer;
-
         color: $secondary-color-gray;
+        font-size: 12px;
+        font-family: $font-stack;
+
         border: none;
         border-radius: 3px;
         outline: none;
+
+        cursor: pointer;
 
         &--option {
             cursor: pointer;

@@ -2,23 +2,23 @@
 
 .CheckboxComponent {
     &__label {
-        font-family: $font-stack;
-        font-size: 12px;
 
         display: flex;
         align-items: center;
         justify-content: flex-start;
 
-        cursor: pointer;
-
         color: $primary-color-white;
+        font-size: 12px;
+        font-family: $font-stack;
+
+        cursor: pointer;
     }
 
     &__input {
         margin: 0 0 0 10px;
 
-        cursor: pointer;
-
         border-radius: 5px;
+
+        cursor: pointer;
     }
 }

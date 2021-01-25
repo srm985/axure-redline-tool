@@ -17,8 +17,6 @@ import {
 import './styles.scss';
 
 class ElementPropertiesSidebarModule extends React.PureComponent {
-    static displayName = 'ElementPropertiesSidebarModule';
-
     static cssAttributesList = {
         /* eslint-disable quote-props, sort-keys */
         properties: {
@@ -422,7 +420,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 tempElementAttributes.styles['border-top'] = `${borderTopStyle} ${borderTopWidth} ${borderTopColor}`;
             }
 
-
             delete tempElementAttributes.styles['border-bottom-color'];
             delete tempElementAttributes.styles['border-bottom-style'];
             delete tempElementAttributes.styles['border-bottom-width'];
@@ -435,7 +432,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             delete tempElementAttributes.styles['border-top-color'];
             delete tempElementAttributes.styles['border-top-style'];
             delete tempElementAttributes.styles['border-top-width'];
-
 
             // Check if we have matching border attributes and consolidate.
             const borderBottomFinal = tempElementAttributes.styles['border-bottom'];
@@ -513,7 +509,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         }
 
         const blockProperties = [];
-
 
         Object.keys(tempElementAttributes).forEach((attributeFamily) => {
             elementAttributes.push(
@@ -827,11 +822,21 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
     }
 }
 
+ElementPropertiesSidebarModule.displayName = 'ElementPropertiesSidebarModule';
+
 ElementPropertiesSidebarModule.propTypes = {
     gridLayout: PropTypes.string.isRequired,
     gridOverlaySet: PropTypes.func.isRequired,
     isToolEnabled: PropTypes.bool.isRequired,
-    selectedElement: PropTypes.shape({})
+    selectedElement: PropTypes.shape({
+        target: PropTypes.shape({
+            getAttribute: PropTypes.func,
+            id: PropTypes.string,
+            innerText: PropTypes.string,
+            parentElement: PropTypes.string,
+            value: PropTypes.string
+        })
+    })
 };
 
 ElementPropertiesSidebarModule.defaultProps = {

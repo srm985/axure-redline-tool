@@ -18,7 +18,7 @@ class SelectedElementModule extends React.PureComponent {
         } = this.props;
 
         return (
-            <React.Fragment>
+            <>
                 <DimensionLineComponent
                     elementMarkerThickness={elementMarkerThickness}
                     height={height}
@@ -51,7 +51,7 @@ class SelectedElementModule extends React.PureComponent {
                     top={offsetTop + height}
                     width={width + (2 * elementMarkerThickness)}
                 />
-            </React.Fragment>
+            </>
         );
     }
 }

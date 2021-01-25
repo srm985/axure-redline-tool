@@ -8,8 +8,6 @@ import { TOOLTIP_VISIBLE_TIME } from '../../globalConstants';
 import './styles.scss';
 
 class TextAreaComponent extends React.PureComponent {
-    static displayName = 'TextAreaComponent';
-
     constructor(props) {
         super(props);
         this.handleCopy = this.handleCopy.bind(this);
@@ -92,6 +90,8 @@ class TextAreaComponent extends React.PureComponent {
         );
     }
 }
+
+TextAreaComponent.displayName = 'TextAreaComponent';
 
 TextAreaComponent.propTypes = {
     inputValue: PropTypes.string.isRequired,

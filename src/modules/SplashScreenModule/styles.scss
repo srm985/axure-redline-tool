@@ -20,10 +20,10 @@
     }
 
     &__scrolling-body {
-        overflow-y: auto;
 
         max-height: 50vh;
         margin-top: 20px;
+        overflow-y: auto;
     }
 
     &--disclosure {
@@ -32,9 +32,9 @@
     }
 
     &--highlight {
-        font-weight: bold;
 
         color: $primary-color-teal;
+        font-weight: bold;
     }
 
     h1 {

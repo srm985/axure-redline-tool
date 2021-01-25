@@ -16,8 +16,6 @@ import calculateGlobalOffset from '../../utils/calculateGlobalOffset';
 import './styles.scss';
 
 class ArtboardModule extends React.PureComponent {
-    static displayName = 'ArtboardModule';
-
     constructor(props) {
         super(props);
 
@@ -197,6 +195,8 @@ class ArtboardModule extends React.PureComponent {
         );
     }
 }
+
+ArtboardModule.displayName = 'ArtboardModule';
 
 ArtboardModule.propTypes = {
     artboardHeight: PropTypes.number.isRequired,

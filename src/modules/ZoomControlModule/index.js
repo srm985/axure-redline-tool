@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import InspectView from '../../views/InspectView';
+import { ZOOM_STEP } from '../../views/InspectView';
 
 import {
     ENTER_KEY,
@@ -60,9 +60,9 @@ class ZoomControlModule extends React.PureComponent {
         } = this.state;
 
         if (zoomDirection === zoomDecrease) {
-            setArtboardZoom(zoomLevel - InspectView.ZOOM_STEP);
+            setArtboardZoom(zoomLevel - ZOOM_STEP);
         } else if (zoomDirection === zoomIncrease) {
-            setArtboardZoom(zoomLevel + InspectView.ZOOM_STEP);
+            setArtboardZoom(zoomLevel + ZOOM_STEP);
         }
     }
 

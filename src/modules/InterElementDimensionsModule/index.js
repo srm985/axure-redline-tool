@@ -195,11 +195,11 @@ class InterElementDimensionsModule extends React.PureComponent {
         return (
             !isDisplayInlineElement
             && (
-                <React.Fragment>
+                <>
                     {
                         isHoveredSelectedElement
                             ? (
-                                <React.Fragment>
+                                <>
                                     <DimensionMarkerComponent
                                         dimensionType={HORIZONTAL_DIMENSION}
                                         measurement={selectedElementTrueWidth}
@@ -212,14 +212,14 @@ class InterElementDimensionsModule extends React.PureComponent {
                                         offsetLeft={selectedElementOffsetLeft + selectedElementWidth}
                                         offsetTop={selectedElementOffsetTop + (selectedElementHeight / 2)}
                                     />
-                                </React.Fragment>
+                                </>
                             )
                             : (
-                                <React.Fragment>
+                                <>
                                     {
                                         leftLineLength
                                         && (
-                                            <React.Fragment>
+                                            <>
                                                 <DimensionLineComponent
                                                     elementMarkerThickness={elementMarkerThickness}
                                                     height={0}
@@ -234,13 +234,13 @@ class InterElementDimensionsModule extends React.PureComponent {
                                                     offsetLeft={leftLineOffsetLeft + (leftLineLength / 2)}
                                                     offsetTop={selectedElementOffsetTop + (selectedElementHeight / 2)}
                                                 />
-                                            </React.Fragment>
+                                            </>
                                         )
                                     }
                                     {
                                         rightLineLength
                                         && (
-                                            <React.Fragment>
+                                            <>
                                                 <DimensionLineComponent
                                                     elementMarkerThickness={elementMarkerThickness}
                                                     height={0}
@@ -255,13 +255,13 @@ class InterElementDimensionsModule extends React.PureComponent {
                                                     offsetLeft={rightLineOffsetLeft + (rightLineLength / 2)}
                                                     offsetTop={selectedElementOffsetTop + (selectedElementHeight / 2)}
                                                 />
-                                            </React.Fragment>
+                                            </>
                                         )
                                     }
                                     {
                                         topLineLength
                                         && (
-                                            <React.Fragment>
+                                            <>
                                                 <DimensionLineComponent
                                                     elementMarkerThickness={elementMarkerThickness}
                                                     height={topLineLength}
@@ -276,13 +276,13 @@ class InterElementDimensionsModule extends React.PureComponent {
                                                     offsetLeft={selectedElementOffsetLeft + (selectedElementWidth / 2)}
                                                     offsetTop={topLineOffsetTop + (topLineLength / 2)}
                                                 />
-                                            </React.Fragment>
+                                            </>
                                         )
                                     }
                                     {
                                         bottomLineLength
                                         && (
-                                            <React.Fragment>
+                                            <>
                                                 <DimensionLineComponent
                                                     elementMarkerThickness={elementMarkerThickness}
                                                     height={bottomLineLength}
@@ -297,13 +297,13 @@ class InterElementDimensionsModule extends React.PureComponent {
                                                     offsetLeft={selectedElementOffsetLeft + (selectedElementWidth / 2)}
                                                     offsetTop={bottomLineOffsetTop + (bottomLineLength / 2)}
                                                 />
-                                            </React.Fragment>
+                                            </>
                                         )
                                     }
-                                </React.Fragment>
+                                </>
                             )
                     }
-                </React.Fragment>
+                </>
             )
         );
     }
@@ -315,12 +315,22 @@ InterElementDimensionsModule.propTypes = {
         height: PropTypes.number.isRequired,
         offsetLeft: PropTypes.number.isRequired,
         offsetTop: PropTypes.number.isRequired,
+        target: PropTypes.shape({}),
+        trueHeight: PropTypes.number,
+        trueOffsetLeft: PropTypes.number,
+        trueOffsetTop: PropTypes.number,
+        trueWidth: PropTypes.number,
         width: PropTypes.number.isRequired
     }).isRequired,
     selectedElement: PropTypes.shape({
         height: PropTypes.number.isRequired,
         offsetLeft: PropTypes.number.isRequired,
         offsetTop: PropTypes.number.isRequired,
+        target: PropTypes.shape({}),
+        trueHeight: PropTypes.number,
+        trueOffsetLeft: PropTypes.number,
+        trueOffsetTop: PropTypes.number,
+        trueWidth: PropTypes.number,
         width: PropTypes.number.isRequired
     }).isRequired
 };

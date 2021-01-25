@@ -4,8 +4,6 @@ import React from 'react';
 import './styles.scss';
 
 class ColorSwatchComponent extends React.PureComponent {
-    static displayName = 'ColorSwatchComponent';
-
     render() {
         const {
             setSwatchValue,
@@ -33,6 +31,8 @@ class ColorSwatchComponent extends React.PureComponent {
         );
     }
 }
+
+ColorSwatchComponent.displayName = 'ColorSwatchComponent';
 
 ColorSwatchComponent.propTypes = {
     setSwatchValue: PropTypes.func.isRequired,

@@ -11,15 +11,12 @@ import { TOOLTIP_VISIBLE_TIME } from '../../globalConstants';
 import './styles.scss';
 
 class InputComponent extends React.PureComponent {
-    static displayName = 'InputComponent';
-    static rgbaRegEx = /rgb(a)?\(\d+,(\s+)?\d+,(\s+)?\d+(,(\s+)?\d(\.\d+)?)?\)/;
-    static hexRegEx = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
-
     constructor(props) {
         super(props);
-        this.checkColorSwatchRequired = this.checkColorSwatchRequired.bind(this);
-        this.handleCopy = this.handleCopy.bind(this);
-        this.setSwatchValue = this.setSwatchValue.bind(this);
+
+        this.displayName = 'InputComponent';
+        this.rgbaRegEx = /rgb(a)?\(\d+,(\s+)?\d+,(\s+)?\d+(,(\s+)?\d(\.\d+)?)?\)/;
+        this.hexRegEx = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
         this.state = {
             inputValue: '',
@@ -62,7 +59,7 @@ class InputComponent extends React.PureComponent {
         }
     }
 
-    setSwatchValue() {
+    setSwatchValue = () => {
         const {
             inputValue
         } = this.state;
@@ -125,7 +122,7 @@ class InputComponent extends React.PureComponent {
      *
      * @param {mouseup event} event
      */
-    handleCopy(event) {
+    handleCopy = (event) => {
         const {
             target: inputField
         } = event;
@@ -144,7 +141,7 @@ class InputComponent extends React.PureComponent {
         });
     }
 
-    checkColorSwatchRequired() {
+    checkColorSwatchRequired = () => {
         const {
             inputValue
         } = this.props;
