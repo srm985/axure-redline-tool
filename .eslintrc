@@ -30,7 +30,8 @@
             {
                 "devDependencies": [
                     "./*.js",
-                    "./tasks/**/*.js"
+                    "./tasks/**/*.js",
+                    "./scripts/**/*.js"
                 ]
             }
         ],

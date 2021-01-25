@@ -1,5 +1,10 @@
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+
+const config = require('./config');
 
 const {
     directories: {
@@ -9,19 +14,23 @@ const {
         development,
         production
     },
-    bundleName,
-    environmentalVariables: {
-        buildEnvironment,
-        injectedEnvironment
-    }
-} = require('./gulp.config.js')();
+    bundleName
+} = config();
 
 module.exports = () => {
-    const environment = process.env[buildEnvironment] === production ? production : development;
-    const isInjectedEnvironment = process.env[injectedEnvironment];
-    const isProduction = environment === production;
+    const {
+        env: {
+            INJECTED = false,
+            NODE_ENV = production
+        }
+    } = process;
 
-    const plugins = [];
+    const isInjectedEnvironment = INJECTED === 'true';
+    const isProduction = NODE_ENV !== development;
+
+    const plugins = [
+        new CleanWebpackPlugin()
+    ];
 
     if (!isInjectedEnvironment && !isProduction) {
         plugins.push(new HtmlWebpackPlugin({
@@ -30,18 +39,24 @@ module.exports = () => {
     }
 
     return {
-        devServer: {},
+        devServer: {
+            contentBase: path.join(__dirname, '../dist/'),
+            historyApiFallback: true,
+            hot: true
+        },
         devtool: !isProduction ? 'source-map' : '',
         entry: [
             `${srcDirectory}/index.js`
         ],
-        mode: environment,
+        mode: NODE_ENV,
         module: {
             rules: [
                 {
                     exclude: /node_modules/,
-                    test: /\.js$/,
-                    use: ['babel-loader']
+                    test: /\.(js|jsx)$/,
+                    use: [
+                        'babel-loader'
+                    ]
                 },
                 {
                     test: /\.scss$/,
