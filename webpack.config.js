@@ -1,5 +1,13 @@
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const config = require('./config');
+
+const WatchBundlePlugin = require('./scripts/WatchBundlePlugin');
 
 const {
     directories: {
@@ -9,56 +17,77 @@ const {
         development,
         production
     },
-    bundleName,
-    environmentalVariables: {
-        buildEnvironment,
-        injectedEnvironment
-    }
-} = require('./gulp.config.js')();
+    bundleName
+} = config();
 
 module.exports = () => {
-    const environment = process.env[buildEnvironment] === production ? production : development;
-    const isInjectedEnvironment = process.env[injectedEnvironment];
-    const isProduction = environment === production;
+    const {
+        env: {
+            INJECTED = false,
+            NODE_ENV = production
+        }
+    } = process;
 
-    const plugins = [];
+    const isInjectedEnvironment = INJECTED === 'true';
+    const isProduction = NODE_ENV !== development;
+
+    const plugins = [
+        new CleanWebpackPlugin(),
+        new WatchBundlePlugin({
+            isInjectedEnvironment,
+            isProduction
+        })
+    ];
 
     if (!isInjectedEnvironment && !isProduction) {
         plugins.push(new HtmlWebpackPlugin({
-            template: `${srcDirectory}/index.html`
+            filename: 'index.html',
+            path: path.join(__dirname, '../dist/'),
+            template: './src/index.html'
         }));
     }
 
     return {
-        devServer: {},
-        devtool: !isProduction ? 'source-map' : '',
+        devServer: {
+            contentBase: path.join(__dirname, '../dist/'),
+            historyApiFallback: true,
+            hot: true
+        },
+        devtool: !isProduction ? 'source-map' : undefined,
         entry: [
             `${srcDirectory}/index.js`
         ],
-        mode: environment,
+        mode: NODE_ENV,
         module: {
             rules: [
                 {
                     exclude: /node_modules/,
-                    test: /\.js$/,
-                    use: ['babel-loader']
+                    test: /\.(js|jsx)$/,
+                    use: [
+                        'babel-loader'
+                    ]
                 },
                 {
                     test: /\.scss$/,
                     use: [
-                        {
-                            loader: 'style-loader'
-                        }, {
-                            loader: 'css-loader'
-                        }, {
-                            loader: 'sass-loader'
-                        }
+                        'style-loader',
+                        'css-loader',
+                        'postcss-loader',
+                        'sass-loader'
                     ]
                 },
                 {
                     loader: 'svg-inline-loader',
                     test: /\.svg$/
                 }
+            ]
+        },
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    extractComments: false
+                })
             ]
         },
         output: {

@@ -7,8 +7,6 @@ export const VERTICAL_DIMENSION = 'VERTICAL';
 export const HORIZONTAL_DIMENSION = 'HORIZONTAL';
 
 export class DimensionMarkerComponent extends React.PureComponent {
-    static displayName = 'DimensionMarkerComponent';
-
     static height = 20;
     static padding = 5;
     static width = 30;
@@ -51,6 +49,8 @@ export class DimensionMarkerComponent extends React.PureComponent {
         );
     }
 }
+
+DimensionMarkerComponent.displayName = 'DimensionMarkerComponent';
 
 DimensionMarkerComponent.propTypes = {
     dimensionType: PropTypes.string.isRequired,

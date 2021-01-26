@@ -13,8 +13,6 @@ import {
 import './styles.scss';
 
 class HeaderModule extends React.PureComponent {
-    static displayName = 'HeaderModule';
-
     constructor(props) {
         super(props);
 
@@ -80,6 +78,8 @@ class HeaderModule extends React.PureComponent {
         );
     }
 }
+
+HeaderModule.displayName = 'HeaderModule';
 
 HeaderModule.propTypes = {
     isArtboardWrapperShown: PropTypes.bool.isRequired,

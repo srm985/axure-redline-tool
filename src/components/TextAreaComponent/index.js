@@ -8,12 +8,8 @@ import { TOOLTIP_VISIBLE_TIME } from '../../globalConstants';
 import './styles.scss';
 
 class TextAreaComponent extends React.PureComponent {
-    static displayName = 'TextAreaComponent';
-
     constructor(props) {
         super(props);
-        this.handleCopy = this.handleCopy.bind(this);
-        this.handleScroll = this.handleScroll.bind(this);
 
         this.state = {
             isCopiedTooltipActive: false,
@@ -27,7 +23,7 @@ class TextAreaComponent extends React.PureComponent {
      *
      * @param {mouseup event} event
      */
-    handleCopy(event) {
+    handleCopy = (event) => {
         const {
             isScrolling
         } = this.state;
@@ -59,7 +55,7 @@ class TextAreaComponent extends React.PureComponent {
         }, 100);
     }
 
-    handleScroll() {
+    handleScroll = () => {
         this.setState({
             isScrolling: true
         });
@@ -92,6 +88,8 @@ class TextAreaComponent extends React.PureComponent {
         );
     }
 }
+
+TextAreaComponent.displayName = 'TextAreaComponent';
 
 TextAreaComponent.propTypes = {
     inputValue: PropTypes.string.isRequired,

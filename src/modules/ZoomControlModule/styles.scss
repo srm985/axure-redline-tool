@@ -1,30 +1,28 @@
 @import '../../styles/constants';
 
-// Module Variables
 $icon-thickness: 2px;
 $icon-diameter: 23px;
 $icon-border-radius: 5px;
 
 .ZoomControlModule {
     position: fixed;
-    z-index: $z-index-zoom-control;
     bottom: 20px;
     left: 20px;
+    z-index: $z-index-zoom-control;
 
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
 
-    opacity: $ui-opacity;
     border-radius: $icon-border-radius;
     box-shadow: 0 3px 5px $primary-color-gray;
+    opacity: $ui-opacity;
 
     &__zoom-input {
-        font-family: $font-stack;
-
         width: 50px;
         height: $icon-diameter;
 
+        font-family: $font-stack;
         text-align: center;
 
         border: none;
@@ -35,16 +33,15 @@ $icon-border-radius: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
-
         box-sizing: border-box;
         width: $icon-diameter;
         height: $icon-diameter;
         padding: 6px;
 
-        cursor: pointer;
-        transition: transform 0.01s ease-in-out;
-
         background-color: $primary-color-teal;
+        cursor: pointer;
+
+        transition: transform 0.05s ease-in-out;
 
         &:hover {
             transform: scale(1.05);
@@ -54,7 +51,6 @@ $icon-border-radius: 5px;
             position: relative;
 
             display: inline-block;
-
             width: 100%;
             height: $icon-thickness;
 
@@ -77,14 +73,13 @@ $icon-border-radius: 5px;
                     right: 0;
 
                     display: inline-block;
-
                     width: 100%;
                     height: $icon-thickness;
 
-                    content: '';
+                    background-color: inherit;
                     transform: rotate(90deg);
 
-                    background-color: inherit;
+                    content: '';
                 }
             }
         }

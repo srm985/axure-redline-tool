@@ -26,7 +26,7 @@ class ElementInteractionModule extends React.PureComponent {
         } = selectedElement;
 
         return (
-            <React.Fragment>
+            <>
                 {
                     hoveredElementTarget
                     && (
@@ -60,7 +60,7 @@ class ElementInteractionModule extends React.PureComponent {
                         />
                     )
                 }
-            </React.Fragment>
+            </>
         );
     }
 }
@@ -71,8 +71,12 @@ ElementInteractionModule.propTypes = {
     artboardScaledHeight: PropTypes.number.isRequired,
     artboardScaledWidth: PropTypes.number.isRequired,
     elementMarkerThickness: PropTypes.number.isRequired,
-    hoveredElement: PropTypes.shape({}).isRequired,
-    selectedElement: PropTypes.shape({}).isRequired
+    hoveredElement: PropTypes.shape({
+        target: PropTypes.shape({})
+    }).isRequired,
+    selectedElement: PropTypes.shape({
+        target: PropTypes.shape({})
+    }).isRequired
 };
 
 export default ElementInteractionModule;

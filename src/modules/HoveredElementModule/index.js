@@ -25,7 +25,7 @@ class HoveredElementModule extends React.PureComponent {
         } = this.props;
 
         return (
-            <React.Fragment>
+            <>
                 <DimensionLineComponent
                     elementMarkerThickness={elementMarkerThickness}
                     height={height}
@@ -91,7 +91,7 @@ class HoveredElementModule extends React.PureComponent {
                     top={offsetTop + height}
                     width={artboardScaledWidth}
                 />
-            </React.Fragment>
+            </>
         );
     }
 }

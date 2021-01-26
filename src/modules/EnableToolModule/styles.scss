@@ -1,38 +1,36 @@
 @import '../../styles/constants';
 
-// Module Constants
 $switch-transition: all 0.15s ease-in-out;
-$color-disabled: #ddd;
 
 .EnableToolModule {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     width: 160px;
     height: 100%;
 
     span {
-        font-family: $font-stack;
-        font-size: 16px;
-
         color: $primary-color-white;
+        font-size: 16px;
+        font-family: $font-stack;
     }
 
     input {
         position: absolute;
 
-        visibility: hidden;
-
         margin-left: -9999px;
 
-        &:checked + label {
-            background-color: $primary-color-teal;
+        visibility: hidden;
 
-            &::after {
-                margin-left: 32px;
-
+        &:checked {
+            & + label {
                 background-color: $primary-color-teal;
+
+                &::after {
+                    margin-left: 32px;
+
+                    background-color: $primary-color-teal;
+                }
             }
         }
     }
@@ -41,18 +39,18 @@ $color-disabled: #ddd;
         position: relative;
 
         display: block;
-
         width: 60px;
         height: 28px;
         padding: 2px;
 
-        cursor: pointer;
-        user-select: none;
-        transition: $switch-transition;
-
+        background-color: $color-gray;
         border-radius: 28px;
         outline: none;
-        background-color: $color-disabled;
+        cursor: pointer;
+
+        transition: $switch-transition;
+
+        user-select: none;
 
         &::before {
             position: absolute;
@@ -63,11 +61,12 @@ $color-disabled: #ddd;
 
             display: block;
 
-            content: '';
+            background-color: $primary-color-white;
+            border-radius: 28px;
+
             transition: $switch-transition;
 
-            border-radius: 28px;
-            background-color: $primary-color-white;
+            content: '';
         }
 
         &::after {
@@ -77,14 +76,14 @@ $color-disabled: #ddd;
             left: 4px;
 
             display: block;
-
             width: 24px;
 
-            content: '';
+            background-color: $color-gray;
+            border-radius: 50%;
+
             transition: $switch-transition;
 
-            border-radius: 50%;
-            background-color: $color-disabled;
+            content: '';
         }
     }
 }

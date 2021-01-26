@@ -6,8 +6,6 @@ import Icon from '../../components/IconComponent';
 import './styles.scss';
 
 class PrimaryControlsModule extends React.PureComponent {
-    static displayName = 'PrimaryControlsModule';
-
     render = () => {
         const {
             controlList = []
@@ -44,6 +42,8 @@ class PrimaryControlsModule extends React.PureComponent {
         );
     }
 }
+
+PrimaryControlsModule.displayName = 'PrimaryControlsModule';
 
 PrimaryControlsModule.propTypes = {
     controlList: PropTypes.arrayOf(PropTypes.shape({

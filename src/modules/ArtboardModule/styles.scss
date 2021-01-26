@@ -13,7 +13,7 @@
         position: absolute;
     }
 
-    #base { // sass-lint:disable-line no-ids
+    #base {
         position: relative;
 
         width: 100%;
@@ -36,7 +36,6 @@
         position: relative;
 
         display: inline-block;
-
         padding-top: $header-height;
 
         .ArtboardModule__artboard {

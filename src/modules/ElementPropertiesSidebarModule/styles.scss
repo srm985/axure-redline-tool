@@ -1,6 +1,6 @@
 @import '../../styles/constants';
 
-// Module Constants
+/* Module Constants */
 $side-pull-width: 20px;
 $sidebar-padding: 20px;
 $sidebar-width: 270px;
@@ -9,18 +9,18 @@ $grid-overlay-height: 100px;
 
 .ElementPropertiesSidebarModule {
     position: fixed;
-    z-index: $z-index-sidebar;
     top: $header-height;
     right: -#{$sidebar-width - 5px};
+    z-index: $z-index-sidebar;
 
     box-sizing: border-box;
     width: $sidebar-width;
     height: calc(100% - #{$header-height});
 
-    transition: right 0.1s ease-in-out;
-
-    opacity: $ui-opacity;
     background-color: $primary-color-background;
+    opacity: $ui-opacity;
+
+    transition: right 0.1s ease-in-out;
 
     &--visible {
         right: 0;
@@ -36,27 +36,25 @@ $grid-overlay-height: 100px;
         left: -#{$side-pull-width};
 
         display: flex;
-        align-items: center;
         flex-direction: column;
+        align-items: center;
         justify-content: space-between;
-
         box-sizing: border-box;
         width: $side-pull-width;
         height: #{2 * $side-pull-width};
         padding: 13px 0 13px 7px;
 
-        cursor: pointer;
-
+        background-color: inherit;
         border-radius: $side-pull-width 0 0 $side-pull-width;
         outline: none;
-        background-color: inherit;
+        cursor: pointer;
 
         & > span {
             width: 100%;
             height: 2px;
 
-            border-radius: 1px;
             background-color: $primary-color-white;
+            border-radius: 1px;
         }
     }
 
@@ -67,20 +65,18 @@ $grid-overlay-height: 100px;
         &--parent-component-name {
             box-sizing: border-box;
             width: 100%;
-            // Weird margin to nicely align pseudo tabs with pull tab.
-            margin-bottom: 41px;
+            margin-bottom: 41px; /* Weird margin to nicely align pseudo tabs with pull tab. */
             padding: 0 $sidebar-padding;
 
             .InputComponent {
-                margin-top: 0 !important; // sass-lint:disable-line no-important
+                margin-top: 0 !important;
             }
         }
 
         &--header {
             display: flex;
-            align-items: flex-end;
             flex-direction: row;
-
+            align-items: flex-end;
             box-sizing: border-box;
             width: 100%;
             height: $pseudo-tab-height;
@@ -88,46 +84,44 @@ $grid-overlay-height: 100px;
         }
 
         &--tab {
-            font-family: $font-stack;
-            font-size: 12px;
-
             z-index: 1;
 
             display: flex;
-            align-items: center;
             flex-basis: 0;
             flex-grow: 1;
+            align-items: center;
             justify-content: center;
-
             box-sizing: border-box;
             max-width: 50%;
             height: 100%;
             margin: 0 1px;
             padding: 0 5px;
 
+            color: $primary-color-gray;
+            font-size: 12px;
+            font-family: $font-stack;
+
+            background-color: $primary-color-white;
+            border-radius: 3px 3px 0 0;
             cursor: pointer;
 
-            color: $primary-color-gray;
-            border-radius: 3px 3px 0 0;
-            background-color: $primary-color-white;
-
             span {
+                width: 100%;
                 overflow: hidden;
 
-                width: 100%;
-
-                text-align: center;
                 white-space: nowrap;
+                text-align: center;
                 text-overflow: ellipsis;
             }
         }
 
         &--tab-active {
             color: $primary-color-white;
-            border-width: 1px 1px 0;
-            border-style: solid;
-            border-color: $primary-color-white;
+
             background-color: $primary-color-background;
+            border-color: $primary-color-white;
+            border-style: solid;
+            border-width: 1px 1px 0;
         }
 
         &--tab-inactive {
@@ -137,25 +131,22 @@ $grid-overlay-height: 100px;
         }
 
         &--body {
-            overflow-y: auto;
-
             box-sizing: border-box;
             width: 100%;
             height: calc(100% - #{$pseudo-tab-height});
             margin-top: -1px;
             padding: 0 $sidebar-padding 20px;
+            overflow-y: auto;
 
             border-top: solid 1px $primary-color-white;
 
             p {
-                font-size: 12px;
-                font-weight: bold;
-
                 margin-top: 20px;
 
-                text-transform: uppercase;
-
                 color: $primary-color-white;
+                font-weight: bold;
+                font-size: 12px;
+                text-transform: uppercase;
             }
         }
     }
@@ -167,7 +158,6 @@ $grid-overlay-height: 100px;
 
     &__grid-overlay {
         display: none;
-
         box-sizing: border-box;
         width: 100%;
         height: #{$grid-overlay-height};
@@ -184,7 +174,9 @@ $grid-overlay-height: 100px;
         }
     }
 
-    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name ~ .ElementPropertiesSidebarModule__pseudo-tabs--body {
-        height: calc(100% - 105px);
+    .ElementPropertiesSidebarModule__pseudo-tabs--parent-component-name {
+        & ~ .ElementPropertiesSidebarModule__pseudo-tabs--body {
+            height: calc(100% - 105px);
+        }
     }
 }

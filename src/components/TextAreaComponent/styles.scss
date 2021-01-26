@@ -4,19 +4,17 @@
     position: relative;
 
     &__label {
-        font-family: $font-stack;
-        font-size: 12px;
 
         position: relative;
 
         display: block;
 
         color: $primary-color-white;
+        font-size: 12px;
+        font-family: $font-stack;
     }
 
     &__textarea {
-        font-family: $font-stack;
-        font-size: 12px;
 
         position: relative;
 
@@ -26,13 +24,16 @@
         margin-top: 0;
         padding: 4px 5px;
 
-        resize: none;
-        cursor: text;
-
         color: $secondary-color-gray;
+        font-size: 12px;
+        font-family: $font-stack;
+
         border: none;
         border-radius: 3px;
         outline: none;
+        cursor: text;
+
+        resize: none;
     }
 
     .TooltipComponent {

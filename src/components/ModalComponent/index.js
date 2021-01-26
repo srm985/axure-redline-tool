@@ -7,8 +7,6 @@ import { ESCAPE_KEY } from '../../globalConstants';
 import './styles.scss';
 
 class ModalComponent extends React.PureComponent {
-    static displayName = 'ModalComponent';
-
     static modalOpenClassName = 'modal-open';
 
     componentDidMount() {
@@ -101,6 +99,8 @@ class ModalComponent extends React.PureComponent {
         );
     }
 }
+
+ModalComponent.displayName = 'ModalComponent';
 
 ModalComponent.propTypes = {
     children: PropTypes.node.isRequired,
