@@ -52,6 +52,12 @@
     "webpack-dev-server": "^3.11.0"
   },
   "homepage": "https://github.com/srm985/axure-redline-tool#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "cross-env FORCE_COLOR=true lint-staged && npm run build",
+      "pre-push": "node ./scripts/branchCheck.js"
+    }
+  },
   "jest": {
     "transform": {
       "^.+\\.js$": "babel-jest"
@@ -76,6 +82,14 @@
     "redline"
   ],
   "license": "MIT",
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.scss": [
+      "stylelint --syntax scss --color --allow-empty-input --fix"
+    ]
+  },
   "name": "axure-redline-tool",
   "repository": {
     "type": "git",
