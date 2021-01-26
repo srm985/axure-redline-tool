@@ -87,7 +87,7 @@
   "license": "MIT",
   "lint-staged": {
     "*.js": [
-      "eslint --fix"
+      "eslint --fix --ignore-pattern '/dist/*' --ignore-pattern '/web/*'"
     ],
     "*.scss": [
       "stylelint --syntax scss --color --allow-empty-input --fix"
