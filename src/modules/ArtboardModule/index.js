@@ -21,8 +21,6 @@ class ArtboardModule extends React.PureComponent {
 
         this.artboardRef = React.createRef();
 
-        this.updateArtboardMeasurements = this.updateArtboardMeasurements.bind(this);
-
         this.state = {
             artboardOffsetLeft: 0,
             artboardOffsetTop: 0,
@@ -86,7 +84,7 @@ class ArtboardModule extends React.PureComponent {
         }
     }
 
-    updateArtboardMeasurements() {
+    updateArtboardMeasurements = () => {
         const {
             current: artboardElement
         } = this.artboardRef;

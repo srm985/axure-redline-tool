@@ -97,10 +97,6 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
 
         this.gridSelectorRef = React.createRef();
 
-        this.clearCSSAttributes = this.clearCSSAttributes.bind(this);
-        this.extractDefaultCSS = this.extractDefaultCSS.bind(this);
-        this.toggleSidebar = this.toggleSidebar.bind(this);
-
         this.state = {
             activeTab: 'default',
             defaultCSSAttributes: {},
@@ -164,7 +160,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         }
     }
 
-    clearCSSAttributes() {
+    clearCSSAttributes = () => {
         const {
             defaultCSSAttributes: statefulDefaultCSSAttributes
         } = this.state;
@@ -193,7 +189,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
      *
      * @param {string} childID
      */
-    isImmediateChild(childID) {
+    isImmediateChild = (childID) => {
         const isImmediateChildRegex = /u\d+_div/;
         const isImmediateChild = isImmediateChildRegex.test(childID);
 
@@ -206,7 +202,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         return parentClassName;
     }
 
-    extractDefaultCSS() {
+    extractDefaultCSS = () => {
         const {
             selectedElement: {
                 target
@@ -249,7 +245,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         });
     }
 
-    toggleSidebar() {
+    toggleSidebar = () => {
         const {
             isToolEnabled
         } = this.props;
@@ -265,7 +261,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         }
     }
 
-    retrieveElementPageCSS(activeTab) {
+    retrieveElementPageCSS = (activeTab) => {
         const {
             selectedElement: {
                 target: {
@@ -349,7 +345,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         return elementCSS;
     }
 
-    renderAttributes(attributeList) {
+    renderAttributes = (attributeList) => {
         const {
             styles: {
                 border = '',
@@ -563,7 +559,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
         return elementAttributes;
     }
 
-    renderPseudoClassTabs() {
+    renderPseudoClassTabs = () => {
         const {
             activeTab,
             defaultCSSAttributes
