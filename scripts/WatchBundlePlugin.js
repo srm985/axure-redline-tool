@@ -13,17 +13,19 @@ const {
 class WatchBundlePlugin {
     constructor(options = {}) {
         const {
-            isInjectedEnvironment
+            isInjectedEnvironment,
+            isProduction
         } = options;
 
         this.isInjectedEnvironment = isInjectedEnvironment;
+        this.isProduction = isProduction;
     }
 
     apply = (compiler) => {
         compiler.hooks.afterEmit.tap('WatchBundlePlugin', () => {
             if (this.isInjectedEnvironment) {
                 browserSync.reload();
-            } else {
+            } else if (this.isProduction) {
                 fs.readFile(`${distDirectory}/${bundleName}.js`, (error, fileContents) => {
                     const wrappedFile = `<script>${fileContents}</script>`;
 

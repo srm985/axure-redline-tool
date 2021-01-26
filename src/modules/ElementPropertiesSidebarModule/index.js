@@ -829,7 +829,9 @@ ElementPropertiesSidebarModule.propTypes = {
             getAttribute: PropTypes.func,
             id: PropTypes.string,
             innerText: PropTypes.string,
-            parentElement: PropTypes.shape({}),
+            parentElement: PropTypes.shape({
+                id: PropTypes.string
+            }),
             value: PropTypes.string
         })
     })

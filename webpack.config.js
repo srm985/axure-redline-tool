@@ -39,7 +39,9 @@ module.exports = () => {
 
     if (!isInjectedEnvironment && !isProduction) {
         plugins.push(new HtmlWebpackPlugin({
-            template: `${srcDirectory}/index.html`
+            filename: 'index.html',
+            path: path.join(__dirname, '../dist/'),
+            template: './src/index.html'
         }));
     }
 

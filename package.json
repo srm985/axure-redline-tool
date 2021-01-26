@@ -59,7 +59,7 @@
     "stylelint-scss": "^3.18.0",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^5.2.0",
-    "webpack-cli": "^4.4.0",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "homepage": "https://github.com/srm985/axure-redline-tool#readme",
@@ -97,6 +97,7 @@
     "build": "concurrently --raw \"npm:lint --silent\" \"npm:test\" && webpack",
     "build:watch": "concurrently --raw \"npm:lint --silent\" \"webpack --watch\" \"npm:watch --silent\"",
     "config:develop": "cross-env-shell NODE_ENV=development INJECTED=true",
+    "develop": "cross-env-shell NODE_ENV=development webpack-dev-server --open --config ./webpack.config.js --mode=development --port 3000",
     "develop:inject": "npm run config:develop && node ./scripts/serveInject.js",
     "lint": "concurrently --raw \"npm:lint:js --silent\" \"npm:lint:scss --silent\"",
     "lint:fix": "concurrently --raw \"eslint ./*.js src/**/*.js --fix\" \"stylelint src/**/*.scss --syntax scss --color --allow-empty-input --fix\"",
