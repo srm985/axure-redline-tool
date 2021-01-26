@@ -58,8 +58,7 @@
   "homepage": "https://github.com/srm985/axure-redline-tool#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "cross-env FORCE_COLOR=true lint-staged && npm run build",
-      "pre-push": "node ./scripts/branchCheck.js"
+      "pre-commit": "cross-env FORCE_COLOR=true lint-staged && npm run build"
     }
   },
   "jest": {
