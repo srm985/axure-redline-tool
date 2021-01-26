@@ -58,7 +58,9 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
             'font-family': '',
             'font-size': '',
             'font-weight': '',
+            'text-transform': '',
             'line-height': '',
+            'letter-spacing': '',
             'text-align': '',
             'color': '',
             'text-shadow': '',
@@ -390,6 +392,7 @@ class ElementPropertiesSidebarModule extends React.PureComponent {
                 && !value.includes('none')
                 && value !== '0px'
                 && value !== 'medium'
+                && value !== 'normal'
                 && !value.includes('initial')
                 && !(attribute === 'opacity' && Number(value) === 1)) {
                 isValid = true;
