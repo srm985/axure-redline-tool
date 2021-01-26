@@ -833,7 +833,7 @@ ElementPropertiesSidebarModule.propTypes = {
             getAttribute: PropTypes.func,
             id: PropTypes.string,
             innerText: PropTypes.string,
-            parentElement: PropTypes.string,
+            parentElement: PropTypes.shape({}),
             value: PropTypes.string
         })
     })

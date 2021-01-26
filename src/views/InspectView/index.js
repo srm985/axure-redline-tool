@@ -4,7 +4,9 @@ import ArtboardModule from '../../modules/ArtboardModule';
 import ElementPropertiesSidebarModule from '../../modules/ElementPropertiesSidebarModule';
 import HeaderModule from '../../modules/HeaderModule';
 import SplashScreenModule from '../../modules/SplashScreenModule';
-import ZoomControlModule from '../../modules/ZoomControlModule';
+import ZoomControlModule, {
+    ZOOM_STEP
+} from '../../modules/ZoomControlModule';
 
 import LoadingIndicatorComponent from '../../components/LoadingIndicatorComponent';
 
@@ -41,8 +43,6 @@ import {
     PLUS_KEY,
     SPLASH_SCREEN_VERSION
 } from '../../globalConstants';
-
-export const ZOOM_STEP = 10;
 
 class InspectView extends React.Component {
     constructor(props) {

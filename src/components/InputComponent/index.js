@@ -14,7 +14,6 @@ class InputComponent extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        this.displayName = 'InputComponent';
         this.rgbaRegEx = /rgb(a)?\(\d+,(\s+)?\d+,(\s+)?\d+(,(\s+)?\d(\.\d+)?)?\)/;
         this.hexRegEx = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
 
@@ -73,12 +72,12 @@ class InputComponent extends React.PureComponent {
         let valueTemplate = '';
 
         // Determine if we're looking at a RGB(A) or hex value.
-        if ((InputComponent.rgbaRegEx).test(inputValue)) {
-            [extractedColorString] = inputValue.match(InputComponent.rgbaRegEx);
-            valueTemplate = inputValue.replace(InputComponent.rgbaRegEx, placeholder);
-        } else if ((InputComponent.hexRegEx).test(inputValue)) {
-            [extractedColorString] = inputValue.match(InputComponent.hexRegEx);
-            valueTemplate = inputValue.replace(InputComponent.hexRegEx, placeholder);
+        if ((this.rgbaRegEx).test(inputValue)) {
+            [extractedColorString] = inputValue.match(this.rgbaRegEx);
+            valueTemplate = inputValue.replace(this.rgbaRegEx, placeholder);
+        } else if ((this.hexRegEx).test(inputValue)) {
+            [extractedColorString] = inputValue.match(this.hexRegEx);
+            valueTemplate = inputValue.replace(this.hexRegEx, placeholder);
         } else {
             // If we end up not passing a color at all.
             valueTemplate = inputValue;
@@ -152,14 +151,14 @@ class InputComponent extends React.PureComponent {
         let conditionedInputColorValue;
         let swatchColor;
 
-        if ((InputComponent.rgbaRegEx).test(inputValue) && inputValue !== 'transparent') {
+        if ((this.rgbaRegEx).test(inputValue) && inputValue !== 'transparent') {
             /**
              * If we have RGBA, we round our opacity to two decimals of
              * precision. If the opacity is 1, we'll convert to RGB.
              */
             if ((/rgba/).test(inputValue)) {
                 // Extract our RGBA substring.
-                const rgbaExtraction = inputValue.match(InputComponent.rgbaRegEx)[0].replace(/\s+/g, '');
+                const rgbaExtraction = inputValue.match(this.rgbaRegEx)[0].replace(/\s+/g, '');
 
                 swatchOpacity = Math.round(Number(rgbaExtraction.replace(/rgba\(\d+,\d+,\d+,(\d?(\.\d+)?)\)/, '$1')) * 100) / 100;
                 swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, `rgba($1, $2, $3, ${placeholder})`);
@@ -173,9 +172,9 @@ class InputComponent extends React.PureComponent {
                     swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, 'rgb($1, $2, $3)');
                 }
 
-                conditionedInputColorValue = inputValue.replace(InputComponent.rgbaRegEx, swatchColor);
+                conditionedInputColorValue = inputValue.replace(this.rgbaRegEx, swatchColor);
             } else {
-                [swatchColor] = inputValue.match(InputComponent.rgbaRegEx);
+                [swatchColor] = inputValue.match(this.rgbaRegEx);
             }
         } else {
             const cleanedInputValue = inputValue.trim().toLowerCase();
@@ -242,6 +241,8 @@ class InputComponent extends React.PureComponent {
         );
     }
 }
+
+InputComponent.displayName = 'InputComponent';
 
 InputComponent.propTypes = {
     inputValue: PropTypes.string.isRequired,

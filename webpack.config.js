@@ -6,6 +6,8 @@ const path = require('path');
 
 const config = require('./config');
 
+const WatchBundlePlugin = require('./scripts/WatchBundlePlugin');
+
 const {
     directories: {
         srcDirectory
@@ -29,7 +31,10 @@ module.exports = () => {
     const isProduction = NODE_ENV !== development;
 
     const plugins = [
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new WatchBundlePlugin({
+            isInjectedEnvironment
+        })
     ];
 
     if (!isInjectedEnvironment && !isProduction) {
@@ -44,7 +49,7 @@ module.exports = () => {
             historyApiFallback: true,
             hot: true
         },
-        devtool: !isProduction ? 'source-map' : '',
+        devtool: !isProduction ? 'source-map' : undefined,
         entry: [
             `${srcDirectory}/index.js`
         ],

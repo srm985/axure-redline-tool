@@ -62,5 +62,13 @@ appendNode().then((container) => {
             <InspectView />,
             container
         );
+
+        const {
+            hot
+        } = module;
+
+        if (hot) {
+            hot.accept();
+        }
     }
 });

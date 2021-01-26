@@ -1040,20 +1040,20 @@ var InputComponent = /*#__PURE__*/function (_React$PureComponent) {
       var opacity;
       var valueTemplate = ''; // Determine if we're looking at a RGB(A) or hex value.
 
-      if (InputComponent.rgbaRegEx.test(inputValue)) {
-        var _inputValue$match = inputValue.match(InputComponent.rgbaRegEx);
+      if (_this.rgbaRegEx.test(inputValue)) {
+        var _inputValue$match = inputValue.match(_this.rgbaRegEx);
 
         var _inputValue$match2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_inputValue$match, 1);
 
         extractedColorString = _inputValue$match2[0];
-        valueTemplate = inputValue.replace(InputComponent.rgbaRegEx, placeholder);
-      } else if (InputComponent.hexRegEx.test(inputValue)) {
-        var _inputValue$match3 = inputValue.match(InputComponent.hexRegEx);
+        valueTemplate = inputValue.replace(_this.rgbaRegEx, placeholder);
+      } else if (_this.hexRegEx.test(inputValue)) {
+        var _inputValue$match3 = inputValue.match(_this.hexRegEx);
 
         var _inputValue$match4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_inputValue$match3, 1);
 
         extractedColorString = _inputValue$match4[0];
-        valueTemplate = inputValue.replace(InputComponent.hexRegEx, placeholder);
+        valueTemplate = inputValue.replace(_this.hexRegEx, placeholder);
       } else {
         // If we end up not passing a color at all.
         valueTemplate = inputValue;
@@ -1113,14 +1113,14 @@ var InputComponent = /*#__PURE__*/function (_React$PureComponent) {
       var conditionedInputColorValue;
       var swatchColor;
 
-      if (InputComponent.rgbaRegEx.test(inputValue) && inputValue !== 'transparent') {
+      if (_this.rgbaRegEx.test(inputValue) && inputValue !== 'transparent') {
         /**
          * If we have RGBA, we round our opacity to two decimals of
          * precision. If the opacity is 1, we'll convert to RGB.
          */
         if (/rgba/.test(inputValue)) {
           // Extract our RGBA substring.
-          var rgbaExtraction = inputValue.match(InputComponent.rgbaRegEx)[0].replace(/\s+/g, '');
+          var rgbaExtraction = inputValue.match(_this.rgbaRegEx)[0].replace(/\s+/g, '');
           swatchOpacity = Math.round(Number(rgbaExtraction.replace(/rgba\(\d+,\d+,\d+,(\d?(\.\d+)?)\)/, '$1')) * 100) / 100;
           swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, "rgba($1, $2, $3, ".concat(placeholder, ")"));
           swatchColor = swatchColor.replace(placeholder, swatchOpacity);
@@ -1133,9 +1133,9 @@ var InputComponent = /*#__PURE__*/function (_React$PureComponent) {
             swatchColor = rgbaExtraction.replace(/rgba\((\d+),(\d+),(\d+),(\d?(\.\d+)?)\)/, 'rgb($1, $2, $3)');
           }
 
-          conditionedInputColorValue = inputValue.replace(InputComponent.rgbaRegEx, swatchColor);
+          conditionedInputColorValue = inputValue.replace(_this.rgbaRegEx, swatchColor);
         } else {
-          var _inputValue$match5 = inputValue.match(InputComponent.rgbaRegEx);
+          var _inputValue$match5 = inputValue.match(_this.rgbaRegEx);
 
           var _inputValue$match6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_inputValue$match5, 1);
 
@@ -1161,7 +1161,6 @@ var InputComponent = /*#__PURE__*/function (_React$PureComponent) {
       });
     });
 
-    _this.displayName = 'InputComponent';
     _this.rgbaRegEx = /rgb(a)?\(\d+,(\s+)?\d+,(\s+)?\d+(,(\s+)?\d(\.\d+)?)?\)/;
     _this.hexRegEx = /#([a-fA-F]|\d){6}((\s+)?\d{1,3}%)?/;
     _this.state = {
@@ -1233,6 +1232,7 @@ var InputComponent = /*#__PURE__*/function (_React$PureComponent) {
   return InputComponent;
 }(react__WEBPACK_IMPORTED_MODULE_9__.PureComponent);
 
+InputComponent.displayName = 'InputComponent';
 InputComponent.propTypes = {
   inputValue: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().string.isRequired),
   label: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().string.isRequired),
@@ -1763,7 +1763,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -1771,6 +1771,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _views_InspectView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/InspectView */ "./src/views/InspectView/index.js");
 /* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles.scss */ "./src/styles.scss");
+/* module decorator */ module = __webpack_require__.hmd(module);
 
 
 
@@ -1821,6 +1822,12 @@ appendNode().then(function (container) {
 
   if (canRender) {
     react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_InspectView__WEBPACK_IMPORTED_MODULE_2__.default, null), container);
+    var _module = module,
+        hot = _module.hot;
+
+    if (hot) {
+      hot.accept();
+    }
   }
 });
 
@@ -3381,7 +3388,7 @@ ElementPropertiesSidebarModule.propTypes = {
       getAttribute: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().func),
       id: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().string),
       innerText: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().string),
-      parentElement: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().string),
+      parentElement: prop_types__WEBPACK_IMPORTED_MODULE_8___default().shape({}),
       value: (prop_types__WEBPACK_IMPORTED_MODULE_8___default().string)
     })
   })
@@ -4562,6 +4569,7 @@ SplashScreenModule.propTypes = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ZOOM_STEP": () => /* binding */ ZOOM_STEP,
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
@@ -4581,9 +4589,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _views_InspectView__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../views/InspectView */ "./src/views/InspectView/index.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../globalConstants */ "./src/globalConstants.js");
-/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ZoomControlModule/styles.scss");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _styles_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./styles.scss */ "./src/modules/ZoomControlModule/styles.scss");
 
 
 
@@ -4600,10 +4607,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
-
 var moduleClassName = 'ZoomControlModule';
 var zoomDecrease = 'decrease';
 var zoomIncrease = 'increase';
+var ZOOM_STEP = 10;
 
 var ZoomControlModule = /*#__PURE__*/function (_React$PureComponent) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_3___default()(ZoomControlModule, _React$PureComponent);
@@ -4622,9 +4629,9 @@ var ZoomControlModule = /*#__PURE__*/function (_React$PureComponent) {
       var zoomLevel = _this.state.zoomLevel;
 
       if (zoomDirection === zoomDecrease) {
-        setArtboardZoom(zoomLevel - _views_InspectView__WEBPACK_IMPORTED_MODULE_9__.ZOOM_STEP);
+        setArtboardZoom(zoomLevel - ZOOM_STEP);
       } else if (zoomDirection === zoomIncrease) {
-        setArtboardZoom(zoomLevel + _views_InspectView__WEBPACK_IMPORTED_MODULE_9__.ZOOM_STEP);
+        setArtboardZoom(zoomLevel + ZOOM_STEP);
       }
     });
 
@@ -4653,7 +4660,7 @@ var ZoomControlModule = /*#__PURE__*/function (_React$PureComponent) {
       var keyCode = event.keyCode,
           target = event.target;
 
-      if (keyCode === _globalConstants__WEBPACK_IMPORTED_MODULE_10__.ENTER_KEY || keyCode === _globalConstants__WEBPACK_IMPORTED_MODULE_10__.ESCAPE_KEY) {
+      if (keyCode === _globalConstants__WEBPACK_IMPORTED_MODULE_9__.ENTER_KEY || keyCode === _globalConstants__WEBPACK_IMPORTED_MODULE_9__.ESCAPE_KEY) {
         target.blur();
       }
     });
@@ -5591,7 +5598,6 @@ var storageRead = function storageRead(keyName) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ZOOM_STEP": () => /* binding */ ZOOM_STEP,
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
@@ -5655,7 +5661,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
-var ZOOM_STEP = 10;
 
 var InspectView = /*#__PURE__*/function (_React$Component) {
   _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_6___default()(InspectView, _React$Component);
@@ -6111,7 +6116,7 @@ var InspectView = /*#__PURE__*/function (_React$Component) {
         case _globalConstants__WEBPACK_IMPORTED_MODULE_22__.PLUS_KEY:
           if (event.ctrlKey || event.metaKey) {
             event.preventDefault();
-            var newZoom = documentZoom + ZOOM_STEP;
+            var newZoom = documentZoom + _modules_ZoomControlModule__WEBPACK_IMPORTED_MODULE_15__.ZOOM_STEP;
 
             _this.setArtboardZoom(newZoom);
           }
@@ -6122,7 +6127,7 @@ var InspectView = /*#__PURE__*/function (_React$Component) {
           if (event.ctrlKey || event.metaKey) {
             event.preventDefault();
 
-            var _newZoom = documentZoom - ZOOM_STEP;
+            var _newZoom = documentZoom - _modules_ZoomControlModule__WEBPACK_IMPORTED_MODULE_15__.ZOOM_STEP;
 
             _this.setArtboardZoom(_newZoom);
           }
@@ -51950,12 +51955,15 @@ module.exports = "<svg fill=\"currentColor\" viewBox=\"0 0 50 50\" xmlns=\"http:
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
 /******/ 			id: moduleId,
-/******/ 			// no module.loaded needed
+/******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -51998,6 +52006,21 @@ module.exports = "<svg fill=\"currentColor\" viewBox=\"0 0 50 50\" xmlns=\"http:
 /******/ 		})();
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/harmony module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.hmd = (module) => {
+/******/ 			module = Object.create(module);
+/******/ 			if (!module.children) module.children = [];
+/******/ 			Object.defineProperty(module, 'exports', {
+/******/ 				enumerable: true,
+/******/ 				set: () => {
+/******/ 					throw new Error('ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' + module.id);
+/******/ 				}
+/******/ 			});
+/******/ 			return module;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
@@ -52017,8 +52040,8 @@ module.exports = "<svg fill=\"currentColor\" viewBox=\"0 0 50 50\" xmlns=\"http:
 /************************************************************************/
 /******/ 	// startup
 /******/ 	// Load entry module
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__("./src/index.js");
-/******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;
 //# sourceMappingURL=plugin.js.map

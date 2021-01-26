@@ -1,10 +1,12 @@
 const browserSync = require('browser-sync');
 const inquirer = require('inquirer');
+const webpack = require('webpack');
 
 const config = require('../config');
 
 const {
-    browserSyncConfig
+    browserSyncConfig,
+    webpackConfig
 } = config();
 
 const rpVersionChoices = {
@@ -73,7 +75,16 @@ const serveInject = async () => {
 
     browserSync.init({
         ...browserSyncConfig,
-        proxyURL
+        proxy: proxyURL
+    }, () => {
+        process.env.NODE_ENV = 'development';
+        process.env.INJECTED = true;
+
+        const webpackConfigObject = require(webpackConfig)(); // eslint-disable-line global-require
+
+        webpack(webpackConfigObject, (error) => {
+            console.log(error);
+        });
     });
 };
 

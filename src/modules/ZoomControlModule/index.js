@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { ZOOM_STEP } from '../../views/InspectView';
-
 import {
     ENTER_KEY,
     ESCAPE_KEY
@@ -14,6 +12,8 @@ const moduleClassName = 'ZoomControlModule';
 
 const zoomDecrease = 'decrease';
 const zoomIncrease = 'increase';
+
+export const ZOOM_STEP = 10;
 
 class ZoomControlModule extends React.PureComponent {
     constructor(props) {
