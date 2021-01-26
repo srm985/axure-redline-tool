@@ -3,6 +3,7 @@ const {
 } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const config = require('./config');
 
@@ -33,7 +34,8 @@ module.exports = () => {
     const plugins = [
         new CleanWebpackPlugin(),
         new WatchBundlePlugin({
-            isInjectedEnvironment
+            isInjectedEnvironment,
+            isProduction
         })
     ];
 
@@ -81,6 +83,14 @@ module.exports = () => {
                     loader: 'svg-inline-loader',
                     test: /\.svg$/
                 }
+            ]
+        },
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    extractComments: false
+                })
             ]
         },
         output: {
