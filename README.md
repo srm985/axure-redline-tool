@@ -13,7 +13,7 @@ Latest Version
 
 Current Version
 ```sh
-<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@3.1.0/web/axure-redline-plugin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axure-redline-tool@3.1.1/web/axure-redline-plugin.js"></script>
 ```
 
 There are several ways to use this "install" this plugin. The easiest option is to copy the script link above into your AxShare project as a plugin. Copy the script of the version you'd like to use, or simply use the script marked "latest" to ensure you're always subscribed to the latest application updates. The code in the scripts above is served from a CDN to ensure a fast response, no matter your location.
@@ -218,3 +218,10 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 * Text Shadow Attribute - Added the CSS attribute of <code>text-shadow</code> to the list.
 * Enhanced Support For Individual Word Styling - If you attempted to style one word differently within a text block by applying, for example, a different color or font weight, this would cause the styled word to break out of the text block. From a technical perspective, this occurred because we were setting <code>&lt;span&gt;</code> elements to <code>display: inline-block;</code>. This was done so we could accurately measure their height, width, and position. Now for these elements, we won't show a height, width, or position because it conveys no information. We instead select the parent container which is typically a <code>&lt;p&gt;</code> tag.
 * Disable Artboard Concept - The redline tool attempts to mimic the concept of an artboard used in many other tools. This is represented as a floating, semi-opaque, centered board. Some users have very large documents or do not prefer this concept.
+
+#### Version 3.1.1
+
+* Migrated from Gulp to npm for all build and development tasks
+* Updated dependencies
+* Added the CSS attributes of <code>letter-spacing</code> and <code>text-transform</code>
+* Added postcss for legacy browser support

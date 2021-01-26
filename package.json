@@ -116,5 +116,5 @@
     "watch:js": "onchange --await-write-finish 300 \"src/**/*.js\" \"*.js\" \"scripts/*.js\" -- npm run lint:js --silent",
     "watch:scss": "onchange --await-write-finish 300 \"src/**/*.scss\" -- npm run lint:scss --silent"
   },
-  "version": "3.1.0"
+  "version": "3.1.1"
 }
